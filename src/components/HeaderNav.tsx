@@ -35,7 +35,7 @@ export class HeaderNav extends Component <Props, State>{
 
     render() {
     return (
-        <div className="container container--gutterless@xs@m container--full-width">
+        <div className="container container--gutterless@xs@m col-8">
             <nav className="header-nav js-header-nav" id="main-nav" aria-label="Main menu" data-ga-element="navigation">
                 <ul className="header-nav__list" aria-label="" role="menubar">
                     {this.state.links.map((link, index) =>
