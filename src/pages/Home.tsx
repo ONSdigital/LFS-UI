@@ -27,7 +27,7 @@ export class Home extends Component{
 
         <ONSTextInput label="Text Input" placeholder="Type here ...." />
 
-        <ONSUpload label="Upload CSV" description="File types accepted are .csv" fileName="file" fileID="file"/> 
+        <ONSUpload label="Upload CSV" description="File types accepted are .csv" fileName="file" fileID="file" accept=".txt"/> 
       </div>
       
     );

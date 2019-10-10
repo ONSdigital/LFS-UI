@@ -4,7 +4,8 @@ interface Props{
   label: string,
   description: string,
   fileName: string,
-  fileID: string  
+  fileID: string,
+  accept: string
 }
 
 export class ONSUpload extends Component <Props, {}>{
@@ -16,7 +17,7 @@ export class ONSUpload extends Component <Props, {}>{
                 <label className="label" >{this.props.label}</label>
                 <span className="label__description">{this.props.description}</span>
                 
-                <input type="file" id={this.props.fileID} className="input input--text input-type__input input--upload" name={this.props.fileName} accept=".csv" />
+                <input type="file" id={this.props.fileID} className="input input--text input-type__input input--upload" name={this.props.fileName} accept={this.props.accept} />
             </p>
         </div>
       );
