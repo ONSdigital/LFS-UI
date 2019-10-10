@@ -39,8 +39,8 @@ export class HeaderNav extends Component <Props, State>{
             <nav className="header-nav js-header-nav" id="main-nav" aria-label="Main menu" data-ga-element="navigation">
                 <ul className="header-nav__list" aria-label="" role="menubar">
                     {this.state.links.map((link, index) =>
-                        <LinkContainer key={index} to={link.link}>
-                            <li className="header-nav__item " onClick={() => this.changePage(link.label)}><a href="" className="header-nav__link">{link.label}</a></li>
+                        <LinkContainer key={index} to={link.link}>                  
+                            <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active": "")} onClick={() => this.changePage(link.label)}><a href="" className="header-nav__link">{link.label}</a></li>
                         </LinkContainer>
                     )}
                 </ul>
