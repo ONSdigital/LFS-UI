@@ -50,7 +50,6 @@ export class Login extends Component <Props, State> {
           <div style={{maxWidth:"351px"}}>
             <ONSTextInput ref="username" label="Username" onChange = {this.handleUserName}/>
             <ONSTextInput ref="password" label="Password" password={true} onChange = {this.handlePassword}/>
-            <br/>
             <ONSButton label="Log In" onClick={() => this.login()} primary={false} small={false}/>
           </div>
         </section>
