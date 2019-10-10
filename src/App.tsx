@@ -1,6 +1,4 @@
-import React, { Component, ReactNode } from 'react';
-import logo from './logo.svg';
-// import './App.css';
+import React from 'react';
 import { Route, RouteProps } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
@@ -8,6 +6,8 @@ import { Login } from './auth/Login';
 import { Unauthorized } from './auth/Unauthroized';
 import { Admin } from './pages/Admin';
 import { Outputs } from './pages/Outputs';
+import { verifyUserToken } from './auth/auth';
+import Logout from './auth/Logout';
 
 interface Props {
 }
@@ -36,7 +36,19 @@ export default class App extends React.Component<Props, State> {
     displayName = App.name
     constructor(props: Props) {
         super(props);
+
+        this.setUser.bind(this)
+
         this.state = {user: null}
+        this.getCurrentUser()
+    }
+
+    getCurrentUser = () => {
+      let user = verifyUserToken()
+      if (user !== undefined) {
+        console.log("User verifed, logging in")
+        this.state = {user: user}
+      }
     }
 
     setUser = (user: User) => {
@@ -45,8 +57,11 @@ export default class App extends React.Component<Props, State> {
 
     PrivateRoute = ({ component: Component, page_id: page_id,  ...rest } : PRProps) => {
       if(!this.state.user){
-        return (<Route {...rest} render={(props) => (<Login setUser={this.setUser}/>)} />)
+        return (<Route {...rest} render={(props) => (<Login setUser={this.setUser} user={this.state.user} />)} />)
       }else{
+        if (page_id === 0){
+          return (<Route {...rest} render={(props) => (<Logout setUser={this.setUser} user={this.state.user}/>)} />) 
+        }
         if(this.state.user.role.pages.includes(page_id)){
             return (<Route {...rest} render={(props) => (<Component {...props} />)} />)
         }else{
@@ -62,7 +77,9 @@ export default class App extends React.Component<Props, State> {
           <this.PrivateRoute exact path='/Dashboard' component={Home} page_id={2}/>
           <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={3}/>
           <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
+          <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
           <Route exact path='/login' component={Login} />
+          
         </Layout>
       );
     }
