@@ -25,8 +25,8 @@ export class Layout extends Component {
         label: "Upload"
       },
       {
-        link: "/link-to-item4",
-        label: "Link 4"
+        link: "/Period",
+        label: "Period"
       },
       {
         link: "/link-to-item5",
