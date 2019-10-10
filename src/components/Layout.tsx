@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { SectionNav } from './SectionNav';
 import { HeaderNav } from './HeaderNav';
 
 export class Layout extends Component {

@@ -4,9 +4,6 @@ import {ONSButton} from "../components/ONSButton";
 
 export class File_Upload extends Component{
     displayName = File_Upload.name
-    constructor(props: any) {
-        super(props);
-  }
 
     render() {
         return (

@@ -4,9 +4,6 @@ import {ONSButton} from "../components/ONSButton";
 
 export class Period extends Component{
     displayName = Period.name
-    constructor(props: any) {
-        super(props);
-    }
 
     weeks = () => {
         let i;

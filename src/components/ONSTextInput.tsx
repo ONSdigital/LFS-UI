@@ -1,5 +1,4 @@
 import React, { Component, ChangeEvent } from 'react';
-import { Function } from '@babel/types';
 
 interface Props{
   label?: string,

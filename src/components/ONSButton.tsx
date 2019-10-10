@@ -9,9 +9,6 @@ interface Props{
 }
 
 export class ONSButton extends Component <Props, {}>{
-  constructor(props : Props) {
-    super(props);
-  }
 
     render() {
     let className = "field btn " + (this.props.primary ? "" : "btn--secondary ") + (this.props.small ? "btn--small " : "");

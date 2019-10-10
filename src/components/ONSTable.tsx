@@ -1,6 +1,4 @@
 import React, { Component, ChangeEvent } from 'react';
-import { Interface } from 'readline';
-import { string } from 'prop-types';
 import { ONSTextInput } from './ONSTextInput';
 import { ONSColumnOrder } from './ONSColumnOrder';
 import { ONSPagination } from './ONSPagination';
@@ -8,7 +6,6 @@ import { ONSButton } from './ONSButton';
 import { ONSCheckbox } from './ONSCheckbox';
 
 var Modal = require('react-bootstrap/Modal')
-var Button = require('react-bootstrap/Button')
 
 interface Props {
     Title : string,
@@ -235,7 +232,7 @@ export class ONSTable extends Component <Props, State>{
   }
 
   genericTable = () => {
-    if(this.state.ShowData == null || this.state.Headers == undefined || this.state.Data == null){
+    if(this.state.ShowData === null || this.state.Headers === undefined || this.state.Data === null){
       return;
     }
     let headers = this.state.Headers;
@@ -279,7 +276,7 @@ export class ONSTable extends Component <Props, State>{
   }
 
   customTable = () => {
-    if(this.state.ShowData == null || this.state.customHeaders == undefined || this.state.Data == null){
+    if(this.state.ShowData === null || this.state.customHeaders === undefined || this.state.Data === null){
       return;
     }
     let headers = this.state.customHeaders;

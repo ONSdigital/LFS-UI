@@ -5,9 +5,6 @@ interface Props{
 }
 
 export class ONSInDevBanner extends Component <Props, {}>{
-  constructor(props : Props) {
-    super(props);
-  }
 
     render() {
     return (
