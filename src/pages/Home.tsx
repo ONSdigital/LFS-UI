@@ -24,9 +24,6 @@ export class Home extends Component{
         <ONSPanel label="" status="error">
           <p>Nothing Loaded</p>
         </ONSPanel>
-        <ONSPanel label="" status="error" header="Oh No">
-          <p>Nothing Loaded</p>
-        </ONSPanel>
 
         <ONSTextInput label="Text Input" placeholder="Type here ...." />
 
