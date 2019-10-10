@@ -21,8 +21,8 @@ export class Layout extends Component {
         label: "Outputs"
       },
       {
-        link: "/link-to-item3",
-        label: "Link 3"
+        link: "/File_Upload",
+        label: "Upload"
       },
       {
         link: "/link-to-item4",
@@ -54,6 +54,7 @@ export class Layout extends Component {
           </Row>
           <Row>
             <Col>
+              <br/>
               {this.props.children}
             </Col>
           </Row>
