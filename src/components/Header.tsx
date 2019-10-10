@@ -18,7 +18,7 @@ export class Header extends Component <Props,{}>{
     return (
         <header className="header header--internal header--thin">
             <div className="header__top" role="banner">
-                <div className="container container--full-width">
+                <div className="container col-8">
                 <div className="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                     <div className="grid__col col-auto">
                     <img className="header__logo" src="/img/ons-logo-white.svg" alt="Office for National Statistics logo"/>
@@ -41,13 +41,13 @@ export class Header extends Component <Props,{}>{
                 </div>
             </div>
             <div className="header__main">
-                <div className="container container--full-width">
+                <div className="container col-8">
                     <div className="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                         <div className="grid__col col-auto u-flex-shrink">
                             <div className="header__title">{this.props.title}</div>
                             </div>
                             <div className="grid__col col-auto u-flex-no-shrink">
-                            <a href="#" role="button" className="btn btn--ghost u-d-no@xs@m">
+                            <a href="/logout" role="button" className="btn btn--ghost u-d-no@xs@m">
                                 <span className="btn__inner">Sign Out</span>
                             </a>
                         </div>
