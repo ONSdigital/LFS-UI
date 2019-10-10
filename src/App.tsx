@@ -57,7 +57,7 @@ export default class App extends React.Component<Props, State> {
       this.setState({ user: user });
     }
 
-    PrivateRoute = ({ component: Component, page_id: page_id,  ...rest } : PRProps) => {
+    PrivateRoute = ({ component: Component, page_id,  ...rest } : PRProps) => {
       if(!this.state.user){
         return (<Route {...rest} render={(props) => (<Login setUser={this.setUser} user={this.state.user} />)} />)
       }else{

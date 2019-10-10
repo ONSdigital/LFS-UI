@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-// import './Header.css';
 
 interface Props {
     title: string
@@ -10,9 +6,6 @@ interface Props {
 
 export class Header extends Component <Props,{}>{
   displayName = Header.name
-    constructor(props: Props) {
-        super(props);
-    }
 
     render() {
     return (
@@ -28,10 +21,10 @@ export class Header extends Component <Props,{}>{
                         <nav className="header-service-nav header-service-nav--internal" aria-label="Site services menu">
                         <ul className="header-service-nav__list" aria-label="Navigation menu">
                             <li className="header-service-nav__item">
-                            <a href="" className="header-service-nav__link"></a>
+                            <a href="#" className="header-service-nav__link"></a>
                             </li>
                             <li className="header-service-nav__item">
-                            <a href="" className="header-service-nav__link"></a>
+                            <a href="#" className="header-service-nav__link"></a>
                             </li>
                         </ul>
                         </nav>

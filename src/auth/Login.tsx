@@ -1,6 +1,5 @@
 ﻿import React, { Component, ChangeEvent } from 'react';
 import { ONSTextInput } from '../components/ONSTextInput';
-import { ONSPasswordInput } from '../components/ONSPasswordInput';
 import { ONSButton } from '../components/ONSButton';
 import {loginUser} from './auth'
 

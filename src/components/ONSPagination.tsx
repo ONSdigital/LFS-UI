@@ -25,8 +25,7 @@ export class ONSPagination extends Component <Props, State>{
       prevPages.push(i);
     }
     prev = prev.reverse(); prevPages = prevPages.reverse();
-    let numPrev = prev.length;
-    if(this.state.page != 1 && this.state.page != this.state.maxPage){
+    if(this.state.page !== 1 && this.state.page !== this.state.maxPage){
       prev.push(this.link(this.state.page));
       prevPages.push(this.state.page)
     }
@@ -63,7 +62,7 @@ export class ONSPagination extends Component <Props, State>{
   }
 
   link = (page: number) => {
-    return(<li key={page} style={{cursor:"pointer"}} className={"pagination__item "+(this.state.page == page ? "pagination__item--current" : "")}><a onClick={(e) => this.pageChange(e, page)} className="pagination__link" aria-label={"Go to page "+page}>{page}</a></li>)
+    return(<li key={page} style={{cursor:"pointer"}} className={"pagination__item "+(this.state.page === page ? "pagination__item--current" : "")}><a onClick={(e) => this.pageChange(e, page)} className="pagination__link" aria-label={"Go to page "+page}>{page}</a></li>)
   }
 
   render() {

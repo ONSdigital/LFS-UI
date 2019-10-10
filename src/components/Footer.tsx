@@ -8,9 +8,6 @@ interface Props {
 
 export class Footer extends Component {
   displayName = Footer.name
-    constructor(props: Props) {
-        super(props);
-    }
 
     render() {
     return (

@@ -1,15 +1,10 @@
 ﻿import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
 import { ONSPanel } from '../components/ONSPanel';
 import { ONSTextInput } from '../components/ONSTextInput';
-import { ONSInDevBanner } from '../components/ONSInDevBanner';
 import { ONSUpload } from '../components/ONSUpload';
 
 export class Home extends Component{
   displayName = Home.name
-  constructor(props: any) {
-    super(props);
-  }
 
   render() {
     return (
