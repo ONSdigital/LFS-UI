@@ -15,7 +15,8 @@ interface Props {
 }
 
 interface State {
-  user?: User | null
+  user?: User | null,
+    page_id?: any
 }
 
 interface Role{
@@ -30,7 +31,8 @@ interface User {
 
 interface PRProps extends RouteProps {
   component: new (props: any) => React.Component, 
-  page_id: number;
+  page_id: number,
+    setCurrentPage: Function;
 }
 
 
@@ -41,8 +43,15 @@ export default class App extends React.Component<Props, State> {
 
         this.setUser.bind(this)
 
-        this.state = {user: null}
+        this.state = {
+            user: null,
+            page_id: 0
+        }
         this.getCurrentUser()
+    }
+
+    setCurrentPage = (page_id: any) => {
+        this.setState({ page_id: page_id });
     }
 
     getCurrentUser = () => {
@@ -62,7 +71,7 @@ export default class App extends React.Component<Props, State> {
         return (<Route {...rest} render={(props) => (<Login setUser={this.setUser} user={this.state.user} />)} />)
       }else{
         if (page_id === 0){
-          return (<Route {...rest} render={(props) => (<Logout setUser={this.setUser} user={this.state.user}/>)} />) 
+          return (<Route {...rest} render={(props) => (<Logout setUser={this.setUser} user={this.state.user}/>)} />)
         }
         if(this.state.user.role.pages.includes(page_id)){
             return (<Route {...rest} render={(props) => (<Component {...props} />)} />)
@@ -74,7 +83,7 @@ export default class App extends React.Component<Props, State> {
 
     render() {
       return (
-        <Layout>
+        <Layout currentPage={this.state.page_id}>
           <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
           <this.PrivateRoute exact path='/Dashboard' component={Home} page_id={2}/>
           <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={3}/>

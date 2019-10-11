@@ -4,7 +4,11 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { HeaderNav } from './HeaderNav';
 
-export class Layout extends Component {
+interface Props {
+  currentPage: any
+}
+
+export class Layout extends Component <Props, {}> {
   displayName = Layout.name
 
   render() {
@@ -13,31 +17,37 @@ export class Layout extends Component {
       {
         link: "/Dashboard",
         label: "Dashboard",
-        current: true
+        pageID: 2
       },
       {
         link: "/Outputs",
-        label: "Outputs"
+        label: "Outputs",
+        pageID: 3
       },
       {
         link: "/File_Upload",
-        label: "Upload"
+        label: "Upload",
+        pageID: 4
       },
       {
         link: "/Period",
-        label: "Period"
+        label: "Period",
+        pageID: 5
       },
       {
         link: "/link-to-item5",
-        label: "Link 5"
+        label: "Link 5",
+        pageID: 0
       },
       {
         link: "/link-to-item6",
-        label: "Link 6"
+        label: "Link 6",
+        pageID: 0
       },
       {
         link: "/Admin",
-        label: "Admin"
+        label: "Admin",
+        pageID: 9
       }
     ]
 
@@ -47,7 +57,7 @@ export class Layout extends Component {
         <Container fluid>
           <Row>
             <Header title="Labour Force Survey">
-              <HeaderNav links={links}/>
+              <HeaderNav links={links} currentPage={this.props.currentPage}/>
             </Header>
             <br/>
           </Row>

@@ -3,13 +3,15 @@ import { LinkContainer } from 'react-router-bootstrap';
 // import './VerticalNav.css';
 
 interface Props{
-  links: Link[]
+    links: Link[],
+    currentPage: any
 }
 
 interface Link{
   link: string,
-  label: string, 
-  current? : boolean
+  label: string,
+  current? : boolean,
+    pageID: any
 }
 
 interface State{
@@ -22,7 +24,24 @@ export class HeaderNav extends Component <Props, State>{
   constructor(props : Props) {
     super(props);
     this.state = { links: props.links}
+    this.setCurrentPage()
   }
+
+  setCurrentPage = () => {
+      let links = this.state.links;
+      let link = links.find(x => x.current);
+      if (link === undefined) {
+          console.log("there is no current page");
+          console.log(this.props.currentPage)
+          let currentLink = links.find(x => x.pageID === this.props.currentPage);
+          if (currentLink === undefined){
+              return;
+          }
+          currentLink.current = true;
+          this.setState({links: links});
+      }
+  };
+
 
     changePage = (label: string) => {
         let links = this.state.links;
@@ -31,6 +50,7 @@ export class HeaderNav extends Component <Props, State>{
         link = links.find(x => x.label === label)
         link !== undefined ? link.current = true : console.log("somehow it's undefined!")
         this.setState({links: links});
+        console.log(links)
     }
 
     render() {
