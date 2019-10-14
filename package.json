@@ -14,7 +14,6 @@
     "@types/react-router-bootstrap": "^0.24.5",
     "@types/react-router-dom": "^4.3.5",
     "bootstrap": "^4.3.1",
-    "form-data": "^2.5.1",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-bootstrap-modal": "^4.2.0",
