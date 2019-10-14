@@ -22,5 +22,5 @@
   "include": [
     "src"
   ],
-  "exclude": ["build", "node_modules/*", "node_modules/@types/","requests.js"]
+  "exclude": ["build", "node_modules",]
 }
