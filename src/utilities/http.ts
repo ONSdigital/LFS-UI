@@ -1,32 +1,23 @@
-const request = require('request');
-const FormData = require('form-data');
+export function postFile(lfsfile: any, fileName: string, fileType: string, fileSource: string, survey: string): Promise<any> {
 
-const options = {
-    url: 'http://127.0.0.1:8000/import/survey/1',
+    let formData = new FormData();
+    formData.append("lfsFile", lfsfile[0]);
+    formData.append("fileName", fileName);
+    formData.append("fileType", fileType);
+    formData.append("fileSource", fileSource);
 
-};
-
-export function postFile(lfsfile: string, fileName: string, fileType: string, fileSource: string) {
-    let form = new FormData();
-
-    form.append('lfsfile', lfsfile);
-    form.append('fileName',fileName);
-    form.append('fileType', fileType);
-    form.append('fileSource', fileSource);
-
-    request.post(
-        {
-            url:'http://127.0.0.1:8000/import/survey/1',
-            formData: form,
-            headers: {
-                'User-Agent': 'request',
-                'Content-Type' : 'multipart/form-data'
-            }
-        }, function optionalCallback(err: Error, httpResponse: any, body: any) {
-        console.error('upload:', httpResponse);
-        if (err) {
-            return console.error('upload failed:', err);
-        }
-        console.log('Upload successful!  Server responded with:', body);
-    });
+    return new Promise((resolve: any, reject: any) => {
+        fetch("/import/survey/" + survey, {
+            "method": "POST",
+            "body": formData,
+        })
+            .then(response => {
+                console.log(response);
+                resolve(response.json());
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err)
+            });
+    })
 }
