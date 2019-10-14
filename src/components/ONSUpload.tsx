@@ -19,7 +19,7 @@ export class ONSUpload extends Component <Props, {}>{
 
     handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if(this.props.onChange !== undefined){
-            this.props.onChange(e, this.props.label);
+            this.props.onChange(e);
         }
         this.value = e.target.value;
 
