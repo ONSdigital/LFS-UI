@@ -1,32 +1,31 @@
-
 let users: any[] = []
+
 function getUsers() {
     fetch('/jsons/Users.json')
         .then(response => response.json())
         .then(response => users = response.Rows)
     return users
-  }
-
+}
 
 function loginUser(username: string, password: string) {
-    let userList: any[] = getUsers()
-    console.log(userList)
+    let userList: any[] = getUsers();
+    console.log(userList);
+    let serverURL = process.env.SERVER_URL;
 
-    // TODO: verify login with server and receive authentication token
-    // Currently Checking Username against Users.json list
-    if(userList.find(user => user.username === username)){
-        // Generating Mock Tokens
-        let token = (Math.random() * (10000000000 - 999999999) + 999999999).toString()
-        storeTokens(token, token)
-        let user = { 
-          name: "Admin",
-          role: {
-            name: "Admin",
-            pages: [0,1,2,3,4,5,6,7,8,9]
-          }
-        }
-        return user
-    }
+    fetch ("http://localhost:8000/login/" + username)
+        .then(res => res.json())
+        .then((data) => {
+            let user = {
+                name: "Admin",
+                role: {
+                    name: "Admin",
+                    pages: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                }
+            };
+            return user
+        })
+        .catch(console.log);
+
     return ''
 }
 
@@ -35,15 +34,15 @@ function verifyUserToken() {
     let tokens = getTokens()
 
     console.log(tokens)
-    if (tokens !== undefined){
-        let user = { 
+    if (tokens !== undefined) {
+        let user = {
             name: "Admin",
             role: {
-              name: "Admin",
-              pages: [0,1,2,3,4,5,6,7,8,9]
+                name: "Admin",
+                pages: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
-          }
-          return user;
+        }
+        return user;
     }
     return undefined;
 }
@@ -58,12 +57,12 @@ function getTokens() {
     let refreshToken: string = ''
 
     let storedToken: any = localStorage.getItem("token");
-    if (typeof storedToken === 'string'){
+    if (typeof storedToken === 'string') {
         token = storedToken
     }
 
     let storedRefreshToken: any = localStorage.getItem("refreshToken");
-    if (typeof storedRefreshToken === 'string'){
+    if (typeof storedRefreshToken === 'string') {
         refreshToken = storedRefreshToken
     }
 
@@ -72,8 +71,6 @@ function getTokens() {
     }
     return undefined
 }
-
-
 
 
 export {
