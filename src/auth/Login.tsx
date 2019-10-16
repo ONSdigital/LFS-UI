@@ -28,6 +28,7 @@ export class Login extends Component <Props, State> {
 
   login = () => {
     let user = loginUser(this.state.username, this.state.username)
+    console.log("?: " + user)
     if(user){
       this.props.setUser(user)
     }

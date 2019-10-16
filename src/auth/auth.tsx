@@ -1,20 +1,27 @@
 let users: any[] = []
 
 function getUsers() {
+    console.log("getUsers start")
     fetch('/jsons/Users.json')
         .then(response => response.json())
         .then(response => users = response.Rows)
+    console.log("users: " + users)
+    console.log("getUsers end")
     return users
+
 }
 
 function loginUser(username: string, password: string) {
+    console.log("loginUser: " + username)
     let userList: any[] = getUsers();
+    console.log("loginUser continued...")
     console.log(userList);
     let serverURL = process.env.SERVER_URL;
 
-    fetch ("http://localhost:8000/login/" + username)
+    fetch ("/login/" + username)
         .then(res => res.json())
         .then((data) => {
+            console.log("got this: " + data);
             let user = {
                 name: "Admin",
                 role: {
@@ -23,6 +30,7 @@ function loginUser(username: string, password: string) {
                 }
             };
             return user
+            console.log("user: " + user)
         })
         .catch(console.log);
 
