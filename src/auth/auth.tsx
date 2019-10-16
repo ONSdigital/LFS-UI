@@ -1,39 +1,28 @@
 let users: any[] = []
 
-function getUsers() {
-    fetch('/jsons/Users.json')
-        .then(response => response.json())
-        .then(response => users = response.Rows)
-    return users
-}
-
 function loginUser(username: string, password: string) {
-    let userList: any[] = getUsers();
-    console.log(userList);
-    let serverURL = process.env.SERVER_URL;
 
-    fetch ("http://localhost:8000/login/" + username)
-        .then(res => res.json())
-        .then((data) => {
-            let user = {
+    const request = async () => {
+        const res = await fetch("http://localhost:8000/login/" + username);
+        const data = await res.json();
+
+        let user = {
+            name: "Admin",
+            role: {
                 name: "Admin",
-                role: {
-                    name: "Admin",
-                    pages: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                }
-            };
-            return user
-        })
-        .catch(console.log);
-
-    return ''
+                pages: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+        };
+        return user
+    };
+    return request()
 }
 
 function verifyUserToken() {
-    // TODO: send to sever and authenticate the token
-    let tokens = getTokens()
 
-    console.log(tokens)
+    let tokens = getTokens();
+
+    console.log(tokens);
     if (tokens !== undefined) {
         let user = {
             name: "Admin",
@@ -41,7 +30,7 @@ function verifyUserToken() {
                 name: "Admin",
                 pages: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             }
-        }
+        };
         return user;
     }
     return undefined;
@@ -53,8 +42,8 @@ function storeTokens(token: string, refreshToken: string) {
 }
 
 function getTokens() {
-    let token: string = ''
-    let refreshToken: string = ''
+    let token: string = '';
+    let refreshToken: string = '';
 
     let storedToken: any = localStorage.getItem("token");
     if (typeof storedToken === 'string') {
