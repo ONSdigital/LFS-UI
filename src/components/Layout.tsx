@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { SectionNav } from './SectionNav';
 import { HeaderNav } from './HeaderNav';
 
 export class Layout extends Component {
@@ -21,12 +20,12 @@ export class Layout extends Component {
         label: "Outputs"
       },
       {
-        link: "/link-to-item3",
-        label: "Link 3"
+        link: "/File_Upload",
+        label: "Upload"
       },
       {
-        link: "/link-to-item4",
-        label: "Link 4"
+        link: "/Period",
+        label: "Period"
       },
       {
         link: "/link-to-item5",
@@ -54,6 +53,7 @@ export class Layout extends Component {
           </Row>
           <Row>
             <Col>
+              <br/>
               {this.props.children}
             </Col>
           </Row>

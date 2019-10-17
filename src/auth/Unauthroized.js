@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ONSPanel } from '../components/ONSPanel';
 
 export class Unauthorized extends Component {
   displayName = Unauthorized.name
@@ -6,7 +7,9 @@ export class Unauthorized extends Component {
   render() {
     return (
       <div>
-          <p>This is the unauthorized screen</p>
+        <ONSPanel label="" status="error">
+          <p>You are not authorised to see this page</p>
+        </ONSPanel>
       </div>
     );
   }
