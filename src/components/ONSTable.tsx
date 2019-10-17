@@ -4,6 +4,7 @@ import { ONSColumnOrder } from './ONSColumnOrder';
 import { ONSPagination } from './ONSPagination';
 import { ONSButton } from './ONSButton';
 import { ONSCheckbox } from './ONSCheckbox';
+import ReactModal from 'react-modal';
 
 var Modal = require('react-bootstrap/Modal')
 
@@ -119,21 +120,42 @@ export class ONSTable extends Component <Props, State>{
   modal = () => {
     if(this.state.customHeaders)
     return(
-      <Modal show={this.state.showModal} onHide={this.closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Row</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {this.state.customHeaders.map((header, index) =>
-            {return header.create === true &&
-            <ONSTextInput label={header.label} onChange={this.updatePayload}/>}
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <ONSButton primary={false} small={true} label={"Close"} onClick={this.closeModal}/>
-          <ONSButton primary={true} small={true} label={"Save"} onClick={this.saveChanges}/>
-        </Modal.Footer>
-      </Modal>
+      // Modal was messinhg with the submit button so we made our own and its wayyy cooler
+      <ReactModal 
+          isOpen={this.state.showModal}
+          contentLabel="Minimal Modal Example"        
+          className='Modal'
+          shouldFocusAfterRender={true}
+          shouldReturnFocusAfterClose={true}
+      >
+        <h1>Add User</h1>
+        {this.state.customHeaders.map((header, index) =>
+          {return header.create === true &&
+          <ONSTextInput label={header.label} onChange={this.updatePayload}/>}
+        )}
+      <hr/>
+      <h2/>
+        <ONSButton primary={true} small={false} label={" Save "} onClick={this.saveChanges}/> 
+        <ONSButton label="Cancel" small={false} primary={false} onClick={this.closeModal}/>
+      </ReactModal>
+
+
+
+      // <Modal show={this.state.showModal} onHide={this.closeModal}>
+      //   <Modal.Header closeButton>
+      //     <Modal.Title>Add Row</Modal.Title>
+      //   </Modal.Header>
+      //   <Modal.Body>
+      //     {this.state.customHeaders.map((header, index) =>
+      //       {return header.create === true &&
+      //       <ONSTextInput label={header.label} onChange={this.updatePayload}/>}
+      //     )}
+      //   </Modal.Body>
+      //   <Modal.Footer>
+      //     <ONSButton primary={false} small={true} label={"Close"} onClick={this.closeModal}/>
+      //     <ONSButton primary={true} small={true} label={"Save"} onClick={this.saveChanges}/>
+      //   </Modal.Footer>
+      // </Modal>
     );
     }
 

@@ -81,7 +81,7 @@ export class File_Upload extends Component <Props, State> {
                                accept=".csv"/>
                     <ONSUpload label={"File 3"} description={"Only .csv accepted"} fileName={"Upload 3"} fileID={"U3"}
                                accept=".csv"/>
-                    <ONSButton label={"Submit"} onClick={this.upload} primary={true} small={false} loading={this.state.uploading}/>
+                    <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false} loading={this.state.uploading}/>
                 </form>
             </div>
         )
