@@ -34,30 +34,31 @@ interface PRProps extends RouteProps {
 }
 
 export default class App extends React.Component<Props, State> {
-    displayName = App.name
+    displayName = App.name;
 
     constructor(props: Props) {
         super(props);
 
-        this.setUser.bind(this)
+        this.setUser.bind(this);
 
-        this.state = {user: null}
+        this.state = {user: null};
         this.getCurrentUser()
     }
 
     getCurrentUser = () => {
-        let user = verifyUserToken()
+        let user = verifyUserToken();
         if (user !== undefined) {
-            console.log("User verifed, logging in")
+            console.log("User verifed, logging in");
             this.state = {user: user}
         }
-    }
+    };
 
     setUser = (user: User) => {
         this.setState({user: user});
-    }
+    };
 
     PrivateRoute = ({component: Component, page_id, ...rest}: PRProps) => {
+
         if (!this.state.user) {
             return (<Route {...rest} render={(props) => (<Login setUser={this.setUser} user={this.state.user}/>)}/>)
         } else {
@@ -65,13 +66,14 @@ export default class App extends React.Component<Props, State> {
                 return (
                     <Route {...rest} render={(props) => (<Logout setUser={this.setUser} user={this.state.user}/>)}/>)
             }
+
             if (this.state.user.role.pages.includes(page_id)) {
                 return (<Route {...rest} render={(props) => (<Component {...props} />)}/>)
             } else {
                 return (<Route {...rest} render={(props) => (<Unauthorized/>)}/>)
             }
         }
-    }
+    };
 
     render() {
         return (
