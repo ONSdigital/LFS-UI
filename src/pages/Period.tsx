@@ -30,7 +30,7 @@ export class Period extends Component{
             <div className="container">
                     <ONSSelect label="Week" value="week" options={this.weeks()} />
                     <ONSSelect label="Year" value="year" options={this.years()} />
-                    <ONSButton label={"Submit"} primary={true} small={false}/>
+                    <ONSButton label={"Submit"} field={true} primary={true} small={false}/>
 
             </div>
         )

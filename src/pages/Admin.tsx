@@ -68,19 +68,19 @@ export class Admin extends Component <{}, State>{
         order: true,
         create: false,
       },{
-        label: "username",
+        label: "Username",
         column_name: "username",
         filter: false,
         order: true,
         create: true
       },{
-        label: "password",
+        label: "Password",
         column_name: "password",
         filter: false,
         order: false,
         create: true
       },{
-        label: "role",
+        label: "Role",
         column_name: "role",
         filter: false,
         order: false,

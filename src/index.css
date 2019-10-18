@@ -28,9 +28,21 @@ caption{
   caption-side: top
 }
 
-.modal{
-  display: block;
-  text-align: unset
+.Modal {
+  position: absolute;
+  text-align: unset; 
+  top:20%;
+  bottom: 50%;
+  /* right: c%; */
+  left: 35%;
+  height: 465px;
+  width: 465px;
+  background: white;
+  border-style: solid;
+  border-color: blueviolet;
+  border-width: 3px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .fade:not(.show) {

@@ -5,6 +5,7 @@ interface Props {
     id?: string,
     primary: boolean,
     small: boolean,
+    field?: boolean,
     loading?: boolean,
     onClick?: (...props: any[]) => void
 }
@@ -12,7 +13,7 @@ interface Props {
 export class ONSButton extends Component <Props, {}> {
 
     render() {
-        let className = "field btn " + (this.props.loading ? "btn--loader is-loading" : "") + (this.props.primary ? "" : "btn--secondary ") + (this.props.small ? "btn--small " : "");
+        let className = "btn " + (this.props.loading ? "btn--loader is-loading" : "") + (this.props.field ? "field ": "") + (this.props.primary ? "" : "btn--secondary ") + (this.props.small ? "btn--small " : "");
         return (
             <button type="button" disabled={this.props.loading} className={className} onClick={this.props.onClick}>
                 <span className="btn__inner">{this.props.label}</span>
