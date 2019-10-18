@@ -53,7 +53,6 @@ export class Layout extends Component {
           </Row>
           <Row>
             <Col>
-              <br/>
               {this.props.children}
             </Col>
           </Row>
