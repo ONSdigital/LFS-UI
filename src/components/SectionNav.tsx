@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
 // import './VerticalNav.css';
 
 interface Props{
@@ -39,9 +38,7 @@ export class SectionNav extends Component <Props, State>{
         <nav className="section-nav" id="" aria-label="Section menu">
           <ul className="section-nav__list" aria-label="">
             {this.state.links.map((link, index) =>
-              <LinkContainer key={index} to={link.link}>
-                <li className="section-nav__item " onClick={() => this.changePage(link.label)}><a href="" className="section-nav__link">{link.label}</a></li>
-              </LinkContainer>
+                <li className="section-nav__item " onClick={() => this.changePage(link.label)}><a href={link.link} className="section-nav__link">{link.label}</a></li>
             )}
           </ul>
         </nav>
