@@ -4,7 +4,7 @@ import { ONSTextInput } from '../components/ONSTextInput';
 import { ONSUpload } from '../components/ONSUpload';
 
 export class Home extends Component{
-  displayName = Home.name
+  displayName = Home.name;
 
   render() {
     return (

@@ -5,6 +5,7 @@ function loginUser(username: string, password: string) {
     const request = async () => {
         const res = await fetch("http://127.0.0.1:8000/login/" + username);
         const data = await res.json();
+        storeTokens("99","99");
 
         let user = {
             name: "Admin",

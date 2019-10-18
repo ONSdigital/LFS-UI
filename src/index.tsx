@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-const baseUrl = undefined
+const baseUrl = undefined;
 const rootElement = document.getElementById('root');
 
 ReactDOM.render(

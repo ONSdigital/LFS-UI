@@ -10,10 +10,6 @@ interface Props {
     autoFocus?: boolean,
 }
 
-interface State {
-    value: string
-}
-
 export class ONSTextInput extends Component <Props, {}> {
     value: string = "";
 

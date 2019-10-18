@@ -3,27 +3,27 @@ import {ONSSelect} from "../components/ONSSelect";
 import {ONSButton} from "../components/ONSButton";
 
 export class Period extends Component{
-    displayName = Period.name
+    displayName = Period.name;
 
     weeks = () => {
         let i;
-        let weekList = []
+        let weekList = [];
         for (i=1; i<=52; i++) {
             weekList.push({"label":"Week "+String(i), "value":String(i)})
         }
         return weekList
-    }
+    };
 
     years = () => {
         let i;
         let yearlist = [];
-        var date = new Date();
+        let date = new Date();
         const year = date.getFullYear();
         for (i=0; i<10; i++){
             yearlist.push({"label":String(year-i), "value":String(year-i)})
         }
         return yearlist
-    }
+    };
 
     render() {
         return (
