@@ -138,24 +138,6 @@ export class ONSTable extends Component <Props, State>{
         <ONSButton primary={true} small={false} label={" Save "} onClick={this.saveChanges}/> 
         <ONSButton label="Cancel" small={false} primary={false} onClick={this.closeModal}/>
       </ReactModal>
-
-
-
-      // <Modal show={this.state.showModal} onHide={this.closeModal}>
-      //   <Modal.Header closeButton>
-      //     <Modal.Title>Add Row</Modal.Title>
-      //   </Modal.Header>
-      //   <Modal.Body>
-      //     {this.state.customHeaders.map((header, index) =>
-      //       {return header.create === true &&
-      //       <ONSTextInput label={header.label} onChange={this.updatePayload}/>}
-      //     )}
-      //   </Modal.Body>
-      //   <Modal.Footer>
-      //     <ONSButton primary={false} small={true} label={"Close"} onClick={this.closeModal}/>
-      //     <ONSButton primary={true} small={true} label={"Save"} onClick={this.saveChanges}/>
-      //   </Modal.Footer>
-      // </Modal>
     );
     }
 
