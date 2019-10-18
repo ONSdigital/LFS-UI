@@ -70,11 +70,11 @@ export class File_Upload extends Component <Props, State> {
 
     render() {
         return (
-            <div className="container">
-                <ONSPanel status={"error"}  label={"error"} hidden={this.state.errorPanelHidden}>
-                    <p>{this.state.errorPanelMessage}</p>
-                </ONSPanel>
+            <div className="container">     
                 <form>
+                    <ONSPanel status={"error"}  label={"error"} hidden={this.state.errorPanelHidden}>
+                            <p>{this.state.errorPanelMessage}</p>
+                    </ONSPanel>
                     <ONSUpload label={"SAV File 1"} description={"Only .sav accepted"} fileName={"Upload 1"} fileID={"U1"}
                                accept=".sav" onChange={(e) => this.handleFileOneChange(e.target.files)}/>
                     <ONSUpload label={"File 2"} description={"Only .csv accepted"} fileName={"Upload 2"} fileID={"U2"}
