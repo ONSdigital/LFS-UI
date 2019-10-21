@@ -24,12 +24,12 @@ export class Layout extends Component {
         label: "Upload"
       },
       {
-        link: "/Period",
-        label: "Period"
-      },
-      {
         link: "/New_Run",
         label: "New Run"
+      },
+      {
+        link: "/Link-to-item-5",
+        label: "Link 5"
       },
       {
         link: "/link-to-item6",
