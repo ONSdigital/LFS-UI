@@ -28,8 +28,8 @@ export class Layout extends Component {
         label: "Period"
       },
       {
-        link: "/link-to-item5",
-        label: "Link 5"
+        link: "/New_Run",
+        label: "New Run"
       },
       {
         link: "/link-to-item6",
