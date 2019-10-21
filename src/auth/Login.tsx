@@ -27,9 +27,8 @@ export class Login extends Component <Props, State> {
             password: ''
         };
     }
-
     login = async () => {
-        let user = await loginUser(this.state.username, this.state.username);
+        let user = await loginUser(this.state.username, this.state.password);
         this.props.setUser(user)
     };
 
@@ -57,7 +56,7 @@ export class Login extends Component <Props, State> {
                                           onChange={this.handleUserName}/>
                             <ONSTextInput ref="password" label="Password" password={true}
                                           onChange={this.handlePassword}/>
-                            <ONSSubmitButton label="Log In" primary={false} onClick={() => this.login()}
+                            <ONSSubmitButton label="Log In" primary={false}
                                              small={false}/>
                         </div>
                     </form>
