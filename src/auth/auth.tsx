@@ -8,6 +8,12 @@ function loginUser(username: string, password: string) {
             }
         });
         const data = await res.json();
+
+        //TODO: Intermittent bug with login. Remove console.log when resolved --->
+        console.log("DEBUG: password = " + password)
+        console.log("DEBUG: data.status = " + data.status)
+        //TODO: <---
+
         if(data.status === "OK"){
             let user = {
                 name: username,
