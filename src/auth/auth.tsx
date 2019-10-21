@@ -13,8 +13,6 @@ function loginUser(username: string, password: string) {
         if(data.status === "OK"){
             let user = {
                 name: username,
-                password: password,
-                //TODO: Role functionality to be removed
                 role: {
                     name: "Admin",
                     pages: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

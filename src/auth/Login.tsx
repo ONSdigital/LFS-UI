@@ -29,7 +29,7 @@ export class Login extends Component <Props, State> {
     }
 
     login = async () => {
-        let user = await loginUser(this.state.username, this.state.username);
+        let user = await loginUser(this.state.username, this.state.password);
         this.props.setUser(user)
     };
 
