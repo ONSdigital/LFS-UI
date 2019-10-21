@@ -5,11 +5,11 @@ import { Footer } from './Footer';
 import { HeaderNav } from './HeaderNav';
 
 export class Layout extends Component {
-  displayName = Layout.name
+  displayName = Layout.name;
 
   render() {
 
-    var links = [
+    let links = [
       {
         link: "/Dashboard",
         label: "Dashboard",
@@ -39,7 +39,7 @@ export class Layout extends Component {
         link: "/Admin",
         label: "Admin"
       }
-    ]
+    ];
 
     return (
       <div style={{height: "100%"}}>

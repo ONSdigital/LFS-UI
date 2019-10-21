@@ -20,10 +20,10 @@ interface Cell{
 }
 
 export class Outputs extends Component <{}, State>{
-  displayName = Outputs.name
+  displayName = Outputs.name;
   constructor(props: any) {
     super(props);
-    this.state = {Outputs: null, OutputData: null}
+    this.state = {Outputs: null, OutputData: null};
     this.getOutputs();
   }
 
@@ -31,23 +31,23 @@ export class Outputs extends Component <{}, State>{
     fetch('/jsons/Outputs.json')
         .then(response => response.json())
         .then(response => this.setMockOutputData(response))
-  }
+  };
 
   setMockOutputData = (response: any) => {
     //-------Delete this when using api
     let outputs = response.Rows as object[];
-    outputs = outputs.slice(0, 20)
+    outputs = outputs.slice(0, 20);
     this.setState({OutputData: response, Outputs: {Rows: outputs as any, Count: response.Count}})
-  }
+  };
 
   mockOutputs = (offset: number, steps: number) => {
     //-------Use fetch method to api here to get from DB
     if(this.state.OutputData !== null){
       let outputs = this.state.OutputData.Rows as object[];
-      outputs = outputs.slice(offset, offset+steps)
+      outputs = outputs.slice(offset, offset+steps);
       this.setState({Outputs: {Rows: outputs as any, Count: this.state.OutputData.Count}});
     }
-  }
+  };
 
 
   outputHeaders = () => {
@@ -66,9 +66,10 @@ export class Outputs extends Component <{}, State>{
         order: false,
         onChange: this.fullChange
       }
-    )
+    );
+
     if(this.state.OutputData){
-      let keys = Object.keys(this.state.OutputData.Rows[0])
+      let keys = Object.keys(this.state.OutputData.Rows[0]);
       for(let i = 2; i<keys.length; i++){
         headers.push(
           {
@@ -84,7 +85,7 @@ export class Outputs extends Component <{}, State>{
     return(
       headers
     );
-  }
+  };
 
   singleChange = (e: any, row: number, column: string, offset: number) => {
     if(this.state.Outputs && this.state.OutputData){
@@ -95,7 +96,7 @@ export class Outputs extends Component <{}, State>{
     }
     //-------Add code here to save to database
     //-------You can get the variable name with data.Rows[row]["Variable"]
-  }
+  };
 
   fullChange = (e: any, row: number, column: string, offset: number) => {
     if(this.state.Outputs && this.state.OutputData){
@@ -111,7 +112,7 @@ export class Outputs extends Component <{}, State>{
     }
     //-------Add code here to save to database
     //-------You can get the variable name with data.Rows[row]["Variable"]
-  }
+  };
 
 
   render() {

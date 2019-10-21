@@ -21,10 +21,10 @@ interface Cell{
 }
 
 export class Admin extends Component <{}, State>{
-  displayName = Admin.name
+  displayName = Admin.name;
   constructor(props: any) {
     super(props);
-    this.state = {UserData: null, Users: null, RoleData: null}
+    this.state = {UserData: null, Users: null, RoleData: null};
     this.getUsers();
     this.getRoles();
   }
@@ -33,31 +33,31 @@ export class Admin extends Component <{}, State>{
     fetch('/jsons/Users.json')
         .then(response => response.json())
         .then(response => this.setMockUserData(response))
-  }
+  };
 
   getRoles = () => {
     fetch('/jsons/Roles.json')
         .then(response => response.json())
         .then(response => this.setMockRoleData(response))
-  }
+  };
 
   setMockRoleData = (response: any) => {
     this.setState({RoleData: response})
-  }
+  };
 
   setMockUserData = (response: any) => {
     let users = response.Rows as object[];
-    users = users.slice(0, 20)
+    users = users.slice(0, 20);
     this.setState({UserData: response, Users: {Rows: users as any, Count: response.Count}})
-  }
+  };
 
   mockUsers = (offset: number, steps: number) => {
     if(this.state.UserData !== null){
       let users = this.state.UserData.Rows as object[];
-      users = users.slice(offset, offset+steps)
+      users = users.slice(offset, offset+steps);
       this.setState({Users: {Rows: users as any, Count: this.state.UserData.Count}});
     }
-  }
+  };
 
   userHeaders = () => {
     return(
@@ -87,7 +87,7 @@ export class Admin extends Component <{}, State>{
         create: true
       }]
     )
-  }
+  };
 
   roleHeaders = () => {
     return(
@@ -103,11 +103,11 @@ export class Admin extends Component <{}, State>{
         order: false
       }]
     )
-  }
+  };
 
   createUser = (payload : any) => {
     console.log(payload)
-  }
+  };
 
   render() {
     return (

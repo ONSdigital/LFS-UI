@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
 // import './VerticalNav.css';
 
 interface Props{
@@ -17,7 +16,7 @@ interface State{
 }
 
 export class SectionNav extends Component <Props, State>{
-  displayName = SectionNav.name
+  displayName = SectionNav.name;
 
   constructor(props : Props) {
     super(props);
@@ -27,11 +26,11 @@ export class SectionNav extends Component <Props, State>{
     changePage = (label: string) => {
         let links = this.state.links;
         let link = links.find(x => x.current);
-        link != undefined ? link.current = false : console.log("there is no current!")
-        link = links.find(x => x.label === label)
-        link != undefined ? link.current = true : console.log("somehow it's undefined!")
+        link != undefined ? link.current = false : console.log("there is no current!");
+        link = links.find(x => x.label === label);
+        link != undefined ? link.current = true : console.log("somehow it's undefined!");
         this.setState({links: links});
-    }
+    };
 
     render() {
     return (
@@ -39,9 +38,7 @@ export class SectionNav extends Component <Props, State>{
         <nav className="section-nav" id="" aria-label="Section menu">
           <ul className="section-nav__list" aria-label="">
             {this.state.links.map((link, index) =>
-              <LinkContainer key={index} to={link.link}>
-                <li className="section-nav__item " onClick={() => this.changePage(link.label)}><a href="" className="section-nav__link">{link.label}</a></li>
-              </LinkContainer>
+                <li className="section-nav__item " onClick={() => this.changePage(link.label)}><a href={link.link} className="section-nav__link">{link.label}</a></li>
             )}
           </ul>
         </nav>

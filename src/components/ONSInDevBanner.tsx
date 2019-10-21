@@ -15,7 +15,7 @@ export class ONSInDevBanner extends Component <Props, {}>{
               <h3 className="phase-banner__badge">In Dev</h3>
             </div>
             <div className="grid__col col-auto u-flex-shrink">
-              <p className="phase-banner__desc u-fs-s u-mb-no">This is a new service – your <a href="#feedback">feedback</a> will help us improve it.</p>
+              <p className="phase-banner__desc u-fs-s u-mb-no">This is a new service – your <a href={"#feedback"}>feedback</a> will help us improve it.</p>
             </div>
           </div>
         </div>

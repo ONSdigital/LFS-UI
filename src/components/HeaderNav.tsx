@@ -17,7 +17,7 @@ interface State{
 }
 
 export class HeaderNav extends Component <Props, State>{
-  displayName = HeaderNav.name
+  displayName = HeaderNav.name;
 
   constructor(props : Props) {
     super(props);
@@ -27,11 +27,11 @@ export class HeaderNav extends Component <Props, State>{
     changePage = (label: string) => {
         let links = this.state.links;
         let link = links.find(x => x.current);
-        link !== undefined ? link.current = false : console.log("there is no current!")
-        link = links.find(x => x.label === label)
-        link !== undefined ? link.current = true : console.log("somehow it's undefined!")
+        link !== undefined ? link.current = false : console.log("there is no current!");
+        link = links.find(x => x.label === label);
+        link !== undefined ? link.current = true : console.log("somehow it's undefined!");
         this.setState({links: links});
-    }
+    };
 
     render() {
     return (

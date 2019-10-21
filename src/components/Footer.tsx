@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { ONSInDevBanner } from './ONSInDevBanner';
-// import './Footer.css';
-
-interface Props {
-    
-}
 
 export class Footer extends Component {
-  displayName = Footer.name
+  displayName = Footer.name;
 
     render() {
     return (

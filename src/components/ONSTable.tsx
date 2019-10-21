@@ -6,8 +6,6 @@ import { ONSButton } from './ONSButton';
 import { ONSCheckbox } from './ONSCheckbox';
 import ReactModal from 'react-modal';
 
-var Modal = require('react-bootstrap/Modal')
-
 interface Props {
     Title : string,
     Data : Data | null,
@@ -84,13 +82,13 @@ export class ONSTable extends Component <Props, State>{
       this.setState({offset: offset});
       this.props.pageChange(offset, steps)
     }
-  }
+  };
 
 
   componentWillReceiveProps(newProps: Props){
         if(newProps.Data != null){
             this.setState({
-              Headers: Object.keys(newProps.Data.Rows[0]), 
+              Headers: Object.keys(newProps.Data.Rows[0]),
               customHeaders: newProps.Headers,
               Data: JSON.parse(JSON.stringify(newProps.Data)),
               FilteredData: JSON.parse(JSON.stringify(newProps.Data)),
@@ -101,21 +99,21 @@ export class ONSTable extends Component <Props, State>{
 
   closeModal = () => {
     this.setState({showModal:false, payload: undefined})
-  }
+  };
 
   saveChanges = () => {
     if(this.props.CreateFunction) this.props.CreateFunction(this.state.payload);
     this.closeModal();
-  }
+  };
 
   updatePayload = (e: ChangeEvent<HTMLInputElement>, property: string) => {
     let payload = this.state.payload;
     if(!payload) payload = {};
     payload[property] = e.target.value;
     this.setState({payload:payload})
-  }
+  };
   
-  openModal = () => this.setState({showModal:true})
+  openModal = () => this.setState({showModal:true});
 
   modal = () => {
     if(this.state.customHeaders)
@@ -129,7 +127,7 @@ export class ONSTable extends Component <Props, State>{
           shouldReturnFocusAfterClose={true}
       >
         <h1>Add User</h1>
-        {this.state.customHeaders.map((header, index) =>
+        {this.state.customHeaders.map((header) =>
           {return header.create === true &&
           <ONSTextInput label={header.label} onChange={this.updatePayload}/>}
         )}
@@ -139,7 +137,7 @@ export class ONSTable extends Component <Props, State>{
         <ONSButton label="Cancel" small={false} primary={false} onClick={this.closeModal}/>
       </ReactModal>
     );
-    }
+    };
 
   format = (x : object, column: string|null, row: number|null, passedChange : ((e: ChangeEvent<HTMLInputElement>, ...props: any[]) => void) | undefined) =>{ 
     if(typeof(x) === "boolean"){
@@ -150,35 +148,35 @@ export class ONSTable extends Component <Props, State>{
         let toReturn = "";
         y.forEach(z => {
             toReturn += String(z) + ","
-        })
+        });
         return toReturn;
     }
     return x;
-  }
+  };
 
   onChange = (e: any, onChange : ((e: ChangeEvent<HTMLInputElement>, ...props: any[]) => void) | undefined, row: number | null, column: string | null, type: string) => {
     if(onChange !== undefined){
       onChange(e, row, column, this.state.offset)
     }
-  }
+  };
 
   filter = (e: ChangeEvent<HTMLInputElement>, column: string) => {
     let filters = this.state.Filters;
     filters[column] = e.target.value;
     this.applyFilters(filters)
-  }
+  };
 
   sort = (column: string, dir: "Asc" | "Desc" | null) => {
     if(dir === null){
-      this.setState({ShowData : JSON.parse(JSON.stringify(this.state.FilteredData))})
+      this.setState({ShowData : JSON.parse(JSON.stringify(this.state.FilteredData))});
       return
     }
     let sort = {
       column : column,
       type: dir 
-    }
+    };
     this.sortData(sort)
-  } 
+  } ;
 
   sortData = (sort: Sort) => {
     let data = JSON.parse(JSON.stringify(this.state.FilteredData));
@@ -206,7 +204,7 @@ export class ONSTable extends Component <Props, State>{
     data.Rows = rows;
     this.setState({ShowData: data, Sort: sort})
 
-  }
+  };
 
   applyFilters = (filters : Filters) => {
     let data = JSON.parse(JSON.stringify(this.state.Data));
@@ -219,7 +217,7 @@ export class ONSTable extends Component <Props, State>{
     });
     data.Rows = rows;
     this.setState({FilteredData: data, Filters: filters, ShowData: JSON.parse(JSON.stringify(data))});
-  }
+  };
 
   getCustomHeader = (header: Header) => {
     return(
@@ -233,7 +231,7 @@ export class ONSTable extends Component <Props, State>{
         }
       </th>
     )
-  }
+  };
 
   genericTable = () => {
     if(this.state.ShowData === null || this.state.Headers === undefined || this.state.Data === null){
@@ -247,15 +245,15 @@ export class ONSTable extends Component <Props, State>{
             <caption className="table__caption">{this.props.Title}</caption>
             <thead className="table__head">
             <tr className="table__row">
-                {headers.map((header, index) =>
+                {headers.map((header) =>
                     <th scope="col" className="table__header " aria-sort="none">{header}</th>
                 )}
             </tr>
             </thead>
             <tbody className="table__body">
-                {Object.keys(this.state.ShowData.Rows).map((row, index) =>
+                {Object.keys(this.state.ShowData.Rows).map((row) =>
                     <tr className="table__row">
-                        {headers.map((header, index) =>
+                        {headers.map((header) =>
                         <td className="table__cell ">{this.format(rows[parseInt(row)][header], header, parseInt(row), undefined)}</td>
                         )}
                     </tr>
@@ -267,7 +265,7 @@ export class ONSTable extends Component <Props, State>{
         }
       </div>
     );
-  }
+  };
 
   getCreateElement = () => {
     if(this.props.CreateFunction !== undefined){
@@ -277,7 +275,7 @@ export class ONSTable extends Component <Props, State>{
         </div>
       )
     }
-  }
+  };
 
   customTable = () => {
     if(this.state.ShowData === null || this.state.customHeaders === undefined || this.state.Data === null){
@@ -291,15 +289,15 @@ export class ONSTable extends Component <Props, State>{
             <caption className="table__caption">{this.props.Title} {this.getCreateElement()}</caption>
             <thead className="table__head">
             <tr className="table__row">
-                {headers.map((header, index) =>
+                {headers.map((header) =>
                     {return this.getCustomHeader(header)}
                 )}
             </tr>
             </thead>
             <tbody className="table__body">
-                {Object.keys(this.state.ShowData.Rows).map((row, index) =>
+                {Object.keys(this.state.ShowData.Rows).map((row) =>
                     <tr className="table__row">
-                        {headers.map((header, index) =>
+                        {headers.map((header) =>
                         <td className="table__cell ">{this.format(rows[parseInt(row)][header.column_name], header.column_name, parseInt(row), header.onChange)}</td>
                         )}
                     </tr>
@@ -311,7 +309,7 @@ export class ONSTable extends Component <Props, State>{
         }
       </div>
     );
-  }
+  };
 
     render() {
         if(this.state.Data != null && this.state.Headers){

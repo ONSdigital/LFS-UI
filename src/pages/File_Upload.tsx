@@ -47,7 +47,7 @@ export class File_Upload extends Component <Props, State> {
                 });
             })
             .catch(err => {
-                console.log(err)
+                console.log(err);
                 this.setErrorMessage(err.toString());
                 this.setState({
                     uploading: false,
