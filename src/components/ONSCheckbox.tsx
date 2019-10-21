@@ -12,10 +12,10 @@ interface State{
 }
 
 export class ONSCheckbox extends Component <Props, State>{
-  value: boolean = this.props.checked === true ? true : false;
+  value: boolean = this.props.checked === true;
   constructor(props : Props) {
     super(props);
-    this.state = {value: props.checked === true ? true : false};
+    this.state = {value: props.checked === true};
   }
 
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ export class ONSCheckbox extends Component <Props, State>{
     this.value = e.target.checked;
     this.setState({value: e.target.checked})
     
-  }
+  };
 
   componentWillReceiveProps(newProps: Props){
     if(newProps.checked !== undefined){

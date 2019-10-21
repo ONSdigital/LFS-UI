@@ -31,7 +31,7 @@ export class ONSPagination extends Component <Props, State>{
     }
     let aft = []; let aftPages = [];
     for(let i = this.state.page+1; i < this.state.maxPage && i <= this.state.page + 2; i++){ 
-      aft.push(this.link(i))
+      aft.push(this.link(i));
       aftPages.push(i);
     }
     let allPages = prevPages.concat(aftPages);
@@ -44,26 +44,26 @@ export class ONSPagination extends Component <Props, State>{
       toReturn.push(<li key={"end_dots"} className="pagination__item pageination__item--gap">&hellip;</li>);
     }
     return toReturn
-  }
+  };
 
   pageChange = (e : React.MouseEvent, page: number) => {
     if(page !== this.state.page){
-      this.props.pageChange((page-1)*this.props.steps, this.props.steps)
+      this.props.pageChange((page-1)*this.props.steps, this.props.steps);
       this.setState({page: page})
     }
-  }
+  };
 
   previous = (e : React.MouseEvent) => {
     this.pageChange(e, this.state.page - 1)
-  }
+  };
 
   next = (e : React.MouseEvent) => {
     this.pageChange(e, this.state.page + 1)
-  }
+  };
 
   link = (page: number) => {
     return(<li key={page} style={{cursor:"pointer"}} className={"pagination__item "+(this.state.page === page ? "pagination__item--current" : "")}><a onClick={(e) => this.pageChange(e, page)} className="pagination__link" aria-label={"Go to page "+page}>{page}</a></li>)
-  }
+  };
 
   render() {
     return (

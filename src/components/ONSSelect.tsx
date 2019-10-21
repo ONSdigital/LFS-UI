@@ -30,7 +30,7 @@ export class ONSSelect extends Component <Props, State>{
     }
     this.value = e.target.value;
     this.setState({value: e.target.value})
-  }
+  };
 
     render() {
       return (

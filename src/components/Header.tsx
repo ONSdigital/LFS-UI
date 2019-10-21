@@ -5,7 +5,7 @@ interface Props {
 }
 
 export class Header extends Component <Props,{}>{
-  displayName = Header.name
+  displayName = Header.name;
 
     render() {
     return (
@@ -14,8 +14,8 @@ export class Header extends Component <Props,{}>{
                 <div className="container col-8">
                 <div className="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                     <div className="grid__col col-auto">
-                        <a href="/Dashboard">
-                            <img className="header__logo" src="/img/ons-logo-white.svg" alt="Office for National Statistics logo"/>
+                        <a href={"/Dashboard"}>
+                            <img className="header__logo" src={"/img/ons-logo-white.svg"} alt="Office for National Statistics logo"/>
                         </a>
                     </div>
                     <div className="header__links grid__col col-auto">
@@ -23,10 +23,10 @@ export class Header extends Component <Props,{}>{
                         <nav className="header-service-nav header-service-nav--internal" aria-label="Site services menu">
                         <ul className="header-service-nav__list" aria-label="Navigation menu">
                             <li className="header-service-nav__item">
-                            <a href="#" className="header-service-nav__link"></a>
+                            <a href="#" className="header-service-nav__link"/>
                             </li>
                             <li className="header-service-nav__item">
-                            <a href="#" className="header-service-nav__link"></a>
+                            <a href="#" className="header-service-nav__link"/>
                             </li>
                         </ul>
                         </nav>
