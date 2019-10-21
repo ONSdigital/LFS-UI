@@ -2,17 +2,16 @@ let users: any[] = []
 
 function loginUser(username: string, password: string) {
     const request = async () => {
-
         const res = await fetch("/login/" + username, {
             "headers":{
                 "password": password
             }
         });
         const data = await res.json();
-
         if(data.status === "OK"){
             let user = {
                 name: username,
+                //TODO: Role functionality to be removed
                 role: {
                     name: "Admin",
                     pages: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
