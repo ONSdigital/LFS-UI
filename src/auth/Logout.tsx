@@ -10,12 +10,15 @@ interface Props {
 
 class Logout extends Component <Props, {}>{
     componentWillMount () {
+        // Remove User Cookie and state
         this.props.cookies.set('username', "", { path: '/'});
         this.props.setUser(null);
     }
 
     render () {
-        return <Redirect to='/'/>;
+        // Reload the page to go back to the login page
+        // ?logout is to indicate to the login page to display logout successfully
+        return <Redirect to='/?logout'/>;
     }
 }
 

@@ -24,7 +24,7 @@ function loginUser(username: string, password: string, cookies: Cookies) {
             cookies.set('username', user.name, { path: '/' , expires: cookieExpire});
             return user;
         }
-        return undefined;
+        return null;
     };
 
     return request()

@@ -51,7 +51,7 @@ export class Layout extends Component <Props, {}> {
         <Container fluid>
           <Row>
             <Header title="Labour Force Survey" loggedIn={this.props.loggedIn}>
-              <HeaderNav links={links}/>
+              <HeaderNav links={links} loggedIn={this.props.loggedIn}/>
             </Header>
             <br/>
           </Row>
