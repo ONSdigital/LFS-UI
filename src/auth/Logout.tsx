@@ -1,27 +1,22 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router';
+import {Cookies} from "react-cookie";
 
 interface Props {
     setUser: Function,
-    user: any
-  }
-  
-interface State{
-  user: any
+    user: any,
+    cookies: Cookies
 }
 
-let Logout;
-
-Logout = class extends Component <Props, State>{
+class Logout extends Component <Props, {}>{
     componentWillMount () {
-        localStorage.clear();
-        let user = null
-        this.props.setUser(user)
+        this.props.cookies.set('username', "", { path: '/'});
+        this.props.setUser(null);
     }
 
     render () {
         return <Redirect to='/'/>;
     }
-};
+}
 
 export default (Logout);

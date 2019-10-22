@@ -2,11 +2,13 @@
 import React, {ChangeEvent, Component} from 'react';
 import {ONSTextInput} from '../components/ONSTextInput';
 import {loginUser} from './auth';
+import {Cookies} from "react-cookie";
 
 
 interface Props {
     setUser: Function,
-    user: any
+    user: any,
+    cookies: Cookies
 }
 
 interface State{
@@ -27,14 +29,16 @@ export class Login extends Component <Props, State> {
             password: ''
         };
     }
+
     login = async () => {
-        let user = await loginUser(this.state.username, this.state.password);
-        this.props.setUser(user)
+        let user = await loginUser(this.state.username, this.state.password, this.props.cookies);
+        this.props.setUser(user);
     };
 
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        this.login()
+        this.login();
+
     };
 
     handleUserName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +60,7 @@ export class Login extends Component <Props, State> {
                                           onChange={this.handleUserName}/>
                             <ONSTextInput ref="password" label="Password" password={true}
                                           onChange={this.handlePassword}/>
-                            <ONSSubmitButton label="Log In" primary={false}
+                            <ONSSubmitButton label="Log In" primary={true}
                                              small={false}/>
                         </div>
                     </form>

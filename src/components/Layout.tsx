@@ -4,7 +4,11 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { HeaderNav } from './HeaderNav';
 
-export class Layout extends Component {
+interface Props {
+  loggedIn: boolean
+}
+
+export class Layout extends Component <Props, {}> {
   displayName = Layout.name;
 
   render() {
@@ -46,7 +50,7 @@ export class Layout extends Component {
       <div style={{minHeight: "100%"}}>
         <Container fluid>
           <Row>
-            <Header title="Labour Force Survey">
+            <Header title="Labour Force Survey" loggedIn={this.props.loggedIn}>
               <HeaderNav links={links}/>
             </Header>
             <br/>
