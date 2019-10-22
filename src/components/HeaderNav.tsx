@@ -40,7 +40,7 @@ export class HeaderNav extends Component <Props, State>{
                 <ul className="header-nav__list" aria-label="" role="menubar">
                     {this.state.links.map((link, index) =>
                         <LinkContainer key={index} to={link.link}>                  
-                            <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active": "")} onClick={() => this.changePage(link.label)}><a href="" className="header-nav__link">{link.label}</a></li>
+                            <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active": "")} onClick={() => this.changePage(link.label)}><a className="header-nav__link">{link.label}</a></li>
                         </LinkContainer>
                     )}
                 </ul>

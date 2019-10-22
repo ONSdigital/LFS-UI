@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 interface Props {
-    title: string
+    title: string,
+    loggedIn: boolean
 }
 
 export class Header extends Component <Props,{}>{
@@ -42,9 +43,13 @@ export class Header extends Component <Props,{}>{
                             <div className="header__title">{this.props.title}</div>
                             </div>
                             <div className="grid__col col-auto u-flex-no-shrink">
-                            <a href="/logout" role="button" className="btn btn--ghost u-d-no@xs@m">
-                                <span className="btn__inner">Sign Out</span>
-                            </a>
+                                {this.props.loggedIn ?
+                                    <a href="/logout" role="button" className="btn btn--ghost u-d-no@xs@m">
+                                        <span className="btn__inner">Sign Out</span>
+                                    </a>
+                                    :
+                                    <div/>
+                                }
                         </div>
                     </div>
                 </div>
