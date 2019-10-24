@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, RouteProps} from 'react-router';
+import {Route, RouteProps, Switch} from 'react-router';
 import {Layout} from './components/Layout';
 import {Home} from './pages/Home';
 import {Login} from './auth/Login';
@@ -8,6 +8,7 @@ import {Outputs} from './pages/Outputs';
 import Logout from './auth/Logout';
 import {File_Upload} from "./pages/File_Upload";
 import { New_Run } from './pages/New_Run';
+import {GenericNotFound} from "./pages/GenericNotFound";
 import {Cookies, withCookies} from "react-cookie";
 
 interface Props {
@@ -74,15 +75,17 @@ class App extends React.Component<Props, State> {
     render() {
         return (
             <Layout loggedIn={!!(this.state.user !== null || "")}>
-                <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
-                <this.PrivateRoute exact path='/Dashboard' component={Home} page_id={2}/>
-                <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={3}/>
-                <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
-                <this.PrivateRoute exact path='/File_Upload' component={File_Upload} page_id={4}/>
-                <this.PrivateRoute exact path='/New_Run' component={New_Run} page_id={5}/>
-                <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
-                <Route exact path='/login' component={Login}/>
-
+                <Switch>
+                    <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
+                    <this.PrivateRoute exact path='/Dashboard' component={Home} page_id={2}/>
+                    <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={3}/>
+                    <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
+                    <this.PrivateRoute exact path='/File_Upload' component={File_Upload} page_id={4}/>
+                    <this.PrivateRoute exact path='/New_Run' component={New_Run} page_id={5}/>
+                    <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
+                    <Route exact path='/login' component={Login}/>
+                    <Route component={GenericNotFound} />
+                </Switch>
             </Layout>
         );
     }
