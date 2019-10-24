@@ -3,7 +3,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 // import './VerticalNav.css';
 
 interface Props{
-  links: Link[]
+  links: Link[],
+   loggedIn: boolean
 }
 
 interface Link{
@@ -38,11 +39,18 @@ export class HeaderNav extends Component <Props, State>{
         <div className="container container--gutterless@xs@m col-8">
             <nav className="header-nav js-header-nav" id="main-nav" aria-label="Main menu" data-ga-element="navigation">
                 <ul className="header-nav__list" aria-label="" role="menubar">
-                    {this.state.links.map((link, index) =>
-                        <LinkContainer key={index} to={link.link}>                  
-                            <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active": "")} onClick={() => this.changePage(link.label)}><a href="" className="header-nav__link">{link.label}</a></li>
-                        </LinkContainer>
-                    )}
+                    {
+                        this.props.loggedIn ?
+                            this.state.links.map((link, index) =>
+                                    <LinkContainer key={index} to={link.link}>
+                                        <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active": "")} onClick={() => this.changePage(link.label)}><a className="header-nav__link">{link.label}</a></li>
+                                    </LinkContainer>
+                                )
+                            :
+                            <LinkContainer key={0} to={"/"}>
+                                <li className={"header-nav__item " + "header-nav__item--active"}><a className="header-nav__link">{"Login"}</a></li>
+                            </LinkContainer>
+                    }
                 </ul>
             </nav>
         </div>
