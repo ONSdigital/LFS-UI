@@ -8,6 +8,7 @@ interface Props {
     placeholder?: string,
     fit?: boolean,
     autoFocus?: boolean,
+    value?: string
 }
 
 export class ONSTextInput extends Component <Props, {}> {
@@ -30,7 +31,7 @@ export class ONSTextInput extends Component <Props, {}> {
         return (
             <p className="field">
                 {this.props.label !== undefined && <label className="label">{this.props.label}</label>}
-                <input style={{width: this.props.fit === true ? "unset" : ""}}
+                <input value={this.props.value} style={{width: this.props.fit === true ? "unset" : ""}}
                        autoFocus={this.props.autoFocus === true}
                        type={this.props.password === true ? "password" : "text"} id={this.props.id}
                        className="input input--text input-type__input " placeholder={this.props.placeholder}
