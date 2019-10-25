@@ -1,0 +1,28 @@
+{
+    "Rows": [{
+        "source": "GB",
+        "week" : "1",
+        "status": "Green"
+    },
+    {
+        "source": "GB",
+        "week" : "2",
+        "status": "Green"
+    },
+    {
+        "source": "GB",
+        "week" : "3",
+        "status": "Green"
+    },
+    {
+        "source": "GB",
+        "week" : "4",
+        "status": "Green"
+    },
+    {
+        "source": "NI",
+        "week" : "Monthly",
+        "status": "Green"
+    }],
+        "Count":4
+}

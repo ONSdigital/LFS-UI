@@ -8,7 +8,7 @@ import {Outputs} from './pages/Outputs';
 import Logout from './auth/Logout';
 import {File_Upload} from "./pages/File_Upload";
 import { New_Batch } from './pages/New_Batch';
-import { Manage_Batch } from './pages/Manage_Batch';
+import { View_Monthly_Batch } from './pages/View_Monthly_Batch';
 import {GenericNotFound} from "./pages/GenericNotFound";
 import {Cookies, withCookies} from "react-cookie";
 
@@ -82,9 +82,9 @@ class App extends React.Component<Props, State> {
                     <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={3}/>
                     <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
                     <this.PrivateRoute exact path='/File_Upload' component={File_Upload} page_id={4}/>
-                    <this.PrivateRoute exact path='/New_Run' component={New_Batch} page_id={5}/>
+                    <this.PrivateRoute exact path='/New_Batch' component={New_Batch} page_id={5}/>
                     <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
-                    <this.PrivateRoute exact path='/Manage_Run' component={Manage_Batch} page_id={6}/>
+                    <this.PrivateRoute exact path='/View_Monthly_Batch' component={View_Monthly_Batch} page_id={6}/>
                     <Route exact path='/login' component={Login}/>
                     <Route component={GenericNotFound} />
                 </Switch>

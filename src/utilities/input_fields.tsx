@@ -41,8 +41,8 @@ function years() {
     return yearlist
 }
 
-const runs = [{"label":"Monthly", "value":"monthly"}, 
+const batches = [{"label":"Monthly", "value":"monthly"}, 
         {"label":"Quarterly", "value":"quarterly"}, 
         {"label":"Yearly", "value":"yearly"}]
 
-export{weeks, months, quarters, years, runs}
+export{weeks, months, quarters, years, batches}
