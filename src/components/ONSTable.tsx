@@ -5,6 +5,8 @@ import { ONSPagination } from './ONSPagination';
 import { ONSButton } from './ONSButton';
 import { ONSCheckbox } from './ONSCheckbox';
 import ReactModal from 'react-modal';
+import { number } from 'prop-types';
+import { ONSStatus } from './ONSStatus';
 
 interface Props {
     Title : string,
@@ -142,6 +144,24 @@ export class ONSTable extends Component <Props, State>{
   format = (x : object, column: string|null, row: number|null, passedChange : ((e: ChangeEvent<HTMLInputElement>, ...props: any[]) => void) | undefined) =>{ 
     if(typeof(x) === "boolean"){
       return(<ONSCheckbox checked={x} id={column+"_"+row} onChange={(e:any, onChange : ((e: ChangeEvent<HTMLInputElement>, ...props: any[]) => void) | undefined, ...props: any[]) => this.onChange(e, passedChange, row, column, typeof(x))}/>)
+    }
+    if(column === "status"){
+      if(typeof(x) === "number"){
+        if (x === 1){
+          return(<ONSStatus label="Ready" small={true} status="info"></ONSStatus>)
+        }if (x === 2){
+          return(<ONSStatus label="Running" small={true} status="info"></ONSStatus>)
+        }if (x === 3){
+          return(<ONSStatus label="Complete" small={true} status="success"></ONSStatus>)
+        }if (x === 4){
+          return(<ONSStatus label="Cancelled" small={true} status="dead"></ONSStatus>)
+        }if (x === 5){
+          return(<ONSStatus label="Invalid Run" small={true} status="error"></ONSStatus>)
+        }if (x === 6){
+          return(<ONSStatus label="Failed" small={true} status="error"></ONSStatus>)
+
+        }
+      }
     }
     if(typeof(x) === "object"){
         let y = x as object[];
