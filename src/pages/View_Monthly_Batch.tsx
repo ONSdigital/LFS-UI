@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { ONSTable } from '../components/ONSTable';
 import { ONSPanel } from '../components/ONSPanel';
 import { ONSButton } from '../components/ONSButton';
+import { ONSStatus } from '../components/ONSStatus';
 
 
 interface State {
   UploadsData: Data | null
+  Batch_ID: String
 }
 
 interface Data{
@@ -21,15 +23,11 @@ interface Cell{
   [key: string]: object
 }
 
-let divStyle = {
-    marginRight: "20px",
-  };
-
 export class View_Monthly_Batch extends Component <{}, State> {
   displayName = View_Monthly_Batch.name;
   constructor(props: any) {
     super(props);
-    this.state = {UploadsData: null};
+    this.state = {UploadsData: null, Batch_ID: "Dec2019"};
     this.getUploads();
   }
 
@@ -42,6 +40,30 @@ export class View_Monthly_Batch extends Component <{}, State> {
   setMockRoleData = (response: any) => {
     this.setState({UploadsData: response})
   };
+
+  getMonth = () => {
+    var Month = this.state.Batch_ID.substring(0,3)
+    console.log(Month)
+    switch (Month){
+      case 'Jan': Month = 'January'; break;
+      case 'Feb': Month = 'February'; break;
+      case 'Mar': Month = 'March'; break;
+      case 'Apr': Month = 'April'; break;
+      case 'May': break;
+      case 'Jun': Month = 'June'; break;
+      case 'Jul': Month = 'July'; break;
+      case 'Aug': Month = 'August'; break;
+      case 'Sep': Month = 'September'; break;
+      case 'Oct': Month = 'October'; break;
+      case 'Nov': Month = 'November'; break;
+      case 'Dec': Month = 'December'; break;
+    }
+    return Month
+  }
+
+  getYear = () => {
+    return this.state.Batch_ID.substring(3,7)
+  }
 
   batchHeaders = () => {
     return(
@@ -74,11 +96,11 @@ export class View_Monthly_Batch extends Component <{}, State> {
             <text style={{fontWeight: "bold"}}> Manage Monthly Uploads</text>
           </header>
           <br></br>
-          <text> Batch ID: 5746827</text>
+          <text> Batch ID: {this.state.Batch_ID}</text>
           <br></br>
-          <text> Year: xxxx</text>
+          <text> Year: {this.getYear()}</text>
           <br></br>
-          <text> Month: xxx </text>
+          <text> Month: {this.getMonth()} </text>
           <br></br>
 
         </div>

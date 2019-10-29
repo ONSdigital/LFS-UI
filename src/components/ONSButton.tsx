@@ -17,10 +17,10 @@ interface Props {
 export class ONSButton extends Component <Props, {}> {
     
     spacing = () => {
-        let divStyle = {
+        let buttonStyle = {
             marginRight: String(this.props.marginRight) + "px",
           };
-        return divStyle
+        return buttonStyle
     }
 
     render() {
