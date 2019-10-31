@@ -27,6 +27,8 @@
     "react-scripts": "^3.2.0",
     "react-table": "^6.10.3",
     "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "immutability-helper": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
