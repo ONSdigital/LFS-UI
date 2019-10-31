@@ -28,8 +28,8 @@ export class Layout extends Component <Props, {}> {
         label: "Upload"
       },
       {
-        link: "/New_Run",
-        label: "New Run"
+        link: "/New_Batch",
+        label: "New Batch"
       },
       {
         link: "/Link-to-item-5",
