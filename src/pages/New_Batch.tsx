@@ -1,7 +1,7 @@
 import React, {Component, ChangeEvent} from "react";
 import {ONSSelect} from "../components/ONSSelect";
 import {ONSSubmitButton} from "../components/ONSSubmitButton"
-import {batches, years, quarters, months } from "../utilities/input_fields";
+import {batches, years, quarters, months } from "../utilities/Common_Functions";
 
 interface State{
     batchType: String;

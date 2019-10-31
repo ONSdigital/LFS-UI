@@ -1,0 +1,28 @@
+{
+    "Rows": [{
+        "step": "Upload",
+        "date" : "2019/08 12:44",
+        "status": 3
+    },
+    {
+        "step": "Validation",
+        "date" : "2019/08 12:44",
+        "status": 2
+    },
+    {
+        "step": "Filtering",
+        "date" : "2019/08 12:44",
+        "status": 1
+    },
+    {
+        "step": "Drop Columns",
+        "date" : "2019/08 12:44",
+        "status": 1
+    },
+    {
+        "step": "Rename Tables",
+        "date" : "2019/08 12:44",
+        "status": 1
+    }],
+        "Count":4
+}

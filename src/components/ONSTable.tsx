@@ -4,19 +4,18 @@ import { ONSColumnOrder } from './ONSColumnOrder';
 import { ONSPagination } from './ONSPagination';
 import { ONSButton } from './ONSButton';
 import { ONSCheckbox } from './ONSCheckbox';
-import ReactModal from 'react-modal';
-import { number } from 'prop-types';
 import { ONSStatus } from './ONSStatus';
 
 interface Props {
-    Title : string,
-    Data : Data | null,
-    Headers?: Header[],
-    Pagination : boolean,
-    Steps?: number,
-    pageChange? : (offset: number, steps: number) => void,
-    Create? : boolean,
-    CreateFunction? : (...props : any[]) => void
+  Title : string,
+  Data : Data | null,
+  Headers?: Header[],
+  Pagination : boolean,
+  Steps?: number,
+  pageChange? : (offset: number, steps: number) => void,
+  Create? : boolean,
+  CreateFunction? : (...props : any[]) => void
+  openModal? : any
 }
 
 interface Header{
@@ -29,54 +28,56 @@ interface Header{
 }
 
 interface State {
-    Headers?: string[],
-    customHeaders?: Header[],
-    Data: Data | null,
-    FilteredData: Data | null,
-    ShowData: Data | null
-    Filters : Filters,
-    Pagination : boolean,
-    Sort: Sort | null,
-    showModal: boolean,
-    payload? : Payload,
-    offset: number,
+  Headers?: string[],
+  customHeaders?: Header[],
+  Data: Data | null,
+  FilteredData: Data | null,
+  ShowData: Data | null
+  Filters : Filters,
+  Pagination : boolean,
+  Sort: Sort | null,
+  showSaveModal: boolean,
+  showSummaryModal: boolean,
+  payload? : Payload,
+  offset: number,
+  UploadsData: Data | null
 }
 
 interface Payload {
   [key: string] : any;
 }
 
-  interface Data{
-    Rows : Row,
-    Count : number
-  }
-  
-  interface Row{
-    [key: number]: Cell
-  }
-  
-  interface Cell{
-    [key: string]: object
-  }
+interface Data{
+  Rows : Row,
+  Count : number
+}
 
-  interface Filters{
-    [key: string] : string
-  }
+interface Row{
+  [key: number]: Cell
+}
 
-  interface Sort{
-    column : string,
-    type : "Asc" | "Desc"
-  }
+interface Cell{
+  [key: string]: object
+}
 
-  interface ColumnSorts{
-    [key : string] : ONSColumnOrder
-  }
+interface Filters{
+  [key: string] : string
+}
+
+interface Sort{
+  column : string,
+  type : "Asc" | "Desc"
+}
+
+interface ColumnSorts{
+  [key : string] : ONSColumnOrder
+}
 
 export class ONSTable extends Component <Props, State>{
   sortElements : ColumnSorts = {};
   constructor(props : Props) {
     super(props);
-    this.state = {Data: null, FilteredData: null, ShowData: null, Filters: {}, Sort: null, Pagination: props.Pagination, showModal: false, offset: 0}
+    this.state = {Data: null, FilteredData: null, ShowData: null, Filters: {}, Sort: null, Pagination: props.Pagination, showSaveModal: false, showSummaryModal: false, offset: 0, UploadsData: null}
   }
 
   pageChange = (offset: number, steps: number) => {
@@ -86,83 +87,42 @@ export class ONSTable extends Component <Props, State>{
     }
   };
 
-
-  componentWillReceiveProps(newProps: Props){
-        if(newProps.Data != null){
-            this.setState({
-              Headers: Object.keys(newProps.Data.Rows[0]),
-              customHeaders: newProps.Headers,
-              Data: JSON.parse(JSON.stringify(newProps.Data)),
-              FilteredData: JSON.parse(JSON.stringify(newProps.Data)),
-              ShowData: JSON.parse(JSON.stringify(newProps.Data))
-            })
-        }
+  static getDerivedStateFromProps(newProps: Props, prevState: State) {
+    if(newProps.Data !== null){
+        return { Headers: Object.keys(newProps.Data.Rows[0]),
+          customHeaders: newProps.Headers,
+          Data: JSON.parse(JSON.stringify(newProps.Data)),
+          FilteredData: JSON.parse(JSON.stringify(newProps.Data)),
+          ShowData: JSON.parse(JSON.stringify(newProps.Data))};
+    }
+    else return null;
   }
-
-  closeModal = () => {
-    this.setState({showModal:false, payload: undefined})
-  };
-
-  saveChanges = () => {
-    if(this.props.CreateFunction) this.props.CreateFunction(this.state.payload);
-    this.closeModal();
-  };
-
-  updatePayload = (e: ChangeEvent<HTMLInputElement>, property: string) => {
-    let payload = this.state.payload;
-    if(!payload) payload = {};
-    payload[property] = e.target.value;
-    this.setState({payload:payload})
-  };
-  
-  openModal = () => this.setState({showModal:true});
-
-  modal = () => {
-    if(this.state.customHeaders)
-    return(
-      // Modal was messinhg with the submit button so we made our own and its wayyy cooler
-      <ReactModal 
-          isOpen={this.state.showModal}
-          contentLabel="Minimal Modal Example"        
-          className='Modal'
-          shouldFocusAfterRender={true}
-          shouldReturnFocusAfterClose={true}
-      >
-        <h1>Add User</h1>
-        {this.state.customHeaders.map((header) =>
-          {return header.create === true &&
-          <ONSTextInput label={header.label} onChange={this.updatePayload}/>}
-        )}
-      <hr/>
-      <h2/>
-        <ONSButton primary={true} small={false} label={" Save "} onClick={this.saveChanges}/> 
-        <ONSButton label="Cancel" small={false} primary={false} onClick={this.closeModal}/>
-      </ReactModal>
-    );
-    };
 
   format = (x : object, column: string|null, row: number|null, passedChange : ((e: ChangeEvent<HTMLInputElement>, ...props: any[]) => void) | undefined) =>{ 
     if(typeof(x) === "boolean"){
       return(<ONSCheckbox checked={x} id={column+"_"+row} onChange={(e:any, onChange : ((e: ChangeEvent<HTMLInputElement>, ...props: any[]) => void) | undefined, ...props: any[]) => this.onChange(e, passedChange, row, column, typeof(x))}/>)
     }
+    if(column === "button"){
+      return(<ONSButton label="Summary" small={true} primary={false} onClick={this.props.openModal}></ONSButton>)
+    }
     if(column === "status"){
       if(typeof(x) === "number"){
         if (x === 1){
-          return(<ONSStatus label="Ready" small={true} status="info"></ONSStatus>)
+          return(<ONSStatus label="Ready" small={false} status="info"></ONSStatus>)
         }if (x === 2){
-          return(<ONSStatus label="Running" small={true} status="info"></ONSStatus>)
+          return(<ONSStatus label="Running" small={false} status="info"></ONSStatus>)
         }if (x === 3){
-          return(<ONSStatus label="Complete" small={true} status="success"></ONSStatus>)
+          return(<ONSStatus label="Complete" small={false} status="success"></ONSStatus>)
         }if (x === 4){
-          return(<ONSStatus label="Cancelled" small={true} status="dead"></ONSStatus>)
+          return(<ONSStatus label="Cancelled" small={false} status="dead"></ONSStatus>)
         }if (x === 5){
-          return(<ONSStatus label="Invalid Run" small={true} status="error"></ONSStatus>)
+          return(<ONSStatus label="Invalid Run" small={false} status="error"></ONSStatus>)
         }if (x === 6){
-          return(<ONSStatus label="Failed" small={true} status="error"></ONSStatus>)
-
+          return(<ONSStatus label="Failed" small={false} status="error"></ONSStatus>)
         }
       }
     }
+
     if(typeof(x) === "object"){
         let y = x as object[];
         let toReturn = "";
@@ -254,7 +214,7 @@ export class ONSTable extends Component <Props, State>{
   };
 
   genericTable = () => {
-    if(this.state.ShowData === null || this.state.Headers === undefined || this.state.Data === null){
+          if(this.state.ShowData === null || this.state.Headers === undefined || this.state.Data === null){
       return;
     }
     let headers = this.state.Headers;
@@ -262,7 +222,7 @@ export class ONSTable extends Component <Props, State>{
     return(
       <div>
         <table style={{fontSize:"14px"}} className="table  table--sortable" data-aria-sort="Sort by" data-aria-asc="ascending" data-aria-desc="descending">
-            <caption className="table__caption">{this.props.Title}</caption>
+        <caption className="table__caption">{this.props.Title}</caption>
             <thead className="table__head">
             <tr className="table__row">
                 {headers.map((header) =>
@@ -291,7 +251,7 @@ export class ONSTable extends Component <Props, State>{
     if(this.props.CreateFunction !== undefined){
       return(
         <div style={{marginLeft:"10px", display:"inline-block"}}>
-          <ONSButton primary={false} small={true} label="Add Row" onClick={this.openModal}/>
+          <ONSButton primary={false} small={true} label="Add Row" onClick={this.props.openModal}/>
         </div>
       )
     }
@@ -331,23 +291,21 @@ export class ONSTable extends Component <Props, State>{
     );
   };
 
-    render() {
-        if(this.state.Data != null && this.state.Headers){
-            if(this.state.customHeaders !== undefined){
-              return(
-                [this.modal(),
-                this.customTable()]
-              )
-            }else{
-              return (
-                [this.modal(),
-                this.genericTable()]
-              );
-            }
-        }else{
+  render() {
+      if(this.state.Data != null && this.state.Headers){
+        if(this.state.customHeaders !== undefined){
             return(
-                <p>"Loading..."</p>
+              this.customTable()
+            )
+          }else{
+            return (
+              this.genericTable()
             );
-        }
-    }
+          }
+      }else{
+          return(
+              <p>"Loading..."</p>
+          );
+      }
+  }
 }

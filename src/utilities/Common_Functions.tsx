@@ -41,8 +41,33 @@ function years() {
     return yearlist
 }
 
+function getMonth (Batch_ID: String) {
+    var Month = Batch_ID.substring(0,3)
+    switch (Month){
+      case 'Jan': Month = 'January'; break;
+      case 'Feb': Month = 'February'; break;
+      case 'Mar': Month = 'March'; break;
+      case 'Apr': Month = 'April'; break;
+      case 'May': break;
+      case 'Jun': Month = 'June'; break;
+      case 'Jul': Month = 'July'; break;
+      case 'Aug': Month = 'August'; break;
+      case 'Sep': Month = 'September'; break;
+      case 'Oct': Month = 'October'; break;
+      case 'Nov': Month = 'November'; break;
+      case 'Dec': Month = 'December'; break;
+    }
+    return Month
+  }
+
+  function getYear (Batch_ID: String) {
+    return Batch_ID.substring(3,7)
+  }
+
 const batches = [{"label":"Monthly", "value":"monthly"}, 
         {"label":"Quarterly", "value":"quarterly"}, 
         {"label":"Yearly", "value":"yearly"}]
 
-export{weeks, months, quarters, years, batches}
+const qList = ["January", "February", "April", "May", "July", "August", "October", "November"]
+
+export{weeks, months, quarters, years, batches, getMonth, getYear, qList}
