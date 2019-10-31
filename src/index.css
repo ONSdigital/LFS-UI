@@ -1,12 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 #root{
   height: 100%;
 }
@@ -43,6 +34,13 @@ caption{
   border-width: 3px;
   padding: 10px;
   border-radius: 5px;
+}
+
+.selectableTableRow:focus {
+  -webkit-box-shadow: 0 0 0 3px #fd0;
+  box-shadow: 0 0 0 3px #fd0;
+  outline: none;
+  padding: 0 0 0 1.85rem;
 }
 
 .fade:not(.show) {
