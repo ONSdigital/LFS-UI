@@ -50,7 +50,7 @@ export class DashboardTable extends Component <Props, State> {
     render() {
         return (
             <table id="basic-table" className="table ">
-                <Fragment>
+                <>
                     <thead className="table__head">
                     <tr className="table__row">
                         <th scope="col" className="table__header ">Batch ID</th>
@@ -64,10 +64,10 @@ export class DashboardTable extends Component <Props, State> {
                     {
                         this.props.data !== null && this.props.data.length !== 0 ?
                             this.state.data.map((row: DashboardTableRow, index: number) =>
-                                <>
+                                <Fragment key={row.BatchID}>
                                     <tr className="table__row"
                                         onClick={((e) => this.handleClickOnRow(e, row, index))}
-                                        key={row.BatchID} tabIndex={0}
+                                         tabIndex={0}
                                         onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>
                                         <td className="table__cell ">
                                             {row.BatchID}
@@ -93,17 +93,19 @@ export class DashboardTable extends Component <Props, State> {
                                             </ONSPanel>
                                         </td>
                                     </tr>
-                                </>
+                                </Fragment>
                             )
                             :
-                            <td colSpan={5} className="table__cell ">
-                                <ONSPanel label={'No Batches Matching the Criteria'}>
-                                    <p>No Batches matching this criteria</p>
-                                </ONSPanel>
-                            </td>
+                            <tr>
+                                <td colSpan={5} className="table__cell ">
+                                    <ONSPanel label={'No Batches Matching the Criteria'}>
+                                        <p>No Batches matching this criteria</p>
+                                    </ONSPanel>
+                                </td>
+                            </tr>
                     }
                     </tbody>
-                </Fragment>
+                </>
             </table>
         );
     }
