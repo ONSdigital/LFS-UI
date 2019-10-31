@@ -106,7 +106,8 @@ export class Dashboard extends Component <{}, State> {
                     <legend className="fieldset__legend">Filter Batches</legend>
                     <p className="checkboxes__label">Batch Status</p>
                     <span className="radios__items">
-                        <ONSRadioButton label={'Live'} onChange={this.handleBatchTypeRadioChange}
+                        <ONSRadioButton label={'Live'}
+                                        onChange={this.handleBatchTypeRadioChange}
                                         id={"live"}
                                         checked={this.state.liveStatus}
                                         style={this.filterOptionStyle}/>
