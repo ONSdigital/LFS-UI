@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, RouteProps, Switch} from 'react-router';
 import {Layout} from './components/Layout';
-import {Home} from './pages/Home';
+import {Dashboard} from './pages/Dashboard';
 import {Login} from './auth/Login';
 import {Admin} from './pages/Admin';
 import {Outputs} from './pages/Outputs';
@@ -77,8 +77,8 @@ class App extends React.Component<Props, State> {
         return (
             <Layout loggedIn={!!(this.state.user !== null || "")}>
                 <Switch>
-                    <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
-                    <this.PrivateRoute exact path='/Dashboard' component={Home} page_id={2}/>
+                    <this.PrivateRoute exact path='/' component={Dashboard} page_id={1}/>
+                    <this.PrivateRoute exact path='/Dashboard' component={Dashboard} page_id={2}/>
                     <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={3}/>
                     <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
                     <this.PrivateRoute exact path='/File_Upload' component={File_Upload} page_id={4}/>
