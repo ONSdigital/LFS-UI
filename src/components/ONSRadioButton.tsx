@@ -29,10 +29,10 @@ export class ONSRadioButton extends Component <Props, State> {
 
     };
 
-    componentWillReceiveProps(newProps: Props) {
-        if (newProps.checked !== undefined) {
-            this.setState({value: newProps.checked})
-        }
+    static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+        if (nextProps.checked !== undefined) {
+            return {value: nextProps.checked};
+        } else return null;
     }
 
     render() {
