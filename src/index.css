@@ -45,6 +45,13 @@ caption{
   border-radius: 5px;
 }
 
+.selectableTableRow:focus {
+  -webkit-box-shadow: 0 0 0 3px #fd0;
+  box-shadow: 0 0 0 3px #fd0;
+  outline: none;
+  padding: 0 0 0 1.85rem;
+}
+
 .fade:not(.show) {
   opacity: 1;
 }

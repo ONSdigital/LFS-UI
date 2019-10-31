@@ -65,7 +65,7 @@ export class DashboardTable extends Component <Props, State> {
                         this.props.data !== null && this.props.data.length !== 0 ?
                             this.state.data.map((row: DashboardTableRow, index: number) =>
                                 <Fragment key={row.BatchID}>
-                                    <tr className="table__row"
+                                    <tr className="table__row selectableTableRow"
                                         onClick={((e) => this.handleClickOnRow(e, row, index))}
                                          tabIndex={0}
                                         onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>
