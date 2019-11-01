@@ -7,7 +7,8 @@ interface State{
     batchType: String;
     year: String;
     period: String;
-    submitError?: boolean;
+    submit: boolean
+    inputError: boolean;
 }
 
 export class New_Batch extends Component <{}, State> {
@@ -18,14 +19,15 @@ export class New_Batch extends Component <{}, State> {
             batchType: "",
             year: "",
             period: "",
-            submitError: false
+            inputError: false,
+            submit: false
         };
     }
     error = false;
 
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        this.setState({submit: true})
         //setting up for the panel error, if submit === true then there is at least one empty field and submit has been clicked, else redirect to view batch
         if(this.state.batchType === "" || this.state.year === "" || (this.state.batchType !== "yearly" && this.state.period === "")) this.error = true
         else {
@@ -47,7 +49,7 @@ export class New_Batch extends Component <{}, State> {
 
         if(this.state.batchType !== "yearly") this.setState({period: ""})
         
-        this.setState({submitError: this.error})
+        this.setState({inputError: this.error})
         
         // printing to console the info to be sent to api on submit
         console.log("subbbbmmmiiiiittttt")
@@ -55,24 +57,36 @@ export class New_Batch extends Component <{}, State> {
 
     };
 
-    handleBatchTypeChange = (e: ChangeEvent<HTMLSelectElement>) =>{
+    handleBatchTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
         this.setState({batchType: e.target.value})
+        this.errorGone()
         
     }
     
-    handleYearChange = (e: ChangeEvent<HTMLSelectElement>) =>{
+    handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
         this.setState({year: e.target.value})
+        this.errorGone()
     }
 
-    handlePeriodChange = (e: ChangeEvent<HTMLSelectElement>) =>{
+    handlePeriodChange = (e: ChangeEvent<HTMLSelectElement>) => {
         this.setState({period: e.target.value})
+        this.errorGone()
+    }
+
+    errorGone = () => {
+        console.log(this.state.batchType + " " + this.state.year + " " + this.state.period + " "+ this.state.submit + " " + this.state.inputError)
+        if(this.state.batchType !== "" && this.state.year !== "" && (this.state.batchType !== "yearly" || this.state.period !== "")) this.setState({inputError: false})
     }
 
     render() {
+        let x = 0
+        let y = 0
+        let z = 0
+        
         return (
             <div className="container">
                 {/* this is for the empty inputs, the  ifs are pure jank but it works */}
-                {(() => {if (this.state.submitError === true) {
+                {(() => {if (this.state.inputError === true) {
                     return(
                         <div>
                             <div className="panel panel--error">

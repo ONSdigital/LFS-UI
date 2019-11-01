@@ -4,10 +4,11 @@ import { ONSPanel } from '../components/ONSPanel';
 import { ONSButton } from '../components/ONSButton';
 import { getMonth, getYear, qList } from '../utilities/Common_Functions';
 import { TableWithModal } from '../components/TableWithModal' 
+import { ONSMetadata } from '../components/ONSMetadata';
 
 interface State {
   UploadsData: Data | null
-  Batch_ID: String
+  Batch_ID: string
 }
 
 interface Data{
@@ -67,6 +68,24 @@ export class View_Monthly_Batch extends Component <{}, State> {
     )
   };
 
+  thelist = () => {
+    return(
+      [{
+        L: "Batch_ID",
+        R: this.state.Batch_ID,
+        
+      },{
+        L: "Year",
+        R: getYear(this.state.Batch_ID),
+        
+      },{
+        L: "Period",
+        R: getMonth(this.state.Batch_ID),
+         
+      }]
+    )
+  };
+
   showSummary = (payload : any) => {
     console.log(payload)
   };
@@ -79,12 +98,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
             <text style={{fontWeight: "bold"}}> Manage Monthly Uploads</text>
           </header>
           <br></br>
-          <text> Batch ID: {this.state.Batch_ID}</text>
-          <br></br>
-          <text> Year: {getYear(this.state.Batch_ID)}</text>
-          <br></br>
-          <text> Month: {getMonth(this.state.Batch_ID)} </text>
-          <br></br>
+          <ONSMetadata List={this.thelist()}></ONSMetadata>
         </div>
         <br></br>
         <table>
