@@ -78,11 +78,7 @@ export class New_Batch extends Component <{}, State> {
         if(this.state.batchType !== "" && this.state.year !== "" && (this.state.batchType !== "yearly" || this.state.period !== "")) this.setState({inputError: false})
     }
 
-    render() {
-        let x = 0
-        let y = 0
-        let z = 0
-        
+    render() {        
         return (
             <div className="container">
                 {/* this is for the empty inputs, the  ifs are pure jank but it works */}
