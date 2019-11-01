@@ -21,7 +21,7 @@ function loginUser(username: string, password: string, cookies: Cookies) {
 
             // Set Session Cookie, Expires in 30 minutes
             let cookieExpire = moment(new Date()).add(30, 'm').toDate();
-            cookies.set('username', user.name, { path: '/' , expires: cookieExpire});
+            cookies.set('username', user.name, { path: '/' , expires: cookieExpire, sameSite: true});
             return user;
         }
         return null;

@@ -11,7 +11,7 @@ interface Props {
 class Logout extends Component <Props, {}>{
     componentWillMount () {
         // Remove User Cookie and state
-        this.props.cookies.set('username', "", { path: '/'});
+        this.props.cookies.remove('username');
         this.props.setUser(null);
     }
 
