@@ -1,4 +1,4 @@
-import React, {Component, ChangeEvent, CSSProperties} from 'react';
+import React, {CSSProperties} from 'react';
 
 interface Props {
     label?: string,
@@ -8,67 +8,33 @@ interface Props {
     style?: CSSProperties
 }
 
-interface State {
-    value: boolean
-}
-
-export class ONSCheckbox extends Component <Props, State> {
-    value: boolean = this.props.checked === true;
-
-    constructor(props: Props) {
-        super(props);
-        this.state = {value: props.checked === true};
-    }
-
-    handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (this.props.onChange !== undefined) {
-            this.props.onChange(e);
-        }
-        this.value = e.target.checked;
-        this.setState({value: e.target.checked})
-
-    };
-
-    static getDerivedStateFromProps(nextProps: Props) {
-        if (nextProps.checked !== undefined) {
-            return {value: nextProps.checked};
-        } else return null;
-    }
-
-    render() {
-        if (this.props.label !== undefined) {
-            return (
-                <p className="checkboxes__item" style={this.props.style}>
-                    <span className="checkbox ">
-                        <input
-                            type="checkbox"
-                            id={this.props.id}
-                            checked={this.state.value}
-                            onChange={(e) => this.handleChange(e)}
-                            className="checkbox__input js-checkbox "
-                            value={this.props.id}
-                            name={this.props.label}
-                        />
-                        <label className="checkbox__label " htmlFor={this.props.id}>
-                            {this.props.label}
-                        </label>
-                    </span>
-                </p>
-            );
-        } else {
-            return (
-                <span style={{width: "unset"}} className="checkbox" >
-                    <input
-                        type="checkbox"
-                        id={this.props.id}
-                        className="checkbox__input js-checkbox "
-                        checked={this.state.value}
-                        onChange={(e) => this.handleChange(e)}
-                        style={{position: "unset"}}
-                    />
-                </span>
-            );
-        }
-
-    }
-}
+export const ONSCheckbox = (props: Props) => (
+    props.label !== undefined ?
+        <p className="checkboxes__item" style={props.style}>
+            <span className="checkbox ">
+                <input
+                    type="checkbox"
+                    id={props.id}
+                    checked={props.checked}
+                    onChange={(e) => props.onChange ? props.onChange(e) : e}
+                    className="checkbox__input js-checkbox "
+                    value={props.id}
+                    name={props.label}
+                />
+                <label className="checkbox__label " htmlFor={props.id}>
+                    {props.label}
+                </label>
+            </span>
+        </p>
+        :
+        <span style={{width: "unset"}} className="checkbox">
+            <input
+                type="checkbox"
+                id={props.id}
+                className="checkbox__input js-checkbox "
+                checked={props.checked}
+                onChange={(e) => props.onChange ? props.onChange(e) : e}
+                style={{position: "unset"}}
+            />
+        </span>
+);
