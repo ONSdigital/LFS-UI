@@ -1,69 +1,40 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, {CSSProperties} from 'react';
 
-interface Props{
-  label?: string,
-  id?: string,
-  onChange : ((...props: any[]) => void) | undefined,
-  checked? : boolean
+interface Props {
+    label?: string,
+    id: string,
+    onChange: ((...props: any[]) => void) | undefined,
+    checked?: boolean,
+    style?: CSSProperties
 }
 
-interface State{
-  value: boolean
-}
-
-export class ONSCheckbox extends Component <Props, State>{
-  value: boolean = this.props.checked === true;
-  constructor(props : Props) {
-    super(props);
-    this.state = {value: props.checked === true};
-  }
-
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if(this.props.onChange !== undefined){
-      this.props.onChange(e);
-    }
-    this.value = e.target.checked;
-    this.setState({value: e.target.checked})
-    
-  };
-
-  componentWillReceiveProps(newProps: Props){
-    if(newProps.checked !== undefined){
-      this.setState({value: newProps.checked})
-    }
-  }
-
-    render() {
-    if(this.props.label !== undefined){
-        return (
+export const ONSCheckbox = (props: Props) => (
+    props.label !== undefined ?
+        <p className="checkboxes__item" style={props.style}>
             <span className="checkbox ">
                 <input
                     type="checkbox"
-                    id={this.props.id}
-                    checked={this.state.value}
-                    onChange={(e) => this.handleChange(e)}
+                    id={props.id}
+                    checked={props.checked}
+                    onChange={(e) => props.onChange ? props.onChange(e) : e}
                     className="checkbox__input js-checkbox "
-                    value="bacon"
+                    value={props.id}
+                    name={props.label}
                 />
-                <label id="bacon-label" className="checkbox__label">
-                    {this.props.label}
+                <label className="checkbox__label " htmlFor={props.id}>
+                    {props.label}
                 </label>
             </span>
-        );
-    }else{
-
-    }
-    return (
-        <span style={{width:"unset"}} className="checkbox">
+        </p>
+        :
+        <span style={{width: "unset"}} className="checkbox">
             <input
                 type="checkbox"
-                id={this.props.id}
+                id={props.id}
                 className="checkbox__input js-checkbox "
-                checked={this.state.value}
-                onChange={(e) => this.handleChange(e)}
-                style={{position:"unset"}}
+                checked={props.checked}
+                onChange={(e) => props.onChange ? props.onChange(e) : e}
+                style={{position: "unset"}}
             />
-        </span> 
-    );
-  }
-}
+        </span>
+);
