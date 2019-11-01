@@ -3,6 +3,9 @@ import {DashboardTable} from "../components/DashboardTable";
 import {ONSRadioButton} from "../components/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONSCheckbox";
 
+const MONTHLY_BATCH = 'Monthly';
+const QUARTERLY_BATCH = 'Quarterly';
+const ANNUALLY_BATCH = 'Annually';
 
 interface State {
     batchData: [] | null,
@@ -11,7 +14,7 @@ interface State {
     liveStatus: boolean,
     monthlyBatchFilter: boolean,
     quarterlyBatchFilter: boolean,
-    yearlyBatchFilter: boolean
+    annuallyBatchFilter: boolean
 }
 
 export class Dashboard extends Component <{}, State> {
@@ -26,7 +29,7 @@ export class Dashboard extends Component <{}, State> {
             liveStatus: true,
             monthlyBatchFilter: true,
             quarterlyBatchFilter: true,
-            yearlyBatchFilter: true
+            annuallyBatchFilter: true
         };
         this.getBatchData();
     }
@@ -50,17 +53,17 @@ export class Dashboard extends Component <{}, State> {
     filterListByBatchType = (row: any): boolean => {
         let monthly = false;
         let quarterly = false;
-        let yearly = false;
+        let annually = false;
         if (this.state.monthlyBatchFilter) {
-            monthly = (row.batchtype === 'Monthly')
+            monthly = (row.batchtype === MONTHLY_BATCH)
         }
         if (this.state.quarterlyBatchFilter) {
-            quarterly = (row.batchtype === 'Quarterly')
+            quarterly = (row.batchtype === QUARTERLY_BATCH)
         }
-        if (this.state.yearlyBatchFilter) {
-            yearly = (row.batchtype === 'Yearly')
+        if (this.state.annuallyBatchFilter) {
+            annually = (row.batchtype === ANNUALLY_BATCH)
         }
-        return monthly || quarterly || yearly;
+        return monthly || quarterly || annually;
     };
 
     filterBatchData = () => {
@@ -92,8 +95,8 @@ export class Dashboard extends Component <{}, State> {
         this.filterBatchData();
     };
 
-    handleYearlyBatchFilterChange = async () => {
-        await this.setState({yearlyBatchFilter: !this.state.yearlyBatchFilter});
+    handleAnnuallyBatchFilterChange = async () => {
+        await this.setState({annuallyBatchFilter: !this.state.annuallyBatchFilter});
         this.filterBatchData();
     };
 
@@ -120,21 +123,22 @@ export class Dashboard extends Component <{}, State> {
                     <p className="checkboxes__label">Batch Type</p>
                     <span className="checkboxes__items">
                         <ONSCheckbox onChange={this.handleMonthlyBatchFilterChange}
-                                     label={'Monthly'}
+                                     id={MONTHLY_BATCH}
+                                     label={MONTHLY_BATCH}
                                      checked={this.state.monthlyBatchFilter}
-                                     id={'Monthly'}
                                      style={this.filterOptionStyle}/>
                         <ONSCheckbox onChange={this.handleQuarterlyBatchFilterChange}
-                                     label={'Quarterly'}
+                                     id={QUARTERLY_BATCH}
+                                     label={QUARTERLY_BATCH}
                                      checked={this.state.quarterlyBatchFilter}
-                                     id={'Quarterly'}
                                      style={this.filterOptionStyle}/>
-                        <ONSCheckbox onChange={this.handleYearlyBatchFilterChange} label={'Yearly'}
-                                     checked={this.state.yearlyBatchFilter} id={'Yearly'}
+                        <ONSCheckbox onChange={this.handleAnnuallyBatchFilterChange}
+                                     id={ANNUALLY_BATCH}
+                                     label={ANNUALLY_BATCH}
+                                     checked={this.state.annuallyBatchFilter}
                                      style={this.filterOptionStyle}/>
                     </span>
                 </fieldset>
-                {/*<DashboardTable data={this.state.filteredBatchData}/>*/}
                 <DashboardTable data={this.state.filteredBatchData}/>
             </div>
         );
