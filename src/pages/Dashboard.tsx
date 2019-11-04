@@ -2,6 +2,7 @@
 import {DashboardTable} from "../components/DashboardTable";
 import {ONSRadioButton} from "../components/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONSCheckbox";
+import {getAllBatches} from "../utilities/http";
 
 const MONTHLY_BATCH = 'Monthly';
 const QUARTERLY_BATCH = 'Quarterly';
@@ -35,6 +36,21 @@ export class Dashboard extends Component <{}, State> {
     }
 
     getBatchData = () => {
+        getAllBatches()
+            .then(r => {
+                console.log(r);
+                this.setState({batchData: r});
+                this.filterBatchData()
+            })
+            .catch(error => {
+                console.log(error);
+                if (process.env.NODE_ENV === 'development') {
+                    this.getMockBatchData()
+                }
+            });
+    };
+
+    getMockBatchData = () => {
         fetch('/jsons/MOCK_RUNS.json')
             .then(response => response.json())
             .then(response => {
@@ -55,13 +71,13 @@ export class Dashboard extends Component <{}, State> {
         let quarterly = false;
         let annually = false;
         if (this.state.monthlyBatchFilter) {
-            monthly = (row.batchtype === MONTHLY_BATCH)
+            monthly = (row.type === MONTHLY_BATCH)
         }
         if (this.state.quarterlyBatchFilter) {
-            quarterly = (row.batchtype === QUARTERLY_BATCH)
+            quarterly = (row.type === QUARTERLY_BATCH)
         }
         if (this.state.annuallyBatchFilter) {
-            annually = (row.batchtype === ANNUALLY_BATCH)
+            annually = (row.type === ANNUALLY_BATCH)
         }
         return monthly || quarterly || annually;
     };

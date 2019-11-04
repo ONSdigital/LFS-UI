@@ -2,6 +2,8 @@ import React, {Component, Fragment} from 'react';
 import {ONSStatus} from "./ONSStatus";
 import {ONSPanel} from "./ONSPanel";
 import update from 'immutability-helper';
+import {monthNumberToString} from "../utilities/Common_Functions";
+import {ONSButton} from "./ONSButton";
 
 interface Props {
     Headers?: string[],
@@ -13,8 +15,8 @@ interface State {
 }
 
 interface DashboardTableRow {
-    BatchID: number
-    batchtype: string
+    id: number
+    type: string
     period: string
     status: string
     year: number,
@@ -64,19 +66,23 @@ export class DashboardTable extends Component <Props, State> {
                     {
                         this.props.data !== null && this.props.data.length !== 0 ?
                             this.state.data.map((row: DashboardTableRow, index: number) =>
-                                <Fragment key={row.BatchID}>
+                                <Fragment key={row.id}>
                                     <tr className="table__row selectableTableRow"
                                         onClick={((e) => this.handleClickOnRow(e, row, index))}
-                                         tabIndex={0}
+                                        tabIndex={0}
                                         onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>
                                         <td className="table__cell ">
-                                            {row.BatchID}
+                                            {row.id}
                                         </td>
                                         <td className="table__cell ">
-                                            {row.batchtype}
+                                            {row.type}
                                         </td>
                                         <td className="table__cell ">
-                                            {row.period}
+                                            {row.type === "Monthly" ?
+                                                monthNumberToString(+row.period)
+                                                :
+                                                row.period
+                                            }
                                         </td>
                                         <td className="table__cell ">
                                             {row.year}
@@ -88,9 +94,9 @@ export class DashboardTable extends Component <Props, State> {
                                     </tr>
                                     <tr hidden={!row.expanded}>
                                         <td colSpan={5} className="table__cell ">
-                                            <ONSPanel label={'sds'}>
-                                                {row.status}
-                                            </ONSPanel>
+                                            <ONSButton label={"Manage Batch"} primary={true} small={false} onClick={() => {
+                                                window.location.href = "/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
+                                            }}/>
                                         </td>
                                     </tr>
                                 </Fragment>

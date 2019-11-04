@@ -4,7 +4,7 @@ import {ONSButton} from '../components/ONSButton';
 import {getMonth, monthNumberToString, qList} from '../utilities/Common_Functions';
 import {TableWithModal} from '../components/TableWithModal'
 import {ONSMetadata} from '../components/ONSMetadata';
-import {getBatch} from "../utilities/http";
+import {getBatchData} from "../utilities/http";
 import {GenericNotFound} from "./GenericNotFound";
 
 interface State {
@@ -57,7 +57,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
     }
 
     getUploads = () => {
-        getBatch(this.state.batchType, this.state.year, this.state.period)
+        getBatchData(this.state.batchType, this.state.year, this.state.period)
             .then(r => {
                 console.log(r[0]);
                 if (r[0] === undefined) {
@@ -69,16 +69,8 @@ export class View_Monthly_Batch extends Component <{}, State> {
             })
             .catch(error => {
                 console.log(error);
-                if (process.env.NODE_ENV === 'development') {
-                    fetch('/jsons/Sources.json')
-                        .then(response => response.json())
-                        .then(response => this.setRoleData(response))
-                }
+                this.setState({batchFound: false});
             });
-    };
-
-    setRoleData = (response: any) => {
-        this.setState({UploadsData: response})
     };
 
     formatMetaData() {
