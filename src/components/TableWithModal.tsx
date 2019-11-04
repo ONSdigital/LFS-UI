@@ -56,7 +56,6 @@ export class TableWithModal extends Component <Props, State> {
             data = (this.props.returnedData ? this.props.returnedData : null)
         }
         this.state = {showSaveModal: false, showSummaryModal: false, UploadsData: data, UploadStatusData: null, Users: null, UserData: null}
-        console.log(this.state.UploadsData)
         this.getUploads();
         this.getUploadStatuses();
         this.getUsers();
