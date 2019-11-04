@@ -59,7 +59,6 @@ export class View_Monthly_Batch extends Component <{}, State> {
     getUploads = () => {
         getBatchData(this.state.batchType, this.state.year, this.state.period)
             .then(r => {
-                console.log(r[0]);
                 if (r[0] === undefined) {
                     // Batch does not exist, load not found page
                     this.setState({batchFound: false})
