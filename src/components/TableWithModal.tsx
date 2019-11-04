@@ -1,13 +1,14 @@
-import React, { Component, ChangeEvent } from "react";
+import React, {ChangeEvent, Component} from "react";
 import ReactModal from 'react-modal';
-import { ONSTextInput } from './ONSTextInput';
-import { ONSButton } from './ONSButton';
-import { ONSTable } from './ONSTable';
-import { batchHeaders, uploadHeaders, userHeaders } from '../utilities/Headers'
+import {ONSTextInput} from './ONSTextInput';
+import {ONSButton} from './ONSButton';
+import {ONSTable} from './ONSTable';
+import {batchHeaders, uploadHeaders, userHeaders} from '../utilities/Headers'
 
 interface Props {
     CreateFunction? : (...props : any[]) => void
     table : String
+    returnedData?: Data | null
 }
 
 interface State {
@@ -19,7 +20,6 @@ interface State {
     UploadStatusData: Data |null
     Users: Data | null
     UserData: Data | null
-    
 }
 
 interface Header{
@@ -51,10 +51,21 @@ interface Data{
 export class TableWithModal extends Component <Props, State> {
     constructor(props : Props) {
         super(props);
-        this.state = {showSaveModal: false, showSummaryModal: false, UploadsData: null, UploadStatusData: null, Users: null, UserData: null}
+        let data = null;
+        if (this.props.table === "batch" && this.props.returnedData !== null) {
+            data = (this.props.returnedData ? this.props.returnedData : null)
+        }
+        this.state = {showSaveModal: false, showSummaryModal: false, UploadsData: data, UploadStatusData: null, Users: null, UserData: null}
+        console.log(this.state.UploadsData)
         this.getUploads();
         this.getUploadStatuses();
         this.getUsers();
+    }
+
+    static getDerivedStateFromProps(newProps: Props) {
+        if (newProps.returnedData !== undefined) {
+            return {UploadsData: newProps.returnedData};
+        } else return null;
     }
     
     //summary modal functions
