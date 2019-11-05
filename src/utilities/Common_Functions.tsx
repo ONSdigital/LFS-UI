@@ -7,18 +7,40 @@ function weeks() {
     return weekList
 }
 
+const monthNames = ["January", "February", "March", "April", "May", "June", "July",
+    "August", "September", "October", "November", "December"];
+
+function monthNumberToString(MonthNum: number): string {
+    let Month: string = "";
+    switch (MonthNum){
+        case 1: Month = 'January'; break;
+        case 2: Month = 'February'; break;
+        case 3: Month = 'March'; break;
+        case 4: Month = 'April'; break;
+        case 5: Month = 'May'; break;
+        case 6: Month = 'June'; break;
+        case 7: Month = 'July'; break;
+        case 8: Month = 'August'; break;
+        case 9: Month = 'September'; break;
+        case 10: Month = 'October'; break;
+        case 11: Month = 'November'; break;
+        case 12: Month = 'December'; break;
+    }
+    return Month
+}
+
+
 function months() {
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", 
-                        "August", "September", "October", "November", "December"];
+
     let i;
     let monthlist = [];
     var date = new Date();
     const month = date.getMonth();
     for (i=0; i<12; i++){
         if (month-i>=0)
-            monthlist.push({"label":monthNames[month-i], "value":monthNames[month-i]})
+            monthlist.push({"label":monthNames[month-i], "value":((month-i)+1).toString()});
         else{
-            monthlist.push({"label":monthNames[month+12-i], "value":monthNames[month+12-i]})
+            monthlist.push({"label":monthNames[month+12-i], "value":((month+12-i)+1).toString()})
 
         }
     }
@@ -70,4 +92,21 @@ const batches = [{"label":"Monthly", "value":"monthly"},
 
 const qList = ["January", "February", "April", "May", "July", "August", "October", "November"]
 
-export{weeks, months, quarters, years, batches, getMonth, getYear, qList}
+interface status {
+    text: string,
+    colour: string
+}
+
+function getStatusStyle(statusNo: number) {
+    let status: status = {text: "", colour: 'info'};
+    switch (statusNo){
+        case 0: status = {text: "Not Started", colour: 'info'}; break;
+        case 1: status = {text: "File Uploaded", colour: 'success'}; break;
+        case 2: status = {text: "File Reloaded", colour: 'success'}; break;
+        case 3: status = {text: "Upload Failed", colour: 'error'}; break;
+        case 4: status = {text: "Successful - Complete", colour: 'success'}; break;
+    }
+    return status
+}
+
+export{weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle}

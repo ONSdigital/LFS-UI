@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, RouteProps, Switch} from 'react-router';
+import {Route, RouteProps, Switch} from "react-router-dom";
 import {Layout} from './components/Layout';
 import {Dashboard} from './pages/Dashboard';
 import {Login} from './auth/Login';
@@ -86,7 +86,7 @@ class App extends React.Component<Props, State> {
                     <this.PrivateRoute exact path='/File_Upload' component={File_Upload} page_id={4}/>
                     <this.PrivateRoute exact path='/New_Batch' component={New_Batch} page_id={5}/>
                     <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
-                    <this.PrivateRoute exact path='/View_Monthly_Batch' component={View_Monthly_Batch} page_id={6}/>
+                    <this.PrivateRoute exact path='/View_Monthly_Batch/:batchtype/:year/:period' component={View_Monthly_Batch} page_id={6}/>
                     <Route exact path='/login' component={Login}/>
                     <Route component={GenericNotFound}/>
                 </Switch>
