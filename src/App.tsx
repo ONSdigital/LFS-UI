@@ -31,22 +31,22 @@ interface PRProps extends RouteProps {
 
 class App extends React.Component<Props, State> {
     displayName = App.name;
-    state = {user: null};
 
     constructor(props: Props) {
         super(props);
 
-        this.getCurrentUser();
-
+        this.state = {user: null};
         this.setUser.bind(this);
+    }
+
+    componentDidMount(): void {
+        this.getCurrentUser();
     }
 
     getCurrentUser = () => {
         let user = this.props.cookies.get('username') || null;
-        if (user !== null || user !== "" ) {
-            this.state = {
-                user: user
-            };
+        if (user !== null || user !== "") {
+            this.setState({user: user});
         }
     };
 
@@ -56,11 +56,13 @@ class App extends React.Component<Props, State> {
 
     PrivateRoute = ({component: Component, page_id, ...rest}: PRProps) => {
         if (!this.state.user) {
-            return (<Route {...rest} render={(props) => (<Login setUser={this.setUser} user={this.state.user} cookies={this.props.cookies}/>)}/>)
+            return (<Route {...rest} render={(props) => (
+                <Login setUser={this.setUser} user={this.state.user} cookies={this.props.cookies}/>)}/>)
         } else {
             if (page_id === 0) { // Page ID 0 : logout page
                 return (
-                    <Route {...rest} render={(props) => (<Logout setUser={this.setUser} user={this.state.user} cookies={this.props.cookies}/>)}/>)
+                    <Route {...rest} render={(props) => (
+                        <Logout setUser={this.setUser} user={this.state.user} cookies={this.props.cookies}/>)}/>)
             }
             return (<Route {...rest} render={(props) => (<Component {...props} />)}/>)
 
@@ -86,7 +88,7 @@ class App extends React.Component<Props, State> {
                     <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
                     <this.PrivateRoute exact path='/View_Monthly_Batch' component={View_Monthly_Batch} page_id={6}/>
                     <Route exact path='/login' component={Login}/>
-                    <Route component={GenericNotFound} />
+                    <Route component={GenericNotFound}/>
                 </Switch>
             </Layout>
         );
