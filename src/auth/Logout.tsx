@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router';
+import {Redirect} from 'react-router';
 import {Cookies} from "react-cookie";
 
 interface Props {
@@ -9,7 +9,9 @@ interface Props {
 }
 
 class Logout extends Component <Props, {}>{
-    componentWillMount () {
+
+    constructor(props : Props) {
+        super(props);
         // Remove User Cookie and state
         this.props.cookies.remove('username');
         this.props.setUser(null);
