@@ -117,7 +117,7 @@ export class ONSTable extends Component <Props, State> {
                                  onChange={(e: any, onChange: ((e: ChangeEvent<HTMLInputElement>, ...props: any[]) => void) | undefined, ...props: any[]) => this.onChange(e, passedChange, row, column, typeof (x))}/>)
         }
         if (column === "button") {
-            return (<ONSButton label="Summary" small={true} primary={false} onClick={this.props.openModal}></ONSButton>)
+            return (<ONSButton label="Summary" small={true} primary={false} onClick={this.props.openModal}/>)
         }
         if (column === "status") {
             if (typeof (x) === "number") {
@@ -216,7 +216,7 @@ export class ONSTable extends Component <Props, State> {
 
     getCustomHeader = (header: Header) => {
         return (
-            <th scope="col" className="table__header " aria-sort="none">
+            <th key={header.label} scope="col" className="table__header " aria-sort="none">
                 {header.label}
                 {header.order &&
                 <ONSColumnOrder ref={(input: ONSColumnOrder) => {
@@ -245,15 +245,15 @@ export class ONSTable extends Component <Props, State> {
                     <thead className="table__head">
                     <tr className="table__row">
                         {headers.map((header) =>
-                            <th scope="col" className="table__header " aria-sort="none">{header}</th>
+                            <th key={header} scope="col" className="table__header " aria-sort="none">{header}</th>
                         )}
                     </tr>
                     </thead>
                     <tbody className="table__body">
                     {Object.keys(this.state.ShowData.Rows).map((row) =>
-                        <tr className="table__row">
+                        <tr key={row} className="table__row">
                             {headers.map((header) =>
-                                <td className="table__cell ">{this.format(rows[parseInt(row)][header], header, parseInt(row), undefined)}</td>
+                                <td key={header} className="table__cell ">{this.format(rows[parseInt(row)][header], header, parseInt(row), undefined)}</td>
                             )}
                         </tr>
                     )}
@@ -297,9 +297,9 @@ export class ONSTable extends Component <Props, State> {
                     </thead>
                     <tbody className="table__body">
                     {Object.keys(this.state.ShowData.Rows).map((row) =>
-                        <tr className="table__row">
+                        <tr className="table__row" key={row}>
                             {headers.map((header) =>
-                                <td className="table__cell ">{this.format(rows[parseInt(row)][header.column_name], header.column_name, parseInt(row), header.onChange)}</td>
+                                <td key={header.label} className="table__cell ">{this.format(rows[parseInt(row)][header.column_name], header.column_name, parseInt(row), header.onChange)}</td>
                             )}
                         </tr>
                     )}
