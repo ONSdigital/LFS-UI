@@ -49,7 +49,7 @@ export class HeaderNav extends Component <Props, State>{
                                 )
                             :
                             <LinkContainer key={0} to={"/"}>
-                                <li className={"header-nav__item header-nav__item--active"}><a href={"/"} className="header-nav__link">"Login"</a></li>
+                                <li className={"header-nav__item header-nav__item--active"}><a href={"/"} className="header-nav__link">Login</a></li>
                             </LinkContainer>
                     }
                 </ul>
