@@ -183,7 +183,6 @@ export class TableWithModal extends Component <Props, State> {
                     <div>
                 <ONSTable Data={this.state.UploadStatusData} Title="File Upload Status 2" Headers={uploadHeaders()} Pagination={false}/>
                 <ONSButton label="Export / View Report" primary={false} small={false}/>
-                
                 </div>
                 <br/>
                 <div>  
@@ -203,13 +202,13 @@ export class TableWithModal extends Component <Props, State> {
 
     render(){
         return(
-            <div>
+            <>
                 {[this.saveModal(),
                 this.summaryModal()]}    
-                <div>
+                <>
                     {this.table()}
-                </div>
-            </div>
+                </>
+            </>
         )    
     }
 }
