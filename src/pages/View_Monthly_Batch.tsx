@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import { ONSTable } from '../components/ONSTable';
-import { ONSPanel } from '../components/ONSPanel';
-import { ONSButton } from '../components/ONSButton';
-import { getMonth, getYear, qList } from '../utilities/Common_Functions';
-import { TableWithModal } from '../components/TableWithModal' 
-import { ONSMetadata } from '../components/ONSMetadata';
+import React, {Component} from 'react';
+import {ONSPanel} from '../components/ONSPanel';
+import {ONSButton} from '../components/ONSButton';
+import {getMonth, getYear, qList} from '../utilities/Common_Functions';
+import {TableWithModal} from '../components/TableWithModal'
+import {ONSMetadata} from '../components/ONSMetadata';
 
 interface State {
   UploadsData: Data | null
