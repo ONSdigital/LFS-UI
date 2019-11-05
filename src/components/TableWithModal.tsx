@@ -1,9 +1,9 @@
-import React, { Component, ChangeEvent } from "react";
+import React, {ChangeEvent, Component} from "react";
 import ReactModal from 'react-modal';
-import { ONSTextInput } from './ONSTextInput';
-import { ONSButton } from './ONSButton';
-import { ONSTable } from './ONSTable';
-import { batchHeaders, uploadHeaders, userHeaders } from '../utilities/Headers'
+import {ONSTextInput} from './ONSTextInput';
+import {ONSButton} from './ONSButton';
+import {ONSTable} from './ONSTable';
+import {batchHeaders, uploadHeaders, userHeaders} from '../utilities/Headers'
 
 interface Props {
     CreateFunction? : (...props : any[]) => void
@@ -51,7 +51,7 @@ interface Data{
 export class TableWithModal extends Component <Props, State> {
     constructor(props : Props) {
         super(props);
-        this.state = {showSaveModal: false, showSummaryModal: false, UploadsData: null, UploadStatusData: null, Users: null, UserData: null}
+        this.state = {showSaveModal: false, showSummaryModal: false, UploadsData: null, UploadStatusData: null, Users: null, UserData: null};
         this.getUploads();
         this.getUploadStatuses();
         this.getUsers();
@@ -60,7 +60,7 @@ export class TableWithModal extends Component <Props, State> {
     //summary modal functions
     openSummaryModal = () => this.setState({showSummaryModal:true});
    
-    closeSummaryModal = () => this.setState({showSummaryModal:false})
+    closeSummaryModal = () => this.setState({showSummaryModal:false});
 
     setMockUploadData = (response: any) => {
             this.setState({UploadsData: response})
@@ -74,29 +74,30 @@ export class TableWithModal extends Component <Props, State> {
         fetch('/jsons/Sources.json')
             .then(response => response.json())
             .then(response => this.setMockUploadData(response))
-    }
+    };
 
     getUploadStatuses = () => {
         fetch('/jsons/Upload_Statuses.json')
             .then(response => response.json())
             .then(response => this.setMockUploadStatusData(response))
-        }
+        };
     
     acceptLoad = () => {
-        console.log("Load Accepted")
+        console.log("Load Accepted");
         this.closeSummaryModal()
-    }
+    };
     
     rejectLoad = () => {
-        console.log("Load Rejected")
+        console.log("Load Rejected");
         this.closeSummaryModal()
-    }
+    };
 
     //save modal functions
     openSaveModal = () => {
-        console.log("=============")
+        console.log("=============");
         this.setState({showSaveModal:true});
-    }
+    };
+
     closeSaveModal = () => {
         this.setState({showSaveModal:false, payload: undefined})
     };
@@ -154,8 +155,6 @@ export class TableWithModal extends Component <Props, State> {
               {return header.create === true &&
               <ONSTextInput label={header.label} onChange={this.updatePayload}/>}
             )}
-          <hr/>
-          <h2/>
             <ONSButton primary={true} small={false} label={" Save "} onClick={this.saveChanges}/> 
             <ONSButton label="Cancel" small={false} primary={false} onClick={this.closeSaveModal}/>
           </ReactModal>
@@ -173,24 +172,24 @@ export class TableWithModal extends Component <Props, State> {
                 ariaHideApp={false}>
                     <div>
                 <ONSTable Data={this.state.UploadStatusData} Title="File Upload Status 2" Headers={uploadHeaders()} Pagination={false}/>
-                <ONSButton label="Export / View Report" primary={false} small={false}></ONSButton>
+                <ONSButton label="Export / View Report" primary={false} small={false}/>
                 
                 </div>
-                <br></br>
+                <br/>
                 <div>  
-                <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}></ONSButton>
-                <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad} marginRight={155}></ONSButton>
-                <ONSButton label="Close" primary={false} small={false} onClick={this.closeSummaryModal}></ONSButton>
+                <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
+                <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad} marginRight={155}/>
+                <ONSButton label="Close" primary={false} small={false} onClick={this.closeSummaryModal}/>
                 </div>
             </ReactModal>
         )
-    }
+    };
 
     table = ()  => {
-        let Table = this.props.table
-        if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={batchHeaders()} Pagination={false} openModal={this.openSummaryModal}/>
+        let Table = this.props.table;
+        if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={batchHeaders()} Pagination={false} openModal={this.openSummaryModal}/>;
         if(Table === "admin") return <ONSTable Data={this.state.Users} Title="Users" CreateFunction={this.createUser} Headers={userHeaders()} Pagination={true} Steps={20} pageChange={this.mockUsers} openModal={this.openSaveModal}/>
-    }
+    };
 
     render(){
         return(
