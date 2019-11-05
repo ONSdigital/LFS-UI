@@ -1,122 +1,139 @@
 import React, {Component} from 'react';
 import {ONSPanel} from '../components/ONSPanel';
 import {ONSButton} from '../components/ONSButton';
-import {getMonth, getYear, qList} from '../utilities/Common_Functions';
+import {getMonth, monthNumberToString, qList} from '../utilities/Common_Functions';
 import {TableWithModal} from '../components/TableWithModal'
 import {ONSMetadata} from '../components/ONSMetadata';
+import {getBatchData} from "../utilities/http";
+import {GenericNotFound} from "./GenericNotFound";
 
 interface State {
-  UploadsData: Data | null
-  Batch_ID: string
+    UploadsData: Data | null
+    Batch_ID: string,
+    batchType: string,
+    year: string,
+    period: string,
+    returnedData: Data | null,
+    metadata: Array<MetaDataListItem>,
+    batchFound: boolean
 }
 
-interface Data{
-  Rows : Row,
-  Count : number
+interface MetaDataListItem {
+    R: string,
+    L: string
 }
 
-interface Row{
-  [key: number]: Cell
+interface Data {
+    Rows: Row,
+    Count: number
 }
 
-interface Cell{
-  [key: string]: object
+interface Row {
+    [key: number]: Cell
+}
+
+interface Cell {
+    [key: string]: object
 }
 
 export class View_Monthly_Batch extends Component <{}, State> {
-  displayName = View_Monthly_Batch.name;
-  constructor(props: any) {
-    super(props);
-    this.state = {UploadsData: null, Batch_ID: "Dec2019"};
-    this.getUploads();
-  }
+    displayName = View_Monthly_Batch.name;
 
-  getUploads = () => {
-    fetch('/jsons/Sources.json')
-        .then(response => response.json())
-        .then(response => this.setMockRoleData(response))
-  }
+    constructor(props: any) {
+        super(props);
 
-  setMockRoleData = (response: any) => {
-    this.setState({UploadsData: response})
-  };
+        this.state = {
+            UploadsData: null,
+            Batch_ID: "Dec2019",
+            batchType: props.match.params.batchtype,
+            year: props.match.params.year,
+            period: props.match.params.period,
+            returnedData: null,
+            metadata: [],
+            batchFound: true
+        };
+        this.getUploads();
+        this.updateMetaDataList()
+    }
 
-  batchHeaders = () => {
-    return(
-      [{
-        label: "Source",
-        column_name: "source",
-        filter: false,
-        order: true
-      },{
-        label: "Week",
-        column_name: "week",
-        filter: false,
-        order: false
-      },{
-        label: "Status",
-        column_name: "status",
-        filter: false,
-        order: false
-      },{
-        label: "",
-        column_name: "button",
-        filter: false,
-        order: false
-      }]
-    )
-  };
+    getUploads = () => {
+        getBatchData(this.state.batchType, this.state.year, this.state.period)
+            .then(r => {
+                if (r[0] === undefined) {
+                    // Batch does not exist, load not found page
+                    this.setState({batchFound: false})
+                }
+                this.setState({returnedData: {Rows: r, Count: r.length}});
+                this.updateMetaDataList()
+            })
+            .catch(error => {
+                console.log(error);
+                this.setState({batchFound: false});
+            });
+    };
 
-  thelist = () => {
-    return(
-      [{
-        L: "Batch_ID",
-        R: this.state.Batch_ID,
-        
-      },{
-        L: "Year",
-        R: getYear(this.state.Batch_ID),
-        
-      },{
-        L: "Period",
-        R: getMonth(this.state.Batch_ID),
-         
-      }]
-    )
-  };
+    formatMetaData() {
+        return (
+            [{
+                L: "Batch_ID",
+                R: "This is no longer a thing ",
+            }, {
+                L: "Year",
+                R: this.state.year.toString(),
+            }, {
+                L: "Period",
+                R: (this.state.batchType === "monthly" ? monthNumberToString(Number(this.state.period)).toString() : this.state.period.toString()),
+            }, {
+                L: "Status",
+                R: "",
+            }, {
+                L: "Description",
+                R: "A Batch",
+            }
+            ]
+        )
+    }
 
-  showSummary = (payload : any) => {
-    console.log(payload)
-  };
+    updateMetaDataList = () => {
+        this.setState({metadata: this.formatMetaData()})
+    };
 
-  render() {
-    return (
-      <div className="container">
-        <div>
-          <header className="header header--internal">  
-            <text style={{fontWeight: "bold"}}> Manage Monthly Uploads</text>
-          </header>
-          <br></br>
-          <ONSMetadata List={this.thelist()}></ONSMetadata>
-        </div>
-        <br></br>
-        <table>
-          <TableWithModal table="batch"></TableWithModal>
-          <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
-            <p>Every File Must be Uploaded to Run Process</p>
-          </ONSPanel>
-          <br></br>
-        </table>
-        <div>
-          <ONSButton label="Run Monthly Process" small={false} primary={true} marginRight={10} />
-          {(() => {if(qList.some(item => String(getMonth(this.state.Batch_ID)) === String(item))){
-            return(
-              <ONSButton label="Run Inetrim Weighting" small={false} primary={false} />
-              )
-          }
-          })()}
-        </div>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="container">
+                {
+                    this.state.batchFound ?
+                        <>
+                            <div>
+                                <header className="header header--internal">
+                                    <text style={{fontWeight: "bold"}}> Manage Monthly Uploads</text>
+                                </header>
+                                <br/>
+                                <ONSMetadata List={this.state.metadata}/>
+                            </div>
+                            <br/>
+                            <table>
+                                <TableWithModal table="batch" returnedData={this.state.returnedData}/>
+                                <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
+                                    <p>Every File Must be Uploaded to Run Process</p>
+                                </ONSPanel>
+                                <br/>
+                            </table>
+                            <div>
+                                <ONSButton label="Run Monthly Process" small={false} primary={true} marginRight={10}/>
+                                {(() => {
+                                    if (qList.some(item => String(getMonth(this.state.Batch_ID)) === String(item))) {
+                                        return (
+                                            <ONSButton label="Run Inetrim Weighting" small={false} primary={false}/>
+                                        )
+                                    }
+                                })()}
+                            </div>
+                        </>
+                        :
+                        <GenericNotFound label={this.state.batchType + " batch Not Found "}/>
+                }
+            </div>
+        );
+    }
 }

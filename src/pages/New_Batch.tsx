@@ -1,18 +1,28 @@
-import React, {Component, ChangeEvent} from "react";
+import React, {ChangeEvent, Component} from "react";
 import {ONSSelect} from "../components/ONSSelect";
 import {ONSSubmitButton} from "../components/ONSSubmitButton"
-import {batches, years, quarters, months } from "../utilities/Common_Functions";
+import {batches, monthNames, months, quarters, years} from "../utilities/Common_Functions";
+import {createNewBatch} from "../utilities/http";
+import {ONSPanel} from "../components/ONSPanel";
+
+interface Panel {
+    label: string,
+    visible: boolean
+    status: string
+}
 
 interface State{
-    batchType: String;
-    year: String;
-    period: String;
+    batchType: string
+    year: string
+    period: string
     submit: boolean
-    inputError: boolean;
+    inputError: boolean
+    panel: Panel
 }
 
 export class New_Batch extends Component <{}, State> {
-    displayName = New_Batch.name
+    displayName = New_Batch.name;
+
     constructor(props: any) {
         super(props);
         this.state = {
@@ -20,67 +30,95 @@ export class New_Batch extends Component <{}, State> {
             year: "",
             period: "",
             inputError: false,
-            submit: false
+            submit: false,
+            panel: {
+                label: '',
+                visible: false,
+                status: ''
+            }
         };
     }
     error = false;
 
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        this.setState({submit: true})
+        e.preventDefault();
+        this.setState({submit: true});
         //setting up for the panel error, if submit === true then there is at least one empty field and submit has been clicked, else redirect to view batch
-        if(this.state.batchType === "" || this.state.year === "" || (this.state.batchType !== "yearly" && this.state.period === "")) this.error = true
+        if(this.state.batchType === "" || this.state.year === "" || (this.state.batchType !== "yearly" && this.state.period === "")) this.error = true;
         else {
-            let period: String
-            if(this.state.batchType !== "yearly") period = this.state.period.substring(0,3)
-            else period = "JD"
+            let periodName: String;
+            if (this.state.batchType === "monthly") periodName = monthNames[+this.state.period].substring(0,3);
+            else if (this.state.batchType === "quarterly") periodName = this.state.period;
+            else periodName = "JD";
 
-            let batch_id = String(period + String(this.state.year))
+            let batch_id = String(periodName + String(this.state.year));
 
-            console.log(batch_id)
-            console.log("batch type :" + this.state.batchType)
-            console.log("batch type :" + this.state.year)
-            if(this.state.batchType !== "yearly") console.log("batch type :" + this.state.period)
+            console.log(batch_id);
+            console.log("batch type : " + this.state.batchType);
+            console.log("batch type : " + this.state.year);
+            if(this.state.batchType !== "yearly") console.log("batch type : s" + this.state.period);
 
-            // redirect to view batch
-            window.location.href = "/View_Monthly_Batch"
+            createNewBatch(this.state.batchType, this.state.year, this.state.period, "")
+                .then(r => {
+                    console.log(r);
+
+                    if (r.status === 'ERROR') {
+                        this.setState({
+                            panel: {
+                                label: r.errorMessage,
+                                visible: true,
+                                status: 'error'
+                            }
+                        })
+                    } else {
+                        this.setState({
+                            panel: {
+                                label: 'Created new Batch ID ',
+                                visible: true,
+                                status: 'info'
+                            }
+                        });
+                        // redirect to Manage batch Page
+                        window.location.href = "/View_Monthly_Batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period
+                    }
+                })
+                .catch(error => console.log(error));
         }
 
-
-        if(this.state.batchType !== "yearly") this.setState({period: ""})
-        
-        this.setState({inputError: this.error})
-        
-        // printing to console the info to be sent to api on submit
-        console.log("subbbbmmmiiiiittttt")
-        
+        if(this.state.batchType === "yearly") this.setState({period: ""});
+        this.setState({inputError: this.error});
 
     };
 
     handleBatchTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        this.setState({batchType: e.target.value})
+        this.setState({batchType: e.target.value});
         this.errorGone()
         
-    }
+    };
     
     handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        this.setState({year: e.target.value})
+        this.setState({year: e.target.value});
         this.errorGone()
-    }
+    };
 
     handlePeriodChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        this.setState({period: e.target.value})
+        this.setState({period: e.target.value});
         this.errorGone()
-    }
+    };
 
     errorGone = () => {
-        console.log(this.state.batchType + " " + this.state.year + " " + this.state.period + " "+ this.state.submit + " " + this.state.inputError)
+        console.log(this.state.batchType + " " + this.state.year + " " + this.state.period + " "+ this.state.submit + " " + this.state.inputError);
         if(this.state.batchType !== "" && this.state.year !== "" && (this.state.batchType !== "yearly" || this.state.period !== "")) this.setState({inputError: false})
-    }
+    };
 
     render() {        
         return (
             <div className="container">
+                <ONSPanel label={this.state.panel.label} hidden={!this.state.panel.visible} status={this.state.panel.status}>
+                    <p>{this.state.panel.label}</p>
+                </ONSPanel>
+                <br/>
                 {/* this is for the empty inputs, the  ifs are pure jank but it works */}
                 {(() => {if (this.state.inputError === true) {
                     return(
@@ -107,10 +145,12 @@ export class New_Batch extends Component <{}, State> {
                                             </li>
                                             )}
                                         })()}
+
                                         {(() => {if ((this.state.batchType !== "yearly" && this.state.batchType !== "") && this.state.period === ""){
                                             return(<li className="list__item ">
+
                                                 <p className="list__link js-inpagelink">
-                                                Please select a Period.
+                                                Please select a Period. {this.state.period}
                                                 </p>
                                             </li>
                                             )}
