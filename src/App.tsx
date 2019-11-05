@@ -84,6 +84,7 @@ class App extends React.Component<Props, State> {
                     <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={3}/>
                     <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
                     <this.PrivateRoute exact path='/File_Upload' component={File_Upload} page_id={4}/>
+                    <this.PrivateRoute exact path='/surveyUpload/:survey/:period/:year' component={File_Upload} page_id={4}/>
                     <this.PrivateRoute exact path='/New_Batch' component={New_Batch} page_id={5}/>
                     <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
                     <this.PrivateRoute exact path='/View_Monthly_Batch/:batchtype/:year/:period' component={View_Monthly_Batch} page_id={6}/>

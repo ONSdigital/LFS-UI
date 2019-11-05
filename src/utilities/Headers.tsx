@@ -25,6 +25,11 @@ function batchHeaders() {
             column_name: "button",
             filter: false,
             order: false
+        }, {
+            label: "",
+            column_name: "button2",
+            filter: false,
+            order: false
         }]
     )
 };

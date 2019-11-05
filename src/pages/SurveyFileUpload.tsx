@@ -5,6 +5,9 @@ import {postSurveyFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONSPanel";
 
 interface Props{
+    period: string,
+    year: string,
+    surveyType: string
 }
 
 interface State{
@@ -14,8 +17,8 @@ interface State{
     uploading: boolean
 }
 
-export class File_Upload extends Component <Props, State> {
-    displayName = File_Upload.name;
+export class SurveyFileUpload extends Component <Props, State> {
+    displayName = SurveyFileUpload.name;
 
     constructor(props : Props) {
         super(props);
@@ -35,8 +38,7 @@ export class File_Upload extends Component <Props, State> {
             errorPanelHidden: true,
             uploading: true
         });
-        // TODO: Send correct data for each file type
-        postSurveyFile(this.state.fileOne, 'lfsFile','survey','GB', "18",  "2014")
+        postSurveyFile(this.state.fileOne, 'lfsFile','survey', this.props.surveyType, this.props.period, this.props.year)
             .then(response => {
                 console.log(response);
                 if (response.status === 'ERROR'){
@@ -45,6 +47,7 @@ export class File_Upload extends Component <Props, State> {
                 this.setState({
                     uploading: false,
                 });
+                this.setErrorMessage(response.status);
             })
             .catch(err => {
                 console.log(err);
@@ -77,10 +80,6 @@ export class File_Upload extends Component <Props, State> {
                     </ONSPanel>
                     <ONSUpload label={"SAV File 1"} description={"Only .sav accepted"} fileName={"Upload 1"} fileID={"U1"}
                                accept=".sav" onChange={(e) => this.handleFileOneChange(e.target.files)}/>
-                    <ONSUpload label={"File 2"} description={"Only .csv accepted"} fileName={"Upload 2"} fileID={"U2"}
-                               accept=".csv"/>
-                    <ONSUpload label={"File 3"} description={"Only .csv accepted"} fileName={"Upload 3"} fileID={"U3"}
-                               accept=".csv"/>
                     <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false} loading={this.state.uploading}/>
                 </form>
             </div>

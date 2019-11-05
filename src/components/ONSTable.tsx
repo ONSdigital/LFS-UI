@@ -15,7 +15,8 @@ interface Props {
     pageChange?: (offset: number, steps: number) => void,
     Create?: boolean,
     CreateFunction?: (...props: any[]) => void
-    openModal?: any
+    openModal?: any,
+    openUploadModel?: any
 }
 
 interface Header {
@@ -118,6 +119,9 @@ export class ONSTable extends Component <Props, State> {
         }
         if (column === "button") {
             return (<ONSButton label="Summary" small={true} primary={false} onClick={this.props.openModal}/>)
+        }
+        if (column === "button2") {
+            return (<ONSButton label="Upload" small={true} primary={false} onClick={this.props.openUploadModel}/>)
         }
         if (column === "status") {
             if (typeof (x) === "number") {

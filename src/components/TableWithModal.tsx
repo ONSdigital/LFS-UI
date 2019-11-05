@@ -4,6 +4,7 @@ import {ONSTextInput} from './ONSTextInput';
 import {ONSButton} from './ONSButton';
 import {ONSTable} from './ONSTable';
 import {batchHeaders, uploadHeaders, userHeaders} from '../utilities/Headers'
+import {SurveyFileUpload} from "../pages/SurveyFileUpload";
 
 interface Props {
     CreateFunction? : (...props : any[]) => void
@@ -15,6 +16,7 @@ interface State {
     customHeaders?: Header[],
     showSaveModal: boolean,
     showSummaryModal: boolean,
+    showUploadModel: boolean
     payload? : Payload,
     UploadsData: Data | null
     UploadStatusData: Data |null
@@ -55,7 +57,7 @@ export class TableWithModal extends Component <Props, State> {
         if (this.props.table === "batch" && this.props.returnedData !== null) {
             data = (this.props.returnedData ? this.props.returnedData : null)
         }
-        this.state = {showSaveModal: false, showSummaryModal: false, UploadsData: data, UploadStatusData: null, Users: null, UserData: null};
+        this.state = {showSaveModal: false, showSummaryModal: false, showUploadModel: false, UploadsData: data, UploadStatusData: null, Users: null, UserData: null};
         this.getUploads();
         this.getUploadStatuses();
         this.getUsers();
@@ -71,6 +73,11 @@ export class TableWithModal extends Component <Props, State> {
     openSummaryModal = () => this.setState({showSummaryModal:true});
    
     closeSummaryModal = () => this.setState({showSummaryModal:false});
+
+    //Upload modal functions
+    openUploadModal = () => this.setState({showUploadModel: true});
+
+    closeUploadModal = () => this.setState({showUploadModel: false});
 
     setMockUploadData = (response: any) => {
             this.setState({UploadsData: response})
@@ -173,30 +180,50 @@ export class TableWithModal extends Component <Props, State> {
 
     summaryModal = () => {
         if(this.state.showSummaryModal)
-        return(<ReactModal 
-                isOpen={this.state.showSummaryModal}
-                contentLabel="Minimal Modal Example"        
-                className='Modal'
-                shouldFocusAfterRender={true}
-                shouldReturnFocusAfterClose={true}
-                ariaHideApp={false}>
+            return(<ReactModal
+                    isOpen={this.state.showSummaryModal}
+                    contentLabel="Minimal Modal Example"
+                    className='Modal'
+                    shouldFocusAfterRender={true}
+                    shouldReturnFocusAfterClose={true}
+                    ariaHideApp={false}>
                     <div>
-                <ONSTable Data={this.state.UploadStatusData} Title="File Upload Status 2" Headers={uploadHeaders()} Pagination={false}/>
-                <ONSButton label="Export / View Report" primary={false} small={false}/>
-                </div>
-                <br/>
-                <div>  
-                <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
-                <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad} marginRight={155}/>
-                <ONSButton label="Close" primary={false} small={false} onClick={this.closeSummaryModal}/>
-                </div>
-            </ReactModal>
-        )
+                        <ONSTable Data={this.state.UploadStatusData} Title="File Upload Status 2" Headers={uploadHeaders()} Pagination={false}/>
+                        <ONSButton label="Export / View Report" primary={false} small={false}/>
+                    </div>
+                    <br/>
+                    <div>
+                        <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
+                        <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad} marginRight={155}/>
+                        <ONSButton label="Close" primary={false} small={false} onClick={this.closeSummaryModal}/>
+                    </div>
+                </ReactModal>
+            )
+    };
+
+    uploadModel = () => {
+        if(this.state.showUploadModel)
+            return(<ReactModal
+                    isOpen={this.state.showUploadModel}
+                    contentLabel="Minimal Modal Example"
+                    className='Modal'
+                    shouldFocusAfterRender={true}
+                    shouldReturnFocusAfterClose={true}
+                    ariaHideApp={false}>
+                    <div>
+                        <SurveyFileUpload period={'18'} year={'2014'} surveyType={'gb'}/>
+                    </div>
+                    <br/>
+                    <div>
+                        <ONSButton label="Close" primary={false} small={false} onClick={this.closeUploadModal}/>
+                    </div>
+                </ReactModal>
+            )
     };
 
     table = ()  => {
         let Table = this.props.table;
-        if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={batchHeaders()} Pagination={false} openModal={this.openSummaryModal}/>;
+        if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={batchHeaders()} Pagination={false} openModal={this.openSummaryModal} openUploadModel={this.openUploadModal}/>;
         if(Table === "admin") return <ONSTable Data={this.state.Users} Title="Users" CreateFunction={this.createUser} Headers={userHeaders()} Pagination={true} Steps={20} pageChange={this.mockUsers} openModal={this.openSaveModal}/>
     };
 
@@ -204,7 +231,8 @@ export class TableWithModal extends Component <Props, State> {
         return(
             <>
                 {[this.saveModal(),
-                this.summaryModal()]}    
+                this.summaryModal(),
+                this.uploadModel()]}
                 <>
                     {this.table()}
                 </>
