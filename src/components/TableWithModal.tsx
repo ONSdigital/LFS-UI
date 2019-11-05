@@ -192,13 +192,13 @@ export class TableWithModal extends Component <Props, State> {
 
     render(){
         return(
-            <div>
+            <>
                 {[this.saveModal(),
                 this.summaryModal()]}    
-                <div>
+                <>
                     {this.table()}
-                </div>
-            </div>
+                </>
+            </>
         )    
     }
 }
