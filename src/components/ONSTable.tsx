@@ -1,10 +1,10 @@
-import React, { Component, ChangeEvent } from 'react';
-import { ONSTextInput } from './ONSTextInput';
-import { ONSColumnOrder } from './ONSColumnOrder';
-import { ONSPagination } from './ONSPagination';
-import { ONSButton } from './ONSButton';
-import { ONSCheckbox } from './ONSCheckbox';
-import { ONSStatus } from './ONSStatus';
+import React, {ChangeEvent, Component} from 'react';
+import {ONSTextInput} from './ONSTextInput';
+import {ONSColumnOrder} from './ONSColumnOrder';
+import {ONSPagination} from './ONSPagination';
+import {ONSButton} from './ONSButton';
+import {ONSCheckbox} from './ONSCheckbox';
+import {ONSStatus} from './ONSStatus';
 
 interface Props {
   Title : string,
@@ -201,7 +201,7 @@ export class ONSTable extends Component <Props, State>{
 
   getCustomHeader = (header: Header) => {
     return(
-      <th scope="col" className="table__header " aria-sort="none">
+      <th scope="col" className="table__header " aria-sort="none" key={header.label}>
         {header.label}
         {header.order &&
         <ONSColumnOrder ref={(input : ONSColumnOrder) => { this.sortElements[header.column_name] = input }} onClick={( e: "Asc" | "Desc" | null) => this.sort(header.column_name, e)}/>
@@ -232,7 +232,7 @@ export class ONSTable extends Component <Props, State>{
             </thead>
             <tbody className="table__body">
                 {Object.keys(this.state.ShowData.Rows).map((row) =>
-                    <tr className="table__row">
+                    <tr className="table__row"  key={row}>
                         {headers.map((header) =>
                         <td className="table__cell ">{this.format(rows[parseInt(row)][header], header, parseInt(row), undefined)}</td>
                         )}
@@ -276,9 +276,9 @@ export class ONSTable extends Component <Props, State>{
             </thead>
             <tbody className="table__body">
                 {Object.keys(this.state.ShowData.Rows).map((row) =>
-                    <tr className="table__row">
+                    <tr className="table__row" key={row}>
                         {headers.map((header) =>
-                        <td className="table__cell ">{this.format(rows[parseInt(row)][header.column_name], header.column_name, parseInt(row), header.onChange)}</td>
+                        <td key={header.label} className="table__cell ">{this.format(rows[parseInt(row)][header.column_name], header.column_name, parseInt(row), header.onChange)}</td>
                         )}
                     </tr>
                 )}
