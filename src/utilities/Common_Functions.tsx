@@ -92,4 +92,21 @@ const batches = [{"label":"Monthly", "value":"monthly"},
 
 const qList = ["January", "February", "April", "May", "July", "August", "October", "November"]
 
-export{weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString}
+interface status {
+    text: string,
+    colour: string
+}
+
+function getStatusStyle(statusNo: number) {
+    let status: status = {text: "", colour: 'info'};
+    switch (statusNo){
+        case 0: status = {text: "Not Started", colour: 'info'}; break;
+        case 1: status = {text: "File Uploaded", colour: 'success'}; break;
+        case 2: status = {text: "File Reloaded", colour: 'success'}; break;
+        case 3: status = {text: "Upload Failed", colour: 'error'}; break;
+        case 4: status = {text: "Successful - Complete", colour: 'success'}; break;
+    }
+    return status
+}
+
+export{weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle}

@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {ONSStatus} from "./ONSStatus";
 import {ONSPanel} from "./ONSPanel";
 import update from 'immutability-helper';
-import {monthNumberToString} from "../utilities/Common_Functions";
+import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
 import {ONSButton} from "./ONSButton";
 
 interface Props {
@@ -88,8 +88,9 @@ export class DashboardTable extends Component <Props, State> {
                                             {row.year}
                                         </td>
                                         <td className="table__cell ">
-                                            <ONSStatus label={row.status} small={false}
-                                                       status={row.status}/>
+
+                                            <ONSStatus label={getStatusStyle(+row.status).text} small={false}
+                                                       status={getStatusStyle(+row.status).colour}/>
                                         </td>
                                     </tr>
                                     <tr hidden={!row.expanded}>
