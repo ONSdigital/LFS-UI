@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 interface Props {
     title: string,
@@ -21,16 +21,17 @@ export class Header extends Component <Props,{}>{
                     </div>
                     <div className="header__links grid__col col-auto">
                     <div className="grid__col col-auto u-d-no@xs@m">
-                        <nav className="header-service-nav header-service-nav--internal" aria-label="Site services menu">
-                        <ul className="header-service-nav__list" aria-label="Navigation menu">
-                            <li className="header-service-nav__item">
-                            <a href="#" className="header-service-nav__link"/>
-                            </li>
-                            <li className="header-service-nav__item">
-                            <a href="#" className="header-service-nav__link"/>
-                            </li>
-                        </ul>
-                        </nav>
+                        {/* TODO: Unused Navigation in the header, May use at some point */}
+                        {/*<nav className="header-service-nav header-service-nav--internal" aria-label="Site services menu">*/}
+                        {/*<ul className="header-service-nav__list" aria-label="Navigation menu">*/}
+                        {/*    <li className="header-service-nav__item">*/}
+                        {/*        <a href="/" className="header-service-nav__link">User Management</a>*/}
+                        {/*    </li>*/}
+                        {/*    <li className="header-service-nav__item">*/}
+                        {/*    <a href="#" className="header-service-nav__link"/>*/}
+                        {/*    </li>*/}
+                        {/*</ul>*/}
+                        {/*</nav>*/}
                     </div>
                     </div>
                 </div>
@@ -44,7 +45,7 @@ export class Header extends Component <Props,{}>{
                             </div>
                             <div className="grid__col col-auto u-flex-no-shrink">
                                 {this.props.loggedIn ?
-                                    <a href="/logout" role="button" className="btn btn--ghost u-d-no@xs@m">
+                                    <a href={"/logout"} role="button" className="btn btn--ghost u-d-no@xs@m">
                                         <span className="btn__inner">Sign Out</span>
                                     </a>
                                     :

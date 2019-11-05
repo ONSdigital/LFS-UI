@@ -31,11 +31,11 @@ interface PRProps extends RouteProps {
 
 class App extends React.Component<Props, State> {
     displayName = App.name;
+    state = {user: null};
 
     constructor(props: Props) {
         super(props);
 
-        this.state = {user: null};
         this.getCurrentUser();
 
         this.setUser.bind(this);

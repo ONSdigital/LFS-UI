@@ -6,7 +6,6 @@ interface Props {
 }
 
 export class ONSMetadata extends Component < Props, {} > {
-    constructor(props : Props) {super(props);}
     
     render () {
         if (this.props.List !== null) {
