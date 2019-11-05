@@ -7,8 +7,8 @@ import {Admin} from './pages/Admin';
 import {Outputs} from './pages/Outputs';
 import Logout from './auth/Logout';
 import {File_Upload} from "./pages/File_Upload";
-import { New_Batch } from './pages/New_Batch';
-import { View_Monthly_Batch } from './pages/View_Monthly_Batch';
+import {New_Batch} from './pages/New_Batch';
+import {View_Monthly_Batch} from './pages/View_Monthly_Batch';
 import {GenericNotFound} from "./pages/GenericNotFound";
 import {Cookies, withCookies} from "react-cookie";
 
@@ -31,11 +31,11 @@ interface PRProps extends RouteProps {
 
 class App extends React.Component<Props, State> {
     displayName = App.name;
+    state = {user: null};
 
     constructor(props: Props) {
         super(props);
 
-        this.state = {user: null};
         this.getCurrentUser();
 
         this.setUser.bind(this);
