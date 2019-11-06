@@ -24,7 +24,7 @@ const batchHeaders =
             column_name: "button",
             filter: false,
             order: false
-        }];
+        }]
 
 function uploadHeaders() {
     return (

@@ -24,8 +24,8 @@ export class Layout extends Component <Props, {}> {
         label: "Outputs"
       },
       {
-        link: "/File_Upload",
-        label: "Upload"
+        link: "/Import",
+        label: "Import"
       },
       {
         link: "/New_Batch",
