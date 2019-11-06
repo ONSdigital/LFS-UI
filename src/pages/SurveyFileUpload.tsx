@@ -25,7 +25,8 @@ interface State {
     uploading: boolean,
     surveyType: string,
     year: string
-    period: string
+    week: string
+    month: string
 }
 
 export class SurveyFileUpload extends Component <Props, State> {
@@ -38,7 +39,8 @@ export class SurveyFileUpload extends Component <Props, State> {
             uploading: false,
             surveyType: props.match.params.survey,
             year: props.match.params.year,
-            period: props.match.params.period,
+            week: props.match.params.week,
+            month: props.match.params.month,
             panel: {
                 label: '',
                 visible: false,
@@ -49,7 +51,7 @@ export class SurveyFileUpload extends Component <Props, State> {
     }
 
 
-    upload = () => {
+    uploadFile = () => {
         console.log('Uploading File');
         this.setState({
             uploading: true,
@@ -71,18 +73,19 @@ export class SurveyFileUpload extends Component <Props, State> {
             });
             return
         }
-        postSurveyFile(this.state.fileOne, 'lfsFile', 'survey', this.state.surveyType, this.state.period, this.state.year)
+
+        postSurveyFile(this.state.fileOne, 'lfsFile', 'survey', this.state.surveyType, (this.state.surveyType === "gb" ? this.state.week : this.state.month), this.state.year)
             .then(response => {
                 console.log(response);
                 if (response.status === 'ERROR') {
                     this.setPanel("Error Occurred while Uploading File: " + response.errorMessage.toString(), 'error');
                 } else {
                     this.setPanel(response.status, 'success');
+                    this.returnToManageBatch(true)
                 }
                 this.setState({
                     uploading: false,
                 });
-
             })
             .catch(err => {
                 console.log(err);
@@ -97,6 +100,10 @@ export class SurveyFileUpload extends Component <Props, State> {
             });
     };
 
+    returnToManageBatch = (uploaded: boolean) => {
+        window.location.href = "/View_Monthly_Batch/monthly/" + this.state.year + "/" + this.state.month + (!uploaded ?  "/true" : "")
+    };
+
     formatMetaData() {
         return (
             [{
@@ -107,7 +114,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                 R: this.state.year.toString(),
             }, {
                 L: "Period",
-                R: (this.state.surveyType === "gb" ? "Week " + this.state.period.toString() : monthNumberToString(Number(this.state.period)).toString()),
+                R: (this.state.surveyType === "gb" ? "Week " + this.state.week.toString() : monthNumberToString(Number(this.state.month)).toString()),
             }
             ]
         )
@@ -142,8 +149,10 @@ export class SurveyFileUpload extends Component <Props, State> {
                                description={"Only .sav accepted"} fileName={"Upload 1"}
                                fileID={"U1"}
                                accept=".sav" onChange={(e) => this.handleFileChange(e.target.files)}/>
-                    <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false}
+                    <ONSButton label={"Submit"} field={true} onClick={this.uploadFile} primary={true} small={false}
                                loading={this.state.uploading}/>
+                    <ONSButton label={"Cancel"} field={true} onClick={this.returnToManageBatch} primary={false}
+                               small={false}/>
                 </form>
             </div>
         )
