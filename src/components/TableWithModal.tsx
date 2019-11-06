@@ -210,12 +210,18 @@ export class TableWithModal extends Component <Props, State> {
                     shouldFocusAfterRender={true}
                     shouldReturnFocusAfterClose={true}
                     ariaHideApp={false}>
-                    <div>
+                        
+                    <div> 
+  <div className="text-right">
+                        <button type="button" className="close" aria-label="Close" onClick={this.closeUploadModal}>
+                            <span >&times;</span>
+                        </button>  </div>                   
+{/* <ONSButton label="Close" primary={false} small={false} onClick={this.closeUploadModal}/> */}
+
                         <SurveyFileUpload period={'18'} year={'2014'} surveyType={'gb'}/>
                     </div>
                     <br/>
                     <div>
-                        <ONSButton label="Close" primary={false} small={false} onClick={this.closeUploadModal}/>
                     </div>
                 </ReactModal>
             )
