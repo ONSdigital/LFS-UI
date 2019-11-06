@@ -210,12 +210,12 @@ export class TableWithModal extends Component <Props, State> {
                     shouldFocusAfterRender={true}
                     shouldReturnFocusAfterClose={true}
                     ariaHideApp={false}>
-                        
-                    <div> 
+
+                    <div>
   <div className="text-right">
                         <button type="button" className="close" aria-label="Close" onClick={this.closeUploadModal}>
                             <span >&times;</span>
-                        </button>  </div>                   
+                        </button>  </div>
 {/* <ONSButton label="Close" primary={false} small={false} onClick={this.closeUploadModal}/> */}
 
                         {/*<SurveyFileUpload period={'18'} year={'2014'} surveyType={'gb'}/>*/}
@@ -229,7 +229,7 @@ export class TableWithModal extends Component <Props, State> {
 
     table = ()  => {
         let Table = this.props.table;
-        if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={batchHeaders()} Pagination={false} openModal={this.openSummaryModal} openUploadModel={this.openUploadModal}/>;
+        if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={batchHeaders} Pagination={false} openModal={this.openSummaryModal}/>;
         if(Table === "admin") return <ONSTable Data={this.state.Users} Title="Users" CreateFunction={this.createUser} Headers={userHeaders()} Pagination={true} Steps={20} pageChange={this.mockUsers} openModal={this.openSaveModal}/>
     };
 
