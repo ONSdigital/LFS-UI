@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {ONSUpload} from "../components/ONSUpload";
 import {ONSButton} from "../components/ONSButton";
-import {postFile} from "../utilities/http";
+import {postSurveyFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONSPanel";
 
 interface Props{
@@ -36,7 +36,7 @@ export class File_Upload extends Component <Props, State> {
             uploading: true
         });
         // TODO: Send correct data for each file type
-        postFile(this.state.fileOne, 'lfsFile','Survey','GB', "1")
+        postSurveyFile(this.state.fileOne, 'lfsFile','survey','GB', "18",  "2014")
             .then(response => {
                 console.log(response);
                 if (response.status === 'ERROR'){
