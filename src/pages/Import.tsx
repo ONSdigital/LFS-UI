@@ -1,7 +1,7 @@
 import React, {Component, ChangeEvent} from "react";
 import {ONSUpload} from "../components/ONSUpload";
 import {ONSButton} from "../components/ONSButton";
-import {postFile} from "../utilities/http";
+import {postImportFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONSPanel";
 import { ONSSelect } from "../components/ONSSelect";
 
@@ -16,6 +16,9 @@ interface State{
     import: string
     importHidden: boolean
     fileType: string
+    redirect: string
+    //check to see if functionality is built and whether to send the request
+    built: boolean
 }
 
 export class Import extends Component <Props, State> {
@@ -30,7 +33,9 @@ export class Import extends Component <Props, State> {
             uploading: false,
             import: "",
             importHidden: true,
-            fileType: ""
+            fileType: "",
+            redirect: "",
+            built: false
         };
 
         this.handleFileOneChange = this.handleFileOneChange.bind(this);
@@ -44,11 +49,18 @@ export class Import extends Component <Props, State> {
             uploading: true
         });
         // TODO: Send correct data for each file type
-        postFile(this.state.fileOne, 'lfsFile','Survey','GB', "1")
+        if(this.state.built){
+        postImportFile(this.state.fileOne, this.state.import, this.state.fileType)
             .then(response => {
                 console.log(response);
-                if (response.status === 'ERROR'){
+                console.log(response.status)
+                if (response.status === ''){
+                    console.log("window no change")
+
                     this.setErrorMessage(response.errorMessage.toString());
+                }else {
+                    console.log("window change")
+                    window.location.href = this.state.redirect
                 }
                 this.setState({
                     uploading: false,
@@ -60,8 +72,10 @@ export class Import extends Component <Props, State> {
                 this.setState({
                     uploading: false,
                 });
-            });
+            });    
+        }else window.location.href = this.state.redirect
     };
+
 
     setErrorMessage = (message: string) => {
         this.setState({
@@ -82,13 +96,13 @@ export class Import extends Component <Props, State> {
     filetype = (file: string) => {
         let type = ""
         switch (file){
-            case "Bulk Ammendments": type = ''; break;
-            case "Design Weights": type = ''; break;
-            case "Geographical Classifications": type = ''; break;
-            case "LFS Address File": type = '.csv'; break;
-            case "Survey Data Labels": type = ''; break;
-            case "Value Label": type = '.csv'; break;
-            case "Variable Definitions": type = ''; break;
+            case "address": type = '.csv'; this.setState({redirect: "", built: true}); break;
+            case "Bulk Ammendments": type = ''; this.setState({redirect: ""}); break;
+            case "Design Weights": type = ''; this.setState({redirect: ""}); break;
+            case "Geographical Classifications": this.setState({redirect: ""}); type = ''; break;
+            case "Population Estimates": type = ''; this.setState({redirect: "/"}); break;
+            case "Value Label": type = '.csv'; this.setState({redirect: ""}); break;
+            case "Variable Definitions": type = ''; this.setState({redirect: ""}); break;
         }
         return type
     }
@@ -97,11 +111,11 @@ export class Import extends Component <Props, State> {
                 //  {"label":"Bulk Ammendments", "value":"Bulk Ammendments"}, 
                 //  {"label":"Design Weights", "value":"Design Weights"}, 
                 //  {"label":"Geographical Classifications", "value":"Geographical Classifications"}, 
-                //  {"label":"Survey Data Labels", "value":"Survey Data Labels"}, 
-                {"label":"LFS Address File", "value":"LFS Address File"},
+                {"label":"LFS Address File", "value":"address"},
                 {"label":"Value Label", "value":"Value Label"}
                 //  , 
-                //  {"label":"Variable Definitions", "value":"Variable Definitions"}
+                  //  {"label":"Population Estimates", "value":"Population Estimates"}, 
+              //  {"label":"Variable Definitions", "value":"Variable Definitions"}
                 ]
 
 

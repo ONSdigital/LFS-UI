@@ -21,6 +21,28 @@ function postSurveyFile(lfsfile: any, fileName: string, fileType: string, survey
     })
 }
 
+function postImportFile(importFile: any, fileName: string, fileType: string): Promise<any> {
+    console.log("/imports/" + fileName + "-----------------------")
+    let formData = new FormData();
+    formData.append("lfsFile", importFile[0]);
+    formData.append("fileName", fileName);
+
+    return new Promise((resolve: any, reject: any) => {
+        fetch("/imports/" + fileName, {
+            "method": "POST",
+            "body": formData,
+        })
+            .then(response => {
+                console.log(response);
+                resolve(response.json());
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err)
+            });
+    })
+}
+
 function createNewBatch(batchType: string, year: string, period: string, description: string): Promise<any> {
 
     let formData = new FormData();
@@ -85,4 +107,4 @@ function getAllBatches(): Promise<any> {
     })
 }
 
-export {postSurveyFile, createNewBatch, getAllBatches, getBatchData}
+export {postSurveyFile, postImportFile, createNewBatch, getAllBatches, getBatchData}
