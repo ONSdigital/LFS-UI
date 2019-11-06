@@ -11,11 +11,10 @@ import {batchHeaders} from "../utilities/Headers";
 
 interface State {
     UploadsData: Data | null
-    Batch_ID: string,
     batchType: string,
     year: string,
     period: string,
-    returnedData: Data | null,
+    returnedData: [] | null,
     metadata: Array<MetaDataListItem>,
     batchFound: boolean,
     summaryOpen: boolean
@@ -47,7 +46,6 @@ export class View_Monthly_Batch extends Component <{}, State> {
 
         this.state = {
             UploadsData: null,
-            Batch_ID: "Dec2019",
             batchType: props.match.params.batchtype,
             year: props.match.params.year,
             period: props.match.params.period,
@@ -61,8 +59,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
     }
 
     goToUploadPage = (row: any) => {
-        // surveyUpload/gb/18/2014
-        // window.location.href = "/surveyUpload/" + row. "/" + row.year + "/" + row.period
+        window.location.href = "/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year
     };
 
     getUploads = () => {
@@ -109,7 +106,6 @@ export class View_Monthly_Batch extends Component <{}, State> {
 
     BatchUploadTableRow = (rowData: any) => {
         let row = rowData.row;
-        console.log(row)
         return (
             <>
                 <td className="table__cell ">
@@ -152,7 +148,6 @@ export class View_Monthly_Batch extends Component <{}, State> {
                             </div>
                             <br/>
                             <table>
-                                {/*<TableWithModal table="batch" returnedData={this.state.returnedData}/>*/}
                                 <ONSAccordionTable Headers={batchHeaders} data={this.state.returnedData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
                                 <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
                                     <p>Every File Must be Uploaded to Run Process</p>
@@ -162,9 +157,9 @@ export class View_Monthly_Batch extends Component <{}, State> {
                             <div>
                                 <ONSButton label="Run Monthly Process" small={false} primary={true} marginRight={10}/>
                                 {(() => {
-                                    if (qList.some(item => String(getMonth(this.state.Batch_ID)) === String(item))) {
+                                    if (qList.some(item => String(getMonth(this.state.period)) === String(item))) {
                                         return (
-                                            <ONSButton label="Run Inetrim Weighting" small={false} primary={false}/>
+                                            <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
                                         )
                                     }
                                 })()}
