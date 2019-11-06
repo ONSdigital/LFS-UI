@@ -3,84 +3,147 @@ import {ONSUpload} from "../components/ONSUpload";
 import {ONSButton} from "../components/ONSButton";
 import {postSurveyFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONSPanel";
+import {ONSMetadata} from "../components/ONSMetadata";
+import {monthNumberToString} from "../utilities/Common_Functions";
 
-interface Props{
+interface Props {
     period: string,
     year: string,
     surveyType: string
+    match: any
 }
 
-interface State{
+interface Panel {
+    label: string,
+    visible: boolean
+    status: string
+}
+
+interface State {
     fileOne: any,
-    errorPanelHidden: boolean,
-    errorPanelMessage: string,
-    uploading: boolean
+    panel: Panel
+    uploading: boolean,
+    surveyType: string,
+    year: string
+    period: string
 }
 
 export class SurveyFileUpload extends Component <Props, State> {
     displayName = SurveyFileUpload.name;
 
-    constructor(props : Props) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             fileOne: "",
-            errorPanelHidden: true,
-            errorPanelMessage: "",
-            uploading: false
+            uploading: false,
+            surveyType: props.match.params.survey,
+            year: props.match.params.year,
+            period: props.match.params.period,
+            panel: {
+                label: '',
+                visible: false,
+                status: ''
+            }
         };
-        this.handleFileOneChange = this.handleFileOneChange.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
     }
 
 
     upload = () => {
         console.log('Uploading File');
         this.setState({
-            errorPanelHidden: true,
-            uploading: true
+            uploading: true,
+            panel: {
+                label: '',
+                visible: false,
+                status: ''
+            }
         });
-        postSurveyFile(this.state.fileOne, 'lfsFile','survey', this.props.surveyType, this.props.period, this.props.year)
+
+        if (this.state.fileOne.length === 0) {
+            this.setState({
+                uploading: false,
+                panel: {
+                    label: 'No File Selected',
+                    visible: true,
+                    status: 'info'
+                }
+            });
+            return
+        }
+        postSurveyFile(this.state.fileOne, 'lfsFile', 'survey', this.state.surveyType, this.state.period, this.state.year)
             .then(response => {
                 console.log(response);
-                if (response.status === 'ERROR'){
-                    this.setErrorMessage(response.errorMessage.toString());
+                if (response.status === 'ERROR') {
+                    this.setPanel("Error Occurred while Uploading File: " + response.errorMessage.toString(), 'error');
+                } else {
+                    this.setPanel(response.status, 'success');
                 }
                 this.setState({
                     uploading: false,
                 });
-                this.setErrorMessage(response.status);
+
             })
             .catch(err => {
                 console.log(err);
-                this.setErrorMessage(err.toString());
+                if (err.toString() === "SyntaxError: Unexpected token P in JSON at position 0") {
+                    this.setPanel("Error Occurred while Uploading File: Unable to Connect to Server", 'error');
+                } else {
+                    this.setPanel("Error Occurred while Uploading File: " + err.toString(), 'error');
+                }
                 this.setState({
                     uploading: false,
                 });
             });
     };
 
-    setErrorMessage = (message: string) => {
+    formatMetaData() {
+        return (
+            [{
+                L: "Survey",
+                R: this.state.surveyType.toUpperCase(),
+            }, {
+                L: "Year",
+                R: this.state.year.toString(),
+            }, {
+                L: "Period",
+                R: (this.state.surveyType === "gb" ? "Week " + this.state.period.toString() : monthNumberToString(Number(this.state.period)).toString()),
+            }
+            ]
+        )
+    }
+
+    setPanel = (message: string, status: string) => {
         this.setState({
-            errorPanelHidden: false,
-            errorPanelMessage: "Error Occurred while Uploading Files: " + message,
+            panel: {
+                label: message,
+                visible: true,
+                status: status
+            }
         });
     };
 
-
-    handleFileOneChange = (selectorFiles: FileList | null) => {
+    handleFileChange = (selectorFiles: FileList | null) => {
         console.log(selectorFiles);
         this.setState({fileOne: selectorFiles})
     };
 
     render() {
         return (
-            <div className="container">     
+            <div className="container">
+                <h2>Import Survey</h2>
+                <ONSMetadata List={this.formatMetaData()}/>
                 <form>
-                    <ONSPanel status={"error"}  label={"error"} hidden={this.state.errorPanelHidden}>
-                            <p>{this.state.errorPanelMessage}</p>
+                    <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
+                              hidden={!this.state.panel.visible}>
+                        <p>{this.state.panel.label}</p>
                     </ONSPanel>
-                    <ONSUpload label={"SAV File 1"} description={"Only .sav accepted"} fileName={"Upload 1"} fileID={"U1"}
-                               accept=".sav" onChange={(e) => this.handleFileOneChange(e.target.files)}/>
-                    <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false} loading={this.state.uploading}/>
+                    <ONSUpload label={"Import " + this.state.surveyType.toUpperCase() + " File"}
+                               description={"Only .sav accepted"} fileName={"Upload 1"}
+                               fileID={"U1"}
+                               accept=".sav" onChange={(e) => this.handleFileChange(e.target.files)}/>
+                    <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false}
+                               loading={this.state.uploading}/>
                 </form>
             </div>
         )

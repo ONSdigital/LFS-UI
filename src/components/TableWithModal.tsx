@@ -4,12 +4,12 @@ import {ONSTextInput} from './ONSTextInput';
 import {ONSButton} from './ONSButton';
 import {ONSTable} from './ONSTable';
 import {batchHeaders, uploadHeaders, userHeaders} from '../utilities/Headers'
-import {SurveyFileUpload} from "../pages/SurveyFileUpload";
 
 interface Props {
     CreateFunction? : (...props : any[]) => void
     table : String
-    returnedData?: Data | null
+    returnedData?: Data | null,
+    summaryOpen?: boolean | null
 }
 
 interface State {
@@ -57,7 +57,7 @@ export class TableWithModal extends Component <Props, State> {
         if (this.props.table === "batch" && this.props.returnedData !== null) {
             data = (this.props.returnedData ? this.props.returnedData : null)
         }
-        this.state = {showSaveModal: false, showSummaryModal: false, showUploadModel: false, UploadsData: data, UploadStatusData: null, Users: null, UserData: null};
+        this.state = {showSaveModal: false, showSummaryModal: (this.props.summaryOpen ? true : false), showUploadModel: false, UploadsData: data, UploadStatusData: null, Users: null, UserData: null};
         this.getUploads();
         this.getUploadStatuses();
         this.getUsers();
@@ -218,7 +218,7 @@ export class TableWithModal extends Component <Props, State> {
                         </button>  </div>                   
 {/* <ONSButton label="Close" primary={false} small={false} onClick={this.closeUploadModal}/> */}
 
-                        <SurveyFileUpload period={'18'} year={'2014'} surveyType={'gb'}/>
+                        {/*<SurveyFileUpload period={'18'} year={'2014'} surveyType={'gb'}/>*/}
                     </div>
                     <br/>
                     <div>
