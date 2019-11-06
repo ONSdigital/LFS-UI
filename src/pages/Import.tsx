@@ -85,6 +85,7 @@ export class Import extends Component <Props, State> {
             case "Bulk Ammendments": type = ''; break;
             case "Design Weights": type = ''; break;
             case "Geographical Classifications": type = ''; break;
+            case "LFS Address File": type = '.csv'; break;
             case "Survey Data Labels": type = ''; break;
             case "Value Label": type = '.csv'; break;
             case "Variable Definitions": type = ''; break;
@@ -92,16 +93,13 @@ export class Import extends Component <Props, State> {
         return type
     }
 
-    fileTypeString = () => {
-        return "Only " + this.state.fileType + " accepted"
-    }
-
     fileSelection = [
                 //  {"label":"Bulk Ammendments", "value":"Bulk Ammendments"}, 
                 //  {"label":"Design Weights", "value":"Design Weights"}, 
                 //  {"label":"Geographical Classifications", "value":"Geographical Classifications"}, 
                 //  {"label":"Survey Data Labels", "value":"Survey Data Labels"}, 
-                 {"label":"Value Label", "value":"Value Label"}
+                {"label":"LFS Address File", "value":"LFS Address File"},
+                {"label":"Value Label", "value":"Value Label"}
                 //  , 
                 //  {"label":"Variable Definitions", "value":"Variable Definitions"}
                 ]
@@ -117,7 +115,7 @@ export class Import extends Component <Props, State> {
                     <ONSSelect label="Select Import" value="select value" options={this.fileSelection} onChange={this.handleImportChange}></ONSSelect>
                     <br></br>
                     <div hidden={this.state.importHidden}>
-                        <ONSUpload label={this.state.import} description={this.fileTypeString()} fileName={"Upload 1"} fileID={"U1"}
+                        <ONSUpload label={"Import " + this.state.import} description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"} fileID={"U1"}
                                 accept={this.state.fileType} onChange={(e) => this.handleFileOneChange(e.target.files)}/>
                         <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false} loading={this.state.uploading}/>
                     </div>
