@@ -1,5 +1,4 @@
-function batchHeaders() {
-    return (
+const batchHeaders =
         [{
             label: "Source",
             column_name: "type",
@@ -25,9 +24,7 @@ function batchHeaders() {
             column_name: "button",
             filter: false,
             order: false
-        }]
-    )
-};
+        }];
 
 function uploadHeaders() {
     return (
@@ -47,7 +44,36 @@ function uploadHeaders() {
             filter: false,
             order: false
         }])
-};
+}
+
+const dashboardHeaders =
+    [{
+        label: "BatchID",
+        column_name: "BatchID",
+        filter: false,
+        order: true
+    },{
+        label: "Batch Type",
+        column_name: "Batch Type",
+        filter: false,
+        order: true
+    }, {
+        label: "Period",
+        column_name: "Period",
+        filter: false,
+        order: false
+    }, {
+        label: "Year",
+        column_name: "Year",
+        filter: false,
+        order: false
+    }, {
+        label: "Status",
+        column_name: "status",
+        filter: false,
+        order: false
+    }
+    ];
 
 
 function userHeaders() {
@@ -78,7 +104,7 @@ function userHeaders() {
             create: true
         }]
     )
-};
+}
 
 function roleHeaders() {
     return (
@@ -94,6 +120,6 @@ function roleHeaders() {
             order: false
         }]
     )
-};
+}
 
-export {batchHeaders, uploadHeaders, userHeaders, roleHeaders}
+export {batchHeaders, uploadHeaders, userHeaders, roleHeaders, dashboardHeaders}
