@@ -229,7 +229,9 @@ export class TableWithModal extends Component <Props, State> {
 
     table = ()  => {
         let Table = this.props.table;
+
         if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={batchHeaders()} Pagination={false} openModal={this.openSummaryModal} openUploadModel={this.openUploadModal}/>;
+
         if(Table === "admin") return <ONSTable Data={this.state.Users} Title="Users" CreateFunction={this.createUser} Headers={userHeaders()} Pagination={true} Steps={20} pageChange={this.mockUsers} openModal={this.openSaveModal}/>
     };
 
