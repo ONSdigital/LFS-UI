@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {ONSPanel} from '../components/ONSPanel';
 import {ONSButton} from '../components/ONSButton';
-import {getMonth, monthNumberToString, qList} from '../utilities/Common_Functions';
-import {TableWithModal} from '../components/TableWithModal'
+import {getMonth, getStatusStyle, monthNumberToString, qList} from '../utilities/Common_Functions';
 import {ONSMetadata} from '../components/ONSMetadata';
 import {getBatchData} from "../utilities/http";
 import {GenericNotFound} from "./GenericNotFound";
+import {ONSStatus} from "../components/ONSStatus";
+import {ONSAccordionTable} from "../components/ONSAccordionTable";
+import {batchHeaders} from "../utilities/Headers";
 
 interface State {
     UploadsData: Data | null
@@ -13,7 +15,7 @@ interface State {
     batchType: string,
     year: string,
     period: string,
-    returnedData: Data | null,
+    returnedData: [] | null,
     metadata: Array<MetaDataListItem>,
     batchFound: boolean
 }
@@ -56,6 +58,11 @@ export class View_Monthly_Batch extends Component <{}, State> {
         this.updateMetaDataList()
     }
 
+    goToUploadPage = (row: any) => {
+        // surveyUpload/gb/18/2014
+        // window.location.href = "/surveyUpload/" + row. "/" + row.year + "/" + row.period
+    };
+
     getUploads = () => {
         getBatchData(this.state.batchType, this.state.year, this.state.period)
             .then(r => {
@@ -63,7 +70,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
                     // Batch does not exist, load not found page
                     this.setState({batchFound: false})
                 }
-                this.setState({returnedData: {Rows: r, Count: r.length}});
+                this.setState({returnedData: r});
                 this.updateMetaDataList()
             })
             .catch(error => {
@@ -98,6 +105,36 @@ export class View_Monthly_Batch extends Component <{}, State> {
         this.setState({metadata: this.formatMetaData()})
     };
 
+    BatchUploadTableRow = (rowData: any) => {
+        let row = rowData.row;
+        console.log(row)
+        return (
+            <>
+                <td className="table__cell ">
+                    {row.type}
+                </td>
+                <td className="table__cell ">
+                    {row.type === "NI" ?
+                        monthNumberToString(+row.month)
+                        :
+                        "Week " + row.week
+                    }
+                </td>
+                <td className="table__cell ">
+
+                    <ONSStatus label={getStatusStyle(+row.status).text} small={false}
+                               status={getStatusStyle(+row.status).colour}/>
+                </td>
+                <td className="table__cell ">
+                    <ONSButton label={"Summary"} primary={false} small={true}/>
+                </td>
+                <td className="table__cell ">
+                    <ONSButton label={"Upload"} primary={false} small={true} onClick={(() => this.goToUploadPage(row))}/>
+                </td>
+            </>
+        )
+    };
+
     render() {
         return (
             <div className="container">
@@ -113,7 +150,8 @@ export class View_Monthly_Batch extends Component <{}, State> {
                             </div>
                             <br/>
                             <table>
-                                <TableWithModal table="batch" returnedData={this.state.returnedData}/>
+                                {/*<TableWithModal table="batch" returnedData={this.state.returnedData}/>*/}
+                                <ONSAccordionTable Headers={batchHeaders} data={this.state.returnedData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
                                 <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
                                     <p>Every File Must be Uploaded to Run Process</p>
                                 </ONSPanel>

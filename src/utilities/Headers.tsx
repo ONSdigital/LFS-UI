@@ -5,18 +5,18 @@ const batchHeaders =
             filter: false,
             order: true
         }, {
-            label: "Month",
+            label: "Period",
             column_name: "month",
-            filter: false,
-            order: false
-        }, {
-            label: "Week",
-            column_name: "week",
             filter: false,
             order: false
         }, {
             label: "Status",
             column_name: "status",
+            filter: false,
+            order: false
+        }, {
+            label: "",
+            column_name: "button",
             filter: false,
             order: false
         }, {
