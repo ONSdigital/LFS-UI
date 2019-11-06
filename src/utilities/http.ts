@@ -1,13 +1,12 @@
-function postFile(lfsfile: any, fileName: string, fileType: string, fileSource: string, survey: string): Promise<any> {
+function postSurveyFile(lfsfile: any, fileName: string, fileType: string, survey: string, period: string, year: string): Promise<any> {
 
     let formData = new FormData();
     formData.append("lfsFile", lfsfile[0]);
     formData.append("fileName", fileName);
-    formData.append("fileType", fileType);
-    formData.append("fileSource", fileSource);
+    formData.append("fileSource", survey);
 
     return new Promise((resolve: any, reject: any) => {
-        fetch("/import/survey/" + survey, {
+        fetch("/imports/" + fileType + "/" + survey + "/" +  period + "/" +  year, {
             "method": "POST",
             "body": formData,
         })
@@ -86,4 +85,4 @@ function getAllBatches(): Promise<any> {
     })
 }
 
-export {postFile, createNewBatch, getAllBatches, getBatchData}
+export {postSurveyFile, createNewBatch, getAllBatches, getBatchData}

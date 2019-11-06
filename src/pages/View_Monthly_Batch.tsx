@@ -15,7 +15,8 @@ interface State {
     period: string,
     returnedData: Data | null,
     metadata: Array<MetaDataListItem>,
-    batchFound: boolean
+    batchFound: boolean,
+    summaryOpen: boolean
 }
 
 interface MetaDataListItem {
@@ -50,7 +51,8 @@ export class View_Monthly_Batch extends Component <{}, State> {
             period: props.match.params.period,
             returnedData: null,
             metadata: [],
-            batchFound: true
+            batchFound: true,
+            summaryOpen: (props.match.params.summary)
         };
         this.getUploads();
         this.updateMetaDataList()
@@ -113,7 +115,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
                             </div>
                             <br/>
                             <table>
-                                <TableWithModal table="batch" returnedData={this.state.returnedData}/>
+                                <TableWithModal table="batch" returnedData={this.state.returnedData} summaryOpen={this.state.summaryOpen}/>
                                 <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
                                     <p>Every File Must be Uploaded to Run Process</p>
                                 </ONSPanel>

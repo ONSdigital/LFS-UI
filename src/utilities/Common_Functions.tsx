@@ -109,4 +109,8 @@ function getStatusStyle(statusNo: number) {
     return status
 }
 
-export{weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle}
+function toUpperCaseFirstChar(string: string){
+    return string.charAt(0).toUpperCase() + string.slice(1, string.length)
+}
+
+export{weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar}
