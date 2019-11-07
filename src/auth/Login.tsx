@@ -4,6 +4,7 @@ import {ONSTextInput} from '../components/ONSTextInput';
 import {loginUser} from './auth';
 import {Cookies} from "react-cookie";
 import {ONSPanel} from "../components/ONSPanel";
+import {ONSPasswordInput} from "../components/ONSPasswordInput";
 
 
 interface Props {
@@ -94,10 +95,9 @@ export class Login extends Component <Props, State> {
                     <form id={'loginForm'} onSubmit={this.handleSubmit}>
 
                         <div style={{maxWidth: "351px"}}>
-                            <ONSTextInput ref="username" autoFocus={true} label="Username"
+                            <ONSTextInput ref="username" autoFocus={true} label="Username" autoComplete={"username"}
                                           value={this.state.username} onChange={this.handleUserName}/>
-                            <ONSTextInput ref="password" label="Password" password={true}
-                                          value={this.state.password} onChange={this.handlePassword}/>
+                            <ONSPasswordInput onChange={this.handlePassword}/>
                             <ONSSubmitButton label="Log In" primary={true}
                                              small={false}/>
                         </div>
