@@ -1,10 +1,14 @@
 import React, {Component} from "react";
 import {ONSUpload} from "../components/ONSUpload";
 import {ONSButton} from "../components/ONSButton";
-import {postSurveyFile} from "../utilities/http";
+import {getSurveyAudit, postSurveyFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONSPanel";
 import {ONSMetadata} from "../components/ONSMetadata";
-import {monthNumberToString} from "../utilities/Common_Functions";
+import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
+import {ONSAccordionTable} from "../components/ONSAccordionTable";
+import {ONSStatus} from "../components/ONSStatus";
+import {surveyUploadHistory} from "../utilities/Headers";
+import moment from "moment";
 
 interface Props {
     period: string,
@@ -27,6 +31,7 @@ interface State {
     year: string
     week: string
     month: string
+    uploadHistory: []
 }
 
 export class SurveyFileUpload extends Component <Props, State> {
@@ -45,10 +50,28 @@ export class SurveyFileUpload extends Component <Props, State> {
                 label: '',
                 visible: false,
                 status: ''
-            }
+            },
+            uploadHistory: []
         };
         this.handleFileChange = this.handleFileChange.bind(this);
     }
+
+    componentDidMount(): void {
+        this.getUploadHistory()
+    }
+
+    getUploadHistory = () => {
+        getSurveyAudit(this.state.surveyType, this.state.year, (this.state.surveyType === 'gb' ? this.state.week : this.state.month))
+            .then(r => {
+                if (r !== undefined) {
+                    // Batch does not exist, load not found page
+                    this.setState({uploadHistory: r})
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
 
 
     uploadFile = () => {
@@ -101,7 +124,7 @@ export class SurveyFileUpload extends Component <Props, State> {
     };
 
     returnToManageBatch = (uploaded: boolean) => {
-        window.location.href = "/View_Monthly_Batch/monthly/" + this.state.year + "/" + this.state.month + (!uploaded ?  "/true" : "")
+        window.location.href = "/View_Monthly_Batch/monthly/" + this.state.year + "/" + this.state.month + (!uploaded ? "/true" : "")
     };
 
     formatMetaData() {
@@ -135,11 +158,32 @@ export class SurveyFileUpload extends Component <Props, State> {
         this.setState({fileOne: selectorFiles})
     };
 
+    UploadHistoryRow = (rowData: any) => {
+        let row = rowData.row;
+        return (
+            <>
+                <td className="table__cell ">
+                    {moment(new Date(row.referenceDate)).format('L H:mm')}
+                </td>
+                <td className="table__cell ">
+                    <ONSStatus label={row.message} small={false}
+                               status={getStatusStyle(+row.status).colour}/>
+                </td>
+            </>
+        )
+    };
+
     render() {
         return (
             <div className="container">
                 <h2>Import Survey</h2>
                 <ONSMetadata List={this.formatMetaData()}/>
+                <div style={{width: "55%"}}>
+                    <h4>Previous imports </h4>
+                    <ONSAccordionTable Headers={surveyUploadHistory} data={this.state.uploadHistory} Row={this.UploadHistoryRow}
+                                       expandedRowEnabled={false}
+                                       noDataMessage={"Survey has not been previously imported"}/>
+                </div>
                 <form>
                     <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
                               hidden={!this.state.panel.visible}>
