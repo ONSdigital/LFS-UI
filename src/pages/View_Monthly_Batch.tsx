@@ -143,17 +143,15 @@ export class View_Monthly_Batch extends Component <{}, State> {
                                 <header className="header header--internal">
                                     <text style={{fontWeight: "bold"}}> Manage Monthly Uploads</text>
                                 </header>
-                                <br/>
                                 <ONSMetadata List={this.state.metadata}/>
                             </div>
-                            <br/>
-                            <table>
+                            <div style={{width: "55%"}}>
                                 <ONSAccordionTable Headers={batchHeaders} data={this.state.returnedData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
                                 <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
                                     <p>Every File Must be Uploaded to Run Process</p>
                                 </ONSPanel>
                                 <br/>
-                            </table>
+                            </div>
                             <div>
                                 <ONSButton label="Run Monthly Process" small={false} primary={true} marginRight={10}/>
                                 {(() => {

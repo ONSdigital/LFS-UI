@@ -4,7 +4,7 @@ import update from 'immutability-helper';
 
 interface Props {
     Headers: Header[],
-    data: [] | null
+    data: any[] | null
     Row: any,
     expandedRowEnabled: boolean
     expandedRow?: any,
@@ -64,8 +64,8 @@ export class ONSAccordionTable extends Component <Props, State> {
                     <thead className="table__head">
                     <tr className="table__row">
                         {
-                            this.props.Headers.map((header: any) =>
-                                    <th scope="col" className="table__header ">{header.label}</th>
+                            this.props.Headers.map((header: any, index: number) =>
+                                    <th key={index} scope="col" className="table__header ">{header.label}</th>
                             )
                         }
                     </tr>
@@ -74,7 +74,7 @@ export class ONSAccordionTable extends Component <Props, State> {
                     {
                         this.props.data !== null && this.props.data.length !== 0 ?
                             this.state.data.map((row: DashboardTableRow, index: number) =>
-                                <Fragment key={row.id}>
+                                <Fragment key={(this.props.expandedRowEnabled ? row.id : index)}>
                                     <tr className="table__row selectableTableRow"
                                         onClick={((e) => this.handleClickOnRow(e, row, index))}
                                         tabIndex={0}
