@@ -7,7 +7,7 @@ interface Props {
     small: boolean,
     field?: boolean,
     loading?: boolean,
-    marginRight?: any,
+    marginRight?: number,
     onClick?: (...props: any[]) => void
 }
 

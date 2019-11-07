@@ -4,6 +4,7 @@ import {ONSButton} from "../components/ONSButton";
 import {postImportFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONSPanel";
 import { ONSSelect } from "../components/ONSSelect";
+import { Address } from "./Address";
 
 interface Props{
 }
@@ -15,6 +16,7 @@ interface State{
     uploading: boolean
     import: string
     importHidden: boolean
+    statusHidden: boolean
     fileType: string
     redirect: string
     //check to see if functionality is built and whether to send the request
@@ -33,6 +35,7 @@ export class Import extends Component <Props, State> {
             uploading: false,
             import: "",
             importHidden: true,
+            statusHidden: true,
             fileType: "",
             redirect: "",
             built: false
@@ -60,7 +63,7 @@ export class Import extends Component <Props, State> {
                     this.setErrorMessage(response.errorMessage.toString());
                 }else {
                     console.log("window change")
-                    window.location.href = this.state.redirect
+                    this.setState({importHidden: true, statusHidden: false})
                 }
                 this.setState({
                     uploading: false,
@@ -73,7 +76,7 @@ export class Import extends Component <Props, State> {
                     uploading: false,
                 });
             });    
-        }else window.location.href = this.state.redirect
+        }
     };
 
 
@@ -90,13 +93,13 @@ export class Import extends Component <Props, State> {
     };
 
     handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        this.setState({import: e.target.value, importHidden: false, fileType: this.filetype(e.target.value)})
+        this.setState({import: e.target.value, importHidden: false, fileType: this.filetype(e.target.value), statusHidden: true})
     }
 
     filetype = (file: string) => {
         let type = ""
         switch (file){
-            case "address": type = '.csv'; this.setState({redirect: "", built: true}); break;
+            case "address": type = '.csv'; this.setState({redirect: "/Address", built: true}); break;
             case "Bulk Ammendments": type = ''; this.setState({redirect: ""}); break;
             case "Design Weights": type = ''; this.setState({redirect: ""}); break;
             case "Geographical Classifications": this.setState({redirect: ""}); type = ''; break;
@@ -134,6 +137,7 @@ export class Import extends Component <Props, State> {
                         <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false} loading={this.state.uploading}/>
                     </div>
                 </form>
+                <Address import={this.state.import} hidden={this.state.statusHidden}></Address>
             </div>
         )
     }

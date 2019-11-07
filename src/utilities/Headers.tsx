@@ -26,8 +26,8 @@ const batchHeaders =
             order: false
         }]
 
-function uploadHeaders() {
-    return (
+const uploadHeaders =
+     
         [{
             label: "Step",
             column_name: "step",
@@ -43,8 +43,7 @@ function uploadHeaders() {
             column_name: "status",
             filter: false,
             order: false
-        }])
-}
+        }]
 
 const dashboardHeaders =
     [{
