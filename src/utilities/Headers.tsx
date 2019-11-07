@@ -24,7 +24,7 @@ const batchHeaders =
             column_name: "button",
             filter: false,
             order: false
-        }]
+        }];
 
 function uploadHeaders() {
     return (
@@ -75,6 +75,19 @@ const dashboardHeaders =
     }
     ];
 
+const surveyUploadHistory =
+    [{
+        label: "Import Date",
+        column_name: "Date",
+        filter: false,
+        order: true
+    },{
+        label: "Status",
+        column_name: "Status",
+        filter: false,
+        order: true
+    }
+    ];
 
 function userHeaders() {
     return (
@@ -122,4 +135,4 @@ function roleHeaders() {
     )
 }
 
-export {batchHeaders, uploadHeaders, userHeaders, roleHeaders, dashboardHeaders}
+export {batchHeaders, surveyUploadHistory, uploadHeaders, userHeaders, roleHeaders, dashboardHeaders}

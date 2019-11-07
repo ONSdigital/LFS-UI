@@ -69,7 +69,6 @@ function createNewBatch(batchType: string, year: string, period: string, descrip
 }
 
 function getBatchData(batchType: string, year: string, period: string): Promise<any> {
-
     let url = "/batches/display/" + batchType + "/" + year + (batchType !== 'annually' ? "/" + period : "");
 
     return new Promise((resolve: any, reject: any) => {
@@ -107,4 +106,24 @@ function getAllBatches(): Promise<any> {
     })
 }
 
-export {postSurveyFile, postImportFile, createNewBatch, getAllBatches, getBatchData}
+function getSurveyAudit(survey: string, year: string, period: string): Promise<any> {
+    let url = "/audits/" + (survey === 'gb' ? 'week' : 'month') + "/" + year + "/" + period;
+
+    return new Promise((resolve: any, reject: any) => {
+        fetch(url, {
+            "method": "GET"
+        })
+            .then(response => {
+                console.log("Response");
+                console.log(response);
+                resolve(response.json());
+            })
+            .catch(err => {
+                console.log("Error");
+                console.log(err);
+                reject(err)
+            });
+    })
+}
+
+export {postSurveyFile, postImportFile, createNewBatch, getAllBatches, getBatchData, getSurveyAudit}
