@@ -188,7 +188,7 @@ export class TableWithModal extends Component <Props, State> {
                     shouldReturnFocusAfterClose={true}
                     ariaHideApp={false}>
                     <div>
-                        <ONSTable Data={this.state.UploadStatusData} Title="File Upload Status 2" Headers={uploadHeaders()} Pagination={false}/>
+                        <ONSTable Data={this.state.UploadStatusData} Title="File Upload Status 2" Headers={uploadHeaders} Pagination={false}/>
                         <ONSButton label="Export / View Report" primary={false} small={false}/>
                     </div>
                     <br/>

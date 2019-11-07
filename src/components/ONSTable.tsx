@@ -16,7 +16,7 @@ interface Props {
     Create?: boolean,
     CreateFunction?: (...props: any[]) => void
     openModal?: any,
-    openUploadModel?: any
+    openUploadmodal?: any
 }
 
 interface Header {
@@ -121,7 +121,7 @@ export class ONSTable extends Component <Props, State> {
             return (<ONSButton label="Summary" small={true} primary={false} onClick={this.props.openModal}/>)
         }
         if (column === "button2") {
-            return (<ONSButton label="Upload" small={true} primary={false} onClick={this.props.openUploadModel}/>)
+            return (<ONSButton label="Upload" small={true} primary={false} onClick={this.props.openUploadmodal}/>)
         }
         if (column === "status") {
             if (typeof (x) === "number") {

@@ -90,16 +90,14 @@ export class Login extends Component <Props, State> {
                 <ONSPanel label={this.state.panel.label} hidden={!this.state.panel.visible} status={this.state.panel.status}>
                     <p>{this.state.panel.label}</p>
                 </ONSPanel>
-                <br/>
                 <section>
                     <form id={'loginForm'} onSubmit={this.handleSubmit}>
 
                         <div style={{maxWidth: "351px"}}>
                             <ONSTextInput ref="username" autoFocus={true} label="Username" autoComplete={"username"}
                                           value={this.state.username} onChange={this.handleUserName}/>
-                            <ONSPasswordInput onChange={this.handlePassword}/>
-                            <ONSSubmitButton label="Log In" primary={true}
-                                             small={false}/>
+                            <ONSPasswordInput onChange={this.handlePassword}  marginTop={15}/>
+                            <ONSSubmitButton label="Log In" primary={true} small={false}/>
                         </div>
                     </form>
                 </section>
