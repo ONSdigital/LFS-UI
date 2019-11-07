@@ -1,7 +1,7 @@
 ﻿import React, {ChangeEvent, Component} from 'react';
 import {DashboardTable} from "../components/DashboardTable";
-import {ONSRadioButton} from "../components/ONSRadioButton";
-import {ONSCheckbox} from "../components/ONSCheckbox";
+import {ONSRadioButton} from "../components/ONS_DesignSystem/ONSRadioButton";
+import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
 
 const MONTHLY_BATCH = 'Monthly';

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { ONSPanel } from '../components/ONSPanel';
+import React, {Component} from 'react';
+import {ONSPanel} from '../components/ONS_DesignSystem/ONSPanel';
 
 export class Unauthorized extends Component {
   displayName = Unauthorized.name

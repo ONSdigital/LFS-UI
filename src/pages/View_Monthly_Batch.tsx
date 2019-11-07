@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {ONSPanel} from '../components/ONSPanel';
-import {ONSButton} from '../components/ONSButton';
+import {ONSPanel} from '../components/ONS_DesignSystem/ONSPanel';
+import {ONSButton} from '../components/ONS_DesignSystem/ONSButton';
 import {getMonth, getStatusStyle, monthNumberToString, qList} from '../utilities/Common_Functions';
-import {ONSMetadata} from '../components/ONSMetadata';
+import {ONSMetadata} from '../components/ONS_DesignSystem/ONSMetadata';
 import {getBatchData} from "../utilities/http";
 import {GenericNotFound} from "./GenericNotFound";
-import {ONSStatus} from "../components/ONSStatus";
-import {ONSAccordionTable} from "../components/ONSAccordionTable";
+import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
+import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {batchHeaders} from "../utilities/Headers";
 
 interface State {

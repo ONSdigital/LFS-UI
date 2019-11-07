@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { ONSInDevBanner } from './ONSInDevBanner';
+import React, {Component} from 'react';
+import {ONSInDevBanner} from './ONS_DesignSystem/ONSInDevBanner';
 
 export class Footer extends Component {
   displayName = Footer.name;
