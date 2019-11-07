@@ -1,10 +1,10 @@
-import React, {Component, ChangeEvent} from "react";
-import {ONSUpload} from "../components/ONSUpload";
-import {ONSButton} from "../components/ONSButton";
+import React, {ChangeEvent, Component} from "react";
+import {ONSUpload} from "../components/ONS_DesignSystem/ONSUpload";
+import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {postImportFile} from "../utilities/http";
-import {ONSPanel} from "../components/ONSPanel";
-import { ONSSelect } from "../components/ONSSelect";
-import { Address } from "./Address";
+import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
+import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
+import {Address} from "./Address";
 
 interface Props{
 }

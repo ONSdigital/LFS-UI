@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 interface Props{
   onClick: (e: "Asc" | "Desc" | null) => void

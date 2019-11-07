@@ -1,10 +1,10 @@
-﻿import {ONSSubmitButton} from "../components/ONSSubmitButton";
+﻿import {ONSSubmitButton} from "../components/ONS_DesignSystem/ONSSubmitButton";
 import React, {ChangeEvent, Component} from 'react';
-import {ONSTextInput} from '../components/ONSTextInput';
+import {ONSTextInput} from '../components/ONS_DesignSystem/ONSTextInput';
 import {loginUser} from './auth';
 import {Cookies} from "react-cookie";
-import {ONSPanel} from "../components/ONSPanel";
-import {ONSPasswordInput} from "../components/ONSPasswordInput";
+import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
+import {ONSPasswordInput} from "../components/ONS_DesignSystem/ONSPasswordInput";
 
 
 interface Props {

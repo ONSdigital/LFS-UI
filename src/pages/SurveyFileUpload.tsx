@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import {ONSUpload} from "../components/ONSUpload";
-import {ONSButton} from "../components/ONSButton";
+import {ONSUpload} from "../components/ONS_DesignSystem/ONSUpload";
+import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {getSurveyAudit, postSurveyFile} from "../utilities/http";
-import {ONSPanel} from "../components/ONSPanel";
-import {ONSMetadata} from "../components/ONSMetadata";
+import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
+import {ONSMetadata} from "../components/ONS_DesignSystem/ONSMetadata";
 import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
-import {ONSAccordionTable} from "../components/ONSAccordionTable";
-import {ONSStatus} from "../components/ONSStatus";
+import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
+import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {surveyUploadHistory} from "../utilities/Headers";
 import moment from "moment";
 

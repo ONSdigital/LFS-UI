@@ -1,5 +1,5 @@
-﻿import React, { Component } from 'react';
-import { ONSTable } from '../components/ONSTable';
+﻿import React, {Component} from 'react';
+import {ONSTable} from '../components/ONS_DesignSystem/ONSTable';
 
 interface State {
   Outputs: Data | null,

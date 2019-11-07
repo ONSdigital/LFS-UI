@@ -1,4 +1,4 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, {ChangeEvent, Component} from 'react';
 
 interface Props{
   label?: string,

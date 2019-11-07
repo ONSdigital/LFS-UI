@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+
 interface Props{
   steps : number,
   count : number,

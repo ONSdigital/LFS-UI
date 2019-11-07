@@ -1,8 +1,8 @@
 import React, {ChangeEvent, Component} from "react";
 import ReactModal from 'react-modal';
-import {ONSTextInput} from './ONSTextInput';
-import {ONSButton} from './ONSButton';
-import {ONSTable} from './ONSTable';
+import {ONSTextInput} from './ONS_DesignSystem/ONSTextInput';
+import {ONSButton} from './ONS_DesignSystem/ONSButton';
+import {ONSTable} from './ONS_DesignSystem/ONSTable';
 import {batchHeaders, uploadHeaders, userHeaders} from '../utilities/Headers'
 
 interface Props {

@@ -1,9 +1,9 @@
 import React, {ChangeEvent, Component} from "react";
-import {ONSSelect} from "../components/ONSSelect";
-import {ONSSubmitButton} from "../components/ONSSubmitButton"
+import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
+import {ONSSubmitButton} from "../components/ONS_DesignSystem/ONSSubmitButton"
 import {batches, monthNames, months, quarters, years} from "../utilities/Common_Functions";
 import {createNewBatch} from "../utilities/http";
-import {ONSPanel} from "../components/ONSPanel";
+import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 
 interface Panel {
     label: string,

@@ -1,9 +1,8 @@
 import React, {Component} from "react";
-import {ONSAccordionTable} from "../components/ONSAccordionTable";
+import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {uploadHeaders} from "../utilities/Headers"
-import {ONSStatus} from "../components/ONSStatus";
-import {ONSButton} from '../components/ONSButton';
-import {getMonth, getStatusStyle, monthNumberToString, qList} from '../utilities/Common_Functions';
+import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
+import {getStatusStyle} from '../utilities/Common_Functions';
 
 interface Props {
     import: String

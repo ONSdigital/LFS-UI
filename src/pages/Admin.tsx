@@ -1,7 +1,7 @@
-﻿import React, { Component } from 'react';
-import { ONSTable } from '../components/ONSTable';
-import { TableWithModal } from '../components/TableWithModal'
-import { roleHeaders } from '../utilities/Headers'
+﻿import React, {Component} from 'react';
+import {ONSTable} from '../components/ONS_DesignSystem/ONSTable';
+import {TableWithModal} from '../components/TableWithModal'
+import {roleHeaders} from '../utilities/Headers'
 
 interface State {
   UserData: Data | null

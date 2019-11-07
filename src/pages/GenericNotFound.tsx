@@ -1,5 +1,5 @@
 ﻿import React, {Component} from 'react';
-import {ONSButton} from "../components/ONSButton";
+import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 
 interface Props {
     label?: string
