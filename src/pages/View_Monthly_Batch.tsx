@@ -141,7 +141,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
                         <>
                             <div>
                                 <header className="header header--internal">
-                                    <text style={{fontWeight: "bold"}}> Manage Monthly Uploads</text>
+                                    <p style={{fontWeight: "bold"}}> Manage Monthly Uploads</p>
                                 </header>
                                 <ONSMetadata List={this.state.metadata}/>
                             </div>
