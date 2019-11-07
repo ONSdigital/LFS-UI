@@ -81,9 +81,6 @@ export class View_Monthly_Batch extends Component <{}, State> {
     formatMetaData() {
         return (
             [{
-                L: "Batch_ID",
-                R: "This is no longer a thing ",
-            }, {
                 L: "Year",
                 R: this.state.year.toString(),
             }, {
@@ -92,9 +89,6 @@ export class View_Monthly_Batch extends Component <{}, State> {
             }, {
                 L: "Status",
                 R: "",
-            }, {
-                L: "Description",
-                R: "A Batch",
             }
             ]
         )
