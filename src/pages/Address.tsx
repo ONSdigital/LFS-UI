@@ -3,6 +3,7 @@ import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTabl
 import {uploadHeaders} from "../utilities/Headers"
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {getStatusStyle} from '../utilities/Common_Functions';
+import {ONSProgressBar} from "../components/ONS_DesignSystem/ONSProgressBar";
 
 interface Props {
     import: String
@@ -10,27 +11,63 @@ interface Props {
 }
 
 interface State {
-    UploadStatusData: [] | null
+    uploadStatusData: UploadStatusData[] | null
+    uploadStatusCode: number
+    uploadPercentage: number
+}
+
+interface UploadStatusData {
+    step: string
+    date: string
+    status: string
 }
 
 export class Address extends Component <Props, State> {
     constructor(props: Props) {
-        super(props)
-        this.state = ({UploadStatusData: null})
+        super(props);
+        this.state = (
+            {
+                uploadStatusData:  [{
+                    step: 'Uploading',
+                    date: new Date().toDateString(),
+                    status: "Starting Import"
+                }],
+                uploadStatusCode: 0,
+                uploadPercentage: 50
+            })
 
     }
 
-    uploadStatusData = 
+    randomPercentage = () => {
+        setTimeout( () => {
+            let number = Math.floor((Math.random() * 100) + 1);
+            this.setState({
+                uploadStatusData:  [{
+                    step: 'Uploading',
+                    date: new Date().toDateString(),
+                    status: "Importing: " + number
+                }],
+                uploadPercentage: number
+            })
+        }, 1000);
+
+    };
+
+    componentDidMount(): void {
+        this.randomPercentage()
+    }
+
+    uploadStatusData =
         [{
             "step": "Upload",
-            "date" : "2019/08 12:44",
+            "date": "2019/08 12:44",
             "status": "",
         }]
 
     goToUploadPage = (row: any) => {
         window.location.href = "/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year
     };
-    
+
     BatchUploadTableRow = (rowData: any) => {
         let row = rowData.row;
         return (
@@ -42,28 +79,31 @@ export class Address extends Component <Props, State> {
                     {row.date}
                 </td>
                 <td className="table__cell ">
-                    <ONSStatus label={getStatusStyle(+row.status).text} small={false}
-                                status={getStatusStyle(+row.status).colour}/>
+                    <ONSStatus label={row.status} small={false}
+                               status={getStatusStyle(this.state.uploadStatusCode).colour}/>
                 </td>
             </>
         )
     };
-    
+
     addressHidden = () => {
         console.log(this.props.import)
-        if(this.props.import === "address") return this.props.hidden
+        if (this.props.import === "address") return this.props.hidden;
         else return true
     }
 
     render() {
         return (
-        <div hidden={this.addressHidden()}>
-            {/* <br></br> */}
-            {/* <h3>Address Upload</h3> */}
-            <table>
-                 <ONSAccordionTable Headers={uploadHeaders} data={this.uploadStatusData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
-            </table>
-        </div>
+            <div hidden={!this.addressHidden()}>
+                {/* <br></br> */}
+                {/* <h3>Address Upload</h3> */}
+                <table>
+                    <ONSAccordionTable Headers={uploadHeaders} data={this.state.uploadStatusData}
+                                       Row={this.BatchUploadTableRow} expandedRowEnabled={false}
+                                       noDataMessage={"No Data"}/>
+                </table>
+                <ONSProgressBar statusCode={this.state.uploadStatusCode} percentage={this.state.uploadPercentage}/>
+            </div>
         )
     }
 }

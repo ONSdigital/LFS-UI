@@ -17,7 +17,6 @@ export const ONSProgressBar = (props: Props) => (
             <div className={'progress-bar'}>
                 <Filler percentage={props.percentage} statusCode={props.statusCode}/>
             </div>
-            <p style={{float: "left"}}>{props.percentage}%</p>
         </p>
     </p>
 );

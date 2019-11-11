@@ -35,7 +35,7 @@ export class Import extends Component <Props, State> {
             uploading: false,
             import: "",
             importHidden: true,
-            statusHidden: true,
+            statusHidden: false,
             fileType: "",
             redirect: "",
             built: false
@@ -56,9 +56,9 @@ export class Import extends Component <Props, State> {
             postImportFile(this.state.fileOne, this.state.import, this.state.fileType)
                 .then(response => {
                     console.log(response);
-                    console.log(response.status);
+                    console.log(response.status)
                     if (response.status === '') {
-                        console.log("window no change");
+                        console.log("window no change")
 
                         this.setErrorMessage(response.errorMessage.toString());
                     } else {
@@ -97,9 +97,9 @@ export class Import extends Component <Props, State> {
             import: e.target.value,
             importHidden: false,
             fileType: this.filetype(e.target.value),
-            statusHidden: false
+            statusHidden: true
         })
-    };
+    }
 
     filetype = (file: string) => {
         let type = ""
@@ -134,7 +134,7 @@ export class Import extends Component <Props, State> {
                 break;
         }
         return type
-    };
+    }
 
     fileSelection = [
         //  {"label":"Bulk Ammendments", "value":"Bulk Ammendments"},
@@ -145,7 +145,7 @@ export class Import extends Component <Props, State> {
         //  ,
         //  {"label":"Population Estimates", "value":"Population Estimates"},
         //  {"label":"Variable Definitions", "value":"Variable Definitions"}
-    ];
+    ]
 
 
     render() {
