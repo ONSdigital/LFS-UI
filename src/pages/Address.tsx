@@ -27,7 +27,7 @@ export class Address extends Component <Props, State> {
         super(props);
         this.state = (
             {
-                uploadStatusData:  [{
+                uploadStatusData: [{
                     step: 'Uploading',
                     date: new Date().toDateString(),
                     status: "Starting Import"
@@ -39,10 +39,10 @@ export class Address extends Component <Props, State> {
     }
 
     randomPercentage = () => {
-        setTimeout( () => {
+        setTimeout(() => {
             let number = Math.floor((Math.random() * 100) + 1);
             this.setState({
-                uploadStatusData:  [{
+                uploadStatusData: [{
                     step: 'Uploading',
                     date: new Date().toDateString(),
                     status: "Importing: " + number

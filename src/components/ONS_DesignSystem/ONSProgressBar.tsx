@@ -22,5 +22,6 @@ export const ONSProgressBar = (props: Props) => (
 );
 
 const Filler = (props: FillerProps) => {
-    return <div className="progress-bar-filler" style={{width: `${props.percentage}%`, background: `${getStatusStyle(props.statusCode).hexCode}`}}/>
+    return <div className="progress-bar-filler"
+                style={{width: `${props.percentage}%`, background: `${getStatusStyle(props.statusCode).hexCode}`}}/>
 };
