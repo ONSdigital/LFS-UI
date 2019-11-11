@@ -57,13 +57,6 @@ export class Address extends Component <Props, State> {
         this.randomPercentage()
     }
 
-    uploadStatusData =
-        [{
-            "step": "Upload",
-            "date": "2019/08 12:44",
-            "status": "",
-        }]
-
     goToUploadPage = (row: any) => {
         window.location.href = "/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year
     };
@@ -87,10 +80,10 @@ export class Address extends Component <Props, State> {
     };
 
     addressHidden = () => {
-        console.log(this.props.import)
+        console.log(this.props.import);
         if (this.props.import === "address") return this.props.hidden;
         else return true
-    }
+    };
 
     render() {
         return (
