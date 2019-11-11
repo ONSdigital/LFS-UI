@@ -45,7 +45,7 @@ export class Address extends Component <Props, State> {
                 uploadStatusData: [{
                     step: 'Uploading',
                     date: new Date().toDateString(),
-                    status: "Importing: " + number
+                    status: "Importing: " + number + "%"
                 }],
                 uploadPercentage: number
             })
@@ -97,12 +97,14 @@ export class Address extends Component <Props, State> {
             <div hidden={!this.addressHidden()}>
                 {/* <br></br> */}
                 {/* <h3>Address Upload</h3> */}
-                <table>
-                    <ONSAccordionTable Headers={uploadHeaders} data={this.state.uploadStatusData}
-                                       Row={this.BatchUploadTableRow} expandedRowEnabled={false}
-                                       noDataMessage={"No Data"}/>
-                </table>
-                <ONSProgressBar statusCode={this.state.uploadStatusCode} percentage={this.state.uploadPercentage}/>
+                <div style={{width: "60%"}}>
+                    <table>
+                        <ONSAccordionTable Headers={uploadHeaders} data={this.state.uploadStatusData}
+                                           Row={this.BatchUploadTableRow} expandedRowEnabled={false}
+                                           noDataMessage={"No Data"}/>
+                    </table>
+                    <ONSProgressBar statusCode={this.state.uploadStatusCode} percentage={this.state.uploadPercentage}/>
+                </div>
             </div>
         )
     }
