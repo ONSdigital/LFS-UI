@@ -28,7 +28,7 @@ export class Address extends Component <Props, State> {
         this.state = (
             {
                 uploadStatusData: [{
-                    step: 'Uploading',
+                    step: 'Import',
                     date: new Date().toDateString(),
                     status: "Starting Import"
                 }],
@@ -43,7 +43,7 @@ export class Address extends Component <Props, State> {
             let number = Math.floor((Math.random() * 100) + 1);
             this.setState({
                 uploadStatusData: [{
-                    step: 'Uploading',
+                    step: 'Import',
                     date: new Date().toDateString(),
                     status: "Importing: " + number + "%"
                 }],
