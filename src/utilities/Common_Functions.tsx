@@ -95,16 +95,17 @@ const qList = ["January", "February", "April", "May", "July", "August", "October
 interface status {
     text: string,
     colour: string
+    hexCode: string
 }
 
 function getStatusStyle(statusNo: number) {
-    let status: status = {text: "", colour: 'info'};
+    let status: status = {text: "", colour: 'info', hexCode: '#222'};
     switch (statusNo){
-        case 0: status = {text: "Not Started", colour: 'info'}; break;
-        case 1: status = {text: "File Uploaded", colour: 'success'}; break;
-        case 2: status = {text: "File Reloaded", colour: 'success'}; break;
-        case 3: status = {text: "Upload Failed", colour: 'error'}; break;
-        case 4: status = {text: "Successful - Complete", colour: 'success'}; break;
+        case 0: status = {text: "Not Started", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 1: status = {text: "File Uploaded", colour: 'success', hexCode: '#12c864'}; break;
+        case 2: status = {text: "File Reloaded", colour: 'success', hexCode: '#12c864'}; break;
+        case 3: status = {text: "Upload Failed", colour: 'error', hexCode: '#fd112e'}; break;
+        case 4: status = {text: "Successful - Complete", colour: 'success', hexCode: '#12c864'}; break;
     }
     return status
 }
