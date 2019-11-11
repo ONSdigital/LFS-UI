@@ -36,7 +36,7 @@ caption{
   border-radius: 5px;
 }
 
-.selectableTableRow :focus {
+.selectableTableRow:focus {
   -webkit-box-shadow: 0 0 0 3px #fd0;
   box-shadow: 0 0 0 3px #fd0;
   outline: none;
@@ -47,6 +47,21 @@ caption{
   cursor: pointer
 }
 
+.progress-bar {
+  position: relative;
+  height: 20px;
+  width: 390px;
+  border-radius: 3px;
+  border: 1px solid #333;
+}
+
+.progress-bar-filler {
+  height: 100%;
+  border-radius: inherit;
+  transition: width .2s ease-in;
+}
+
+
 .fade:not(.show) {
   opacity: 1;
 }
@@ -55,19 +70,3 @@ caption{
   opacity: 0.5;
 }
 
-/*Progress Bar Styling*/
-.progress-bar {
-  position: relative;
-  width: 350px;
-  height: 20px;
-  z-index: -1;
-  border: 1px solid #222;
-  border-radius: 2px;
-
-}
-
-.progress-bar-filler {
-  height: 102%;
-  border-radius: inherit;
-  transition: width .2s ease-in;
-}
