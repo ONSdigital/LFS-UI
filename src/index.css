@@ -36,11 +36,15 @@ caption{
   border-radius: 5px;
 }
 
-.selectableTableRow:focus {
+.selectableTableRow :focus {
   -webkit-box-shadow: 0 0 0 3px #fd0;
   box-shadow: 0 0 0 3px #fd0;
   outline: none;
   padding: 0 0 0 1.85rem;
+}
+
+.itemCursorHover :hover {
+  cursor: pointer
 }
 
 .fade:not(.show) {
@@ -51,3 +55,19 @@ caption{
   opacity: 0.5;
 }
 
+/*Progress Bar Styling*/
+.progress-bar {
+  position: relative;
+  width: 350px;
+  height: 20px;
+  z-index: -1;
+  border: 1px solid #222;
+  border-radius: 2px;
+
+}
+
+.progress-bar-filler {
+  height: 102%;
+  border-radius: inherit;
+  transition: width .2s ease-in;
+}
