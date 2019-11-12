@@ -80,11 +80,13 @@ export class FileUploadProgress extends Component <Props, State> {
     handleWSOnClose = (evt: Event) => {
         console.log("WebSocket Closed");
         console.log(evt);
+        clearInterval(this.state.websocketID);
     };
 
     handleWSOnError = (evt: Event) => {
         console.log("WebSocket Error");
         console.log(evt);
+        clearInterval(this.state.websocketID);
     };
 
     handleWSOnMessage = (evt: any) => {
