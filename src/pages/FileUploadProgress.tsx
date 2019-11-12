@@ -158,11 +158,9 @@ export class FileUploadProgress extends Component <Props, State> {
                 {/* <br></br> */}
                 {/* <h3>Address Upload</h3> */}
                 <div style={{width: "55%"}}>
-                    <table>
                         <ONSAccordionTable Headers={uploadHeaders} data={this.state.uploadStatusData}
                                            Row={this.BatchUploadTableRow} expandedRowEnabled={false}
                                            noDataMessage={"No Data"}/>
-                    </table>
                     <ONSProgressBar statusCode={this.state.uploadStatusCode} percentage={this.state.uploadPercentage}/>
                 </div>
             </div>
