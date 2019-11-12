@@ -50,7 +50,6 @@ caption{
 .progress-bar {
   position: relative;
   height: 20px;
-  width: 390px;
   border-radius: 3px;
   border: 1px solid #333;
 }

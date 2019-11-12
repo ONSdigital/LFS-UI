@@ -1,49 +1,54 @@
 const batchHeaders =
-        [{
-            label: "Source",
-            column_name: "type",
-            filter: false,
-            order: true
-        }, {
-            label: "Period",
-            column_name: "month",
-            filter: false,
-            order: false
-        }, {
-            label: "Status",
-            column_name: "status",
-            filter: false,
-            order: false
-        }, {
-            label: "",
-            column_name: "button",
-            filter: false,
-            order: false
-        }, {
-            label: "",
-            column_name: "button",
-            filter: false,
-            order: false
-        }];
+    [{
+        label: "Source",
+        column_name: "type",
+        filter: false,
+        order: true
+    }, {
+        label: "Period",
+        column_name: "month",
+        filter: false,
+        order: false
+    }, {
+        label: "Status",
+        column_name: "status",
+        filter: false,
+        order: false
+    }, {
+        label: "",
+        column_name: "button",
+        filter: false,
+        order: false
+    }, {
+        label: "",
+        column_name: "button",
+        filter: false,
+        order: false
+    }];
 
 const uploadHeaders =
-     
-        [{
-            label: "Step",
-            column_name: "step",
-            filter: false,
-            order: true
-        }, {
-            label: "Date",
-            column_name: "date",
-            filter: false,
-            order: false
-        }, {
-            label: "Status",
-            column_name: "status",
-            filter: false,
-            order: false
-        }]
+
+    [{
+        label: "File Name ",
+        column_name: "fileName",
+        filter: false,
+        order: true
+    }, {
+        label: "Step",
+        column_name: "step",
+        filter: false,
+        order: true
+    }, {
+        label: "Date",
+        column_name: "date",
+        filter: false,
+        order: false
+    }, {
+        label: "Status",
+        column_name: "status",
+        filter: false,
+        order: false
+    }]
 
 const dashboardHeaders =
     [{
@@ -51,7 +56,7 @@ const dashboardHeaders =
         column_name: "BatchID",
         filter: false,
         order: true
-    },{
+    }, {
         label: "Batch Type",
         column_name: "Batch Type",
         filter: false,
@@ -80,7 +85,7 @@ const surveyUploadHistory =
         column_name: "Date",
         filter: false,
         order: true
-    },{
+    }, {
         label: "Status",
         column_name: "Status",
         filter: false,

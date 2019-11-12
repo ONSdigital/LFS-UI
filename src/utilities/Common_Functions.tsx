@@ -98,6 +98,18 @@ interface status {
     hexCode: string
 }
 
+function getUploadStatusStyle(statusNo: number) {
+    let status: status = {text: "", colour: 'info', hexCode: '#222'};
+    switch (statusNo){
+        case 0: status = {text: "Not Started", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 1: status = {text: "File Uploading", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 2: status = {text: "Upload Successful", colour: 'success', hexCode: '#12c864'}; break;
+        case 3: status = {text: "Upload Failed", colour: 'error', hexCode: '#fd112e'}; break;
+    }
+    return status
+}
+
+
 function getStatusStyle(statusNo: number) {
     let status: status = {text: "", colour: 'info', hexCode: '#222'};
     switch (statusNo){
@@ -114,4 +126,4 @@ function toUpperCaseFirstChar(string: string){
     return string.charAt(0).toUpperCase() + string.slice(1, string.length)
 }
 
-export{weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar}
+export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle}

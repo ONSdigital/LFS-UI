@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStatusStyle} from "../../utilities/Common_Functions";
+import {getUploadStatusStyle} from "../../utilities/Common_Functions";
 
 interface Props {
     statusCode: number
@@ -12,16 +12,14 @@ interface FillerProps {
 }
 
 export const ONSProgressBar = (props: Props) => (
-    <p className="field">
-        <p className="field">
-            <div className={'progress-bar'}>
-                <Filler percentage={props.percentage} statusCode={props.statusCode}/>
-            </div>
-        </p>
-    </p>
+    <div className="field">
+        <div className={'progress-bar'}>
+            <Filler percentage={props.percentage} statusCode={props.statusCode}/>
+        </div>
+    </div>
 );
 
 const Filler = (props: FillerProps) => {
     return <div className="progress-bar-filler"
-                style={{width: `${props.percentage}%`, background: `${getStatusStyle(props.statusCode).hexCode}`}}/>
+                style={{width: `${props.percentage}%`, background: `${getUploadStatusStyle(props.statusCode).hexCode}`}}/>
 };
