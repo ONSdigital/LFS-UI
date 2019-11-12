@@ -18,7 +18,7 @@ interface State {
     uploadPercentage: number
     fileName: string
     websocketActive: boolean
-
+    websocketID: number
 }
 
 interface UploadStatusData {
@@ -44,7 +44,8 @@ export class FileUploadProgress extends Component <Props, State> {
                 uploadStatusCode: 0,
                 uploadPercentage: 0,
                 fileName: this.props.import,
-                websocketActive: false
+                websocketActive: false,
+                websocketID: 0
             })
     }
 
@@ -56,6 +57,8 @@ export class FileUploadProgress extends Component <Props, State> {
         }
     }
 
+    // --------------- WebSockets ---------------
+
     componentDidMount(): void {
         this.ws.onopen = (evt => this.handleWSOnOpen(evt));
         this.ws.onmessage = (evt => this.handleWSOnMessage(JSON.parse(evt.data)));
@@ -64,7 +67,8 @@ export class FileUploadProgress extends Component <Props, State> {
     }
 
     componentWillUnmount(): void {
-        this.ws.close()
+        this.ws.close(1000, 'componentWillUnmount');
+        clearInterval(this.state.websocketID);
     }
 
     handleWSOnOpen = (evt: Event) => {
@@ -94,8 +98,8 @@ export class FileUploadProgress extends Component <Props, State> {
             }
             this.props.setPanel(evt.errorMessage, 'error');
         }
-        if (evt.status !== 1) {
-            this.props.importOptionVisible(true);
+        if (evt.status === 1) {
+            this.props.importOptionVisible(false);
         }
         let percentage = Math.round(evt.percent * 10) / 10;
         this.setState({
@@ -111,15 +115,15 @@ export class FileUploadProgress extends Component <Props, State> {
         })
     };
 
-
     getFileUploadProgress = () => {
-        setInterval(_ => {
+        let id = setInterval(_ => {
             this.ws.send(JSON.stringify(
                 {
                     "fileName": this.props.import,
                 }
             ));
         }, 3000);
+        this.setState({websocketID: Number(id)});
     };
 
     BatchUploadTableRow = (rowData: any) => {
