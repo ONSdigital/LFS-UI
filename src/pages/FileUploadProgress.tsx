@@ -104,7 +104,8 @@ export class FileUploadProgress extends Component <Props, State> {
         }
         let percentage = Math.round(evt.percent * 10) / 10;
         if (percentage === 100) {
-            this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success')
+            this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success');
+            this.props.importOptionVisible(true);
         }
         this.setState({
             uploadStatusData: [{
