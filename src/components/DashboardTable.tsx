@@ -3,7 +3,7 @@ import {ONSAccordionTable} from "./ONS_DesignSystem/ONSAccordionTable";
 import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
 import {ONSStatus} from "./ONS_DesignSystem/ONSStatus";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
-import {dashboardHeaders} from "../utilities/Headers";
+import {DASHBOARD_HEADERS} from "../utilities/Headers";
 
 interface Props {
     Headers?: string[],
@@ -41,7 +41,7 @@ export class DashboardTable extends Component <Props, State> {
 
     render() {
         return (
-            <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} expandedRowEnabled={true} expandedRow={DashboardExpandedRow} noDataMessage={this.noDataMessage} Headers={dashboardHeaders}/>
+            <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} expandedRowEnabled={true} expandedRow={DashboardExpandedRow} noDataMessage={this.noDataMessage} Headers={DASHBOARD_HEADERS}/>
         );
     }
 }
