@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
 import {ONSPanel} from '../components/ONS_DesignSystem/ONSPanel';
 import {ONSButton} from '../components/ONS_DesignSystem/ONSButton';
-import {getMonth, getStatusStyle, monthNumberToString, qList} from '../utilities/Common_Functions';
+import {
+    getMonth,
+    getStatusStyle,
+    monthNumberToString,
+    qList,
+    toUpperCaseFirstChar
+} from '../utilities/Common_Functions';
 import {ONSMetadata} from '../components/ONS_DesignSystem/ONSMetadata';
 import {getBatchData} from "../utilities/http";
 import {GenericNotFound} from "./GenericNotFound";
@@ -160,7 +166,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
                                 </div>
                             </>
                             :
-                            <GenericNotFound label={this.state.batchType + " batch Not Found "}/>
+                            <GenericNotFound label={toUpperCaseFirstChar(this.state.batchType) + " batch Not Found "}/>
                     }
                 </div>
             </DocumentTitle>
