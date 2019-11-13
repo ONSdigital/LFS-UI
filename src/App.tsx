@@ -12,7 +12,7 @@ import {View_Monthly_Batch} from './pages/View_Monthly_Batch';
 import {GenericNotFound} from "./pages/GenericNotFound";
 import {Cookies, withCookies} from "react-cookie";
 import {SurveyFileUpload} from "./pages/SurveyFileUpload";
-import { Address } from './pages/Address';
+import {FileUploadProgress} from './pages/FileUploadProgress';
 
 interface Props {
     cookies: Cookies
@@ -88,7 +88,7 @@ class App extends React.Component<Props, State> {
                     <this.PrivateRoute exact path='/surveyUpload/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
                     <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={6}/>
                     <this.PrivateRoute exact path='/Import' component={Import} page_id={7}/>
-                    <this.PrivateRoute exact path='/Address' component={Address} page_id={8}/>
+                    <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
                     <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
                     <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
                     <Route exact path='/login' component={Login}/>

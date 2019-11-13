@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import {ONSTextInput} from './ONS_DesignSystem/ONSTextInput';
 import {ONSButton} from './ONS_DesignSystem/ONSButton';
 import {ONSTable} from './ONS_DesignSystem/ONSTable';
-import {batchHeaders, uploadHeaders, userHeaders} from '../utilities/Headers'
+import {BATCH_HEADERS, UPLOAD_HEADERS, userHeaders} from '../utilities/Headers'
 
 interface Props {
     CreateFunction? : (...props : any[]) => void
@@ -188,7 +188,7 @@ export class TableWithModal extends Component <Props, State> {
                     shouldReturnFocusAfterClose={true}
                     ariaHideApp={false}>
                     <div>
-                        <ONSTable Data={this.state.UploadStatusData} Title="File Upload Status 2" Headers={uploadHeaders} Pagination={false}/>
+                        <ONSTable Data={this.state.UploadStatusData} Title="File Upload Status 2" Headers={UPLOAD_HEADERS} Pagination={false}/>
                         <ONSButton label="Export / View Report" primary={false} small={false}/>
                     </div>
                     <br/>
@@ -230,7 +230,7 @@ export class TableWithModal extends Component <Props, State> {
     table = ()  => {
         let Table = this.props.table;
 
-        if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={batchHeaders} Pagination={false} openModal={this.openSummaryModal}/>;
+        if(Table === "batch") return <ONSTable Data={this.state.UploadsData} Title="File Upload Status" Headers={BATCH_HEADERS} Pagination={false} openModal={this.openSummaryModal}/>;
         if(Table === "admin") return <ONSTable Data={this.state.Users} Title="Users" CreateFunction={this.createUser} Headers={userHeaders()} Pagination={true} Steps={20} pageChange={this.mockUsers} openModal={this.openSaveModal}/>
     };
 

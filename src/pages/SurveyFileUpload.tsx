@@ -7,7 +7,7 @@ import {ONSMetadata} from "../components/ONS_DesignSystem/ONSMetadata";
 import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
-import {surveyUploadHistory} from "../utilities/Headers";
+import {SURVEY_UPLOAD_HISTORY} from "../utilities/Headers";
 import moment from "moment";
 
 interface Props {
@@ -180,7 +180,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                 <ONSMetadata List={this.formatMetaData()}/>
                 <div style={{width: "55%"}}>
                     <h4>Previous imports </h4>
-                    <ONSAccordionTable Headers={surveyUploadHistory} data={this.state.uploadHistory} Row={this.UploadHistoryRow}
+                    <ONSAccordionTable Headers={SURVEY_UPLOAD_HISTORY} data={this.state.uploadHistory} Row={this.UploadHistoryRow}
                                        expandedRowEnabled={false}
                                        noDataMessage={"Survey has not been previously imported"}/>
                 </div>

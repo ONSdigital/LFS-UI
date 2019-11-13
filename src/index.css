@@ -43,6 +43,24 @@ caption{
   padding: 0 0 0 1.85rem;
 }
 
+.itemCursorHover :hover {
+  cursor: pointer
+}
+
+.progress-bar {
+  position: relative;
+  height: 20px;
+  border-radius: 3px;
+  border: 1px solid #333;
+}
+
+.progress-bar-filler {
+  height: 100%;
+  border-radius: inherit;
+  transition: width .2s ease-in;
+}
+
+
 .fade:not(.show) {
   opacity: 1;
 }

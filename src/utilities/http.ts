@@ -21,14 +21,14 @@ function postSurveyFile(lfsfile: any, fileName: string, fileType: string, survey
     })
 }
 
-function postImportFile(importFile: any, fileName: string, fileType: string): Promise<any> {
-    console.log("/imports/" + fileName + "-----------------------")
+function postImportFile(importFile: any, link :string, fileName: string): Promise<any> {
+    console.log("/imports/" + fileName + "-----------------------");
     let formData = new FormData();
     formData.append("lfsFile", importFile[0]);
     formData.append("fileName", fileName);
 
     return new Promise((resolve: any, reject: any) => {
-        fetch("/imports/" + fileName, {
+        fetch("/imports/" + link, {
             "method": "POST",
             "body": formData,
         })
