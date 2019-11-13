@@ -5,8 +5,10 @@ function postSurveyFile(lfsfile: any, fileName: string, fileType: string, survey
     formData.append("fileName", fileName);
     formData.append("fileSource", survey);
 
+    let url = "/imports/" + fileType + "/" + survey + "/" +  period + "/" +  year;
+
     return new Promise((resolve: any, reject: any) => {
-        fetch("/imports/" + fileType + "/" + survey + "/" +  period + "/" +  year, {
+        fetch(url, {
             "method": "POST",
             "body": formData,
         })
