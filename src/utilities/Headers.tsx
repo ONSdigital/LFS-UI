@@ -1,57 +1,56 @@
-const batchHeaders =
-        [{
-            label: "Source",
-            column_name: "type",
-            filter: false,
-            order: true
-        }, {
-            label: "Period",
-            column_name: "month",
-            filter: false,
-            order: false
-        }, {
-            label: "Status",
-            column_name: "status",
-            filter: false,
-            order: false
-        }, {
-            label: "",
-            column_name: "button",
-            filter: false,
-            order: false
-        }, {
-            label: "",
-            column_name: "button",
-            filter: false,
-            order: false
-        }];
+const BATCH_HEADERS =
+    [{
+        label: "Source",
+        column_name: "type",
+        filter: false,
+        order: true
+    }, {
+        label: "Period",
+        column_name: "month",
+        filter: false,
+        order: false
+    }, {
+        label: "Status",
+        column_name: "status",
+        filter: false,
+        order: false
+    }, {
+        label: "",
+        column_name: "button",
+        filter: false,
+        order: false
+    }, {
+        label: "",
+        column_name: "button",
+        filter: false,
+        order: false
+    }];
 
-const uploadHeaders =
-     
-        [{
-            label: "Step",
-            column_name: "step",
-            filter: false,
-            order: true
-        }, {
-            label: "Date",
-            column_name: "date",
-            filter: false,
-            order: false
-        }, {
-            label: "Status",
-            column_name: "status",
-            filter: false,
-            order: false
-        }]
+const UPLOAD_HEADERS =
+    [{
+        label: "File Name ",
+        column_name: "fileName",
+        filter: false,
+        order: true
+    }, {
+        label: "Step",
+        column_name: "step",
+        filter: false,
+        order: true
+    }, {
+        label: "Status",
+        column_name: "status",
+        filter: false,
+        order: false
+    }];
 
-const dashboardHeaders =
+const DASHBOARD_HEADERS =
     [{
         label: "BatchID",
         column_name: "BatchID",
         filter: false,
         order: true
-    },{
+    }, {
         label: "Batch Type",
         column_name: "Batch Type",
         filter: false,
@@ -74,13 +73,13 @@ const dashboardHeaders =
     }
     ];
 
-const surveyUploadHistory =
+const SURVEY_UPLOAD_HISTORY =
     [{
         label: "Import Date",
         column_name: "Date",
         filter: false,
         order: true
-    },{
+    }, {
         label: "Status",
         column_name: "Status",
         filter: false,
@@ -134,4 +133,4 @@ function roleHeaders() {
     )
 }
 
-export {batchHeaders, surveyUploadHistory, uploadHeaders, userHeaders, roleHeaders, dashboardHeaders}
+export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, userHeaders, roleHeaders, DASHBOARD_HEADERS}

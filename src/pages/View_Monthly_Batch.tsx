@@ -7,7 +7,7 @@ import {getBatchData} from "../utilities/http";
 import {GenericNotFound} from "./GenericNotFound";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
-import {batchHeaders} from "../utilities/Headers";
+import {BATCH_HEADERS} from "../utilities/Headers";
 import DocumentTitle from "react-document-title";
 
 interface State {
@@ -142,7 +142,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
                                     <ONSMetadata List={this.state.metadata}/>
                                 </div>
                                 <div style={{width: "55%"}}>
-                                    <ONSAccordionTable Headers={batchHeaders} data={this.state.returnedData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
+                                    <ONSAccordionTable Headers={BATCH_HEADERS} data={this.state.returnedData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
                                     <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
                                         <p>Every File Must be Uploaded to Run Process</p>
                                     </ONSPanel>

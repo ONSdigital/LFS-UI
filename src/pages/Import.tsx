@@ -4,140 +4,209 @@ import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {postImportFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
-import {Address} from "./Address";
+import {FileUploadProgress} from "./FileUploadProgress";
+import {toUpperCaseFirstChar} from "../utilities/Common_Functions";
 
-interface Props{
+interface Props {
 }
 
-interface State{
-    fileOne: any,
-    errorPanelHidden: boolean,
-    errorPanelMessage: string,
+
+interface State {
+    uploadFile: any
     uploading: boolean
-    import: string
+    importName: string
     importHidden: boolean
-    statusHidden: boolean
+    uploadProgressHidden: boolean
     fileType: string
-    redirect: string
+    uploadLink: string
     //check to see if functionality is built and whether to send the request
     built: boolean
+    fileName: string
+    panel: Panel
+}
+
+interface Panel {
+    label: string,
+    visible: boolean
+    status: string
 }
 
 export class Import extends Component <Props, State> {
     displayName = Import.name;
 
-    constructor(props : Props) {
+    constructor(props: Props) {
         super(props);
         this.state = {
-            fileOne: "",
-            errorPanelHidden: true,
-            errorPanelMessage: "",
+            uploadFile: "",
             uploading: false,
-            import: "",
+            importName: "",
             importHidden: true,
-            statusHidden: true,
+            uploadProgressHidden: true,
             fileType: "",
-            redirect: "",
-            built: false
+            uploadLink: "",
+            built: false,
+            fileName: "string",
+            panel: {
+                label: '',
+                visible: false,
+                status: 'info'
+            }
         };
-
-        this.handleFileOneChange = this.handleFileOneChange.bind(this);
+        this.setPanel.bind(this);
+        this.setFileUploading.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
     }
-
 
     upload = () => {
         console.log('Uploading File');
+        this.hidePanel();
         this.setState({
-            errorPanelHidden: true,
-            uploading: true
+            uploading: true,
         });
         // TODO: Send correct data for each file type
-        if(this.state.built){
-        postImportFile(this.state.fileOne, this.state.import, this.state.fileType)
-            .then(response => {
-                console.log(response);
-                console.log(response.status)
-                if (response.status === ''){
-                    console.log("window no change")
-
-                    this.setErrorMessage(response.errorMessage.toString());
-                }else {
-                    console.log("window change")
-                    this.setState({importHidden: true, statusHidden: false})
-                }
-                this.setState({
-                    uploading: false,
+        if (this.state.built) {
+            postImportFile(this.state.uploadFile, this.state.uploadLink, this.state.fileName)
+                .then(response => {
+                    console.log(response);
+                    if (response.status === 'ERROR') {
+                        console.log("window no change");
+                        this.setPanel(response.errorMessage.toString(), 'error');
+                        this.setState({importHidden: true, uploadProgressHidden: true})
+                    } else {
+                        if (response.status === "OK") {
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ': File Uploaded Successfully', 'success');
+                        }
+                        console.log("window change")
+                    }
+                    this.setState({
+                        uploading: false,
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.setPanel(err.toString(), 'error');
+                    this.setState({
+                        uploading: false,
+                        uploadProgressHidden: false
+                    });
                 });
-            })
-            .catch(err => {
-                console.log(err);
-                this.setErrorMessage(err.toString());
-                this.setState({
-                    uploading: false,
-                });
-            });    
         }
     };
 
-
-    setErrorMessage = (message: string) => {
+    hidePanel = () => {
         this.setState({
-            errorPanelHidden: false,
-            errorPanelMessage: "Error Occurred while Uploading Files: " + message,
+            panel: {
+                label: "",
+                visible: false,
+                status: "info"
+            }
         });
     };
 
-    handleFileOneChange = (selectorFiles: FileList | null) => {
+    setPanel = (message: string, status: string) => {
+        this.setState({
+            panel: {
+                label: message,
+                visible: true,
+                status: status
+            }
+        });
+    };
+
+    handleFileChange = (selectorFiles: FileList | null) => {
         console.log(selectorFiles);
-        this.setState({fileOne: selectorFiles})
+        this.setState({uploadFile: selectorFiles});
     };
 
     handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        this.setState({import: e.target.value, importHidden: false, fileType: this.filetype(e.target.value), statusHidden: true})
-    }
+        let hidden = (e.target.value !== "address");
+        this.setState({
+            importName: e.target.value,
+            importHidden: false,
+            fileType: this.fileType(e.target.value),
+            uploadProgressHidden: hidden,
+        });
+        this.hidePanel()
+    };
 
-    filetype = (file: string) => {
-        let type = ""
-        switch (file){
-            case "address": type = '.csv'; this.setState({redirect: "/Address", built: true}); break;
-            case "Bulk Ammendments": type = ''; this.setState({redirect: ""}); break;
-            case "Design Weights": type = ''; this.setState({redirect: ""}); break;
-            case "Geographical Classifications": this.setState({redirect: ""}); type = ''; break;
-            case "Population Estimates": type = ''; this.setState({redirect: "/"}); break;
-            case "Value Label": type = '.csv'; this.setState({redirect: ""}); break;
-            case "Variable Definitions": type = ''; this.setState({redirect: ""}); break;
+    setFileUploading = (bool: boolean) => {
+        this.setState({importHidden: !bool})
+    };
+
+    fileType = (file: string) => {
+        let type = "";
+        switch (file) {
+            case "Geographical Classifications":
+                type = '.csv';
+                this.setState({built: true, fileName: "address", uploadLink: 'address'});
+                break;
+            case "Bulk Amendments":
+                type = '';
+                this.setState({});
+                break;
+            case "Design Weights":
+                type = '';
+                this.setState({});
+                break;
+            case "Population Estimates":
+                type = '';
+                this.setState({});
+                break;
+            case "Value Label":
+                type = '.csv';
+                this.setState({});
+                break;
+            case "Variable Definitions":
+                type = '.csv';
+                this.setState({
+                    built: true,
+                    fileName: "variable_definitions",
+                    uploadLink: 'variable/definitions'
+                });
+                break;
         }
         return type
-    }
+    };
 
     fileSelection = [
-                //  {"label":"Bulk Ammendments", "value":"Bulk Ammendments"}, 
-                //  {"label":"Design Weights", "value":"Design Weights"}, 
-                //  {"label":"Geographical Classifications", "value":"Geographical Classifications"}, 
-                {"label":"LFS Address File", "value":"address"},
-                {"label":"Value Label", "value":"Value Label"}
-                //  , 
-                  //  {"label":"Population Estimates", "value":"Population Estimates"}, 
-              //  {"label":"Variable Definitions", "value":"Variable Definitions"}
-                ]
-
+        //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
+        //  {"label":"Design Weights", "value":"Design Weights"},
+        {"label": "Geographical Classifications", "value": "Geographical Classifications"},
+        // {"label": "Value Label", "value": "Value Label"},
+        //  {"label":"Population Estimates", "value":"Population Estimates"},
+        {"label": "Variable Definitions", "value": "Variable Definitions"}
+    ];
 
     render() {
         return (
-            <div className="container">     
+            <div className="container">
                 <form>
-                    <ONSPanel status={"error"}  label={"error"} hidden={this.state.errorPanelHidden}>
-                            <p>{this.state.errorPanelMessage}</p>
+                    <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
+                              hidden={!this.state.panel.visible}>
+                        <p>{this.state.panel.label}</p>
                     </ONSPanel>
-                    <ONSSelect label="Select Import" value="select value" options={this.fileSelection} onChange={this.handleImportChange}></ONSSelect>
-                    <br></br>
+                    <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
+                               onChange={this.handleImportChange}/>
+                    <br/>
                     <div hidden={this.state.importHidden}>
-                        <ONSUpload label={"Import " + this.state.import} description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"} fileID={"U1"}
-                                accept={this.state.fileType} onChange={(e) => this.handleFileOneChange(e.target.files)}/>
-                        <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false} loading={this.state.uploading}/>
+                        <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
+                                   description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}
+                                   fileID={"U1"}
+                                   accept={this.state.fileType}
+                                   onChange={(e) => this.handleFileChange(e.target.files)}/>
+                        <ONSButton label={"Submit"}
+                                   field={true}
+                                   onClick={this.upload}
+                                   primary={true}
+                                   small={false}
+                                   loading={this.state.uploading}/>
                     </div>
                 </form>
-                <Address import={this.state.import} hidden={this.state.statusHidden}></Address>
+                <FileUploadProgress importName={this.state.importName}
+                                    fileName={this.state.fileName}
+                                    hidden={this.state.uploadProgressHidden}
+                                    importOptionVisible={this.setFileUploading}
+                                    setPanel={this.setPanel}/>
             </div>
         )
     }
