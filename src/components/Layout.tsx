@@ -42,6 +42,10 @@ export class Layout extends Component <Props, {}> {
       {
         link: "/Admin",
         label: "Admin"
+      },
+      {
+        link: "/Variable-Definitions",
+        label: "VariableDefinitions"
       }
     ];
 
