@@ -9,6 +9,7 @@ import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTabl
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {SURVEY_UPLOAD_HISTORY} from "../utilities/Headers";
 import moment from "moment";
+import DocumentTitle from "react-document-title";
 
 interface Props {
     period: string,
@@ -175,30 +176,33 @@ export class SurveyFileUpload extends Component <Props, State> {
 
     render() {
         return (
-            <div className="container">
-                <h2>Import Survey</h2>
-                <ONSMetadata List={this.formatMetaData()}/>
-                <div style={{width: "55%"}}>
-                    <h4>Previous imports </h4>
-                    <ONSAccordionTable Headers={SURVEY_UPLOAD_HISTORY} data={this.state.uploadHistory} Row={this.UploadHistoryRow}
-                                       expandedRowEnabled={false}
-                                       noDataMessage={"Survey has not been previously imported"}/>
+            <DocumentTitle title='LFS: Survey File Upload'>
+                <div className="container">
+                    <h2>Import Survey</h2>
+                    <ONSMetadata List={this.formatMetaData()}/>
+                    <div style={{width: "55%"}}>
+                        <h4>Previous imports </h4>
+                        <ONSAccordionTable Headers={SURVEY_UPLOAD_HISTORY} data={this.state.uploadHistory}
+                                           Row={this.UploadHistoryRow}
+                                           expandedRowEnabled={false}
+                                           noDataMessage={"Survey has not been previously imported"}/>
+                    </div>
+                    <form>
+                        <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
+                                  hidden={!this.state.panel.visible}>
+                            <p>{this.state.panel.label}</p>
+                        </ONSPanel>
+                        <ONSUpload label={"Import " + this.state.surveyType.toUpperCase() + " File"}
+                                   description={"Only .sav accepted"} fileName={"Upload 1"}
+                                   fileID={"U1"}
+                                   accept=".sav" onChange={(e) => this.handleFileChange(e.target.files)}/>
+                        <ONSButton label={"Submit"} field={true} onClick={this.uploadFile} primary={true} small={false}
+                                   loading={this.state.uploading}/>
+                        <ONSButton label={"Cancel"} field={true} onClick={this.returnToManageBatch} primary={false}
+                                   small={false}/>
+                    </form>
                 </div>
-                <form>
-                    <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
-                              hidden={!this.state.panel.visible}>
-                        <p>{this.state.panel.label}</p>
-                    </ONSPanel>
-                    <ONSUpload label={"Import " + this.state.surveyType.toUpperCase() + " File"}
-                               description={"Only .sav accepted"} fileName={"Upload 1"}
-                               fileID={"U1"}
-                               accept=".sav" onChange={(e) => this.handleFileChange(e.target.files)}/>
-                    <ONSButton label={"Submit"} field={true} onClick={this.uploadFile} primary={true} small={false}
-                               loading={this.state.uploading}/>
-                    <ONSButton label={"Cancel"} field={true} onClick={this.returnToManageBatch} primary={false}
-                               small={false}/>
-                </form>
-            </div>
+            </DocumentTitle>
         )
     }
 }

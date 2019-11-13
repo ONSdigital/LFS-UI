@@ -6,6 +6,7 @@ import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
 import {FileUploadProgress} from "./FileUploadProgress";
 import {toUpperCaseFirstChar} from "../utilities/Common_Functions";
+import DocumentTitle from "react-document-title";
 
 interface Props {
 }
@@ -183,35 +184,37 @@ export class Import extends Component <Props, State> {
 
     render() {
         return (
-            <div className="container">
-                <form>
-                    <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
-                              hidden={!this.state.panel.visible}>
-                        <p>{this.state.panel.label}</p>
-                    </ONSPanel>
-                    <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
-                               onChange={this.handleImportChange}/>
-                    <br/>
-                    <div hidden={this.state.importHidden}>
-                        <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
-                                   description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}
-                                   fileID={"U1"}
-                                   accept={this.state.fileType}
-                                   onChange={(e) => this.handleFileChange(e.target.files)}/>
-                        <ONSButton label={"Submit"}
-                                   field={true}
-                                   onClick={this.upload}
-                                   primary={true}
-                                   small={false}
-                                   loading={this.state.uploading}/>
-                    </div>
-                </form>
-                <FileUploadProgress importName={this.state.importName}
-                                    fileName={this.state.fileName}
-                                    hidden={this.state.uploadProgressHidden}
-                                    importOptionVisible={this.setFileUploading}
-                                    setPanel={this.setPanel}/>
-            </div>
+            <DocumentTitle title='LFS: Import'>
+                <div className="container">
+                    <form>
+                        <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
+                                  hidden={!this.state.panel.visible}>
+                            <p>{this.state.panel.label}</p>
+                        </ONSPanel>
+                        <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
+                                   onChange={this.handleImportChange}/>
+                        <br/>
+                        <div hidden={this.state.importHidden}>
+                            <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
+                                       description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}
+                                       fileID={"U1"}
+                                       accept={this.state.fileType}
+                                       onChange={(e) => this.handleFileChange(e.target.files)}/>
+                            <ONSButton label={"Submit"}
+                                       field={true}
+                                       onClick={this.upload}
+                                       primary={true}
+                                       small={false}
+                                       loading={this.state.uploading}/>
+                        </div>
+                    </form>
+                    <FileUploadProgress importName={this.state.importName}
+                                        fileName={this.state.fileName}
+                                        hidden={this.state.uploadProgressHidden}
+                                        importOptionVisible={this.setFileUploading}
+                                        setPanel={this.setPanel}/>
+                </div>
+            </DocumentTitle>
         )
     }
 }
