@@ -12,13 +12,12 @@ interface Props {
 
 
 interface State {
-    fileOne: any
+    uploadFile: any
     uploading: boolean
-    import: string
+    importName: string
     importHidden: boolean
     uploadProgressHidden: boolean
     fileType: string
-    redirect: string
     uploadLink: string
     //check to see if functionality is built and whether to send the request
     built: boolean
@@ -38,13 +37,12 @@ export class Import extends Component <Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            fileOne: "",
+            uploadFile: "",
             uploading: false,
-            import: "",
+            importName: "",
             importHidden: true,
             uploadProgressHidden: true,
             fileType: "",
-            redirect: "",
             uploadLink: "",
             built: false,
             fileName: "string",
@@ -55,17 +53,19 @@ export class Import extends Component <Props, State> {
             }
         };
         this.setPanel.bind(this);
-        this.setAddressImporting.bind(this);
-        this.handleFileOneChange = this.handleFileOneChange.bind(this);
+        this.setFileUploading.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
     }
-
 
     upload = () => {
         console.log('Uploading File');
         this.hidePanel();
+        this.setState({
+            uploading: true,
+        });
         // TODO: Send correct data for each file type
         if (this.state.built) {
-            postImportFile(this.state.fileOne, this.state.uploadLink, this.state.fileName)
+            postImportFile(this.state.uploadFile, this.state.uploadLink, this.state.fileName)
                 .then(response => {
                     console.log(response);
                     if (response.status === 'ERROR') {
@@ -74,7 +74,7 @@ export class Import extends Component <Props, State> {
                         this.setState({importHidden: true, uploadProgressHidden: true})
                     } else {
                         if (response.status === "OK") {
-                            this.setPanel(toUpperCaseFirstChar(this.state.import) + ': File Uploaded Successfully', 'success');
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ': File Uploaded Successfully', 'success');
                         }
                         console.log("window change")
                     }
@@ -113,93 +113,100 @@ export class Import extends Component <Props, State> {
         });
     };
 
-    handleFileOneChange = (selectorFiles: FileList | null) => {
+    handleFileChange = (selectorFiles: FileList | null) => {
         console.log(selectorFiles);
-        this.setState({fileOne: selectorFiles});
+        this.setState({uploadFile: selectorFiles});
     };
 
     handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
         let hidden = (e.target.value !== "address");
         this.setState({
-            import: e.target.value,
+            importName: e.target.value,
             importHidden: false,
-            fileType: this.filetype(e.target.value),
+            fileType: this.fileType(e.target.value),
             uploadProgressHidden: hidden,
         });
         this.hidePanel()
     };
 
-    setAddressImporting = (bool: boolean) => {
+    setFileUploading = (bool: boolean) => {
         this.setState({importHidden: !bool})
     };
 
-    filetype = (file: string) => {
+    fileType = (file: string) => {
         let type = "";
         switch (file) {
-            case "address":
+            case "Geographical Classifications":
                 type = '.csv';
-                this.setState({redirect: "/Address", built: true, fileName: "address", uploadLink: 'address'});
+                this.setState({built: true, fileName: "address", uploadLink: 'address'});
                 break;
-            case "Bulk Ammendments":
+            case "Bulk Amendments":
                 type = '';
-                this.setState({redirect: ""});
+                this.setState({});
                 break;
             case "Design Weights":
                 type = '';
-                this.setState({redirect: ""});
-                break;
-            case "Geographical Classifications":
-                this.setState({redirect: ""});
-                type = '';
+                this.setState({});
                 break;
             case "Population Estimates":
                 type = '';
-                this.setState({redirect: "/"});
+                this.setState({});
                 break;
             case "Value Label":
                 type = '.csv';
-                this.setState({redirect: ""});
+                this.setState({});
                 break;
             case "Variable Definitions":
                 type = '.csv';
-                this.setState({redirect: "", built: true, fileName: "variable_definitions", uploadLink: 'variable/definitions'});
+                this.setState({
+                    built: true,
+                    fileName: "variable_definitions",
+                    uploadLink: 'variable/definitions'
+                });
                 break;
         }
         return type
     };
 
     fileSelection = [
-        //  {"label":"Bulk Ammendments", "value":"Bulk Ammendments"},
+        //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
         //  {"label":"Design Weights", "value":"Design Weights"},
-        //  {"label":"Geographical Classifications", "value":"Geographical Classifications"},
-        {"label": "LFS Address File", "value": "address"},
+        {"label": "Geographical Classifications", "value": "Geographical Classifications"},
         // {"label": "Value Label", "value": "Value Label"},
         //  {"label":"Population Estimates", "value":"Population Estimates"},
-         {"label":"Variable Definitions", "value":"Variable Definitions"}
+        {"label": "Variable Definitions", "value": "Variable Definitions"}
     ];
-
 
     render() {
         return (
             <div className="container">
                 <form>
-                    <ONSPanel status={this.state.panel.status} label={this.state.panel.label} hidden={!this.state.panel.visible}>
+                    <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
+                              hidden={!this.state.panel.visible}>
                         <p>{this.state.panel.label}</p>
                     </ONSPanel>
                     <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
                                onChange={this.handleImportChange}/>
                     <br/>
                     <div hidden={this.state.importHidden}>
-                        <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.import)}
+                        <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
                                    description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}
                                    fileID={"U1"}
                                    accept={this.state.fileType}
-                                   onChange={(e) => this.handleFileOneChange(e.target.files)}/>
-                        <ONSButton label={"Submit"} field={true} onClick={this.upload} primary={true} small={false}
+                                   onChange={(e) => this.handleFileChange(e.target.files)}/>
+                        <ONSButton label={"Submit"}
+                                   field={true}
+                                   onClick={this.upload}
+                                   primary={true}
+                                   small={false}
                                    loading={this.state.uploading}/>
                     </div>
                 </form>
-                <FileUploadProgress import={this.state.import} hidden={this.state.uploadProgressHidden} importOptionVisible={this.setAddressImporting} setPanel={this.setPanel}/>
+                <FileUploadProgress importName={this.state.importName}
+                                    fileName={this.state.fileName}
+                                    hidden={this.state.uploadProgressHidden}
+                                    importOptionVisible={this.setFileUploading}
+                                    setPanel={this.setPanel}/>
             </div>
         )
     }

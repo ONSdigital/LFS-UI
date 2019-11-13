@@ -11,6 +11,7 @@ interface Props{
 interface Option{
   label:string,
   value?:string
+  id?: string
 }
 
 interface State{
@@ -43,7 +44,7 @@ export class ONSSelect extends Component <Props, State>{
               Select an option
             </option>
             {this.props.options.map((option, index) =>
-              <option value={option.value} key={index}>
+              <option value={option.value} key={index} id={option.id}>
                 {option.label}    
               </option>
             )}

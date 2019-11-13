@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
-import {uploadHeaders} from "../utilities/Headers"
+import {UPLOAD_HEADERS} from "../utilities/Headers"
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {getUploadStatusStyle, toUpperCaseFirstChar} from '../utilities/Common_Functions';
 import {ONSProgressBar} from "../components/ONS_DesignSystem/ONSProgressBar";
 
 interface Props {
-    import: string
+    importName: string
+    fileName: string
     hidden: boolean
     importOptionVisible: Function
     setPanel: Function
@@ -24,7 +25,6 @@ interface State {
 interface UploadStatusData {
     fileName: string
     step: string
-    date: string
     status: string
 }
 
@@ -38,12 +38,11 @@ export class FileUploadProgress extends Component <Props, State> {
                 uploadStatusData: [{
                     fileName: "",
                     step: 'Import',
-                    date: new Date().toDateString(),
                     status: ""
                 }],
                 uploadStatusCode: 0,
                 uploadPercentage: 0,
-                fileName: this.props.import,
+                fileName: this.props.fileName,
                 websocketActive: false,
                 websocketID: 0
             })
@@ -67,7 +66,7 @@ export class FileUploadProgress extends Component <Props, State> {
     }
 
     componentWillUnmount(): void {
-        this.ws.close(1000, 'componentWillUnmount');
+        this.ws.close(1000, 'Upload Component Unmount');
         clearInterval(this.state.websocketID);
     }
 
@@ -104,15 +103,14 @@ export class FileUploadProgress extends Component <Props, State> {
             this.props.importOptionVisible(false);
         }
         let percentage = Math.round(evt.percent * 10) / 10;
-        if (percentage === 100){
-            this.props.setPanel(toUpperCaseFirstChar(this.props.import) + " : File Imported Successfully", 'success')
+        if (percentage === 100) {
+            this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success')
         }
         this.setState({
             uploadStatusData: [{
-                fileName: toUpperCaseFirstChar(evt.fileName),
+                fileName: toUpperCaseFirstChar(this.props.importName),
                 step: 'Import',
-                date: new Date().toDateString(),
-                status: (this.state.uploadStatusCode === 2 ? "Import Complete" : this.state.uploadStatusCode === 3 ? "Failed" : "Importing: " + percentage + "%")
+                status: (evt.status === 2 ? "Import Complete" : evt.status === 3 ? "Failed" : "Importing: " + percentage + "%")
             }],
             uploadPercentage: percentage,
             uploadStatusCode: evt.status,
@@ -124,14 +122,14 @@ export class FileUploadProgress extends Component <Props, State> {
         let id = setInterval(_ => {
             this.ws.send(JSON.stringify(
                 {
-                    "fileName": this.props.import,
+                    "fileName": this.props.fileName,
                 }
             ));
         }, 3000);
         this.setState({websocketID: Number(id)});
     };
 
-    BatchUploadTableRow = (rowData: any) => {
+    FileImportTableRow = (rowData: any) => {
         let row = rowData.row;
         return (
             <>
@@ -140,9 +138,6 @@ export class FileUploadProgress extends Component <Props, State> {
                 </td>
                 <td className="table__cell ">
                     {row.step}
-                </td>
-                <td className="table__cell ">
-                    {row.date}
                 </td>
                 <td className="table__cell ">
                     <ONSStatus label={row.status} small={false}
@@ -155,12 +150,13 @@ export class FileUploadProgress extends Component <Props, State> {
     render() {
         return (
             <div hidden={!this.state.websocketActive}>
-                {/* <br></br> */}
-                {/* <h3>Address Upload</h3> */}
-                <div style={{width: "55%"}}>
-                        <ONSAccordionTable Headers={uploadHeaders} data={this.state.uploadStatusData}
-                                           Row={this.BatchUploadTableRow} expandedRowEnabled={false}
-                                           noDataMessage={"No Data"}/>
+                 <h4>Import Progress</h4>
+                <div style={{width: "60%"}}>
+                    <ONSAccordionTable Headers={UPLOAD_HEADERS}
+                                       data={this.state.uploadStatusData}
+                                       Row={this.FileImportTableRow}
+                                       expandedRowEnabled={false}
+                                       noDataMessage={"No Data"}/>
                     <ONSProgressBar statusCode={this.state.uploadStatusCode} percentage={this.state.uploadPercentage}/>
                 </div>
             </div>
