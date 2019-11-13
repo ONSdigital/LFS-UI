@@ -154,7 +154,11 @@ export class Import extends Component <Props, State> {
                 break;
             case "Value Label":
                 type = '.csv';
-                this.setState({});
+                this.setState({
+                    built: true,
+                    fileName: "value_labels",
+                    uploadLink: 'value/labels'
+                });
                 break;
             case "Variable Definitions":
                 type = '.csv';
@@ -172,7 +176,7 @@ export class Import extends Component <Props, State> {
         //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
         //  {"label":"Design Weights", "value":"Design Weights"},
         {"label": "Geographical Classifications", "value": "Geographical Classifications"},
-        // {"label": "Value Label", "value": "Value Label"},
+        {"label": "Value Label", "value": "Value Label"},
         //  {"label":"Population Estimates", "value":"Population Estimates"},
         {"label": "Variable Definitions", "value": "Variable Definitions"}
     ];
