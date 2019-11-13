@@ -1,4 +1,4 @@
-const batchHeaders =
+const BATCH_HEADERS =
     [{
         label: "Source",
         column_name: "type",
@@ -26,8 +26,7 @@ const batchHeaders =
         order: false
     }];
 
-const uploadHeaders =
-
+const UPLOAD_HEADERS =
     [{
         label: "File Name ",
         column_name: "fileName",
@@ -39,18 +38,13 @@ const uploadHeaders =
         filter: false,
         order: true
     }, {
-        label: "Date",
-        column_name: "date",
-        filter: false,
-        order: false
-    }, {
         label: "Status",
         column_name: "status",
         filter: false,
         order: false
-    }]
+    }];
 
-const dashboardHeaders =
+const DASHBOARD_HEADERS =
     [{
         label: "BatchID",
         column_name: "BatchID",
@@ -79,7 +73,7 @@ const dashboardHeaders =
     }
     ];
 
-const surveyUploadHistory =
+const SURVEY_UPLOAD_HISTORY =
     [{
         label: "Import Date",
         column_name: "Date",
@@ -139,4 +133,4 @@ function roleHeaders() {
     )
 }
 
-export {batchHeaders, surveyUploadHistory, uploadHeaders, userHeaders, roleHeaders, dashboardHeaders}
+export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, userHeaders, roleHeaders, DASHBOARD_HEADERS}
