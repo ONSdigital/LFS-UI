@@ -26,7 +26,7 @@ interface DashboardTableRow {
     period: string
     status: string
     year: number,
-    expanded: boolean
+    rowExpanded: boolean
 }
 
 interface Header {
@@ -52,22 +52,18 @@ export class ONSAccordionTable extends Component <Props, State> {
 
     pageChange = (offset: number, steps: number) => {
         this.setState({offset: offset});
-        console.log(offset)
-        console.log(steps)
         if (this.props.data === null) return;
         let slicedData: any[] = this.state.data.slice(offset, offset+steps);
         console.log(slicedData)
         if (slicedData !== null) {
-            console.log("sfjhalshfdlaksjh ")
             this.setState({
                 slicedData: slicedData
             })
         }
-        // this.props.pageChange(offset, steps)
     };
 
     handleClickOnRow = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, row: any, index: number) => {
-        row.expanded = !row.expanded;
+        row.rowExpanded = !row.rowExpanded;
         // @ts-ignore
         this.setState({data: update(this.state.data, {[index]: {$set: row}})})
     };
@@ -105,7 +101,7 @@ export class ONSAccordionTable extends Component <Props, State> {
                                         </tr>
                                         {
                                             this.props.expandedRowEnabled ?
-                                                <tr hidden={!row.expanded}>
+                                                <tr hidden={!row.rowExpanded}>
                                                     <td colSpan={this.props.Headers.length} className="table__cell ">
                                                         <this.props.expandedRow row={row}/>
                                                     </td>
