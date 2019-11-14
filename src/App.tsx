@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, RouteProps, Switch} from "react-router-dom";
 import {Layout} from './components/Layout';
 import {Dashboard} from './pages/Dashboard';
-import {VariableDefinitions} from './pages/VariableDefinitions';
 import {Login} from './auth/Login';
 import {Admin} from './pages/Admin';
 import {Outputs} from './pages/Outputs';
@@ -15,6 +14,7 @@ import {Cookies, withCookies} from "react-cookie";
 import {SurveyFileUpload} from "./pages/SurveyFileUpload";
 import {FileUploadProgress} from './pages/FileUploadProgress';
 import DocumentTitle from "react-document-title";
+import {ViewData} from "./pages/ViewData";
 
 interface Props {
     cookies: Cookies
@@ -90,7 +90,7 @@ class App extends React.Component<Props, State> {
                         <this.PrivateRoute exact path='/View_Monthly_Batch/:batchtype/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
                         <this.PrivateRoute exact path='/surveyUpload/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
                         <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={6}/>
-                        <this.PrivateRoute exact path='/Variable_Definitions' component={VariableDefinitions} page_id={10}/>
+                        <this.PrivateRoute exact path='/ViewData' component={ViewData} page_id={10}/>
                         <this.PrivateRoute exact path='/Import' component={Import} page_id={7}/>
                         <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
                         <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
