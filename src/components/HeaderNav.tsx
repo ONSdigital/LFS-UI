@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {LinkContainer} from 'react-router-bootstrap';
 
-// import './VerticalNav.css';
-
 interface Props {
     links: Link[],
     loggedIn: boolean
@@ -23,7 +21,7 @@ export class HeaderNav extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {links: props.links}
+        this.state = {links: props.links};
 
         let links = props.links;
         let link = links.find(x => x.current);
