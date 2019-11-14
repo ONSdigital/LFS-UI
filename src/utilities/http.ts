@@ -108,6 +108,24 @@ function getAllBatches(): Promise<any> {
     })
 }
 
+export function getAllVarDefs(): Promise<any> {
+    return new Promise((resolve: any, reject: any) => {
+        fetch("/variable/definitions", {
+            "method": "GET"
+        })
+            .then(response => {
+                console.log("Response");
+                console.log(response);
+                resolve(response.json());
+            })
+            .catch(err => {
+                console.log("Error");
+                console.log(err);
+                reject(err)
+            });
+    })
+}
+
 function getSurveyAudit(survey: string, year: string, period: string): Promise<any> {
     let url = "/audits/" + (survey === 'gb' ? 'week' : 'month') + "/" + year + "/" + period;
 
