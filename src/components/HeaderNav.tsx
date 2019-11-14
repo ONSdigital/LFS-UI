@@ -10,6 +10,7 @@ interface Link {
     link: string,
     label: string,
     current?: boolean
+    hidden?: boolean
 }
 
 interface State {
@@ -26,16 +27,24 @@ export class HeaderNav extends Component <Props, State> {
         let links = props.links;
         let link = links.find(x => x.current);
         link !== undefined ? link.current = false : console.log("there is no current!");
-        link = links.find(x => x.link === window.location.pathname);
-        link !== undefined ? link.current = true : console.log("Page not in list");
+
+        let pathname = window.location.pathname.split('/');
+        link = links.find(x => x.link === '/' + pathname[1]);
+        if (link !== undefined) {
+            link.current = true;
+            link.hidden = false;
+        } else console.log("Page not in list");
         this.setState({links: links});
 
     }
 
     changePage = (label: string) => {
-        let links = this.state.links;
+        let links = this.props.links;
         let link = links.find(x => x.current);
-        link !== undefined ? link.current = false : console.log("there is no current!");
+        if (link !== undefined) {
+            if (link.hidden) link.hidden = true;
+            link.current = false;
+        } else console.log("there is no current!");
         link = links.find(x => x.label === label);
         link !== undefined ? link.current = true : console.log("somehow it's undefined!");
         this.setState({links: links});
@@ -50,14 +59,17 @@ export class HeaderNav extends Component <Props, State> {
                         {
                             this.props.loggedIn ?
                                 this.state.links.map((link, index) =>
-                                    <LinkContainer key={index} to={link.link}>
-                                        <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active" : "")}
-                                            onClick={() => this.changePage(link.label)}>
-                                            <a href={link.link}
-                                               className="header-nav__link">{link.label}
-                                            </a>
-                                        </li>
-                                    </LinkContainer>
+                                    link.hidden ?
+                                        <></>
+                                        :
+                                        <LinkContainer  key={index} to={link.link}>
+                                            <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active" : "")}
+                                                onClick={() => this.changePage(link.label)}>
+                                                <a href={link.link}
+                                                   className="header-nav__link">{link.label}
+                                                </a>
+                                            </li>
+                                        </LinkContainer>
                                 )
                                 :
                                 <LinkContainer key={0} to={"/"}>

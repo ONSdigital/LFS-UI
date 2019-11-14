@@ -20,6 +20,21 @@ export class Layout extends Component <Props, {}> {
         current: true
       },
       {
+        link: "/View_Monthly_Batch",
+        label: "Manage Batch",
+        hidden: true
+      },
+      {
+        link: "/View_Monthly_Batch",
+        label: "Manage Batch",
+        hidden: true
+      },
+      {
+        link: "/surveyUpload",
+        label: "Import Survey",
+        hidden: true
+      },
+      {
         link: "/New_Batch",
         label: "New Batch"
       },
