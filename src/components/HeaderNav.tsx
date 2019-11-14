@@ -35,7 +35,6 @@ export class HeaderNav extends Component <Props, State> {
             link.hidden = false;
         } else console.log("Page not in list");
         this.setState({links: links});
-
     }
 
     changePage = (label: string) => {
