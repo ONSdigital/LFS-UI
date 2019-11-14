@@ -37,22 +37,10 @@ function getAllBatches(): Promise<any> {
     return requestPromise("GET",url);
 }
 
-export function getAllVarDefs(): Promise<any> {
-    return new Promise((resolve: any, reject: any) => {
-        fetch("/variable/definitions", {
-            "method": "GET"
-        })
-            .then(response => {
-                console.log("Response");
-                console.log(response);
-                resolve(response.json());
-            })
-            .catch(err => {
-                console.log("Error");
-                console.log(err);
-                reject(err)
-            });
-    })
+function getVariableDefinitions(): Promise<any> {
+    let url = "/variable/definitions";
+
+    return requestPromise("GET", url)
 }
 
 function getSurveyAudit(survey: string, year: string, period: string): Promise<any> {
@@ -81,4 +69,4 @@ function requestPromise(method: string, url: string, body: any = null): Promise<
     })
 }
 
-export {postSurveyFile, postImportFile, createNewBatch, getAllBatches, getBatchData, getSurveyAudit}
+export {postSurveyFile, postImportFile, createNewBatch, getBatchData, getAllBatches, getVariableDefinitions, getSurveyAudit}

@@ -4,7 +4,7 @@ import {VARIABLE_DEFINITION_HEADERS} from "../../utilities/Headers";
 import {ONSCheckbox} from "../ONS_DesignSystem/ONSCheckbox";
 import DocumentTitle from "react-document-title";
 import moment from "moment";
-import {getAllVarDefs} from "../../utilities/http";
+import {getVariableDefinitions} from "../../utilities/http";
 
 interface Props {
 }
@@ -36,7 +36,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
     }
 
     getVariableDefinitionData = () => {
-        getAllVarDefs()
+        getVariableDefinitions()
             .then(r => {
                 console.log(r);
                 this.setState({data: r});
