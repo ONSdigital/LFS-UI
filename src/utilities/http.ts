@@ -5,7 +5,7 @@ function postSurveyFile(lfsfile: any, fileName: string, fileType: string, survey
     formData.append("fileName", fileName);
     formData.append("fileSource", survey);
 
-    return request("POST", url, formData);
+    return requestPromise("POST", url, formData);
 }
 
 function postImportFile(importFile: any, link :string, fileName: string): Promise<any> {
@@ -14,7 +14,7 @@ function postImportFile(importFile: any, link :string, fileName: string): Promis
     formData.append("lfsFile", importFile[0]);
     formData.append("fileName", fileName);
 
-    return request("POST", url, formData);
+    return requestPromise("POST", url, formData);
 }
 
 function createNewBatch(batchType: string, year: string, period: string, description: string): Promise<any> {
@@ -22,29 +22,29 @@ function createNewBatch(batchType: string, year: string, period: string, descrip
     formData.append("description", description);
     let url = "/batches/" + batchType + "/" + year + (batchType !== 'annually' ? "/" + period : "");
 
-    return request("POST", url, formData);
+    return requestPromise("POST", url, formData);
 }
 
 function getBatchData(batchType: string, year: string, period: string): Promise<any> {
     let url = "/batches/display/" + batchType + "/" + year + (batchType !== 'annually' ? "/" + period : "");
 
-    return request("GET",url);
+    return requestPromise("GET",url);
 }
 
 function getAllBatches(): Promise<any> {
     let url = "/dashboard";
 
-    return request("GET",url);
+    return requestPromise("GET",url);
 }
 
 function getSurveyAudit(survey: string, year: string, period: string): Promise<any> {
     let url = "/audits/" + (survey === 'gb' ? 'week' : 'month') + "/" + year + "/" + period;
 
-    return request("GET", url)
+    return requestPromise("GET", url)
 }
 
 
-function request(method: string, url: string, body: any = null): Promise<any> {
+function requestPromise(method: string, url: string, body: any = null): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
         fetch(url, {
             "method": method,
