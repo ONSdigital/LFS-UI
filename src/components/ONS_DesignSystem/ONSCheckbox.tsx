@@ -3,9 +3,10 @@ import React, {CSSProperties} from 'react';
 interface Props {
     label?: string,
     id: string,
-    onChange: ((...props: any[]) => void) | undefined,
+    onChange?: ((...props: any[]) => void) | undefined,
     checked?: boolean,
     style?: CSSProperties
+    disabled?: boolean
 }
 
 export const ONSCheckbox = (props: Props) => (
@@ -13,6 +14,7 @@ export const ONSCheckbox = (props: Props) => (
         <p className="checkboxes__item" style={props.style}>
             <span className="checkbox ">
                 <input
+                    disabled={props.disabled}
                     type="checkbox"
                     id={props.id}
                     checked={props.checked}
@@ -29,6 +31,7 @@ export const ONSCheckbox = (props: Props) => (
         :
         <span style={{width: "unset"}} className="checkbox">
             <input
+                disabled={props.disabled}
                 type="checkbox"
                 id={props.id}
                 className="checkbox__input js-checkbox "
