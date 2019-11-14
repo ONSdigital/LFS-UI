@@ -54,7 +54,6 @@ export class ONSAccordionTable extends Component <Props, State> {
         this.setState({offset: offset});
         if (this.props.data === null) return;
         let slicedData: any[] = this.state.data.slice(offset, offset+steps);
-        console.log(slicedData)
         if (slicedData !== null) {
             this.setState({
                 slicedData: slicedData
