@@ -1,0 +1,70 @@
+{
+  "Rows": [
+    {
+      "id": 1,
+      "variable": "CAKE01",
+      "description": "The cake is a lie",
+      "type": "Delicious",
+      "valid_from": "24/01/2020",
+      "length": 5,
+      "precision": 2,
+      "alias": "McCake",
+      "editable": "N",
+      "imputation": "N",
+      "dv": "N"
+    },
+    {
+      "id": 2,
+      "variable": "KEY01",
+      "description": "I've got the key",
+      "type": "",
+      "valid_from": "24/01/2020",
+      "length": 5,
+      "precision": 2,
+      "alias": "NotMcCake",
+      "editable": "N",
+      "imputation": "N",
+      "dv": "N"
+    },
+    {
+      "id": 3,
+      "variable": "CAKE02",
+      "description": "Continue testing...",
+      "type": "1992",
+      "valid_from": "24/01/2020",
+      "length": 5,
+      "precision": 2,
+      "alias": "McCakeTwo",
+      "editable": "N",
+      "imputation": "N",
+      "dv": "N"
+    },
+    {
+      "id": 4,
+      "variable": "CAKE03",
+      "description": "...for science",
+      "type": "1992",
+      "valid_from": "24/01/2020",
+      "length": 5,
+      "precision": 2,
+      "alias": "NotMcKey",
+      "editable": "N",
+      "imputation": "N",
+      "dv": "N"
+    },
+    {
+      "id": 5,
+      "variable": "CAKE04",
+      "description": "The cake is still a lie",
+      "type": "1992",
+      "valid_from": "24/01/2020",
+      "length": 5,
+      "precision": 2,
+      "alias": "McProcrastinatorExtraordinaire",
+      "editable": "N",
+      "imputation": "N",
+      "dv": "N"
+    }
+  ],
+  "Count": 5
+}
