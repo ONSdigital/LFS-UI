@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
 import {ONSPanel} from '../components/ONS_DesignSystem/ONSPanel';
 import {ONSButton} from '../components/ONS_DesignSystem/ONSButton';
-import {getMonth, getStatusStyle, monthNumberToString, qList} from '../utilities/Common_Functions';
+import {
+    getMonth,
+    getStatusStyle,
+    monthNumberToString,
+    qList,
+    toUpperCaseFirstChar
+} from '../utilities/Common_Functions';
 import {ONSMetadata} from '../components/ONS_DesignSystem/ONSMetadata';
 import {getBatchData} from "../utilities/http";
 import {GenericNotFound} from "./GenericNotFound";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {BATCH_HEADERS} from "../utilities/Headers";
+import DocumentTitle from "react-document-title";
 
 interface State {
     UploadsData: Data | null
@@ -129,38 +136,40 @@ export class View_Monthly_Batch extends Component <{}, State> {
 
     render() {
         return (
-            <div className="container">
-                {
-                    this.state.batchFound ?
-                        <>
-                            <div>
-                                <header className="header header--internal">
-                                    <p style={{fontWeight: "bold"}}> Manage Monthly Uploads</p>
-                                </header>
-                                <ONSMetadata List={this.state.metadata}/>
-                            </div>
-                            <div style={{width: "55%"}}>
-                                <ONSAccordionTable Headers={BATCH_HEADERS} data={this.state.returnedData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
-                                <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
-                                    <p>Every File Must be Uploaded to Run Process</p>
-                                </ONSPanel>
-                                <br/>
-                            </div>
-                            <div>
-                                <ONSButton label="Run Monthly Process" small={false} primary={true} marginRight={10}/>
-                                {(() => {
-                                    if (qList.some(item => String(getMonth(this.state.period)) === String(item))) {
-                                        return (
-                                            <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
-                                        )
-                                    }
-                                })()}
-                            </div>
-                        </>
-                        :
-                        <GenericNotFound label={this.state.batchType + " batch Not Found "}/>
-                }
-            </div>
+            <DocumentTitle title='LFS: Manage Batch'>
+                <div className="container">
+                    {
+                        this.state.batchFound ?
+                            <>
+                                <div>
+                                    <header className="header header--internal">
+                                        <p style={{fontWeight: "bold"}}> Manage Monthly Uploads</p>
+                                    </header>
+                                    <ONSMetadata List={this.state.metadata}/>
+                                </div>
+                                <div style={{width: "55%"}}>
+                                    <ONSAccordionTable Headers={BATCH_HEADERS} data={this.state.returnedData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
+                                    <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
+                                        <p>Every File Must be Uploaded to Run Process</p>
+                                    </ONSPanel>
+                                    <br/>
+                                </div>
+                                <div>
+                                    <ONSButton label="Run Monthly Process" small={false} primary={true} marginRight={10}/>
+                                    {(() => {
+                                        if (qList.some(item => String(getMonth(this.state.period)) === String(item))) {
+                                            return (
+                                                <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
+                                            )
+                                        }
+                                    })()}
+                                </div>
+                            </>
+                            :
+                            <GenericNotFound label={toUpperCaseFirstChar(this.state.batchType) + " batch Not Found "}/>
+                    }
+                </div>
+            </DocumentTitle>
         );
     }
 }
