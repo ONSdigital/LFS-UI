@@ -3,6 +3,7 @@ import {DashboardTable} from "../components/DashboardTable";
 import {ONSRadioButton} from "../components/ONS_DesignSystem/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
+import DocumentTitle from "react-document-title";
 
 const MONTHLY_BATCH = 'Monthly';
 const QUARTERLY_BATCH = 'Quarterly';
@@ -120,11 +121,12 @@ export class Dashboard extends Component <{}, State> {
 
     render() {
         return (
-            <div className="container">
-                <fieldset className="fieldset">
-                    <legend className="fieldset__legend">Filter Batches</legend>
-                    <p className="checkboxes__label">Batch Status</p>
-                    <span className="radios__items">
+            <DocumentTitle title={'Labour Force Survey Dashboard'}>
+                <div className="container">
+                    <fieldset className="fieldset">
+                        <legend className="fieldset__legend">Filter Batches</legend>
+                        <p className="checkboxes__label">Batch Status</p>
+                        <span className="radios__items">
                         <ONSRadioButton label={'Live'}
                                         onChange={this.handleBatchTypeRadioChange}
                                         id={"live"}
@@ -136,8 +138,8 @@ export class Dashboard extends Component <{}, State> {
                                         checked={!this.state.liveStatus}
                                         style={this.filterOptionStyle}/><br/>
                     </span>
-                    <p className="checkboxes__label">Batch Type</p>
-                    <span className="checkboxes__items">
+                        <p className="checkboxes__label">Batch Type</p>
+                        <span className="checkboxes__items">
                         <ONSCheckbox onChange={this.handleMonthlyBatchFilterChange}
                                      id={MONTHLY_BATCH}
                                      label={MONTHLY_BATCH}
@@ -154,9 +156,10 @@ export class Dashboard extends Component <{}, State> {
                                      checked={this.state.annuallyBatchFilter}
                                      style={this.filterOptionStyle}/>
                     </span>
-                </fieldset>
-                <DashboardTable data={this.state.filteredBatchData}/>
-            </div>
+                    </fieldset>
+                    <DashboardTable data={this.state.filteredBatchData}/>
+                </div>
+            </DocumentTitle>
         );
     }
 }

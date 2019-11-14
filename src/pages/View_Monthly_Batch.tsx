@@ -136,7 +136,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
 
     render() {
         return (
-            <DocumentTitle title='LFS: Manage Batch'>
+            <DocumentTitle title={'LFS Manage Batch ' + monthNumberToString(+this.state.period) + " " + this.state.year}>
                 <div className="container">
                     {
                         this.state.batchFound ?
