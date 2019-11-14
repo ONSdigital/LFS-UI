@@ -184,7 +184,7 @@ export class Import extends Component <Props, State> {
 
     render() {
         return (
-            <DocumentTitle title='LFS: Import'>
+            <DocumentTitle title='LFS Import'>
                 <div className="container">
                     <form>
                         <ONSPanel status={this.state.panel.status} label={this.state.panel.label}

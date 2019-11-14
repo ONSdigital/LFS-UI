@@ -33,9 +33,11 @@ interface State {
     year: string
     week: string
     month: string
+    period: string
     uploadHistory: []
     importHidden: boolean
     importFileName: string
+    metaData: any[]
 }
 
 export class SurveyFileUpload extends Component <Props, State> {
@@ -43,6 +45,7 @@ export class SurveyFileUpload extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
+        let period = (props.match.params.survey === "gb" ? "Week " + props.match.params.week.toString() : monthNumberToString(Number(props.match.params.month)).toString());
         this.state = {
             fileOne: "",
             uploading: false,
@@ -50,6 +53,7 @@ export class SurveyFileUpload extends Component <Props, State> {
             year: props.match.params.year,
             week: props.match.params.week,
             month: props.match.params.month,
+            period: period,
             panel: {
                 label: '',
                 visible: false,
@@ -57,8 +61,24 @@ export class SurveyFileUpload extends Component <Props, State> {
             },
             uploadHistory: [],
             importHidden: false,
-            importFileName: props.match.params.survey + (props.match.params.survey === 'gb' ? props.match.params.week : props.match.params.month) + props.match.params.year
+            importFileName: props.match.params.survey + (props.match.params.survey === 'gb' ? props.match.params.week : props.match.params.month) + props.match.params.year,
+            metaData:
+                [
+                    {
+                        L: "Survey",
+                        R: props.match.params.survey.toUpperCase(),
+                    },
+                    {
+                        L: "Year",
+                        R: props.match.params.year.toString(),
+                    },
+                    {
+                        L: "Period",
+                        R: period,
+                    }
+                ]
         };
+
         this.handleFileChange = this.handleFileChange.bind(this);
     }
 
@@ -132,22 +152,6 @@ export class SurveyFileUpload extends Component <Props, State> {
         window.location.href = "/View_Monthly_Batch/monthly/" + this.state.year + "/" + this.state.month + (!uploaded ? "/true" : "")
     };
 
-    formatMetaData() {
-        return (
-            [{
-                L: "Survey",
-                R: this.state.surveyType.toUpperCase(),
-            }, {
-                L: "Year",
-                R: this.state.year.toString(),
-            }, {
-                L: "Period",
-                R: (this.state.surveyType === "gb" ? "Week " + this.state.week.toString() : monthNumberToString(Number(this.state.month)).toString()),
-            }
-            ]
-        )
-    }
-
     setPanel = (message: string, status: string) => {
         this.setState({
             panel: {
@@ -184,10 +188,11 @@ export class SurveyFileUpload extends Component <Props, State> {
 
     render() {
         return (
-            <DocumentTitle title='LFS: Survey File Upload'>
+            <DocumentTitle
+                title={'LFS Survey Import ' + this.state.period + ' ' + this.state.year + ' ' + this.state.surveyType.toUpperCase()}>
                 <div className="container">
                     <h2>Import Survey</h2>
-                    <ONSMetadata List={this.formatMetaData()}/>
+                    <ONSMetadata List={this.state.metaData}/>
                     <div style={{width: "55%"}}>
                         <h4>Previous imports </h4>
                         <ONSAccordionTable Headers={SURVEY_UPLOAD_HISTORY} data={this.state.uploadHistory}
@@ -210,7 +215,9 @@ export class SurveyFileUpload extends Component <Props, State> {
                                    small={false}/>
                     </form>
                     <br/>
-                    <FileUploadProgress importName={this.state.surveyType.toUpperCase() +  " Survey File"} fileName={this.state.importFileName} hidden={false} importOptionVisible={this.setFileUploading} setPanel={this.setPanel}/>
+                    <FileUploadProgress importName={this.state.surveyType.toUpperCase() + " Survey File"}
+                                        fileName={this.state.importFileName} hidden={false}
+                                        importOptionVisible={this.setFileUploading} setPanel={this.setPanel}/>
                     <br/>
                 </div>
             </DocumentTitle>
