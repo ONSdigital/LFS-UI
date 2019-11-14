@@ -89,11 +89,6 @@ const SURVEY_UPLOAD_HISTORY =
 
 const VARIABLE_DEFINITION_HEADERS =
     [{
-        label: "ID",
-        column_name: "ID",
-        filter: false,
-        order: false
-    }, {
         label: "Variable",
         column_name: "Variable",
         filter: false,
@@ -131,6 +126,11 @@ const VARIABLE_DEFINITION_HEADERS =
     }, {
         label: "Editable",
         column_name: "Editable",
+        filter: false,
+        order: false
+    }, {
+        label: "Expanded",
+        column_name: "Expanded",
         filter: false,
         order: false
     }, {
