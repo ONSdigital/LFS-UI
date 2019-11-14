@@ -92,7 +92,7 @@ export class ONSAccordionTable extends Component <Props, State> {
                             this.state.data !== null && this.state.data.length !== 0 ?
                                 this.state.slicedData.map((row: DashboardTableRow, index: number) =>
                                     <Fragment key={(this.props.expandedRowEnabled ? row.id : index)}>
-                                        <tr className="table__row selectableTableRow"
+                                        <tr className={("table__row selectableTableRow " + (this.props.expandedRowEnabled ? "itemCursorHover " : ""))}
                                             onClick={((e) => this.handleClickOnRow(e, row, index))}
                                             tabIndex={0}
                                             onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>
