@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import { Header } from './Header';
-import { Footer } from './Footer';
-import { HeaderNav } from './HeaderNav';
+import React, {Component} from 'react';
+import {Col, Container, Row} from 'react-bootstrap';
+import {Header} from './Header';
+import {Footer} from './Footer';
+import {HeaderNav} from './HeaderNav';
 
 interface Props {
   loggedIn: boolean
@@ -20,33 +20,30 @@ export class Layout extends Component <Props, {}> {
         current: true
       },
       {
-        link: "/Outputs",
-        label: "Outputs"
+        link: "/New_Batch",
+        label: "New Batch"
       },
       {
         link: "/Import",
         label: "Import"
       },
       {
-        link: "/New_Batch",
-        label: "New Batch"
+        link: "/ViewData",
+        label: "View Data"
+      },
+      {
+        link: "/Outputs",
+        label: "Outputs"
       },
       {
         link: "/Link-to-item-5",
         label: "Link 5"
       },
       {
-        link: "/link-to-item6",
-        label: "Link 6"
-      },
-      {
         link: "/Admin",
-        label: "Admin"
+        label: "User Management"
       },
-      {
-        link: "/Variable-Definitions",
-        label: "VariableDefinitions"
-      }
+
     ];
 
     return (
