@@ -74,7 +74,6 @@ export class ValueLabelsTable extends Component <Props, State> {
         return (
             <DocumentTitle title={"LFS View Value Labels"}>
                 <>
-
                     <ONSTextInput value={this.state.search} label={"Filter by Label Name"}
                                   onChange={this.handleSearch}/>
                     <ONSButton label={"Search"} primary={true} small={false} field={true}
