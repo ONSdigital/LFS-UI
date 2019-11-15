@@ -90,21 +90,22 @@ export class FileUploadProgress extends Component <Props, State> {
 
     handleWSOnMessage = (evt: any) => {
         console.log(evt);
-        if (evt.status === 3) {
+        if (evt.status === 3 || evt.errorMessage.length > 0) {
             if (evt.errorMessage === "fileName not found") {
                 this.setState({
                     websocketActive: false
                 });
                 return;
             }
-            this.props.setPanel(evt.errorMessage, 'error');
+            this.props.setPanel(evt.errorMessage, 'error', true);
         }
         if (evt.status === 1) {
+            this.props.setPanel("","",false);
             this.props.importOptionVisible(false);
         }
         let percentage = Math.round(evt.percent * 10) / 10;
-        if (percentage === 100) {
-            this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success');
+        if (evt.status === 2 && evt.errorMessage.length === 0) {
+            this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success', true);
             this.props.importOptionVisible(true);
         }
         this.setState({
