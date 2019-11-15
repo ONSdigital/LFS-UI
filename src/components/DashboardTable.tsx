@@ -4,6 +4,7 @@ import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions
 import {ONSStatus} from "./ONS_DesignSystem/ONSStatus";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
 import {DASHBOARD_HEADERS} from "../utilities/Headers";
+import {BatchProgressTable} from "./BatchProgressTable";
 
 interface Props {
     Headers?: string[],
@@ -79,11 +80,11 @@ const DashboardExpandedRow = (rowData: any) => {
     let row: DashboardTableRow = rowData.row;
     return (
         <>
-            <ONSButton label={"Manage Batch"} primary={true} small={false} onClick={() => {
+            <ONSButton label={"Manage Batch"} primary={true} small={false} field={true} onClick={() => {
                 window.location.href = "/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
             }}/>
+            <BatchProgressTable/>
         </>
     )
-
 };
 

@@ -73,6 +73,20 @@ const DASHBOARD_HEADERS =
     }
     ];
 
+const BATCH_PROGRESS_TABLE =
+    [{
+        label: "Step",
+        column_name: "Step",
+        filter: false,
+        order: true
+    }, {
+        label: "Status",
+        column_name: "status",
+        filter: false,
+        order: false
+    }
+    ];
+
 const SURVEY_UPLOAD_HISTORY =
     [{
         label: "Import Date",
@@ -173,4 +187,4 @@ function roleHeaders() {
 }
 
 export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, userHeaders, roleHeaders,
-    DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS}
+    DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS, BATCH_PROGRESS_TABLE}
