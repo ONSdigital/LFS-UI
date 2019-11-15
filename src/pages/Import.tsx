@@ -153,12 +153,20 @@ export class Import extends Component <Props, State> {
                 type = '';
                 this.setState({});
                 break;
-            case "Value Label":
+            case "Value Labels GB":
                 type = '.csv';
                 this.setState({
                     built: true,
                     fileName: "value_labels",
-                    uploadLink: 'value/labels'
+                    uploadLink: 'value/labels/gb'
+                });
+                break;
+            case "Value Labels NI":
+                type = '.csv';
+                this.setState({
+                    built: true,
+                    fileName: "value_labels",
+                    uploadLink: 'value/labels/ni'
                 });
                 break;
             case "Variable Definitions":
@@ -177,7 +185,8 @@ export class Import extends Component <Props, State> {
         //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
         //  {"label":"Design Weights", "value":"Design Weights"},
         {"label": "Geographical Classifications", "value": "Geographical Classifications"},
-        {"label": "Value Label", "value": "Value Label"},
+        {"label": "Value Labels GB", "value": "Value Labels GB"},
+        {"label": "Value Labels NI", "value": "Value Labels NI"},
         //  {"label":"Population Estimates", "value":"Population Estimates"},
         {"label": "Variable Definitions", "value": "Variable Definitions"}
     ];
