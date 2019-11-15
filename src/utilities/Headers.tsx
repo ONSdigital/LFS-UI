@@ -128,8 +128,13 @@ const VARIABLE_DEFINITION_HEADERS =
 
 const VALUE_LABELS_HEADERS =
     [{
-        label: "Name",
-        column_name: "Name",
+        label: "Variable Name",
+        column_name: "Label Name",
+        filter: false,
+        order: false
+    },{
+        label: "Label Name",
+        column_name: "Label Name",
         filter: false,
         order: false
     }, {
@@ -140,16 +145,6 @@ const VALUE_LABELS_HEADERS =
     }, {
         label: "Value",
         column_name: "Value",
-        filter: false,
-        order: false
-    }, {
-        label: "Source",
-        column_name: "Source",
-        filter: false,
-        order: false
-    }, {
-        label: "Type",
-        column_name: "Type",
         filter: false,
         order: false
     }, {

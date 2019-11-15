@@ -47,7 +47,7 @@ export class ONSAccordionTable extends Component <Props, State> {
 
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
         if (nextProps.data !== prevState.data && nextProps.data !== null) {
-            return {data: nextProps.data, slicedData: nextProps.data.slice(0, 20)};
+            return {data: nextProps.data, slicedData: nextProps.data.slice(0, nextProps.paginationSize)};
         } else return null;
     }
 
