@@ -99,28 +99,8 @@ const VARIABLE_DEFINITION_HEADERS =
         filter: false,
         order: false
     }, {
-        label: "Type",
-        column_name: "Type",
-        filter: false,
-        order: false
-    }, {
         label: "Valid From",
         column_name: "Valid From",
-        filter: false,
-        order: false
-    }, {
-        label: "Length",
-        column_name: "Length",
-        filter: false,
-        order: false
-    }, {
-        label: "Precision",
-        column_name: "Precision",
-        filter: false,
-        order: false
-    }, {
-        label: "Alias",
-        column_name: "Alias",
         filter: false,
         order: false
     }, {

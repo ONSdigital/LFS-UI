@@ -67,7 +67,8 @@ export class VariableDefinitionTable extends Component <Props, State> {
                                    noDataMessage={this.noDataMessage}
                                    Headers={VARIABLE_DEFINITION_HEADERS}
                                    pagination={true}
-                                   paginationSize={20}/>
+                                   paginationSize={20}
+                                   scrollable={true}/>
             </DocumentTitle>
         );
     }
@@ -84,20 +85,8 @@ const VarDefTableRow = (rowData: any) => {
                 {row.description}
             </td>
             <td className="table__cell ">
-                {row.type}
-            </td>
-            <td className="table__cell ">
                 {moment(row.validFrom).format('L')}
                 {}
-            </td>
-            <td className="table__cell ">
-                {row.length}
-            </td>
-            <td className="table__cell ">
-                {row.precision}
-            </td>
-            <td className="table__cell ">
-                {row.alias}
             </td>
             <td className="table__cell ">
                 <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {LinkContainer} from 'react-router-bootstrap';
 
 interface Props {
@@ -33,7 +33,14 @@ export class HeaderNav extends Component <Props, State> {
         if (link !== undefined) {
             link.current = true;
             link.hidden = false;
-        } else console.log("Page not in list");
+            link.link = window.location.pathname;
+        } else {
+            console.log("Page not in list");
+            link = links.find(x => x.label === 'Dashboard');
+            if (link !== undefined) {
+                link.current = true;
+            }
+        }
         this.setState({links: links});
     }
 
@@ -45,7 +52,13 @@ export class HeaderNav extends Component <Props, State> {
             link.current = false;
         } else console.log("there is no current!");
         link = links.find(x => x.label === label);
-        link !== undefined ? link.current = true : console.log("somehow it's undefined!");
+        if (link !== undefined) {
+            link.current = true;
+            if (link.hidden) {
+                link.hidden = false;
+                link.link = window.location.pathname
+            }
+        } else console.log("somehow it's undefined!");
         this.setState({links: links});
     };
 
@@ -59,7 +72,7 @@ export class HeaderNav extends Component <Props, State> {
                             this.props.loggedIn ?
                                 this.state.links.map((link, index) =>
                                     link.hidden ?
-                                        <></>
+                                        <Fragment key={index}/>
                                         :
                                         <LinkContainer  key={index} to={link.link}>
                                             <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active" : "")}

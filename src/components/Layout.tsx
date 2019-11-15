@@ -16,8 +16,7 @@ export class Layout extends Component <Props, {}> {
     let links = [
       {
         link: "/Dashboard",
-        label: "Dashboard",
-        current: true
+        label: "Dashboard"
       },
       {
         link: "/View_Monthly_Batch",
