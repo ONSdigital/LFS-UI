@@ -146,6 +146,40 @@ const VARIABLE_DEFINITION_HEADERS =
     }
     ];
 
+const VALUE_LABELS_HEADERS =
+    [{
+        label: "Name",
+        column_name: "Name",
+        filter: false,
+        order: false
+    }, {
+        label: "Label",
+        column_name: "Label",
+        filter: false,
+        order: false
+    }, {
+        label: "Value",
+        column_name: "Value",
+        filter: false,
+        order: false
+    }, {
+        label: "Source",
+        column_name: "Source",
+        filter: false,
+        order: false
+    }, {
+        label: "Type",
+        column_name: "Type",
+        filter: false,
+        order: false
+    }, {
+        label: "Last Updated",
+        column_name: "last Updated",
+        filter: false,
+        order: false
+    }
+    ];
+
 function userHeaders() {
     return (
         [{
@@ -193,4 +227,4 @@ function roleHeaders() {
 }
 
 export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, userHeaders, roleHeaders,
-    DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS}
+    DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS, VALUE_LABELS_HEADERS}

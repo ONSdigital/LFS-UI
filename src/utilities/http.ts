@@ -43,6 +43,12 @@ function getVariableDefinitions(): Promise<any> {
     return requestPromise("GET", url)
 }
 
+function getValueLables(): Promise<any> {
+    let url = "/value/labels";
+
+    return requestPromise("GET", url)
+}
+
 function getSurveyAudit(survey: string, year: string, period: string): Promise<any> {
     let url = "/audits/" + (survey === 'gb' ? 'week' : 'month') + "/" + year + "/" + period;
 
@@ -69,4 +75,4 @@ function requestPromise(method: string, url: string, body: any = null): Promise<
     })
 }
 
-export {postSurveyFile, postImportFile, createNewBatch, getBatchData, getAllBatches, getVariableDefinitions, getSurveyAudit}
+export {postSurveyFile, postImportFile, createNewBatch, getBatchData, getAllBatches, getVariableDefinitions, getValueLables, getSurveyAudit}
