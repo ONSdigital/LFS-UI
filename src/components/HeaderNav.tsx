@@ -34,7 +34,13 @@ export class HeaderNav extends Component <Props, State> {
             link.current = true;
             link.hidden = false;
             link.link = window.location.pathname;
-        } else console.log("Page not in list");
+        } else {
+            console.log("Page not in list");
+            link = links.find(x => x.label === 'Dashboard');
+            if (link !== undefined) {
+                link.current = true;
+            }
+        }
         this.setState({links: links});
     }
 
