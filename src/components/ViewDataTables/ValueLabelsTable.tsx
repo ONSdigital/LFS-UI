@@ -45,7 +45,7 @@ export class ValueLabelsTable extends Component <Props, State> {
     };
 
     getSingleVariableDefinitionData = () => {
-        getValueLabels(this.state.search)
+        getValueLabels(this.state.search.toUpperCase())
             .then(r => {
                 console.log(r);
                 if (r.message !== "no data found") {

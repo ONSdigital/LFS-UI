@@ -54,7 +54,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
     };
 
     getSingleVariableDefinitionData = () => {
-        getVariableDefinitions(this.state.search)
+        getVariableDefinitions(this.state.search.toUpperCase())
             .then(r => {
                 console.log(r);
                 if (r.message !== "no data found") {
