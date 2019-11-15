@@ -58,8 +58,6 @@ export class ViewData extends Component <{}, State> {
                     <div className={'container'}>
                         <ONSSelect label="Select Table" value="select value" options={this.tableSelection}
                                    onChange={this.handleImportChange}/>
-                    </div>
-                    <div style={{margin: "30px"}}>
                         {this.state.table}
                     </div>
                 </>
