@@ -126,9 +126,9 @@ export class SurveyFileUpload extends Component <Props, State> {
             .then(response => {
                 console.log(response);
                 if (response.status === 'ERROR') {
-                    this.setPanel("Error Occurred while Uploading File: " + response.errorMessage.toString(), 'error');
+                    this.setPanel("Error Occurred while Uploading File: " + response.errorMessage.toString(), 'error', true);
                 } else {
-                    this.setPanel(response.status, 'success');
+                    this.setPanel(this.state.surveyType.toUpperCase() + " Survey Uploaded, Starting Import", 'success', true);
                     // this.returnToManageBatch(true)
                 }
                 this.setState({
@@ -138,9 +138,9 @@ export class SurveyFileUpload extends Component <Props, State> {
             .catch(err => {
                 console.log(err);
                 if (err.toString() === "SyntaxError: Unexpected token P in JSON at position 0") {
-                    this.setPanel("Error Occurred while Uploading File: Unable to Connect to Server", 'error');
+                    this.setPanel("Error Occurred while Uploading File: Unable to Connect to Server", 'error', true);
                 } else {
-                    this.setPanel("Error Occurred while Uploading File: " + err.toString(), 'error');
+                    this.setPanel("Error Occurred while Uploading File: " + err.toString(), 'error', true);
                 }
                 this.setState({
                     uploading: false,
@@ -152,11 +152,11 @@ export class SurveyFileUpload extends Component <Props, State> {
         window.location.href = "/View_Monthly_Batch/monthly/" + this.state.year + "/" + this.state.month + (!uploaded ? "/true" : "")
     };
 
-    setPanel = (message: string, status: string) => {
+    setPanel = (message: string, status: string, visible: boolean) => {
         this.setState({
             panel: {
                 label: message,
-                visible: true,
+                visible: visible,
                 status: status
             }
         });
@@ -200,11 +200,12 @@ export class SurveyFileUpload extends Component <Props, State> {
                                            expandedRowEnabled={false}
                                            noDataMessage={"Survey has not been previously imported"}/>
                     </div>
+                    <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
+                              hidden={!this.state.panel.visible}>
+                        <p>{this.state.panel.label}</p>
+                    </ONSPanel>
+                    <br/>
                     <form hidden={this.state.importHidden}>
-                        <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
-                                  hidden={!this.state.panel.visible}>
-                            <p>{this.state.panel.label}</p>
-                        </ONSPanel>
                         <ONSUpload label={"Import " + this.state.surveyType.toUpperCase() + " File"}
                                    description={"Only .sav accepted"} fileName={"Upload 1"}
                                    fileID={"U1"}
