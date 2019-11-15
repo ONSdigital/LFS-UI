@@ -159,10 +159,6 @@ export class ONSAccordionTable extends Component <Props, State> {
                     <br/>
                 }
             </>
-
-
         );
     }
 }
-
-
