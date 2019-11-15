@@ -61,7 +61,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
 
     render() {
         return (
-            <DocumentTitle title={"LFS View Variable Definitions"}>/**/
+            <DocumentTitle title={"LFS View Variable Definitions"}>
                 <ONSAccordionTable data={this.state.data} Row={VarDefTableRow}
                                    expandedRowEnabled={false}
                                    noDataMessage={this.noDataMessage}
