@@ -37,7 +37,9 @@ export class ValueLabelsTable extends Component <Props, State> {
         getValueLabels()
             .then(r => {
                 console.log(r);
-                this.setState({data: r, filteredData: r});
+                if (r.message !== "no data found") {
+                    this.setState({data: r, filteredData: r});
+                } else this.setState({filteredData: []});
             })
             .catch(error => {
                 console.log(error);
