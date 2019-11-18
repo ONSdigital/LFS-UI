@@ -11,6 +11,7 @@ interface Props {
     hidden: boolean
     importOptionVisible: Function
     setPanel: Function
+    redirectOnComplete?: any
 }
 
 interface State {
@@ -107,6 +108,7 @@ export class FileUploadProgress extends Component <Props, State> {
         if (evt.status === 2 && evt.errorMessage.length === 0) {
             this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success', true);
             this.props.importOptionVisible(true);
+            this.props.redirectOnComplete(false);
         }
         this.setState({
             uploadStatusData: [{
