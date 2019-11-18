@@ -9,20 +9,24 @@ interface Props {
 interface State {
     page: number,
     maxPage: number
+    disabled: boolean
 }
 
 export class ONSPagination extends Component <Props, State> {
     constructor(props: Props) {
         super(props);
         let maxPage = Math.ceil(props.count / props.steps);
-        this.state = {page: 1, maxPage: maxPage}
+        this.state = {page: 1, maxPage: maxPage, disabled: false}
     }
 
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+        if (nextProps.count < nextProps.steps) {
+            return {disabled: true};
+        }
         let maxPage = Math.ceil(nextProps.count / nextProps.steps);
         if (maxPage !== prevState.maxPage) {
-            return {page: 1, maxPage: maxPage};
-        } else return null;
+            return {page: 1, maxPage: maxPage, disabled: false};
+        } else return {disabled: false};
     }
 
 
@@ -82,27 +86,30 @@ export class ONSPagination extends Component <Props, State> {
 
     render() {
         return (
-            <nav className="pagination "
-                 arial-label={"Pagination (Page " + this.state.page + " of " + this.state.maxPage + ")"}>
-                <div className="pagination__position">Page {this.state.page} of {this.state.maxPage}</div>
-                <ul className="pagination__items">
-                    {this.state.page > 1 &&
-                    <li className="pagination__item pagination__item--previous">
-                        <a style={{cursor: "pointer"}} onClick={(e) => this.previous(e)} className="pagination__link"
-                           rel="prev" aria-label="Go to the previous page">Previous</a>
-                    </li>
-                    }
-                    {this.link(1)}
-                    {this.createLinks()}
-                    {this.link(this.state.maxPage)}
-                    {this.state.page < this.state.maxPage &&
-                    <li className="pagination__item pagination__item--next">
-                        <a style={{cursor: "pointer"}} onClick={(e) => this.next(e)} className="pagination__link"
-                           rel="next" aria-label="Go to the next page">Next</a>
-                    </li>
-                    }
-                </ul>
-            </nav>
+            <div hidden={this.state.disabled}>
+                <nav className="pagination "
+                     arial-label={"Pagination (Page " + this.state.page + " of " + this.state.maxPage + ")"}>
+                    <div className="pagination__position">Page {this.state.page} of {this.state.maxPage}</div>
+                    <ul className="pagination__items">
+                        {this.state.page > 1 &&
+                        <li className="pagination__item pagination__item--previous">
+                            <a style={{cursor: "pointer"}} onClick={(e) => this.previous(e)}
+                               className="pagination__link"
+                               rel="prev" aria-label="Go to the previous page">Previous</a>
+                        </li>
+                        }
+                        {this.link(1)}
+                        {this.createLinks()}
+                        {this.link(this.state.maxPage)}
+                        {this.state.page < this.state.maxPage &&
+                        <li className="pagination__item pagination__item--next">
+                            <a style={{cursor: "pointer"}} onClick={(e) => this.next(e)} className="pagination__link"
+                               rel="next" aria-label="Go to the next page">Next</a>
+                        </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
         );
     }
 }
