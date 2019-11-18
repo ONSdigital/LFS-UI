@@ -44,7 +44,7 @@ function getVariableDefinitions(): Promise<any> {
 }
 
 function getSurveyAudit(survey: string, year: string, period: string): Promise<any> {
-    let url = "/audits/" + (survey === 'gb' ? 'week' : 'month') + "/" + year + "/" + period;
+    let url = "/audits/" + (survey === 'GB' ? 'week' : 'month') + "/" + year + "/" + period;
 
     return requestPromise("GET", url)
 }
