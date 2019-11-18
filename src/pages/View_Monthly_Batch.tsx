@@ -15,25 +15,33 @@ import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {BATCH_HEADERS} from "../utilities/Headers";
 import DocumentTitle from "react-document-title";
+import {SurveyAuditModal} from "../components/SurveyAuditModal";
 
 interface State {
     UploadsData: Data | null
-    batchType: string,
-    year: string,
-    period: string,
-    returnedData: [] | null,
-    metadata: Array<MetaDataListItem>,
+    batchType: string
+    year: string
+    period: string
+    returnedData: [] | null
+    metadata: Array<MetaDataListItem>
     batchFound: boolean,
+    summaryRedirect: string
     summaryOpen: boolean
+    metaData: any[] | null
+    week: string
+    month: string
+    importAudit: any
+    uploadType: string
+
 }
 
 interface MetaDataListItem {
-    R: string,
+    R: string
     L: string
 }
 
 interface Data {
-    Rows: Row,
+    Rows: Row
     Count: number
 }
 
@@ -59,15 +67,24 @@ export class View_Monthly_Batch extends Component <{}, State> {
             returnedData: null,
             metadata: [],
             batchFound: true,
-            summaryOpen: (props.match.params.summary)
+            summaryRedirect: (props.match.params.summary),
+            summaryOpen: false,
+            week: "",
+            month: "",
+            uploadType: "",
+            importAudit: null,
+            metaData: []
         };
         this.getUploads();
-        this.updateMetaDataList()
+        this.updateMetaDataList();
+
     }
 
-    goToUploadPage = (row: any) => {
-        window.location.href = "/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year
-    };
+    componentDidMount(): void {
+        if (this.state.summaryRedirect !== undefined && this.state.summaryRedirect.length > 0) {
+            this.openSummaryModalFromRedirect();
+        }
+    }
 
     getUploads = () => {
         getBatchData(this.state.batchType, this.state.year, this.state.period)
@@ -84,6 +101,26 @@ export class View_Monthly_Batch extends Component <{}, State> {
                 this.setState({batchFound: false});
             });
     };
+
+    goToUploadPage = (row: any) => {
+        window.location.href = "/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year
+    };
+
+    openSummaryModalFromRedirect = () => {
+        let list = this.state.summaryRedirect.split('-');
+        this.openSummaryModal({
+            type: list[0].toUpperCase(),
+            week: +list[1],
+            month: +list[2],
+            year: +list[3],
+        })
+    };
+
+    openSummaryModal = (row: any) => {
+        this.setState({summaryOpen: true, week: row.week, month: row.month, uploadType: row.type});
+    };
+
+    closeSummaryModal = () => this.setState({summaryOpen: false});
 
     formatMetaData() {
         return (
@@ -120,23 +157,45 @@ export class View_Monthly_Batch extends Component <{}, State> {
                     }
                 </td>
                 <td className="table__cell ">
-
                     <ONSStatus label={getStatusStyle(+row.status).text} small={false}
                                status={getStatusStyle(+row.status).colour}/>
                 </td>
+
                 <td className="table__cell ">
-                    <ONSButton label={"Summary"} primary={false} small={true}/>
+                    <ONSButton label={"Import"} primary={false}
+                               small={true}
+                               onClick={(() => this.goToUploadPage(row))}/>
                 </td>
-                <td className="table__cell ">
-                    <ONSButton label={"Upload"} primary={false} small={true} onClick={(() => this.goToUploadPage(row))}/>
-                </td>
+                {
+                    row.status === 0 ?
+                        <td className="table__cell "/>
+                        :
+                        <td className="table__cell ">
+                            <ONSButton label={"Summary"} primary={true} small={true}
+                                       onClick={(() => this.openSummaryModal(row))}/>
+                        </td>
+                }
             </>
         )
     };
 
+    summaryModal = () => {
+        if (this.state.summaryOpen)
+            return (
+                <SurveyAuditModal modelOpen={this.state.summaryOpen}
+                                  week={this.state.week}
+                                  month={this.state.month}
+                                  year={this.state.year}
+                                  surveyType={this.state.uploadType}
+                                  closeSummaryModal={this.closeSummaryModal}/>
+            )
+    };
+
+
     render() {
         return (
-            <DocumentTitle title={'LFS Manage Batch ' + monthNumberToString(+this.state.period) + " " + this.state.year}>
+            <DocumentTitle
+                title={'LFS Manage Batch ' + monthNumberToString(+this.state.period) + " " + this.state.year}>
                 <div className="container">
                     {
                         this.state.batchFound ?
@@ -148,14 +207,18 @@ export class View_Monthly_Batch extends Component <{}, State> {
                                     <ONSMetadata List={this.state.metadata}/>
                                 </div>
                                 <div style={{width: "55%"}}>
-                                    <ONSAccordionTable Headers={BATCH_HEADERS} data={this.state.returnedData} Row={this.BatchUploadTableRow} expandedRowEnabled={false} noDataMessage={"No Data"}/>
+                                    <ONSAccordionTable Headers={BATCH_HEADERS} data={this.state.returnedData}
+                                                       Row={this.BatchUploadTableRow} expandedRowEnabled={false}
+                                                       noDataMessage={"No Data"}/>
+                                    {this.summaryModal()}
                                     <ONSPanel label="This is the Dashboard" status="info" spacious={false}>
                                         <p>Every File Must be Uploaded to Run Process</p>
                                     </ONSPanel>
                                     <br/>
                                 </div>
                                 <div>
-                                    <ONSButton label="Run Monthly Process" small={false} primary={true} marginRight={10}/>
+                                    <ONSButton label="Run Monthly Process" small={false} primary={true}
+                                               marginRight={10}/>
                                     {(() => {
                                         if (qList.some(item => String(getMonth(this.state.period)) === String(item))) {
                                             return (
