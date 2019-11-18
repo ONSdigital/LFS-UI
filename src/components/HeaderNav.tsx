@@ -41,7 +41,7 @@ export class HeaderNav extends Component <Props, State> {
                 link.current = true;
             }
         }
-        this.setState({links: links});
+        this.state = {links: links};
     }
 
     changePage = (label: string) => {
