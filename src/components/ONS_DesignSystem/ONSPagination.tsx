@@ -89,7 +89,7 @@ export class ONSPagination extends Component <Props, State> {
             </li>)
     };
 
-    buttonStyle = {cursor: "pointer", border: "none", outline: 0, textDecoration: "underline"}
+    buttonStyle = {cursor: "pointer", border: "none", outline: 0, textDecoration: "underline"};
 
     render() {
         return (
