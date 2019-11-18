@@ -75,7 +75,7 @@ export class SurveyAuditModal extends Component <Props, State> {
             period = "Week " + this.props.week;
         }
 
-        return "Summary " + this.props.surveyType + " " + period
+        return "Import Summary " + this.props.surveyType + " " + period
     };
 
     summaryMetaData() {
@@ -83,16 +83,16 @@ export class SurveyAuditModal extends Component <Props, State> {
         if (this.state.importAudit !== null) {
             return (
                 [{
-                    L: "Variables",
+                    L: "Variables in File",
                     R: this.state.importAudit.numVarFile,
                 }, {
-                    L: "Variables Imported",
+                    L: "Variables Uploaded",
                     R: this.state.importAudit.numVarLoaded,
                 }, {
-                    L: "Observations",
+                    L: "Observations in File",
                     R: this.state.importAudit.numObFile,
                 }, {
-                    L: "Observations Imported",
+                    L: "Observations Uploaded",
                     R: this.state.importAudit.numObLoaded,
                 },
                 ]
@@ -117,7 +117,7 @@ export class SurveyAuditModal extends Component <Props, State> {
                 shouldFocusAfterRender={true}
                 shouldReturnFocusAfterClose={true}
                 ariaHideApp={false}>
-                <h1>{this.summaryTitle()}</h1>
+                <h3>{this.summaryTitle()}</h3>
                 <div>
                     <ONSMetadata List={this.summaryMetaData()} LSpacing="9" RSpacing="2"/>
                     <ONSButton label="Export / View Report" primary={false} small={false}/>
