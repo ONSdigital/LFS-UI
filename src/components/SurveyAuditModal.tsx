@@ -3,6 +3,7 @@ import {ONSMetadata} from "./ONS_DesignSystem/ONSMetadata";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
 import ReactModal from "react-modal";
 import {getSurveyAudit} from "../utilities/http";
+import {monthNumberToString} from "../utilities/Common_Functions";
 
 interface Props {
     week: string
@@ -69,12 +70,12 @@ export class SurveyAuditModal extends Component <Props, State> {
     };
 
     summaryTitle = () => {
-        let type = "Month ";
-        let period = this.props.month;
-        if (this.props.surveyType === "GB") type = "Week ";
-        period = this.props.week;
+        let period = monthNumberToString(+this.props.month);
+        if (this.props.surveyType === "GB") {
+            period = "Week " + this.props.week;
+        }
 
-        return "Summary " + type + period
+        return "Summary " + this.props.surveyType + " " + period
     };
 
     summaryMetaData() {
@@ -82,17 +83,16 @@ export class SurveyAuditModal extends Component <Props, State> {
         if (this.state.importAudit !== null) {
             return (
                 [{
-                    L: "Number of Variables",
+                    L: "Variables",
                     R: this.state.importAudit.numVarFile,
-                }
-                    , {
-                    L: "Number of Variables Imported",
+                }, {
+                    L: "Variables Imported",
                     R: this.state.importAudit.numVarLoaded,
                 }, {
-                    L: "Number of observations",
+                    L: "Observations",
                     R: this.state.importAudit.numObFile,
                 }, {
-                    L: "Number of observations Imported",
+                    L: "Observations Imported",
                     R: this.state.importAudit.numObLoaded,
                 },
                 ]
