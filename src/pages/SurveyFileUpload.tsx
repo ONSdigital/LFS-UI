@@ -148,8 +148,12 @@ export class SurveyFileUpload extends Component <Props, State> {
             });
     };
 
-    returnToManageBatch = (uploaded: boolean) => {
-        window.location.href = "/View_Monthly_Batch/monthly/" + this.state.year + "/" + this.state.month + (!uploaded ? "/true" : "")
+    returnToManageBatch = (notImported: boolean) => {
+        let redirectURL = '';
+        if (!notImported) {
+            redirectURL = "/" +  this.state.surveyType + '-' + this.state.week + '-' + this.state.month + '-' + this.state.year
+        }
+        window.location.href = "/View_Monthly_Batch/monthly/" + this.state.year + "/" + this.state.month + redirectURL
     };
 
     setPanel = (message: string, status: string, visible: boolean) => {
@@ -160,6 +164,9 @@ export class SurveyFileUpload extends Component <Props, State> {
                 status: status
             }
         });
+        if (message.indexOf("File Imported Successfully")) {
+            this.returnToManageBatch(false)
+        }
     };
 
     setFileUploading = (bool: boolean) => {
