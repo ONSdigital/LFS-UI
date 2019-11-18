@@ -17,13 +17,14 @@ interface State {
 }
 
 interface ValueLabelTableRow {
-    name: string
-    label: string
-    value: string
+    label_name: string
+    label_value: string
+    description: string
     source: string
-    type: string
+    variable: string
     last_updated: Date
 }
+
 
 export class ValueLabelsTable extends Component <Props, State> {
 
@@ -76,7 +77,7 @@ export class ValueLabelsTable extends Component <Props, State> {
         return (
             <DocumentTitle title={"LFS View Value Labels"}>
                 <>
-                    <ONSTextInput value={this.state.search} label={"Filter by Label Name"}
+                    <ONSTextInput value={this.state.search} label={"Filter by Variable Name"}
                                   onChange={this.handleSearch}/>
                     <ONSButton label={"Search"} primary={true} small={false} field={true}
                                onClick={this.getSingleVariableDefinitionData}/>
@@ -95,21 +96,23 @@ export class ValueLabelsTable extends Component <Props, State> {
     }
 }
 
+
+
 const ValueLabelTableRow = (rowData: any) => {
     let row: ValueLabelTableRow = rowData.row;
     return (
         <>
             <td className="table__cell ">
-                Unknown
+                {row.variable}
             </td>
             <td className="table__cell ">
-                {row.name}
+                {row.label_name}
             </td>
             <td className="table__cell ">
-                {row.label}
+                {row.label_value}
             </td>
             <td className="table__cell ">
-                {row.value}
+                {row.description}
             </td>
             <td className="table__cell ">
                 {moment(row.last_updated).format('L')}
