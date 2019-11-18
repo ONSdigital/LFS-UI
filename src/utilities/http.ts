@@ -37,8 +37,14 @@ function getAllBatches(): Promise<any> {
     return requestPromise("GET",url);
 }
 
-function getVariableDefinitions(): Promise<any> {
-    let url = "/variable/definitions";
+function getVariableDefinitions(variable: string | null = null): Promise<any> {
+    let url = "/variable/definitions" + (variable !== null ? "/"  + variable : "");
+
+    return requestPromise("GET", url)
+}
+
+function getValueLabels(variable: string | null = null): Promise<any> {
+    let url = "/value/labels" + (variable !== null ? "/"  + variable : "");
 
     return requestPromise("GET", url)
 }
@@ -69,4 +75,4 @@ function requestPromise(method: string, url: string, body: any = null): Promise<
     })
 }
 
-export {postSurveyFile, postImportFile, createNewBatch, getBatchData, getAllBatches, getVariableDefinitions, getSurveyAudit}
+export {postSurveyFile, postImportFile, createNewBatch, getBatchData, getAllBatches, getVariableDefinitions, getValueLabels, getSurveyAudit}

@@ -1,10 +1,9 @@
 import React, {ChangeEvent, Component} from 'react';
 import {ONSAccordionTable} from "../ONS_DesignSystem/ONSAccordionTable";
-import {VARIABLE_DEFINITION_HEADERS} from "../../utilities/Headers";
-import {ONSCheckbox} from "../ONS_DesignSystem/ONSCheckbox";
+import {VALUE_LABELS_HEADERS} from "../../utilities/Headers";
 import DocumentTitle from "react-document-title";
 import moment from "moment";
-import {getVariableDefinitions} from "../../utilities/http";
+import {getValueLabels} from "../../utilities/http";
 import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
 import {ONSButton} from "../ONS_DesignSystem/ONSButton";
 
@@ -12,26 +11,22 @@ interface Props {
 }
 
 interface State {
-    data: []
-    filteredData: []
+    data: ValueLabelTableRow[]
+    filteredData: ValueLabelTableRow[]
     search: string
 }
 
-interface VarDefTableRow {
-    variable: string
+interface ValueLabelTableRow {
+    label_name: string
+    label_value: string
     description: string
-    type: string
-    validFrom: Date
-    length: number
-    precision: number
-    alias: string
-    editable: boolean
-    expanded: boolean
-    imputation: boolean
-    dv: boolean
+    source: string
+    variable: string
+    last_updated: Date
 }
 
-export class VariableDefinitionTable extends Component <Props, State> {
+
+export class ValueLabelsTable extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -40,7 +35,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
     }
 
     getVariableDefinitionData = () => {
-        getVariableDefinitions()
+        getValueLabels()
             .then(r => {
                 console.log(r);
                 if (r.message !== "no data found") {
@@ -49,14 +44,11 @@ export class VariableDefinitionTable extends Component <Props, State> {
             })
             .catch(error => {
                 console.log(error);
-                if (process.env.NODE_ENV === 'development') {
-                    this.getMockVarDefData()
-                }
             });
     };
 
     getSingleVariableDefinitionData = () => {
-        getVariableDefinitions(this.state.search.toUpperCase())
+        getValueLabels(this.state.search.toUpperCase())
             .then(r => {
                 console.log(r);
                 if (r.message !== "no data found") {
@@ -65,21 +57,10 @@ export class VariableDefinitionTable extends Component <Props, State> {
             })
             .catch(error => {
                 console.log(error);
-                if (process.env.NODE_ENV === 'development') {
-                    this.getMockVarDefData()
-                }
             });
     };
 
-    getMockVarDefData = () => {
-        fetch('/jsons/MOCK_VAR_DEFS.json')
-            .then(response => response.json())
-            .then(response => {
-                this.setState({data: response.Rows});
-            })
-    };
-
-    noDataMessage = "No Variable Definitions matching this criteria";
+    noDataMessage = "No Value Labels matching this criteria";
 
     viewAll = () => {
         this.setState({filteredData: this.state.data, search: ""})
@@ -94,7 +75,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
 
     render() {
         return (
-            <DocumentTitle title={"LFS View Variable Definitions"}>
+            <DocumentTitle title={"LFS View Value Labels"}>
                 <>
                     <ONSTextInput value={this.state.search} label={"Filter by Variable Name"}
                                   onChange={this.handleSearch}/>
@@ -102,10 +83,10 @@ export class VariableDefinitionTable extends Component <Props, State> {
                                onClick={this.getSingleVariableDefinitionData}/>
                     <ONSButton label={"View All"} primary={false} small={false} field={true}
                                onClick={this.viewAll}/>
-                    <ONSAccordionTable data={this.state.filteredData} Row={VarDefTableRow}
+                    <ONSAccordionTable data={this.state.filteredData} Row={ValueLabelTableRow}
                                        expandedRowEnabled={false}
                                        noDataMessage={this.noDataMessage}
-                                       Headers={VARIABLE_DEFINITION_HEADERS}
+                                       Headers={VALUE_LABELS_HEADERS}
                                        pagination={true}
                                        paginationSize={20}
                                        scrollable={true}/>
@@ -115,45 +96,30 @@ export class VariableDefinitionTable extends Component <Props, State> {
     }
 }
 
-const VarDefTableRow = (rowData: any) => {
-    let row: VarDefTableRow = rowData.row;
+
+
+const ValueLabelTableRow = (rowData: any) => {
+    let row: ValueLabelTableRow = rowData.row;
     return (
         <>
             <td className="table__cell ">
                 {row.variable}
             </td>
             <td className="table__cell ">
+                {row.label_name}
+            </td>
+            <td className="table__cell ">
+                {row.label_value}
+            </td>
+            <td className="table__cell ">
                 {row.description}
             </td>
             <td className="table__cell ">
-                {moment(row.validFrom).format('L')}
+                {moment(row.last_updated).format('L')}
                 {}
             </td>
-            <td className="table__cell ">
-                <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>
-            </td>
-            <td className="table__cell ">
-                <ONSCheckbox id={"expanded"} checked={row.expanded} disabled={true}/>
-            </td>
-            <td className="table__cell ">
-                <ONSCheckbox id={"imputation"} checked={row.imputation} disabled={true}/>
-            </td>
-            <td className="table__cell ">
-                <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
-            </td>
+
         </>
     )
 };
-
-// const VarDefExpandedRow = (rowData: any) => {
-//     let row: VarDefTableRow = rowData.row;
-//     return (
-//         <>
-//             <ONSButton label={"Manage Batch"} primary={true} small={false} onClick={() => {
-//                 window.location.href = "/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
-//             }}/>
-//         </>
-//     )
-//
-// };
 
