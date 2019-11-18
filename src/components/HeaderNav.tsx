@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {LinkContainer} from 'react-router-bootstrap';
+import {useLocation} from "react-router-dom";
 
 interface Props {
     links: Link[],
@@ -42,9 +43,18 @@ export class HeaderNav extends Component <Props, State> {
             }
         }
         this.setState({links: links});
+
+        this.usePageViews()
+    }
+
+    usePageViews = () => {
+        let location = useLocation();
+        console.log(location)
+
     }
 
     changePage = (label: string) => {
+        console.log("CHange PAge <============")
         let links = this.props.links;
         let link = links.find(x => x.current);
         if (link !== undefined) {
