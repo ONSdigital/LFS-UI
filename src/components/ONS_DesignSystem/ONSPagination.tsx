@@ -23,6 +23,7 @@ export class ONSPagination extends Component <Props, State> {
         if (nextProps.count < nextProps.steps) {
             return {disabled: true};
         }
+
         let maxPage = Math.ceil(nextProps.count / nextProps.steps);
         if (maxPage !== prevState.maxPage) {
             return {page: 1, maxPage: maxPage, disabled: false};
@@ -31,7 +32,6 @@ export class ONSPagination extends Component <Props, State> {
 
 
     createLinks = () => {
-
         let prev = [];
         let prevPages = [];
         for (let i = this.state.page - 1; i > 1 && i >= this.state.page - 2; i--) {
@@ -78,24 +78,33 @@ export class ONSPagination extends Component <Props, State> {
     };
 
     link = (page: number) => {
-        return (<li key={page} style={{cursor: "pointer"}}
-                    className={"pagination__item " + (this.state.page === page ? "pagination__item--current" : "")}><a
-            onClick={(e) => this.pageChange(e, page)} className="pagination__link"
-            aria-label={"Go to page " + page}>{page}</a></li>)
+        return (
+            <li key={page} style={{cursor: "pointer"}}
+                className={"pagination__item " + (this.state.page === page ? "pagination__item--current" : "")}>
+                <button
+                    style={this.buttonStyle}
+                    onClick={(e) => this.pageChange(e, page)} className="pagination__link"
+                    aria-label={"Go to page " + page}>{page}
+                </button>
+            </li>)
     };
+
+    buttonStyle = {cursor: "pointer", border: "none", outline: 0, textDecoration: "underline"}
 
     render() {
         return (
             <div hidden={this.state.disabled}>
                 <nav className="pagination "
-                     arial-label={"Pagination (Page " + this.state.page + " of " + this.state.maxPage + ")"}>
+                     aria-label={"Pagination (Page " + this.state.page + " of " + this.state.maxPage + ")"}>
                     <div className="pagination__position">Page {this.state.page} of {this.state.maxPage}</div>
                     <ul className="pagination__items">
                         {this.state.page > 1 &&
                         <li className="pagination__item pagination__item--previous">
-                            <a style={{cursor: "pointer"}} onClick={(e) => this.previous(e)}
-                               className="pagination__link"
-                               rel="prev" aria-label="Go to the previous page">Previous</a>
+                            <button style={this.buttonStyle}
+                                    onClick={(e) => this.previous(e)}
+                                    className="pagination__link"
+                                    aria-label="Go to the previous page">Previous
+                            </button>
                         </li>
                         }
                         {this.link(1)}
@@ -103,8 +112,10 @@ export class ONSPagination extends Component <Props, State> {
                         {this.link(this.state.maxPage)}
                         {this.state.page < this.state.maxPage &&
                         <li className="pagination__item pagination__item--next">
-                            <a style={{cursor: "pointer"}} onClick={(e) => this.next(e)} className="pagination__link"
-                               rel="next" aria-label="Go to the next page">Next</a>
+                            <button style={this.buttonStyle}
+                                    onClick={(e) => this.next(e)} className="pagination__link"
+                                    aria-label="Go to the next page">Next
+                            </button>
                         </li>
                         }
                     </ul>
