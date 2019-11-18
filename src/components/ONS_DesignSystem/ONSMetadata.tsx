@@ -34,4 +34,3 @@ export class ONSMetadata extends Component < Props, {} > {
 
     }
 }
-                                {/* <dt className={("metadata__term grid__col col-" + spacing +"@m")}>{item.L}:</dt> */}
