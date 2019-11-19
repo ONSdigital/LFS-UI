@@ -47,7 +47,7 @@ export class ONSAccordionTable extends Component <Props, State> {
 
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
         if (nextProps.data !== prevState.data && nextProps.data !== null) {
-            return {data: nextProps.data, slicedData: nextProps.data.slice(0, 20)};
+            return {data: nextProps.data, slicedData: nextProps.data.slice(0, nextProps.paginationSize)};
         } else return null;
     }
 
@@ -63,9 +63,11 @@ export class ONSAccordionTable extends Component <Props, State> {
     };
 
     handleClickOnRow = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, row: any, index: number) => {
-        row.rowExpanded = !row.rowExpanded;
-        // @ts-ignore
-        this.setState({data: update(this.state.data, {[index]: {$set: row}})})
+        if (this.props.expandedRowEnabled) {
+            row.rowExpanded = !row.rowExpanded;
+            // @ts-ignore
+            this.setState({data: update(this.state.data, {[index]: {$set: row}})})
+        }
     };
 
     handleEnterKeyPressOnRow = (onClick: any, row: DashboardTableRow, index: number) => {
