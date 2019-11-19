@@ -83,12 +83,7 @@ const DashboardExpandedRow = (rowData: any) => {
             <Link to={"/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period} >
                 <ONSButton label={"Manage Batch"} primary={true} small={false} field={true} />
             </Link>
-
-            <ONSButton label={"Manage Batch"} primary={true} small={false} onClick={() => {
-                window.location.href = "/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
-            }}/>
         </>
     )
-
 };
 
