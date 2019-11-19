@@ -72,7 +72,6 @@ export function HeaderNavigation(props: Props) {
     // Set Current Page and set to visible if its a hidden header
     link = links.find(x => x.link === '/' + location.pathname.split('/')[1]);
     if (link !== undefined) {
-        console.log(link)
         link.current = true;
         if (link.nonGenericPage) {
             link.hidden = false;
