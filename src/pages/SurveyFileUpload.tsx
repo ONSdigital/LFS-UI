@@ -92,7 +92,6 @@ export class SurveyFileUpload extends Component <Props, State> {
     getUploadHistory = () => {
         getSurveyAudit(this.state.surveyType, this.state.year, (this.state.surveyType === 'GB' ? this.state.week : this.state.month))
             .then(r => {
-                console.log(r)
                 if (r !== undefined) {
                     // Batch does not exist, load not found page
                     this.setState({uploadHistory: r});
