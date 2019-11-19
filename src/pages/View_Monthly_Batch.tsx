@@ -15,6 +15,7 @@ import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {BATCH_HEADERS} from "../utilities/Headers";
 import DocumentTitle from "react-document-title";
+import {Link} from "react-router-dom";
 
 interface State {
     UploadsData: Data | null
@@ -128,7 +129,9 @@ export class View_Monthly_Batch extends Component <{}, State> {
                     <ONSButton label={"Summary"} primary={false} small={true}/>
                 </td>
                 <td className="table__cell ">
-                    <ONSButton label={"Upload"} primary={false} small={true} onClick={(() => this.goToUploadPage(row))}/>
+                    <Link to={"/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year} >
+                        <ONSButton label={"Upload"} primary={false} small={true}/>
+                    </Link>
                 </td>
             </>
         )
