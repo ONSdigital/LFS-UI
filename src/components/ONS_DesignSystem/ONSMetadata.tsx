@@ -11,11 +11,11 @@ interface Props {
 export class ONSMetadata extends Component < Props, {} > {
    
     render () {         
-        let Lspacing = this.props.LSpacing
-        let Rspacing = this.props.RSpacing
+        let Lspacing = this.props.LSpacing;
+        let Rspacing = this.props.RSpacing;
 
-        if(this.props.LSpacing === undefined) Lspacing = "2"
-        if(this.props.RSpacing === undefined) Rspacing = "10"
+        if(this.props.LSpacing === undefined) Lspacing = "2";
+        if(this.props.RSpacing === undefined) Rspacing = "10";
         
         if (this.props.List !== null) {
             return(
@@ -34,4 +34,3 @@ export class ONSMetadata extends Component < Props, {} > {
 
     }
 }
-                                {/* <dt className={("metadata__term grid__col col-" + spacing +"@m")}>{item.L}:</dt> */}
