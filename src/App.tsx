@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, RouteProps} from "react-router-dom";
+import {Route, RouteProps, Switch} from "react-router-dom";
 import {Layout} from './components/Layout';
 import {Dashboard} from './pages/Dashboard';
 import {Login} from './auth/Login';
@@ -83,7 +83,7 @@ class App extends React.Component<Props, State> {
         return (
             <DocumentTitle title="Labour Force Survey">
                 <Layout loggedIn={!!(this.state.user !== null || "")}>
-                    {/*<Switch>*/}
+                    <Switch>
                         <this.PrivateRoute exact path='/' component={Dashboard} page_id={1}/>
                         <this.PrivateRoute exact path='/Dashboard' component={Dashboard} page_id={2}/>
                         <this.PrivateRoute exact path='/New_Batch' component={New_Batch} page_id={3}/>
@@ -97,7 +97,7 @@ class App extends React.Component<Props, State> {
                         <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
                         <Route exact path='/login' component={Login}/>
                         <Route component={GenericNotFound}/>
-                    {/*</Switch>*/}
+                    </Switch>
                 </Layout>
             </DocumentTitle>
         );
