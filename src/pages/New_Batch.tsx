@@ -93,7 +93,7 @@ export class New_Batch extends Component <{}, State> {
     };
 
     handleBatchTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        this.setState({batchType: e.target.value});
+        this.setState({batchType: e.target.value, period: ""});
         this.errorGone()
 
     };
@@ -121,68 +121,51 @@ export class New_Batch extends Component <{}, State> {
                         <p>{this.state.panel.label}</p>
                     </ONSPanel>
                     <br/>
-                    {/* this is for the empty inputs, the  ifs are pure jank but it works */}
-                    {(() => {if (this.state.inputError === true) {
-                        return(
-                            <div>
-                                <div className="panel panel--error">
-                                    <div className="panel__header">
-                                        <h1 className="panel__title u-fs-r--b">This page has errors</h1>
-                                    </div>
-                                    <div className="panel__body">
-                                        <ul className="list list--bare">
-                                            {(() => {if (this.state.batchType === ""){
-                                                return(<li className="list__item ">
-                                                    <p className="list__link js-inpagelink">
-                                                    Please select a Batch Type.
-                                                    </p>
-                                                </li>
-                                                )}
-                                            })()}
-                                            {(() => {if (this.state.year === ""){
-                                                return(<li className="list__item ">
-                                                    <p className="list__link js-inpagelink">
-                                                    Please select a Year.
-                                                    </p>
-                                                </li>
-                                                )}
-                                            })()}
-
-                                            {(() => {if ((this.state.batchType !== "yearly" && this.state.batchType !== "") && this.state.period === ""){
-                                                return(<li className="list__item ">
-
-                                                    <p className="list__link js-inpagelink">
-                                                    Please select a Period. {this.state.period}
-                                                    </p>
-                                                </li>
-                                                )}
-                                            })()}
-                                        </ul>
-                                    </div>
+                    {(this.state.inputError === true) &&
+                        <div>
+                            <div className="panel panel--error">
+                                <div className="panel__header">
+                                    <h1 className="panel__title u-fs-r--b">This page has errors</h1>
                                 </div>
-                                <div>
-                                    <br/>
+                                <div className="panel__body">
+                                    <ul className="list list--bare">
+                                        {(this.state.batchType === "") &&
+                                            <li className="list__item ">
+                                                <p className="list__link js-inpagelink">
+                                                Please select a Batch Type.
+                                                </p>
+                                            </li>
+                                        }
+                                        {(this.state.year === "") &&
+                                            <li className="list__item ">
+                                                <p className="list__link js-inpagelink">
+                                                Please select a Year.
+                                                </p>
+                                            </li>  
+                                        }
+                                        {((this.state.batchType !== "yearly" && this.state.batchType !== "") && this.state.period === "") &&
+                                            <li className="list__item ">
+                                                <p className="list__link js-inpagelink">
+                                                Please select a Period. {this.state.period}
+                                                </p>
+                                            </li>
+                                        }
+                                    </ul>
                                 </div>
                             </div>
-                        )}
-                    })()}
-
+                            <br/>
+                        </div>
+                    }
                     <form onSubmit={this.handleSubmit}>
                         <div style={{maxWidth: "351px"}}>
                             <ONSSelect label="Batch Type" value="batch" options={batches} onChange={this.handleBatchTypeChange}/>
                             <ONSSelect label="Year" value="year" options={years()} onChange={this.handleYearChange} />
-                            {(() => {if (this.state.batchType === "monthly") {
-                                return(
-                                    <ONSSelect label="Period" value="period" options={months()} onChange={this.handlePeriodChange} />
-                                )
+                            {(this.state.batchType === "monthly") &&
+                                <ONSSelect label="Period" value="period" options={months()} onChange={this.handlePeriodChange} />      
                             }
-                            })()}
-                            {(() => {if(this.state.batchType === "quarterly"){
-                                return(
-                                    <ONSSelect label="Period" value="period" options={quarters} onChange={this.handlePeriodChange} />
-                                )
+                            {(this.state.batchType === "quarterly") &&
+                                <ONSSelect label="Period" value="period" options={quarters} onChange={this.handlePeriodChange} />
                             }
-                            })()}
                             <ONSSubmitButton label="Submit" primary={true} small={false}/>
                         </div>
                     </form>
