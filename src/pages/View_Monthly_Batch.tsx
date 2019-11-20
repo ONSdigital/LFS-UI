@@ -76,15 +76,14 @@ export class View_Monthly_Batch extends Component <{}, State> {
             importAudit: null,
             metaData: []
         };
-        this.getUploads();
-        this.updateMetaDataList();
-
     }
 
     componentDidMount(): void {
         if (this.state.summaryRedirect !== undefined && this.state.summaryRedirect.length > 0) {
             this.openSummaryModalFromRedirect();
         }
+        this.getUploads();
+        this.updateMetaDataList();
     }
 
     getUploads = () => {
