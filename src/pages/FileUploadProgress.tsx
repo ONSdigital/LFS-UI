@@ -101,14 +101,16 @@ export class FileUploadProgress extends Component <Props, State> {
             this.props.setPanel(evt.errorMessage, 'error', true);
         }
         if (evt.status === 1) {
-            this.props.setPanel("","",false);
+            this.props.setPanel("", "", false);
             this.props.importOptionVisible(false);
         }
         let percentage = Math.round(evt.percent * 10) / 10;
         if (evt.status === 2 && evt.errorMessage.length === 0) {
             this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success', true);
             this.props.importOptionVisible(true);
-            this.props.redirectOnComplete(false);
+            if (this.props.redirectOnComplete !== undefined) {
+                this.props.redirectOnComplete(false);
+            }
         }
         this.setState({
             uploadStatusData: [{
@@ -154,7 +156,7 @@ export class FileUploadProgress extends Component <Props, State> {
     render() {
         return (
             <div hidden={!this.state.websocketActive}>
-                 <h4>Import Progress</h4>
+                <h4>Import Progress</h4>
                 <div style={{width: "60%"}}>
                     <ONSAccordionTable Headers={UPLOAD_HEADERS}
                                        data={this.state.uploadStatusData}

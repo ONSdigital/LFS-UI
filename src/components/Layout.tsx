@@ -43,15 +43,11 @@ export class Layout extends Component <Props, {}> {
       },
       {
         link: "/ViewData",
-        label: "View Data"
+        label: "View Variable Data"
       },
       {
         link: "/Outputs",
         label: "Outputs"
-      },
-      {
-        link: "/Link-to-item-5",
-        label: "Link 5"
       },
       {
         link: "/Admin",
