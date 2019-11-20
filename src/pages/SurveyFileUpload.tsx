@@ -11,6 +11,7 @@ import {SURVEY_UPLOAD_HISTORY} from "../utilities/Headers";
 import moment from "moment";
 import DocumentTitle from "react-document-title";
 import {FileUploadProgress} from "./FileUploadProgress";
+import {Link} from "react-router-dom";
 
 interface Props {
     period: string,
@@ -91,7 +92,6 @@ export class SurveyFileUpload extends Component <Props, State> {
     getUploadHistory = () => {
         getSurveyAudit(this.state.surveyType, this.state.year, (this.state.surveyType === 'GB' ? this.state.week : this.state.month))
             .then(r => {
-                console.log(r)
                 if (r !== undefined) {
                     // Batch does not exist, load not found page
                     this.setState({uploadHistory: r});
@@ -223,10 +223,14 @@ export class SurveyFileUpload extends Component <Props, State> {
                                    description={"Only .sav accepted"} fileName={"Upload 1"}
                                    fileID={"U1"}
                                    accept=".sav" onChange={(e) => this.handleFileChange(e.target.files)}/>
+                        <br/>
                         <ONSButton label={"Import"} field={true} onClick={this.uploadFile} primary={true} small={false}
                                    loading={this.state.uploading}/>
-                        <ONSButton label={"Return to Manage Batch"} field={true} onClick={this.returnToManageBatch} primary={false}
-                                   small={false}/>
+                        <Link className={'field'} style={{marginLeft: "15px"}}
+                              to={"/View_Monthly_Batch/monthly/" + this.state.year + "/" + this.state.month}>
+                            <ONSButton label={"Return to Manage Batch"} field={true} primary={false}
+                                       small={false}/>
+                        </Link>
                     </form>
                     <br/>
                     <FileUploadProgress importName={this.state.surveyType.toUpperCase() + " Survey File"}
