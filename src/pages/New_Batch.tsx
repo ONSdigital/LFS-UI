@@ -153,9 +153,7 @@ export class New_Batch extends Component <{}, State> {
                                     </ul>
                                 </div>
                             </div>
-                            <div>
-                                <br/>
-                            </div>
+                            <br/>
                         </div>
                     }
                     <form onSubmit={this.handleSubmit}>
