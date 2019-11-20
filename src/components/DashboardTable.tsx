@@ -4,6 +4,7 @@ import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions
 import {ONSStatus} from "./ONS_DesignSystem/ONSStatus";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
 import {DASHBOARD_HEADERS} from "../utilities/Headers";
+import {Link} from "react-router-dom";
 
 interface Props {
     Headers?: string[],
@@ -79,11 +80,10 @@ const DashboardExpandedRow = (rowData: any) => {
     let row: DashboardTableRow = rowData.row;
     return (
         <>
-            <ONSButton label={"Manage Batch"} primary={true} small={false} onClick={() => {
-                window.location.href = "/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
-            }}/>
+            <Link to={"/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period} >
+                <ONSButton label={"Manage Batch"} primary={true} small={false} field={true} />
+            </Link>
         </>
     )
-
 };
 

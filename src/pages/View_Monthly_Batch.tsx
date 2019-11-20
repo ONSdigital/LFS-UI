@@ -16,6 +16,7 @@ import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTabl
 import {BATCH_HEADERS} from "../utilities/Headers";
 import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../components/SurveyAuditModal";
+import {Link} from "react-router-dom";
 
 interface State {
     UploadsData: Data | null
@@ -102,10 +103,6 @@ export class View_Monthly_Batch extends Component <{}, State> {
             });
     };
 
-    goToUploadPage = (row: any) => {
-        window.location.href = "/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year
-    };
-
     openSummaryModalFromRedirect = () => {
         let list = this.state.summaryRedirect.split('-');
         this.openSummaryModal({
@@ -162,9 +159,10 @@ export class View_Monthly_Batch extends Component <{}, State> {
                 </td>
 
                 <td className="table__cell ">
-                    <ONSButton label={"Import"} primary={false}
-                               small={true}
-                               onClick={(() => this.goToUploadPage(row))}/>
+                    <Link
+                        to={"/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year}>
+                        <ONSButton label={"Import"} primary={false} small={true}/>
+                    </Link>
                 </td>
                 {
                     row.status === 0 ?
