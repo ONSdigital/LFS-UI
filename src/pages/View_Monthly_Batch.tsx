@@ -54,7 +54,11 @@ interface Cell {
     [key: string]: object
 }
 
-export class View_Monthly_Batch extends Component <{}, State> {
+interface Props {
+    match: any
+}
+
+export class View_Monthly_Batch extends Component <Props, State> {
     displayName = View_Monthly_Batch.name;
 
     constructor(props: any) {
@@ -62,7 +66,7 @@ export class View_Monthly_Batch extends Component <{}, State> {
 
         this.state = {
             UploadsData: null,
-            batchType: props.match.params.batchtype,
+            batchType: 'monthly',
             year: props.match.params.year,
             period: props.match.params.period,
             returnedData: null,
@@ -121,6 +125,9 @@ export class View_Monthly_Batch extends Component <{}, State> {
     formatMetaData() {
         return (
             [{
+                L: "Batch Type",
+                R: 'Monthly',
+            }, {
                 L: "Year",
                 R: this.state.year.toString(),
             }, {
