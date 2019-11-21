@@ -1,10 +1,10 @@
 import React from 'react';
-import {BATCH_HEADERS} from "../utilities/Headers";
-import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
-import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
-import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
+import {BATCH_HEADERS} from "../../utilities/Headers";
+import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
+import {getStatusStyle, monthNumberToString} from "../../utilities/Common_Functions";
+import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
-import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
+import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 
 interface Props {
     batchData: [] | null
@@ -14,7 +14,7 @@ interface Props {
     period: string
 }
 
-export function QuarterlyBatchUploadTable(props: Props) {
+export function MonthlyBatchUploadTable(props: Props) {
 
     let BatchUploadTableRow = (rowData: any) => {
         let row = rowData.row;

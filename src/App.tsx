@@ -8,14 +8,14 @@ import {Outputs} from './pages/Outputs';
 import Logout from './auth/Logout';
 import {Import} from "./pages/Import";
 import {New_Batch} from './pages/New_Batch';
-import {View_Monthly_Batch} from './pages/View_Monthly_Batch';
+import {View_Monthly_Batch} from './pages/manageBatch/View_Monthly_Batch';
 import {GenericNotFound} from "./pages/GenericNotFound";
 import {Cookies, withCookies} from "react-cookie";
 import {SurveyFileUpload} from "./pages/SurveyFileUpload";
 import {FileUploadProgress} from './pages/FileUploadProgress';
 import DocumentTitle from "react-document-title";
 import {ViewData} from "./pages/ViewData";
-import {View_Quarterly_Batch} from "./pages/View_Quarterly_Batch";
+import {View_Quarterly_Batch} from "./pages/manageBatch/View_Quarterly_Batch";
 
 interface Props {
     cookies: Cookies

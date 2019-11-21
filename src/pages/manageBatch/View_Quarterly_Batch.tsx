@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {ONSPanel} from '../components/ONS_DesignSystem/ONSPanel';
-import {ONSButton} from '../components/ONS_DesignSystem/ONSButton';
-import {getMonth, qList,} from '../utilities/Common_Functions';
-import {ONSMetadata} from '../components/ONS_DesignSystem/ONSMetadata';
-import {GenericNotFound} from "./GenericNotFound";
+import {ONSPanel} from '../../components/ONS_DesignSystem/ONSPanel';
+import {ONSButton} from '../../components/ONS_DesignSystem/ONSButton';
+import {getMonth, qList,} from '../../utilities/Common_Functions';
+import {ONSMetadata} from '../../components/ONS_DesignSystem/ONSMetadata';
+import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
-import {SurveyAuditModal} from "../components/SurveyAuditModal";
+import {SurveyAuditModal} from "../../components/SurveyAuditModal";
 import {QuarterlyBatchUploadTable} from "./QuarterlyBatchUploadTable";
 
 interface State {
