@@ -47,10 +47,10 @@ function months() {
     return monthlist
 }
 
-const quarters = [{"label":"Q1", "value":"Q2"}, 
+const quarters = [{"label":"Q1", "value":"Q1"},
                   {"label":"Q2", "value":"Q2"}, 
                   {"label":"Q3", "value":"Q3"}, 
-                  {"label":"Q4", "value":"Q4"}]
+                  {"label":"Q4", "value":"Q4"}];
 
 function years() {
     let i;
