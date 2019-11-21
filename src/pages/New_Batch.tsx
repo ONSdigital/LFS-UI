@@ -121,7 +121,7 @@ export class New_Batch extends Component <{}, State> {
                         <p>{this.state.panel.label}</p>
                     </ONSPanel>
                     <br/>
-                    {(this.state.inputError === true) &&
+                    {(this.state.inputError) &&
                         <div>
                             <div className="panel panel--error">
                                 <div className="panel__header">
