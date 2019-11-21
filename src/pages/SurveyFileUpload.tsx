@@ -159,7 +159,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                 return
             }
         }
-        window.location.href = "/manage_batch/monthly/" + this.state.year + "/" + this.state.month + redirectURL
+        window.location.href = "/manage-batch/monthly/" + this.state.year + "/" + this.state.month + redirectURL
     };
 
     setPanel = (message: string, status: string, visible: boolean) => {
@@ -227,7 +227,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                         <ONSButton label={"Import"} field={true} onClick={this.uploadFile} primary={true} small={false}
                                    loading={this.state.uploading}/>
                         <Link className={'field'} style={{marginLeft: "15px"}}
-                              to={"/manage_batch/monthly/" + this.state.year + "/" + this.state.month}>
+                              to={"/manage-batch/monthly/" + this.state.year + "/" + this.state.month}>
                             <ONSButton label={"Return to Manage Batch"} field={true} primary={false}
                                        small={false}/>
                         </Link>

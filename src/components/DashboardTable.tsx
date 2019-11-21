@@ -80,7 +80,7 @@ const DashboardExpandedRow = (rowData: any) => {
     let row: DashboardTableRow = rowData.row;
     return (
         <>
-            <Link to={"/manage_batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period} >
+            <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period} >
                 <ONSButton label={"Manage Batch"} primary={true} small={false} field={true} />
             </Link>
         </>

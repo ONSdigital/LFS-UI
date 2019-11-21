@@ -20,7 +20,7 @@ let headerLinks = [
         label: "Dashboard"
     },
     {
-        link: "/manage_batch",
+        link: "/manage-batch",
         label: "Manage Batch",
         hidden: true,
         nonGenericPage: true

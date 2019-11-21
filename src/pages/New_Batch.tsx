@@ -81,7 +81,7 @@ export class New_Batch extends Component <{}, State> {
                             }
                         });
                         // redirect to Manage batch Page
-                        window.location.href = "/manage_batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period
+                        window.location.href = "/manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period
                     }
                 })
                 .catch(error => console.log(error));
