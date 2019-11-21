@@ -6,14 +6,11 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { CookiesProvider } from 'react-cookie';
 
-const baseUrl = undefined;
 const rootElement = document.getElementById('root');
 
 ReactDOM.render(
     <CookiesProvider>
-        <BrowserRouter basename={baseUrl}>
-            <App/>
-        </BrowserRouter>
+        <App/>
     </CookiesProvider>,
   rootElement);
 

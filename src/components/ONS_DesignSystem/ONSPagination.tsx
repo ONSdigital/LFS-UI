@@ -97,9 +97,9 @@ export class ONSPagination extends Component <Props, State> {
                 <nav className="pagination "
                      aria-label={"Pagination (Page " + this.state.page + " of " + this.state.maxPage + ")"}>
                     <div className="pagination__position">Page {this.state.page} of {this.state.maxPage}</div>
-                    <ul className="pagination__items">
+                    <ul className="pagination__items" style={{marginLeft:'0px'}}>
                         {this.state.page > 1 &&
-                        <li className="pagination__item pagination__item--previous">
+                        <li className="pagination__item pagination__item--previous" style={{backgroundColor:"#c1c9ca2e"}}>
                             <button style={this.buttonStyle}
                                     onClick={(e) => this.previous(e)}
                                     className="pagination__link"
@@ -111,7 +111,7 @@ export class ONSPagination extends Component <Props, State> {
                         {this.createLinks()}
                         {this.link(this.state.maxPage)}
                         {this.state.page < this.state.maxPage &&
-                        <li className="pagination__item pagination__item--next">
+                        <li className="pagination__item pagination__item--next" style={{backgroundColor:"#c1c9ca2e"}}>
                             <button style={this.buttonStyle}
                                     onClick={(e) => this.next(e)} className="pagination__link"
                                     aria-label="Go to the next page">Next
