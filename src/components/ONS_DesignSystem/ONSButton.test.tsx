@@ -4,8 +4,9 @@ import {ONSButton} from "./ONSButton";
 import sinon from 'sinon';
 
 describe("ONS Button Test", () => {
-    let wrapper;
-    
+    let wrapper: { find: (arg0: string) => { text: () => void; }; };
+    // let wrapper: any
+
     // Props to pass to Button
     const buttonProps = {
         label: "Submit",
@@ -18,6 +19,10 @@ describe("ONS Button Test", () => {
         wrapper = shallow(<ONSButton label={buttonProps.label} primary={buttonProps.primary}  small={buttonProps.small} onClick={buttonProps.onButtonClick}/>)
     })
 
-    
+    it("should render correctly", () => {
+        expect(wrapper.exists()).toEqual(true);
+    })
+
+
 
 })
