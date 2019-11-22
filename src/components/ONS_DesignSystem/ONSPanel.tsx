@@ -17,7 +17,7 @@ export class ONSPanel extends Component <Props, {}>{
         <div id={this.props.id} className={className} hidden={this.props.hidden}>
           <div className="panel__body">
               {this.props.children}
-            </div>
+          </div>
         </div> 
       );
   }

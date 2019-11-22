@@ -10,8 +10,10 @@ describe("ONS Button Test", () => {
 
     const buttonProps = {
         label: "Submit",
-        primary: true,
-        small: false,
+        primary: false,
+        small: true,
+        field: true,
+        loading: false,
         onButtonClick: sinon.spy()
     };
 
@@ -49,4 +51,6 @@ describe("ONS Button Test", () => {
     it('displays loading button', () => {
         expect(wrapper(mount, loadingButtonProps).find('button').hasClass('btn--loader is-loading ')).toEqual(true)
     })
+
+    
 })
