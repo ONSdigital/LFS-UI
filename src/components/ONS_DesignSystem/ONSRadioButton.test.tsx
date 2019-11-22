@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import {ONSRadioButton} from "./ONSRadioButton";
 
 describe("ONS Radio Button Test", () => {
-    Enzyme.configure({ adapter: new Adapter() });
+    Enzyme.configure({adapter: new Adapter()});
 
     const radioProps = {
         label: "On/Off",
@@ -12,9 +12,9 @@ describe("ONS Radio Button Test", () => {
         onRadioClick: jest.fn()
     };
 
-    function wrapper (render: any, radioProps: any) {
+    function wrapper(render: any, radioProps: any) {
         return render(
-            <ONSRadioButton label={radioProps.label} id={radioProps.id}  onChange={radioProps.onRadioClick}/>)
+            <ONSRadioButton label={radioProps.label} id={radioProps.id} onChange={radioProps.onRadioClick}/>)
     }
 
     it("should render correctly", () => expect(wrapper(shallow, radioProps).exists()).toEqual(true));
