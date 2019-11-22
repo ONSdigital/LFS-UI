@@ -33,7 +33,7 @@ export class ONSUpload extends Component <Props, {}>{
                 <br/>
                   <span className="label__description">{this.props.description}</span>
                 </label>
-                <input type="file" id={this.props.fileID} className="input input--text input-type__input input--upload" name={this.props.fileName} accept={this.props.accept} onChange={(e) => this.handleChange(e)}/>
+                <input style={{position: 'static'}} type="file" id={this.props.fileID} className="input input--text input-type__input input--upload" name={this.props.fileName} accept={this.props.accept} onChange={(e) => this.handleChange(e)}/>
             </p>
         </div>
       );
