@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import {ONSPanel} from "./ONSPanel";
-import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
 

@@ -15,7 +15,7 @@ describe("ONS Button Test", () => {
         field: true,
         loading: false,
         onButtonClick: sinon.spy()
-    };
+    }
 
     const loadingButtonProps = {
         label: "Submit",
@@ -41,16 +41,15 @@ describe("ONS Button Test", () => {
 
     it("should render with the correct label", () => {
         expect(wrapper(mount, buttonProps).find("ONSButton").getElement().props.label).toEqual(buttonProps.label);
-    });
+    })
  
     it('simulates click events', () => {
         wrapper(mount, buttonProps).find('ONSButton').simulate('click');
         expect(buttonProps.onButtonClick).toHaveProperty('callCount', 1);
-    });
+    })
  
     it('displays loading button', () => {
         expect(wrapper(mount, loadingButtonProps).find('button').hasClass('btn--loader is-loading ')).toEqual(true)
     })
-
-    
+     
 })
