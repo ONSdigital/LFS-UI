@@ -12,19 +12,14 @@ describe("ONS Radio Button Test", () => {
         onRadioClick: jest.fn()
     };
 
-
     function wrapper (render: any, radioProps: any) {
         return render(
-            <ONSRadioButton label={radioProps.label} id={radioProps.id}  onChange={radioProps.onButtonClick}/>)
+            <ONSRadioButton label={radioProps.label} id={radioProps.id}  onChange={radioProps.onRadioClick}/>)
     }
 
     it("should render correctly", () => expect(wrapper(shallow, radioProps).exists()).toEqual(true));
 
     it("should render with the correct label", () => {
-        expect(wrapper(mount, radioProps).find("ONSRadioButton").getElement().props.label).toEqual(radioProps.label);
-    });
-
-    it("should render with the correct checked status", () => {
         expect(wrapper(mount, radioProps).find("ONSRadioButton").getElement().props.label).toEqual(radioProps.label);
     });
 
