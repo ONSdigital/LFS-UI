@@ -8,13 +8,14 @@ import {Outputs} from './pages/Outputs';
 import Logout from './auth/Logout';
 import {Import} from "./pages/Import";
 import {New_Batch} from './pages/New_Batch';
-import {View_Monthly_Batch} from './pages/View_Monthly_Batch';
+import {View_Monthly_Batch} from './pages/manageBatch/View_Monthly_Batch';
 import {GenericNotFound} from "./pages/GenericNotFound";
 import {Cookies, withCookies} from "react-cookie";
 import {SurveyFileUpload} from "./pages/SurveyFileUpload";
 import {FileUploadProgress} from './pages/FileUploadProgress';
 import DocumentTitle from "react-document-title";
 import {ViewData} from "./pages/ViewData";
+import {View_Quarterly_Batch} from "./pages/manageBatch/View_Quarterly_Batch";
 
 interface Props {
     cookies: Cookies
@@ -81,27 +82,28 @@ class App extends React.Component<Props, State> {
 
     render() {
         return (
-            <BrowserRouter> 
-                <DocumentTitle title="Labour Force Survey">
-                    <Layout loggedIn={!!(this.state.user !== null || "")}>
-                        <Switch>
-                            <this.PrivateRoute exact path='/' component={Dashboard} page_id={1}/>
-                            <this.PrivateRoute exact path='/Dashboard' component={Dashboard} page_id={2}/>
-                            <this.PrivateRoute exact path='/New_Batch' component={New_Batch} page_id={3}/>
-                            <this.PrivateRoute exact path='/View_Monthly_Batch/:batchtype/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
-                            <this.PrivateRoute exact path='/surveyUpload/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
-                            <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={6}/>
-                            <this.PrivateRoute exact path='/ViewData' component={ViewData} page_id={10}/>
-                            <this.PrivateRoute exact path='/Import' component={Import} page_id={7}/>
-                            <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
-                            <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
-                            <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
-                            <Route exact path='/login' component={Login}/>
-                            <Route component={GenericNotFound}/>
-                        </Switch>
-                    </Layout>
-                </DocumentTitle>
-            </BrowserRouter>
+          <BrowserRouter> 
+              <DocumentTitle title="Labour Force Survey">
+                  <Layout loggedIn={!!(this.state.user !== null || "")}>
+                      <Switch>
+                          <this.PrivateRoute exact path='/' component={Dashboard} page_id={1}/>
+                          <this.PrivateRoute exact path='/Dashboard' component={Dashboard} page_id={2}/>
+                          <this.PrivateRoute exact path='/New_Batch' component={New_Batch} page_id={3}/>
+                          <this.PrivateRoute exact path='/manage-batch/monthly/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
+                          <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>
+                          <this.PrivateRoute exact path='/surveyUpload/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
+                          <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={6}/>
+                          <this.PrivateRoute exact path='/ViewData' component={ViewData} page_id={10}/>
+                          <this.PrivateRoute exact path='/Import' component={Import} page_id={7}/>
+                          <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
+                          <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
+                          <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
+                          <Route exact path='/login' component={Login}/>
+                          <Route component={GenericNotFound}/>
+                      </Switch>
+                  </Layout>
+              </DocumentTitle>
+          </BrowserRouter>
         );
     }
 }
