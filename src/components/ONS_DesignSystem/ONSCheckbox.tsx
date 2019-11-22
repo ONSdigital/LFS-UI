@@ -18,7 +18,7 @@ export const ONSCheckbox = (props: Props) => (
                     type="checkbox"
                     id={props.id}
                     checked={props.checked}
-                    onChange={(e) => props.onChange ? props.onChange(e) : e}
+                    onChange={(e) => props.onChange !== undefined && props.onChange(e)}
                     className="checkbox__input js-checkbox "
                     value={props.id}
                     name={props.label}
