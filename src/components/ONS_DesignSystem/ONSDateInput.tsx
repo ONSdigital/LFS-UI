@@ -7,7 +7,7 @@ import {ONSTextInput} from "./ONSTextInput";
 interface Props {
     label?: string
     onChange?: Function
-    date: Date
+    date: Date | null
 }
 
 export const ONSDateInput = (props: Props) => {
@@ -18,6 +18,7 @@ export const ONSDateInput = (props: Props) => {
         <DatePicker
             dateFormat="dd/MM/yyyy"
             selected={props.date}
+            openToDate={new Date()}
             onChange={date => (props.onChange !== undefined && props.onChange(date))}
             customInput={<CustomInput/>}
         />
