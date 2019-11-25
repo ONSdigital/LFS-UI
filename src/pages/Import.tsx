@@ -7,6 +7,7 @@ import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
 import {FileUploadProgress} from "./FileUploadProgress";
 import {toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
+import {ONSDateInput} from "../components/ONS_DesignSystem/ONSDateInput";
 
 interface Props {
 }
@@ -15,9 +16,11 @@ interface Props {
 interface State {
     uploadFile: any
     uploading: boolean
+    validFromDate: Date | null
     importName: string
     importHidden: boolean
     uploadProgressHidden: boolean
+    validFromDateHidden: boolean
     fileType: string
     uploadLink: string
     //check to see if functionality is built and whether to send the request
@@ -40,9 +43,11 @@ export class Import extends Component <Props, State> {
         this.state = {
             uploadFile: "",
             uploading: false,
+            validFromDate: null,
             importName: "",
             importHidden: true,
             uploadProgressHidden: true,
+            validFromDateHidden: true,
             fileType: "",
             uploadLink: "",
             built: false,
@@ -119,6 +124,10 @@ export class Import extends Component <Props, State> {
         this.setState({uploadFile: selectorFiles});
     };
 
+    handleDateChange = (date: Date) => {
+        this.setState({validFromDate: date});
+    };
+
     handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
         let hidden = (e.target.value !== "address");
         this.setState({
@@ -126,6 +135,7 @@ export class Import extends Component <Props, State> {
             importHidden: false,
             fileType: this.fileType(e.target.value),
             uploadProgressHidden: hidden,
+            validFromDate: null
         });
         this.hidePanel()
     };
@@ -139,7 +149,12 @@ export class Import extends Component <Props, State> {
         switch (file) {
             case "Geographical Classifications":
                 type = '.csv';
-                this.setState({built: true, fileName: "address", uploadLink: 'address'});
+                this.setState({
+                    built: true,
+                    fileName: "address",
+                    uploadLink: 'address',
+                    validFromDateHidden: true
+                });
                 break;
             case "Bulk Amendments":
                 type = '';
@@ -158,7 +173,8 @@ export class Import extends Component <Props, State> {
                 this.setState({
                     built: true,
                     fileName: "value_labels",
-                    uploadLink: 'value/labels/gb'
+                    uploadLink: 'value/labels/gb',
+                    validFromDateHidden: false
                 });
                 break;
             case "Value Labels NI":
@@ -166,7 +182,8 @@ export class Import extends Component <Props, State> {
                 this.setState({
                     built: true,
                     fileName: "value_labels",
-                    uploadLink: 'value/labels/ni'
+                    uploadLink: 'value/labels/ni',
+                    validFromDateHidden: false
                 });
                 break;
             case "Variable Definitions":
@@ -174,7 +191,8 @@ export class Import extends Component <Props, State> {
                 this.setState({
                     built: true,
                     fileName: "variable_definitions",
-                    uploadLink: 'variable/definitions'
+                    uploadLink: 'variable/definitions',
+                    validFromDateHidden: false
                 });
                 break;
         }
@@ -204,6 +222,10 @@ export class Import extends Component <Props, State> {
                                    onChange={this.handleImportChange}/>
                         <br/>
                         <div hidden={this.state.importHidden}>
+                            <div hidden={this.state.validFromDateHidden}>
+                                <ONSDateInput label={'Select Valid From Date'} onChange={this.handleDateChange}  date={this.state.validFromDate}/>
+                                <br/><br/>
+                            </div>
                             <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
                                        description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}
                                        fileID={"U1"}
