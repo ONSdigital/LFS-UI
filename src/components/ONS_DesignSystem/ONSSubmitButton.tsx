@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 interface Props {
     label: string,
-    id?: string,
     primary: boolean,
     small: boolean,
     loading?: boolean,

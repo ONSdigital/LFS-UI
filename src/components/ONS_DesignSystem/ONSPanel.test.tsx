@@ -27,14 +27,14 @@ describe("ONS Panel Test", () => {
         id: "spacious"
     }
     
-    function wrapper (render: any, panelProps: any) {
+    function wrapper (render: any, props: any) {
         return render(
-            <ONSPanel   label={panelProps.label} 
-                        status={panelProps.status}  
-                        spacious={panelProps.spacious} 
-                        id={panelProps.id}
-                        hidden = {panelProps.hidden}
-                        >{panelProps.children}</ONSPanel>)}
+            <ONSPanel   label={props.label} 
+                        status={props.status}  
+                        spacious={props.spacious} 
+                        id={props.id}
+                        hidden = {props.hidden}
+                        >{props.children}</ONSPanel>)}
 
     it("should render correctly", () => expect(wrapper(shallow, panelProps).exists()).toEqual(true));
 
