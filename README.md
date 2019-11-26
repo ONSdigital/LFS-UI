@@ -30,13 +30,18 @@ npm run test-ONS
 
 #### Setup Selenium Tests
 
-To Run tests in Google Chrome
+To Run tests in Google Chrome, these Instructions are for Mac OS
 
 Download the [Chrome Driver](https://sites.google.com/a/chromium.org/chromedriver/downloads) for your version of Chrome
 
-In the `.env` file (Which should be in the root of the project)  add the address to the downloaded Chrome Driver like below
+Add the folder containing the Chrome Driver to the system variables
 ```
-REACT_APP_CHROME_DRIVER=/Users/bill/Documents/chromedriver
+export PATH="$PATH:/Users/yourUsername/Documents"
+```
+ 
+In the `.env` file (Which should be in the root of the project) add the folder path to Chrome Driver like below
+```
+REACT_APP_CHROME_DRIVER=/Users/yourUsername/Documents/chromedriver
 ```
 
 For Selenium Test to Run the application Needs to be running on [localhost:3000](http://localhost:3000/)
