@@ -6,6 +6,7 @@ import {ONSPagination} from "./ONSPagination";
 interface Props {
     Headers: Header[]
     data: any[] | null
+    id?: string
     Row: any
     expandedRowEnabled: boolean
     expandedRow?: any

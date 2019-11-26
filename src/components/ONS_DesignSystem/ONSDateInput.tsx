@@ -6,6 +6,7 @@ import {ONSTextInput} from "./ONSTextInput";
 
 interface Props {
     label?: string
+    id?: string
     onChange?: Function
     date: Date | null
 }

@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import {ONSAccordionTable} from "./ONSAccordionTable";
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
-import {DASHBOARD_HEADERS} from "./ONS_DesignSystem_TestData/headers";
+import {DASHBOARD_HEADERS} from "./ONS_TestData/headers";
 
 interface VarDefTableRow {
     variable: string

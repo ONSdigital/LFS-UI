@@ -1,14 +1,18 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, mount, render } from 'enzyme';
 import { ONSTable } from "./ONSTable";
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
-import { resolvePreset } from '@babel/core';
+import {tableData} from './ONS_TestData/dataSources'
 
 describe("ONS Table Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
+    
 
     const Props = {
+        Title: "Da Table",
+        Data: tableData,
+        Pagination: false
     }
 
     function wrapper(render: any, props: any) {
@@ -28,7 +32,5 @@ describe("ONS Table Test", () => {
     }
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
-
-
-
+    
 })
