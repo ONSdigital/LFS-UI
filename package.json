@@ -37,7 +37,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-ONS": "react-scripts test --testNamePattern=ONS",
+    "test-ONS": "react-scripts test --testNamePattern=ONS --coverage --watchAll=false",
     "test-coverage": "npm test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
