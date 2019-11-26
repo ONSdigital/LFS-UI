@@ -8,9 +8,7 @@ describe("Selenium - User Login Test", () => {
     // Setup Chrome driver
     chrome.setDefaultService(new chrome.ServiceBuilder(process.env.REACT_APP_CHROME_DRIVER).build());
 
-    beforeEach(async  () => {
-        browser = await new Builder().forBrowser('chrome').build();
-    });
+    beforeEach(async  () => browser = await new Builder().forBrowser('chrome').build())
 
     afterEach(async () => {
         if (browser !== undefined) {

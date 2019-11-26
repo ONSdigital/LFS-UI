@@ -12,7 +12,6 @@ import {ONSDateInput} from "../components/ONS_DesignSystem/ONSDateInput";
 interface Props {
 }
 
-
 interface State {
     uploadFile: any
     uploading: boolean

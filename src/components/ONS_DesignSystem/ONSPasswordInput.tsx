@@ -2,7 +2,6 @@ import React, {ChangeEvent, Component} from 'react';
 
 interface Props {
     label?: string,
-    id?: string,
     placeholder?: string,
     marginTop?: number
     onChange?: (e: ChangeEvent<HTMLInputElement>, ...args: any[]) => void,

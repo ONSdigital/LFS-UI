@@ -3,6 +3,7 @@ import React, {ChangeEvent, Component} from 'react';
 interface Props{
   label: string,
   description: string,
+  id?: string
   fileName: string,
   fileID: string,
   accept: string,
