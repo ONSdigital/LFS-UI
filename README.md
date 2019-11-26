@@ -32,14 +32,10 @@ npm run test-ONS
 
 To Run tests in Google Chrome, these Instructions are for Mac OS
 
-Download the [Chrome Driver](https://sites.google.com/a/chromium.org/chromedriver/downloads) for your version of Chrome
+Download the [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) for your version of Chrome, export the zip and move the chromedriver to a directory **which is not `/Applications`**  
 
-Add the folder containing the Chrome Driver to the system variables
-```
-export PATH="$PATH:/Users/yourUsername/Documents"
-```
  
-In the `.env` file (Which should be in the root of the project) add the folder path to Chrome Driver like below
+In the `.env` file (Which should be in the root of the project) add the folder path to chromedriver like below
 ```
 REACT_APP_CHROME_DRIVER=/Users/yourUsername/Documents/chromedriver
 ```
