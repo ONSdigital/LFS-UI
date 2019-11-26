@@ -208,7 +208,7 @@ export class Import extends Component <Props, State> {
 
     fileSelection = [
         //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
-         {"label":"Design Weights", "value":"Design Weights"},
+         {"label":"APS Design Weights", "value":"Design Weights"},
         {"label": "Geographical Classifications", "value": "Geographical Classifications"},
         {"label": "Value Labels GB", "value": "Value Labels GB"},
         {"label": "Value Labels NI", "value": "Value Labels NI"},
