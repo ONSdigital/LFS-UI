@@ -30,8 +30,6 @@ describe("ONS Label Test", () => {
         expect(wrapper(mount, Props).find("ONSLabel").getElement().props.label).toEqual(Props.label);
     })
 
-    // the span is in an if statement so not sure how to get it to find
-
     it('displays a description if supplied', () => {
         expect(wrapper(mount, Props).find("span").hasClass("label__description")).toEqual(true)
     })
