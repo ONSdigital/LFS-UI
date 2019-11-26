@@ -165,8 +165,13 @@ export class Import extends Component <Props, State> {
                 this.setState({});
                 break;
             case "Population Estimates":
-                type = '';
-                this.setState({});
+                type = '.zip';
+                this.setState({
+                    built: true,
+                    fileName: "population",
+                    uploadLink: 'population',
+                    validFromDateHidden: true
+                });
                 break;
             case "Value Labels GB":
                 type = '.csv';
@@ -205,7 +210,7 @@ export class Import extends Component <Props, State> {
         {"label": "Geographical Classifications", "value": "Geographical Classifications"},
         {"label": "Value Labels GB", "value": "Value Labels GB"},
         {"label": "Value Labels NI", "value": "Value Labels NI"},
-        //  {"label":"Population Estimates", "value":"Population Estimates"},
+         {"label":"Population Estimates", "value":"Population Estimates"},
         {"label": "Variable Definitions", "value": "Variable Definitions"}
     ];
 
