@@ -30,11 +30,11 @@ npm run test-ONS
 
 #### Setup Selenium Tests
 
-To Run tests in Google Chrome:
+To Run tests in Google Chrome
 
-Download the [Chrome Driver](https://sites.google.com/a/chromium.org/chromedriver/downloads) for your chrome version
+Download the [Chrome Driver](https://sites.google.com/a/chromium.org/chromedriver/downloads) for your version of Chrome
 
-In the `.env` file add the address to the downloaded Chrome Driver like below
+In the `.env` file (Which should be in the root of the project)  add the address to the downloaded Chrome Driver like below
 ```
 REACT_APP_CHROME_DRIVER=/Users/bill/Documents/chromedriver
 ```
