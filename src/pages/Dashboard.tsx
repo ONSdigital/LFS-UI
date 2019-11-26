@@ -4,6 +4,7 @@ import {ONSRadioButton} from "../components/ONS_DesignSystem/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
 import DocumentTitle from "react-document-title";
+import { ONSLabel } from '../components/ONS_DesignSystem/ONSLabel';
 
 const MONTHLY_BATCH = 'Monthly';
 const QUARTERLY_BATCH = 'Quarterly';
@@ -127,6 +128,7 @@ export class Dashboard extends Component <{}, State> {
                         <legend className="fieldset__legend">Filter Batches</legend>
                         <p className="checkboxes__label">Batch Status</p>
                         <span className="radios__items">
+                        <ONSLabel label="Hello" description="----------"/>
                         <ONSRadioButton label={'Live'}
                                         onChange={this.handleBatchTypeRadioChange}
                                         id={"live"}

@@ -21,6 +21,14 @@ describe("ONS Submit Button Test", () => {
         onClick: sinon.spy()
     }
 
+    const loadingButtonProps = {
+        label: "Submit",
+        primary: true,
+        small: false,
+        loading: true,
+        onClick: sinon.spy(),
+    }
+
     function wrapper(render: any, props:any) {
         return render(
             <ONSSubmitButton    label={props.label}
@@ -35,15 +43,15 @@ describe("ONS Submit Button Test", () => {
     it("should render correctly", () => expect(wrapper(shallow, submitProps).exists()).toEqual(true))
 
     it("should render with the correct label", () => {
-        expect(wrapper(mount, submitProps).find("ONSButton").getElement().props.label).toEqual(buttonProps.label);
+        expect(wrapper(mount, submitProps).find("ONSSubmitButton").getElement().props.label).toEqual(submitProps.label);
     })
  
     it('simulates click events', () => {
-        wrapper(mount, submitProps).find('ONSButton').simulate('click');
-        expect(<clickSubmitProps.onButtonClick).toHaveProperty('callCount', 1);
+        wrapper(mount, clickSubmitProps).find('ONSSubmitButton').simulate('click');
+        expect(clickSubmitProps.onClick).toHaveProperty('callCount', 1);
     })
  
     it('displays loading button', () => {
-        expect(wrapper(mount, submitProps).find('button').hasClass('btn--loader is-loading ')).toEqual(true)
+        expect(wrapper(mount, loadingButtonProps).find('button').hasClass('btn--loader is-loading')).toEqual(true)
     })
 })

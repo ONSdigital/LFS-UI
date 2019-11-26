@@ -11,9 +11,6 @@ interface Props {
     onClick?: (...props: any[]) => void
 }
 
-
-
-
 export class ONSButton extends Component <Props, {}> {
     
     spacing = () => {
