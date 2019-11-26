@@ -2,7 +2,6 @@ import React, {ChangeEvent, Component} from 'react';
 
 interface Props{
   label?: string,
-  id?: string,
   onChange? : (e: ChangeEvent<HTMLSelectElement>, ...args: any[]) => void,
   value: string,
   options: Option[]
