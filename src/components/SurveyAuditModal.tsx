@@ -4,6 +4,7 @@ import {ONSButton} from "./ONS_DesignSystem/ONSButton";
 import ReactModal from "react-modal";
 import {getSurveyAudit} from "../utilities/http";
 import {monthNumberToString} from "../utilities/Common_Functions";
+import moment from "moment";
 
 interface Props {
     week: string
@@ -83,6 +84,9 @@ export class SurveyAuditModal extends Component <Props, State> {
         if (this.state.importAudit !== null) {
             return (
                 [{
+                    L: "Reference Date",
+                    R: moment(new Date(this.state.importAudit.referenceDate)).format('Do MMMM YYYY'),
+                }, {
                     L: "Variables in File",
                     R: this.state.importAudit.numVarFile,
                 }, {
@@ -119,7 +123,7 @@ export class SurveyAuditModal extends Component <Props, State> {
                 ariaHideApp={false}>
                 <h3>{this.summaryTitle()}</h3>
                 <div>
-                    <ONSMetadata List={this.summaryMetaData()} LSpacing="9" RSpacing="2"/>
+                    <ONSMetadata List={this.summaryMetaData()} LSpacing="6" RSpacing="5"/>
                     <ONSButton label="Export / View Report" primary={false} small={false}/>
                 </div>
                 <br/>

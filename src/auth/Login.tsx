@@ -95,9 +95,9 @@ export class Login extends Component <Props, State> {
 
                         <div style={{maxWidth: "351px"}}>
                             <ONSTextInput ref="username" autoFocus={true} label="Username" autoComplete={"username"}
-                                          value={this.state.username} onChange={this.handleUserName}/>
+                                          value={this.state.username} onChange={this.handleUserName} id={'username'}/>
                             <ONSPasswordInput onChange={this.handlePassword}  marginTop={15}/>
-                            <ONSSubmitButton label="Log In" primary={true} small={false}/>
+                            <ONSSubmitButton id='login' label="Log In" primary={true} small={false}/>
                         </div>
                     </form>
                 </section>
