@@ -8,6 +8,7 @@ import {FileUploadProgress} from "./FileUploadProgress";
 import {isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
 import {ONSDateInput} from "../components/ONS_DesignSystem/ONSDateInput";
+import {ReportExport} from "../components/ReportExport";
 
 interface Props {
 }
@@ -20,10 +21,12 @@ interface State {
     importHidden: boolean
     uploadProgressHidden: boolean
     validFromDateHidden: boolean
+    reportExportHidden: boolean
     fileType: string
     uploadLink: string
     //check to see if functionality is built and whether to send the request
     built: boolean
+    hasImportReport: boolean
     fileName: string
     panel: Panel
 }
@@ -47,10 +50,12 @@ export class Import extends Component <Props, State> {
             importHidden: true,
             uploadProgressHidden: true,
             validFromDateHidden: true,
+            reportExportHidden: true,
             fileType: "",
             uploadLink: "",
             built: false,
             fileName: "string",
+            hasImportReport: false,
             panel: {
                 label: '',
                 visible: false,
@@ -140,7 +145,10 @@ export class Import extends Component <Props, State> {
     };
 
     setFileUploading = (bool: boolean) => {
-        this.setState({importHidden: !bool})
+        this.setState({importHidden: bool});
+        if (this.state.hasImportReport) {
+            this.setState({reportExportHidden: false})
+        }
     };
 
     fileType = (file: string) => {
@@ -152,7 +160,8 @@ export class Import extends Component <Props, State> {
                     built: true,
                     fileName: "address",
                     uploadLink: 'address',
-                    validFromDateHidden: true
+                    validFromDateHidden: true,
+                    hasImportReport: false
                 });
                 break;
             case "Bulk Amendments":
@@ -165,7 +174,8 @@ export class Import extends Component <Props, State> {
                     built: true,
                     fileName: "design_weights",
                     uploadLink: 'design/weights',
-                    validFromDateHidden: true
+                    validFromDateHidden: true,
+                    hasImportReport: false
                 });
                 break;
             case "Population Estimates":
@@ -174,7 +184,8 @@ export class Import extends Component <Props, State> {
                     built: true,
                     fileName: "population",
                     uploadLink: 'population',
-                    validFromDateHidden: true
+                    validFromDateHidden: true,
+                    hasImportReport: true
                 });
                 break;
             case "Value Labels GB":
@@ -183,7 +194,8 @@ export class Import extends Component <Props, State> {
                     built: true,
                     fileName: "value_labels",
                     uploadLink: 'value/labels/gb',
-                    validFromDateHidden: false
+                    validFromDateHidden: false,
+                    hasImportReport: false
                 });
                 break;
             case "Value Labels NI":
@@ -192,7 +204,8 @@ export class Import extends Component <Props, State> {
                     built: true,
                     fileName: "value_labels",
                     uploadLink: 'value/labels/ni',
-                    validFromDateHidden: false
+                    validFromDateHidden: false,
+                    hasImportReport: false
                 });
                 break;
             case "Variable Definitions":
@@ -201,7 +214,8 @@ export class Import extends Component <Props, State> {
                     built: true,
                     fileName: "variable_definitions",
                     uploadLink: 'variable/definitions',
-                    validFromDateHidden: false
+                    validFromDateHidden: false,
+                    hasImportReport: false
                 });
                 break;
         }
@@ -247,12 +261,13 @@ export class Import extends Component <Props, State> {
                                        primary={true}
                                        small={false}
                                        loading={this.state.uploading}/>
+                            <ReportExport hidden={this.state.reportExportHidden} setPanel={this.setPanel} importName={this.state.uploadLink}/>
                         </div>
                     </form>
                     <FileUploadProgress importName={this.state.importName}
                                         fileName={this.state.fileName}
                                         hidden={this.state.uploadProgressHidden}
-                                        importOptionVisible={this.setFileUploading}
+                                        fileUploading={this.setFileUploading}
                                         setPanel={this.setPanel}/>
                 </div>
             </DocumentTitle>
