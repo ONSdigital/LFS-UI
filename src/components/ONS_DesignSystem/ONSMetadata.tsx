@@ -4,7 +4,6 @@ interface Props {
     List : any
     LSpacing?: string
     RSpacing?: string
-    RightList? : any
 }
 
 

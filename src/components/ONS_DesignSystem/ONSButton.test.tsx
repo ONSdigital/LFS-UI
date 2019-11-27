@@ -25,16 +25,16 @@ describe("ONS Button Test", () => {
         loading: true
     }
 
-    function wrapper (render: any, buttonProps: any) {
+    function wrapper (render: any, props: any) {
         return render(
-             <ONSButton label={buttonProps.label} 
-                        id={buttonProps.id}
-                        primary={buttonProps.primary}  
-                        small={buttonProps.small} 
-                        field={buttonProps.field}
-                        loading = {buttonProps.loading}
-                        marginRight = {buttonProps.marginRight}
-                        onClick={buttonProps.onButtonClick}/>)
+             <ONSButton label={props.label} 
+                        id={props.id}
+                        primary={props.primary}  
+                        small={props.small} 
+                        field={props.field}
+                        loading = {props.loading}
+                        marginRight = {props.marginRight}
+                        onClick={props.onButtonClick}/>)
     }
 
     it("should render correctly", () => expect(wrapper(shallow, buttonProps).exists()).toEqual(true));

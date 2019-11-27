@@ -12,7 +12,6 @@ import {ONSDateInput} from "../components/ONS_DesignSystem/ONSDateInput";
 interface Props {
 }
 
-
 interface State {
     uploadFile: any
     uploading: boolean
@@ -81,6 +80,8 @@ export class Import extends Component <Props, State> {
                     } else {
                         if (response.status === "OK") {
                             this.setPanel(toUpperCaseFirstChar(this.state.importName) + ': File Uploaded Successfully', 'success');
+                        } else if (response.status === "INFO" && response.filename === "design_weights") {
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, 'info');
                         }
                         console.log("window change")
                     }
@@ -161,8 +162,13 @@ export class Import extends Component <Props, State> {
                 this.setState({});
                 break;
             case "Design Weights":
-                type = '';
-                this.setState({});
+                type = '.csv';
+                this.setState({
+                    built: true,
+                    fileName: "design_weights",
+                    uploadLink: 'design/weights',
+                    validFromDateHidden: true
+                });
                 break;
             case "Population Estimates":
                 type = '';
@@ -201,7 +207,7 @@ export class Import extends Component <Props, State> {
 
     fileSelection = [
         //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
-        //  {"label":"Design Weights", "value":"Design Weights"},
+         {"label":"APS Design Weights", "value":"Design Weights"},
         {"label": "Geographical Classifications", "value": "Geographical Classifications"},
         {"label": "Value Labels GB", "value": "Value Labels GB"},
         {"label": "Value Labels NI", "value": "Value Labels NI"},
