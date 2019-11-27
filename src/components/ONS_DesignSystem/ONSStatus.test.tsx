@@ -19,11 +19,11 @@ describe("ONS Status Test", () => {
         status: "error"
     }
 
-    function wrapper(render: any, statusProps: any) {
+    function wrapper(render: any, props: any) {
         return render(
-            <ONSStatus  label={statusProps.label}
-                        small={statusProps.small}
-                        status={statusProps.status}>
+            <ONSStatus  label={props.label}
+                        small={props.small}
+                        status={props.status}>
             </ONSStatus>
         )
     }

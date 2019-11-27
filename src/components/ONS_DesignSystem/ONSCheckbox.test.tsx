@@ -24,14 +24,14 @@ describe("ONS Checkbox Test", () => {
         onCheckboxClick: jest.fn()
     };
 
-    function wrapper(render: any, checkboxProps: any) {
+    function wrapper(render: any, props: any) {
         return render(
-            <ONSCheckbox id={checkboxProps.id}
-                         label={checkboxProps.label}
-                         onChange={checkboxProps.onCheckboxClick}
-                         disabled={checkboxProps.disabled}
-                         checked={checkboxProps.checked}
-                         style={checkboxProps.style}/>)
+            <ONSCheckbox id={props.id}
+                         label={props.label}
+                         onChange={props.onCheckboxClick}
+                         disabled={props.disabled}
+                         checked={props.checked}
+                         style={props.style}/>)
     }
 
     it("should render correctly", () => expect(wrapper(shallow, checkboxProps).exists()).toEqual(true));
