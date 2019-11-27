@@ -5,7 +5,7 @@ import {postImportFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
 import {FileUploadProgress} from "./FileUploadProgress";
-import {toUpperCaseFirstChar} from "../utilities/Common_Functions";
+import {isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
 import {ONSDateInput} from "../components/ONS_DesignSystem/ONSDateInput";
 
@@ -72,9 +72,8 @@ export class Import extends Component <Props, State> {
         if (this.state.built) {
             postImportFile(this.state.uploadFile, this.state.uploadLink, this.state.fileName)
                 .then(response => {
-                    console.log(response);
+                    (isDevEnv && console.log(response));
                     if (response.status === 'ERROR') {
-                        console.log("window no change");
                         this.setPanel(response.errorMessage.toString(), 'error');
                         this.setState({importHidden: true, uploadProgressHidden: true})
                     } else {
@@ -83,7 +82,6 @@ export class Import extends Component <Props, State> {
                         } else if (response.status === "INFO" && response.filename === "design_weights") {
                             this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, 'info');
                         }
-                        console.log("window change")
                     }
                     this.setState({
                         uploading: false,
@@ -91,7 +89,7 @@ export class Import extends Component <Props, State> {
                 })
                 .catch(err => {
                     console.log(err);
-                    this.setPanel(err.toString(), 'error');
+                    this.setPanel(err.toString(), 'error', );
                     this.setState({
                         uploading: false,
                         uploadProgressHidden: false
@@ -110,11 +108,11 @@ export class Import extends Component <Props, State> {
         });
     };
 
-    setPanel = (message: string, status: string) => {
+    setPanel = (message: string, status: string, visible: boolean = true) => {
         this.setState({
             panel: {
                 label: message,
-                visible: true,
+                visible: visible,
                 status: status
             }
         });
