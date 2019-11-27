@@ -165,7 +165,7 @@ export class Import extends Component <Props, State> {
                 this.setState({});
                 break;
             case "Population Estimates":
-                type = '.zip';
+                type = '.xlsx';
                 this.setState({
                     built: true,
                     fileName: "population",
@@ -210,7 +210,7 @@ export class Import extends Component <Props, State> {
         {"label": "Geographical Classifications", "value": "Geographical Classifications"},
         {"label": "Value Labels GB", "value": "Value Labels GB"},
         {"label": "Value Labels NI", "value": "Value Labels NI"},
-         {"label":"Population Estimates", "value":"Population Estimates"},
+        {"label": "Population Estimates", "value": "Population Estimates"},
         {"label": "Variable Definitions", "value": "Variable Definitions"}
     ];
 
@@ -228,7 +228,8 @@ export class Import extends Component <Props, State> {
                         <br/>
                         <div hidden={this.state.importHidden}>
                             <div hidden={this.state.validFromDateHidden}>
-                                <ONSDateInput label={'Select Valid From Date'} onChange={this.handleDateChange}  date={this.state.validFromDate}/>
+                                <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
+                                              date={this.state.validFromDate}/>
                                 <br/><br/>
                             </div>
                             <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
