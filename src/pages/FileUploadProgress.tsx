@@ -9,7 +9,7 @@ interface Props {
     importName: string
     fileName: string
     hidden: boolean
-    importOptionVisible: Function
+    fileUploading: Function
     setPanel: Function
     redirectOnComplete?: any
 }
@@ -102,12 +102,12 @@ export class FileUploadProgress extends Component <Props, State> {
         }
         if (evt.status === 1) {
             this.props.setPanel("", "", false);
-            this.props.importOptionVisible(false);
+            this.props.fileUploading(true);
         }
         let percentage = Math.round(evt.percent * 10) / 10;
         if (evt.status === 2 && evt.errorMessage.length === 0) {
             this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success', true);
-            this.props.importOptionVisible(true);
+            this.props.fileUploading(false);
             if (this.props.redirectOnComplete !== undefined) {
                 this.props.redirectOnComplete(false);
             }

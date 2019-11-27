@@ -176,7 +176,7 @@ export class SurveyFileUpload extends Component <Props, State> {
     };
 
     setFileUploading = (bool: boolean) => {
-        this.setState({importHidden: !bool})
+        this.setState({importHidden: bool})
     };
 
     handleFileChange = (selectorFiles: FileList | null) => {
@@ -235,7 +235,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                     <br/>
                     <FileUploadProgress importName={this.state.surveyType.toUpperCase() + " Survey File"}
                                         fileName={this.state.importFileName} hidden={false}
-                                        importOptionVisible={this.setFileUploading} setPanel={this.setPanel}
+                                        fileUploading={this.setFileUploading} setPanel={this.setPanel}
                                         redirectOnComplete={this.returnToManageBatch}/>
                     <br/>
                 </div>
