@@ -22,6 +22,12 @@ describe("ONS Column Order Test", () => {
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
+    it("has null order to start", () => {
+        let wrapperStyle = wrapper(mount, Props).find('div').prop('style')
+        expect(wrapperStyle).toHaveProperty('display', "inline-block")
+    }
+    )
+
     it('simulates click events', () => {
         wrapper(mount, Props).find('ONSColumnOrder').simulate('click');
         expect(Props.onClick).toHaveProperty('callCount', 1);

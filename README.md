@@ -12,7 +12,7 @@ clone the project. Navigate to the project root folder in a terminal.
 
 ### Testing
 
-#### Unit tests
+#### Running Unit tests
 Run all Tests
 ```
 npm test

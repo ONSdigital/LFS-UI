@@ -7,7 +7,7 @@ import {Builder, By, WebDriver} from 'selenium-webdriver';
 describe("ONS Checkbox Test", () => {
     Enzyme.configure({adapter: new Adapter()});
 
-    const checkboxProps = {
+    const Props = {
         id: '12',
         onCheckboxClick: jest.fn(),
     };
@@ -46,14 +46,14 @@ describe("ONS Checkbox Test", () => {
     //     }
     // });
 
-    it("should render correctly", () => expect(wrapper(shallow, checkboxProps).exists()).toEqual(true));
+    it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
     it("should render with the correct label", () => {
         expect(wrapper(mount, checkboxWithLabelProps).find("ONSCheckbox").getElement().props.label).toEqual(checkboxWithLabelProps.label);
     });
 
     it("should render without label if prop not passed in", () => {
-            expect(wrapper(mount, checkboxProps).find("ONSCheckbox").getElement().props.label).toBeUndefined();
+            expect(wrapper(mount, Props).find("ONSCheckbox").getElement().props.label).toBeUndefined();
         }
     );
 
@@ -62,8 +62,13 @@ describe("ONS Checkbox Test", () => {
     });
 
     it('simulates change events', () => {
-        wrapper(mount, checkboxProps).find('input').simulate('change')
-        expect(checkboxProps.onCheckboxClick).toHaveBeenCalled()
+        //For no label
+        wrapper(mount, Props).find('input').simulate('change')
+        expect(Props.onCheckboxClick).toHaveBeenCalled()
+
+        //For with label
+        wrapper(mount, checkboxWithLabelProps).find('input').simulate('change')
+        expect(checkboxWithLabelProps.onCheckboxClick).toHaveBeenCalled()
 
     });
 
