@@ -16,7 +16,7 @@ export const ONSRadioButton = (props: Props) => (
                 id={props.id}
                 className={"radio__input js-radio"}
                 checked={props.checked}
-                onChange={(e) => props.onChange ? props.onChange(e) : e}
+                onChange={(e) => props.onChange !== undefined && props.onChange(e)}
                 value={props.id}
                 name={props.label}
             />

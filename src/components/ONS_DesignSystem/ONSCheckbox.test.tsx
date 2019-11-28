@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, {mount, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {ONSCheckbox} from "./ONSCheckbox";
+import {Builder, By, WebDriver} from 'selenium-webdriver';
 
 describe("ONS Checkbox Test", () => {
     Enzyme.configure({adapter: new Adapter()});
@@ -14,14 +15,14 @@ describe("ONS Checkbox Test", () => {
     const checkboxWithLabelProps = {
         label: "Enable",
         id: '12',
-        onCheckboxClick: jest.fn()
+        onCheckboxClick: jest.fn(),
+        checked: true
     };
 
     const checkboxCheckedProps = {
         label: "Enable",
         id: '12',
         checked: true,
-        onCheckboxClick: jest.fn()
     };
 
     function wrapper(render: any, props: any) {
@@ -33,6 +34,17 @@ describe("ONS Checkbox Test", () => {
                          checked={props.checked}
                          style={props.style}/>)
     }
+    
+    let url = 'http://localhost:3000';
+    let browser: WebDriver;
+
+    // beforeEach(async  () => browser = await new Builder().forBrowser('chrome').build())
+
+    // afterEach(async () => {
+    //     if (browser !== undefined) {
+    //         await browser.quit();
+    //     }
+    // });
 
     it("should render correctly", () => expect(wrapper(shallow, checkboxProps).exists()).toEqual(true));
 
@@ -50,9 +62,12 @@ describe("ONS Checkbox Test", () => {
     });
 
     it('simulates change events', () => {
-        wrapper(mount, checkboxProps).find('input').simulate('change');
+        wrapper(mount, checkboxProps).find('input').simulate('change')
         expect(checkboxProps.onCheckboxClick).toHaveBeenCalled()
+
     });
+
+    
 
     // it('matches snapshot', () => {
     //     expect(wrapper(mount, checkboxProps)).toMatchSnapshot()
