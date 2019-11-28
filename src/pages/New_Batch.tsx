@@ -158,15 +158,15 @@ export class New_Batch extends Component <{}, State> {
                     }
                     <form onSubmit={this.handleSubmit}>
                         <div style={{maxWidth: "351px"}}>
-                            <ONSSelect label="Batch Type" value="batch" options={batches} onChange={this.handleBatchTypeChange}/>
-                            <ONSSelect label="Year" value="year" options={years()} onChange={this.handleYearChange} />
+                            <ONSSelect id="batch" label="Batch Type" value="batch" options={batches} onChange={this.handleBatchTypeChange}/>
+                            <ONSSelect id="year" label="Year" value="year" options={years()} onChange={this.handleYearChange} />
                             {(this.state.batchType === "monthly") &&
-                                <ONSSelect label="Period" value="period" options={months()} onChange={this.handlePeriodChange} />      
+                                <ONSSelect id="period" label="Period" value="period" options={months()} onChange={this.handlePeriodChange} />
                             }
                             {(this.state.batchType === "quarterly") &&
-                                <ONSSelect label="Period" value="period" options={quarters} onChange={this.handlePeriodChange} />
+                                <ONSSelect id="period" label="Period" value="period" options={quarters} onChange={this.handlePeriodChange} />
                             }
-                            <ONSSubmitButton label="Submit" primary={true} small={false}/>
+                            <ONSSubmitButton id="newBatchSubmit" label="Submit" primary={true} small={false}/>
                         </div>
                     </form>
                 </div>
