@@ -60,6 +60,26 @@ caption{
   transition: width .2s ease-in;
 }
 
+.accordion-table-chevron {
+  display: block;
+  padding: 6px 10px 6px 18px;
+}
+
+.accordion-table-chevron-svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+
+}
+
+.accordion-table-chevron-rotate {
+  -webkit-transform:rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
 
 .fade:not(.show) {
   opacity: 1;
