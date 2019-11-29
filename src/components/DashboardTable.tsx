@@ -43,7 +43,9 @@ export class DashboardTable extends Component <Props, State> {
 
     render() {
         return (
-            <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} expandedRowEnabled={true} expandedRow={DashboardExpandedRow} noDataMessage={this.noDataMessage} Headers={DASHBOARD_HEADERS}/>
+            <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} expandedRowEnabled={true}
+                               expandedRow={DashboardExpandedRow} noDataMessage={this.noDataMessage}
+                               Headers={DASHBOARD_HEADERS}/>
         );
     }
 }
@@ -81,10 +83,11 @@ const DashboardExpandedRow = (rowData: any) => {
     let row: DashboardTableRow = rowData.row;
     return (
         <>
-            <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period} >
-                <ONSButton label={"Manage Batch"} primary={true} small={false} field={true} />
-            </Link>
+
             <BatchProgressTable/>
+            <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period}>
+                <ONSButton label={"Manage Batch"} primary={true} small={false} field={true}/>
+            </Link>
         </>
     )
 

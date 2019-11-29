@@ -121,7 +121,8 @@ export class ONSAccordionTable extends Component <Props, State> {
                                     {
                                         this.props.expandedRowEnabled ?
                                             <tr hidden={!row.rowExpanded}>
-                                                <td colSpan={this.props.Headers.length + 1}
+                                                <td className="table__cell expandedRow" />
+                                                <td colSpan={this.props.Headers.length}
                                                     className="table__cell expandedRow">
                                                     <this.props.expandedRow row={row}/>
                                                 </td>
@@ -130,12 +131,12 @@ export class ONSAccordionTable extends Component <Props, State> {
                                             <>
                                             </>
                                     }
-
                                 </Fragment>
                             )
                             :
                             <tr>
-                                <td colSpan={this.props.Headers.length} className="table__cell ">
+                                <td colSpan={this.props.Headers.length + (this.props.expandedRowEnabled ? 1 : 0)}
+                                    className="table__cell ">
                                     <ONSPanel label={'No Batches Matching the Criteria'}>
                                         <p>{this.props.noDataMessage}</p>
                                     </ONSPanel>

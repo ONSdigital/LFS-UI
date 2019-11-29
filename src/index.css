@@ -64,6 +64,10 @@ caption{
   padding: 0 0 0 1.85rem;
 }
 
+.expandedRow {
+  padding: 10px 0px 10px 0px;
+}
+
 .expandedRow :hover {
   outline: none;
   cursor: default;
@@ -85,14 +89,15 @@ caption{
 
 .accordion-table-chevron {
   display: block;
-  padding: 6px 10px 6px 18px;
+  padding: 6px 0px 6px 18px;
+  margin: 0;
+  width: 30px;
 }
 
 .accordion-table-chevron-svg {
   display: block;
-  width: 15px;
   height: 15px;
-
+  margin: 0;
 }
 
 .accordion-table-chevron-rotate {
