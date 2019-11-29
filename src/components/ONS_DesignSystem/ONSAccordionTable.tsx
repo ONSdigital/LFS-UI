@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {ONSPanel} from "./ONSPanel";
 import update from 'immutability-helper';
 import {ONSPagination} from "./ONSPagination";
+import './ONSAccordionTable.css';
 
 interface Props {
     Headers: Header[]

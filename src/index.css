@@ -36,41 +36,6 @@ caption{
   border-radius: 5px;
 }
 
-/*.selectableTableRow {*/
-/*  outline: none;*/
-/*  cursor: default;*/
-/*  box-shadow: none;*/
-/*}*/
-
-.nonSelectableTableRow:focus {
-  -webkit-box-shadow: 0 0 0 3px #fd0;
-  box-shadow: 0 0 0 3px #fd0;
-  outline: none;
-  padding: 0 0 0 1.85rem;
-}
-
-.selectableTableRow:focus {
-  -webkit-box-shadow: 0 0 0 3px #fd0;
-  box-shadow: 0 0 0 3px #fd0;
-  outline: none;
-  padding: 0 0 0 1.85rem;
-}
-
-.expandedRowEnabled .selectableTableRow:hover {
-  cursor: pointer;
-  -webkit-box-shadow: 0 0 0 3px #fe781f;
-  box-shadow: 0 0 0 3px #fe781f;
-  outline: none;
-  padding: 0 0 0 1.85rem;
-}
-
-.expandedRow {
-  padding: 10px 0px 10px 0px;
-  outline: none;
-  cursor: default;
-  box-shadow: none;
-}
-
 .progress-bar {
   position: relative;
   height: 20px;
@@ -82,27 +47,6 @@ caption{
   height: 100%;
   border-radius: inherit;
   transition: width .2s ease-in;
-}
-
-.accordion-table-chevron {
-  display: block;
-  padding: 6px 0px 6px 18px;
-  margin: 0;
-  width: 30px;
-}
-
-.accordion-table-chevron-svg {
-  display: block;
-  height: 15px;
-  margin: 0;
-}
-
-.accordion-table-chevron-rotate {
-  -webkit-transform:rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
 }
 
 
