@@ -11,6 +11,7 @@ interface Props {
     onClick?: (...props: any[]) => void
 }
 
+<<<<<<< Updated upstream
 export class ONSButton extends Component <Props, {}> {
     
     spacing = () => {
@@ -18,6 +19,33 @@ export class ONSButton extends Component <Props, {}> {
             marginRight: String(this.props.marginRight) + "px",
           };
         return buttonStyle
+=======
+export const ONSButton = (props: Props) => {
+
+    let spacing = () => {
+        return {
+            marginRight: String(props.marginRight) + "px",
+        }
+    };
+
+    let className = "btn ";
+    if (props.exportExcelBtn) {
+        console.log(props.label)
+        console.log("========="+ props.loading)
+        className = className + " " + (props.loading ? "btn--secondary btn--loader is-loading  " : " btn--excel")
+    } else {
+        console.log(props.label)
+        console.log("-------"+ props.loading)
+        console.log("-------"+ props.field)
+        console.log("-------"+ props.primary)
+        console.log("-------"+ props.small)
+
+        className = className +
+            (props.loading ? "btn--loader is-loading " : "") +
+            (props.field ? "field " : "") +
+            (props.primary ? "" : "btn--secondary ") +
+            (props.small ? "btn--small " : "");
+>>>>>>> Stashed changes
     }
 
     render() {

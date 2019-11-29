@@ -8,21 +8,49 @@ import Enzyme from 'enzyme';
 describe("ONS Button Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
 
-    const buttonProps = {
-        label: "Submit",
+    const Props = {
+        label: "Submit1",
         primary: false,
         small: true,
         field: true,
-        loading: false,
-        onButtonClick: sinon.spy()
+        onButtonClick: sinon.spy(),
+        exportExcelBtn: false
+    }
+
+    const exportButtonProps = {
+        label: "Submit1.5",
+        primary: false,
+        small: true,
+        field: true,
+        onButtonClick: sinon.spy(),
+        exportExcelBtn: true,
+        loading: false
+    }
+
+    const smallButtonProps = {
+        label: "Submit2",
+        primary: true,
+        onButtonClick: sinon.spy(),
+        loading: true,
+        exportExcelBtn: false,
+        small: true
+    }
+    const exportLoadingButtonProps = {
+        label: "Submit3",
+        primary: true,
+        small: false,
+        loading: true,
+        exportExcelBtn: true,
     }
 
     const loadingButtonProps = {
-        label: "Submit",
+        label: "Submit4",
         primary: true,
         small: false,
         onButtonClick: sinon.spy(),
-        loading: true
+        loading: true,
+        field: true,
+        exportExcelBtn: false
     }
 
     function wrapper (render: any, props: any) {
@@ -34,22 +62,30 @@ describe("ONS Button Test", () => {
                         field={props.field}
                         loading = {props.loading}
                         marginRight = {props.marginRight}
-                        onClick={props.onButtonClick}/>)
+                        onClick={props.onButtonClick}
+                        exportExcelBtn={props.exportExcelBtn}/>)
     }
 
-    it("should render correctly", () => expect(wrapper(shallow, buttonProps).exists()).toEqual(true));
+    it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
     it("should render with the correct label", () => {
-        expect(wrapper(mount, buttonProps).find("ONSButton").getElement().props.label).toEqual(buttonProps.label);
+        expect(wrapper(mount, Props).find("ONSButton").getElement().props.label).toEqual(Props.label);
     })
  
     it('simulates click events', () => {
-        wrapper(mount, buttonProps).find('ONSButton').simulate('click');
-        expect(buttonProps.onButtonClick).toHaveProperty('callCount', 1);
+        wrapper(mount, exportButtonProps).find('ONSButton').simulate('click');
+        expect(exportButtonProps.onButtonClick).toHaveProperty('callCount', 1);
     })
  
     it('displays loading button', () => {
-        expect(wrapper(mount, loadingButtonProps).find('button').hasClass('btn--loader is-loading ')).toEqual(true)
+        // with export button
+        expect(wrapper(mount, exportLoadingButtonProps).find('button').hasClass('btn--loader is-loading ')).toEqual(true)
+        
+        //without export button
+        expect(wrapper(mount, loadingButtonProps).find('button').hasClass('btn--loader')).toEqual(true)
     })
-     
+
+    it('displays small button', () => {
+        expect(wrapper(mount, smallButtonProps).find('button').hasClass('btn--small')).toEqual(true)
+    })
 })
