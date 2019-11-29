@@ -27,7 +27,7 @@ describe("Selenium - Create New Batch Test", () => {
         }
     });
 
-    it("should Create a New Batch for January 2010", async () => {
+    it("should Create a New Batch for January 2010 and then redirect to the Manage Batch Page", async () => {
         // get the batch type select field
         let batchOption = await browser.findElement(By.id("batch"));
 
@@ -61,17 +61,60 @@ describe("Selenium - Create New Batch Test", () => {
     });
 
     it("should render the Manage Batch page correctly", async () => {
-        await browser.get('http://localhost:3000/manage-batch/monthly/2010/1');
+        await browser.get('http://localhost:3000/manage-batch/monthly/2014/5');
+        let filepath = '/Users/palmem2/Documents/Dev/LFS/LFS Upload Files/LFSwk18PERS_non_confidential.sav';
 
-        await browser.sleep(2000);
+        await browser.sleep(20);
 
-        let batchTable = await browser.findElement(By.id('basic-table'));
+        // Get the first row of the monthly batch imports table
+        let tableRow = await browser.findElement(By.xpath('//tbody/tr[1]'));
 
-        let item = await batchTable.findElement(By.xpath('th[]'))
+        // Get the Import Button
+        let importButton = await tableRow.findElement(By.id('import-18-5-2014'));
 
-        let batchTypeMetadataValue = await browser.findElement(By.xpath('dd[text()="Monthly"]'));
+        await importButton.click();
 
-        expect(batchTypeMetadataValue).toEqual('Monthly')
+        // Wait for page to change
+        await browser.sleep(20);
+
+        // Get Site Title
+        let title = await browser.getTitle();
+
+        // Check the page has moved to the Survey Import
+        expect(title).toContain('LFS Survey Import ');
+
+        // get Survey metadata
+        let metadata = await browser.findElement(By.className('metadata metadata__list grid grid--gutterless u-cf u-mb-l'));
+
+        // get metaData text
+        let metadataText = await metadata.getText();
+
+        // Confirm the page is setup for the correct survey
+        expect(metadataText).toMatch('Survey:\nGB\nYear:\n2014\nPeriod:\nWeek 18');
+
+
+        let uploadFileInput = await browser.findElement(By.xpath('//input[@type="file"]'));
+
+        await uploadFileInput.sendKeys(filepath);
+
+        // Get Submit Button
+        let SubmitButton = await browser.findElement(By.id('import-btn'));
+
+        // Press Button
+        await SubmitButton.click();
+
+        await browser.sleep(20);
+
+        let panel = await browser.findElement(By.className('panel'));
+
+        let panelText = await panel.findElement(By.xpath('//p'));
+
+        console.log(await panelText.getText())
+
+
+        // let batchTypeMetadataValue = await browser.findElement(By.xpath('dd[text()="Monthly"]'));
+        //         //
+        //         // expect(batchTypeMetadataValue).toEqual('Monthly')
     });
 
 });
