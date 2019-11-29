@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Link, useLocation} from "react-router-dom";
-import {LinkContainer} from "react-router-bootstrap";
 
 interface Props {
     loggedIn: boolean
@@ -32,14 +31,14 @@ let headerLinks = [
         nonGenericPage: true
     },
     {
-        link: "/New_Batch",
-        label: "New Batch"
-    },
-    {
         link: "/import",
         label: "Import",
         hidden: true,
         nonGenericPage: true
+    },
+    {
+        link: "/New_Batch",
+        label: "New Batch"
     },
     {
         link: "/ViewData",
@@ -82,20 +81,21 @@ export function HeaderNavigation(props: Props) {
                             props.loggedIn ?
                                 links.map((link, index) =>
                                     !link.hidden &&
-                                    <LinkContainer key={index} to={link.link}>
+                                    <Fragment key={index}>
                                         <li className={"header-nav__item " + (link.current && "header-nav__item--active")}>
-                                            <Link className="header-nav__link" to={link.link}>{link.label}</Link>
+                                            <Link className="header-nav__link"
+                                                  to={link.nonGenericPage ? location : link.link}>{link.label}</Link>
                                         </li>
-                                    </LinkContainer>
+                                    </Fragment>
                                 )
                                 :
-                                <LinkContainer key={0} to={"/"}>
+                                <Fragment key={0}>
                                     <li className={"header-nav__item header-nav__item--active"}>
                                         <a href={"/"}
                                            className="header-nav__link">Login
                                         </a>
                                     </li>
-                                </LinkContainer>
+                                </Fragment>
                         }
                     </ul>
                 </nav>
