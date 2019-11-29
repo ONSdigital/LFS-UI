@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import {LinkContainer} from 'react-router-bootstrap';
 
 interface Props {
     links: Link[],
