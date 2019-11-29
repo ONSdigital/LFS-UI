@@ -66,9 +66,6 @@ caption{
 
 .expandedRow {
   padding: 10px 0px 10px 0px;
-}
-
-.expandedRow :hover {
   outline: none;
   cursor: default;
   box-shadow: none;
