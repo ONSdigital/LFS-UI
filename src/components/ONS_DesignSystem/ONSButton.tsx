@@ -1,34 +1,41 @@
-import React, {Component} from 'react';
+import React from 'react';
+import './ONSButton.css'
 
 interface Props {
     label: string,
     id?: string,
     primary: boolean,
-    small: boolean,
+    small?: boolean,
     field?: boolean,
     loading?: boolean,
     marginRight?: number,
     onClick?: (...props: any[]) => void
+    exportExcelBtn?: boolean
 }
 
+export const ONSButton = (props: Props) => {
 
+    let spacing = () => {
+        return {
+            marginRight: String(props.marginRight) + "px",
+        }
+    };
 
-
-export class ONSButton extends Component <Props, {}> {
-    
-    spacing = () => {
-        let buttonStyle = {
-            marginRight: String(this.props.marginRight) + "px",
-          };
-        return buttonStyle
+    let className = "btn ";
+    if (props.exportExcelBtn) {
+        className = className + " " + (props.loading ? "btn--secondary btn--loader is-loading  " : " btn--excel")
+    } else {
+        className = className +
+            (props.loading ? "btn--loader is-loading " : "") +
+            (props.field ? "field " : "") +
+            (props.primary ? "" : "btn--secondary ") +
+            (props.small ? "btn--small " : "");
     }
 
-    render() {
-        let className = "btn " + (this.props.loading ? "btn--loader is-loading " : "") + (this.props.field ? "field ": "") + (this.props.primary ? "" : "btn--secondary ") + (this.props.small ? "btn--small " : "");
-        return (
-            <button style={this.spacing()} type="button" disabled={this.props.loading} className={className} onClick={this.props.onClick} >
-                <span className="btn__inner">{this.props.label}</span>
-            </button>
-        );
-    }
-}
+    return (
+        <button id={props.id} style={spacing()} type="button" disabled={props.loading}
+                className={className} onClick={props.onClick}>
+            <span className="btn__inner">{props.label}</span>
+        </button>
+    );
+};

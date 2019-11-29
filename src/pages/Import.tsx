@@ -1,27 +1,32 @@
-import React, {ChangeEvent, Component} from "react";
+import React, {Component} from "react";
 import {ONSUpload} from "../components/ONS_DesignSystem/ONSUpload";
 import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {postImportFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
-import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
 import {FileUploadProgress} from "./FileUploadProgress";
-import {toUpperCaseFirstChar} from "../utilities/Common_Functions";
+import {isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
+import {ONSDateInput} from "../components/ONS_DesignSystem/ONSDateInput";
+import {ReportExport} from "../components/ReportExport";
 
 interface Props {
+    match: any
 }
-
 
 interface State {
     uploadFile: any
     uploading: boolean
+    validFromDate: Date | null
     importName: string
     importHidden: boolean
     uploadProgressHidden: boolean
+    validFromDateHidden: boolean
+    reportExportHidden: boolean
     fileType: string
     uploadLink: string
     //check to see if functionality is built and whether to send the request
     built: boolean
+    hasImportReport: boolean
     fileName: string
     panel: Panel
 }
@@ -37,16 +42,22 @@ export class Import extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
+
+        let importName = (props.match.params.file !== undefined ? props.match.params.file : "");
         this.state = {
             uploadFile: "",
             uploading: false,
-            importName: "",
+            validFromDate: null,
+            importName: importName,
             importHidden: true,
             uploadProgressHidden: true,
+            validFromDateHidden: true,
+            reportExportHidden: true,
             fileType: "",
             uploadLink: "",
             built: false,
             fileName: "string",
+            hasImportReport: false,
             panel: {
                 label: '',
                 visible: false,
@@ -58,6 +69,17 @@ export class Import extends Component <Props, State> {
         this.handleFileChange = this.handleFileChange.bind(this);
     }
 
+    componentDidMount(): void {
+        console.log(this.state.importName);
+        if (this.state.importName.length > 0) {
+            this.fileType(this.state.importName);
+            this.setState({
+                importHidden: false,
+                uploadProgressHidden: true,
+            });
+        }
+    }
+
     upload = () => {
         console.log('Uploading File');
         this.hidePanel();
@@ -66,18 +88,22 @@ export class Import extends Component <Props, State> {
         });
         // TODO: Send correct data for each file type
         if (this.state.built) {
-            postImportFile(this.state.uploadFile, this.state.uploadLink, this.state.fileName)
+            let uploadLink = this.state.uploadLink;
+            if (this.state.validFromDate !== null) {
+                uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString()
+            }
+            postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                 .then(response => {
-                    console.log(response);
+                    (isDevEnv && console.log(response));
                     if (response.status === 'ERROR') {
-                        console.log("window no change");
                         this.setPanel(response.errorMessage.toString(), 'error');
                         this.setState({importHidden: true, uploadProgressHidden: true})
                     } else {
                         if (response.status === "OK") {
                             this.setPanel(toUpperCaseFirstChar(this.state.importName) + ': File Uploaded Successfully', 'success');
+                        } else if (response.status === "INFO" && response.filename === "design_weights") {
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, 'info');
                         }
-                        console.log("window change")
                     }
                     this.setState({
                         uploading: false,
@@ -85,12 +111,17 @@ export class Import extends Component <Props, State> {
                 })
                 .catch(err => {
                     console.log(err);
-                    this.setPanel(err.toString(), 'error');
+                    this.setPanel(err.toString(), 'error',);
                     this.setState({
                         uploading: false,
                         uploadProgressHidden: false
                     });
                 });
+        } else {
+            this.setPanel(this.state.importName + ': Import Not Implemented Yet', 'error');
+            this.setState({
+                uploading: false,
+            });
         }
     };
 
@@ -104,11 +135,11 @@ export class Import extends Component <Props, State> {
         });
     };
 
-    setPanel = (message: string, status: string) => {
+    setPanel = (message: string, status: string, visible: boolean = true) => {
         this.setState({
             panel: {
                 label: message,
-                visible: true,
+                visible: visible,
                 status: status
             }
         });
@@ -119,91 +150,91 @@ export class Import extends Component <Props, State> {
         this.setState({uploadFile: selectorFiles});
     };
 
-    handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        let hidden = (e.target.value !== "address");
-        this.setState({
-            importName: e.target.value,
-            importHidden: false,
-            fileType: this.fileType(e.target.value),
-            uploadProgressHidden: hidden,
-        });
-        this.hidePanel()
+    handleDateChange = (date: Date) => {
+        this.setState({validFromDate: date});
     };
 
     setFileUploading = (bool: boolean) => {
-        this.setState({importHidden: !bool})
+        this.setState({importHidden: bool});
+        if (this.state.hasImportReport) {
+            this.setState({reportExportHidden: false})
+        }
     };
 
     fileType = (file: string) => {
-        let type = "";
         switch (file) {
             case "Geographical Classifications":
-                type = '.csv';
-                this.setState({built: true, fileName: "address", uploadLink: 'address'});
+                this.setState({
+                    fileType: '.csv',
+                    built: true,
+                    fileName: "address",
+                    uploadLink: 'address',
+                    validFromDateHidden: true,
+                    hasImportReport: false
+                });
                 break;
             case "Bulk Amendments":
-                type = '';
                 this.setState({});
                 break;
             case "Design Weights":
-                type = '';
-                this.setState({});
-                break;
-            case "Population Estimates":
-                type = '';
-                this.setState({});
-                break;
-            case "Value Labels GB":
-                type = '.csv';
                 this.setState({
+                    fileType: '.csv',
                     built: true,
-                    fileName: "value_labels",
-                    uploadLink: 'value/labels/gb'
+                    fileName: "design_weights",
+                    uploadLink: 'design/weights',
+                    validFromDateHidden: true,
+                    hasImportReport: false
                 });
                 break;
-            case "Value Labels NI":
-                type = '.csv';
+            case "Population Estimates":
                 this.setState({
+                    fileType: '.xlsx',
+                    built: true,
+                    fileName: "population",
+                    uploadLink: 'population',
+                    validFromDateHidden: true,
+                    hasImportReport: true
+                });
+                break;
+            case "Value Labels":
+                this.setState({
+                    fileType: '.csv',
                     built: true,
                     fileName: "value_labels",
-                    uploadLink: 'value/labels/ni'
+                    uploadLink: 'value/labels',
+                    validFromDateHidden: false,
+                    hasImportReport: false
                 });
                 break;
             case "Variable Definitions":
-                type = '.csv';
                 this.setState({
+                    fileType: '.csv',
                     built: true,
                     fileName: "variable_definitions",
-                    uploadLink: 'variable/definitions'
+                    uploadLink: 'variable/definitions',
+                    validFromDateHidden: false,
+                    hasImportReport: false
                 });
                 break;
         }
-        return type
     };
-
-    fileSelection = [
-        //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
-        //  {"label":"Design Weights", "value":"Design Weights"},
-        {"label": "Geographical Classifications", "value": "Geographical Classifications"},
-        {"label": "Value Labels GB", "value": "Value Labels GB"},
-        {"label": "Value Labels NI", "value": "Value Labels NI"},
-        //  {"label":"Population Estimates", "value":"Population Estimates"},
-        {"label": "Variable Definitions", "value": "Variable Definitions"}
-    ];
 
     render() {
         return (
-            <DocumentTitle title='LFS Import'>
+            <DocumentTitle title={'LFS Import ' + this.state.importName}>
                 <div className="container">
                     <form>
                         <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
                                   hidden={!this.state.panel.visible}>
                             <p>{this.state.panel.label}</p>
                         </ONSPanel>
-                        <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
-                                   onChange={this.handleImportChange}/>
                         <br/>
                         <div hidden={this.state.importHidden}>
+                            <div hidden={this.state.validFromDateHidden}>
+                                <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
+                                              date={this.state.validFromDate}/>
+                                <br/><br/>
+                            </div>
                             <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
                                        description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}
                                        fileID={"U1"}
@@ -213,17 +244,23 @@ export class Import extends Component <Props, State> {
                                        field={true}
                                        onClick={this.upload}
                                        primary={true}
-                                       small={false}
                                        loading={this.state.uploading}/>
+                            <ONSButton label={'Return to Manage Batch'}
+                                       primary={false}
+                                       field={true}
+                                       onClick={() => window.history.back()}/>
+                            <ReportExport hidden={this.state.reportExportHidden} setPanel={this.setPanel}
+                                          importName={this.state.uploadLink}/>
                         </div>
                     </form>
                     <FileUploadProgress importName={this.state.importName}
                                         fileName={this.state.fileName}
                                         hidden={this.state.uploadProgressHidden}
-                                        importOptionVisible={this.setFileUploading}
+                                        fileUploading={this.setFileUploading}
                                         setPanel={this.setPanel}/>
                 </div>
-            </DocumentTitle>
+            </
+                DocumentTitle>
         )
     }
 }

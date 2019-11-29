@@ -2,7 +2,6 @@ import React, {ChangeEvent, Component} from 'react';
 
 interface Props {
     label?: string,
-    id?: string,
     placeholder?: string,
     marginTop?: number
     onChange?: (e: ChangeEvent<HTMLInputElement>, ...args: any[]) => void,
@@ -40,14 +39,12 @@ export class ONSPasswordInput extends Component <Props, State> {
         return (
             <p className="field">
                 <label className="label" htmlFor="password">Password</label>
-                
                 <label className="label" htmlFor="password"/>
                 <input
                     type={this.state.password ? "password" : "text"} id="password"
                     className="input input--text input-type__input u-mt-xs"
                     onChange={(e) => this.handleChange(e)}
                 />
-
                 <span className="checkbox checkbox--toggle" style={this.spacing()}>
                     <input
                         type="checkbox"

@@ -6,6 +6,7 @@ import {ONSPagination} from "./ONSPagination";
 interface Props {
     Headers: Header[]
     data: any[] | null
+    id?: string
     Row: any
     expandedRowEnabled: boolean
     expandedRow?: any
@@ -47,7 +48,7 @@ export class ONSAccordionTable extends Component <Props, State> {
 
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
         if (nextProps.data !== prevState.data && nextProps.data !== null) {
-            return {data: nextProps.data, slicedData: nextProps.data.slice(0, 20)};
+            return {data: nextProps.data, slicedData: nextProps.data.slice(0, nextProps.paginationSize)};
         } else return null;
     }
 
@@ -63,9 +64,11 @@ export class ONSAccordionTable extends Component <Props, State> {
     };
 
     handleClickOnRow = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, row: any, index: number) => {
-        row.rowExpanded = !row.rowExpanded;
-        // @ts-ignore
-        this.setState({data: update(this.state.data, {[index]: {$set: row}})})
+        if (this.props.expandedRowEnabled) {
+            row.rowExpanded = !row.rowExpanded;
+            // @ts-ignore
+            this.setState({data: update(this.state.data, {[index]: {$set: row}})})
+        }
     };
 
     handleEnterKeyPressOnRow = (onClick: any, row: DashboardTableRow, index: number) => {
@@ -76,10 +79,15 @@ export class ONSAccordionTable extends Component <Props, State> {
 
     Table = () => {
         return (
+
             <table id="basic-table" className="table ">
                 <>
                     <thead className="table__head">
                     <tr className="table__row">
+                        {
+                            this.props.expandedRowEnabled &&
+                            <th key={0} scope="col" className="table__header "/>
+                        }
                         {
                             this.props.Headers.map((header: any, index: number) =>
                                 <th key={index} scope="col" className="table__header ">{header.label}</th>
@@ -96,12 +104,23 @@ export class ONSAccordionTable extends Component <Props, State> {
                                         onClick={((e) => this.handleClickOnRow(e, row, index))}
                                         tabIndex={0}
                                         onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>
+                                        {
+                                            this.props.expandedRowEnabled &&
+                                            <td className="table__cell ">
+                                                <div className={'accordion-table-chevron '}>
+                                                    <img
+                                                        className={"accordion-table-chevron-svg " + (row.rowExpanded ? 'accordion-table-chevron-rotate' : '')}
+                                                        src={"/img/icons--chevron-right.svg"}
+                                                        alt="Expanded Table chevron"/>
+                                                </div>
+                                            </td>
+                                        }
                                         <this.props.Row row={row}/>
                                     </tr>
                                     {
                                         this.props.expandedRowEnabled ?
                                             <tr hidden={!row.rowExpanded}>
-                                                <td colSpan={this.props.Headers.length}
+                                                <td colSpan={this.props.Headers.length + 1}
                                                     className="table__cell ">
                                                     <this.props.expandedRow row={row}/>
                                                 </td>

@@ -1,6 +1,6 @@
 function weeks() {
     let i;
-    let weekList = []
+    let weekList = [];
     for (i=1; i<=52; i++) {
         weekList.push({"label":"Week "+String(i), "value":String(i)})
     }
@@ -47,10 +47,10 @@ function months() {
     return monthlist
 }
 
-const quarters = [{"label":"Q1", "value":"Q2"}, 
+const quarters = [{"label":"Q1", "value":"Q1"},
                   {"label":"Q2", "value":"Q2"}, 
                   {"label":"Q3", "value":"Q3"}, 
-                  {"label":"Q4", "value":"Q4"}]
+                  {"label":"Q4", "value":"Q4"}];
 
 function years() {
     let i;
@@ -137,4 +137,9 @@ function toUpperCaseFirstChar(string: string){
     return string.charAt(0).toUpperCase() + string.slice(1, string.length)
 }
 
-export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, getBatchProgressStatusStyle}
+
+function isDevEnv() {
+    return process.env.NODE_ENV === 'development'
+}
+
+export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle}

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 
 interface Props{
   label: string,
@@ -13,11 +13,14 @@ export class ONSLabel extends Component <Props, {}>{
 
     render() {
     return (
-      <label className="label" id={this.props.id}>{this.props.label}
+
+      <label className="label" id={this.props.id}>{this.props.label}        
       {
-        this.props.description !== undefined &&
-        [<br/>,
-        <span className="label__description">{this.props.description}</span>]
+        this.props.description !== undefined && 
+        <Fragment>
+          <br/>
+          <span className="label__description">{this.props.description}</span>
+        </Fragment>
       }
       </label>
     );

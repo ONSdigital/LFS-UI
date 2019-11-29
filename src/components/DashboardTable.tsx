@@ -5,6 +5,7 @@ import {ONSStatus} from "./ONS_DesignSystem/ONSStatus";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
 import {DASHBOARD_HEADERS} from "../utilities/Headers";
 import {BatchProgressTable} from "./BatchProgressTable";
+import {Link} from "react-router-dom";
 
 interface Props {
     Headers?: string[],
@@ -80,11 +81,12 @@ const DashboardExpandedRow = (rowData: any) => {
     let row: DashboardTableRow = rowData.row;
     return (
         <>
-            <ONSButton label={"Manage Batch"} primary={true} small={false} field={true} onClick={() => {
-                window.location.href = "/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
-            }}/>
+            <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period} >
+                <ONSButton label={"Manage Batch"} primary={true} small={false} field={true} />
+            </Link>
             <BatchProgressTable/>
         </>
     )
+
 };
 
