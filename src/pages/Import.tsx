@@ -1,9 +1,8 @@
-import React, {ChangeEvent, Component} from "react";
+import React, {Component} from "react";
 import {ONSUpload} from "../components/ONS_DesignSystem/ONSUpload";
 import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {postImportFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
-import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
 import {FileUploadProgress} from "./FileUploadProgress";
 import {isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
@@ -23,7 +22,6 @@ interface State {
     uploadProgressHidden: boolean
     validFromDateHidden: boolean
     reportExportHidden: boolean
-    importSelectHidden: boolean
     fileType: string
     uploadLink: string
     //check to see if functionality is built and whether to send the request
@@ -55,7 +53,6 @@ export class Import extends Component <Props, State> {
             uploadProgressHidden: true,
             validFromDateHidden: true,
             reportExportHidden: true,
-            importSelectHidden: false,
             fileType: "",
             uploadLink: "",
             built: false,
@@ -79,7 +76,6 @@ export class Import extends Component <Props, State> {
             this.setState({
                 importHidden: false,
                 uploadProgressHidden: true,
-                importSelectHidden: true
             });
         }
     }
@@ -158,17 +154,6 @@ export class Import extends Component <Props, State> {
         this.setState({validFromDate: date});
     };
 
-    handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        this.setState({
-            importName: e.target.value,
-            importHidden: false,
-            uploadProgressHidden: false,
-            validFromDate: null
-        });
-        this.fileType(e.target.value);
-        this.hidePanel()
-    };
-
     setFileUploading = (bool: boolean) => {
         this.setState({importHidden: bool});
         if (this.state.hasImportReport) {
@@ -234,15 +219,6 @@ export class Import extends Component <Props, State> {
         }
     };
 
-    fileSelection = [
-        //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
-        {"label": "APS Design Weights", "value": "Design Weights"},
-        {"label": "Geographical Classifications", "value": "Geographical Classifications"},
-        {"label": "Value Labels", "value": "Value Labels"},
-        {"label": "Population Estimates", "value": "Population Estimates"},
-        {"label": "Variable Definitions", "value": "Variable Definitions"}
-    ];
-
     render() {
         return (
             <DocumentTitle title={'LFS Import ' + this.state.importName}>
@@ -252,10 +228,6 @@ export class Import extends Component <Props, State> {
                                   hidden={!this.state.panel.visible}>
                             <p>{this.state.panel.label}</p>
                         </ONSPanel>
-                        <div hidden={this.state.importSelectHidden}>
-                            <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
-                                       onChange={this.handleImportChange}/>
-                        </div>
                         <br/>
                         <div hidden={this.state.importHidden}>
                             <div hidden={this.state.validFromDateHidden}>
@@ -272,14 +244,11 @@ export class Import extends Component <Props, State> {
                                        field={true}
                                        onClick={this.upload}
                                        primary={true}
-                                       small={false}
                                        loading={this.state.uploading}/>
-                            <div className={'field'} hidden={!this.state.importSelectHidden}>
-                                <ONSButton label={'Return to Manage Batch'}
-                                           primary={false}
-                                           field={true}
-                                           onClick={() => window.history.back()}/>
-                            </div>
+                            <ONSButton label={'Return to Manage Batch'}
+                                       primary={false}
+                                       field={true}
+                                       onClick={() => window.history.back()}/>
                             <ReportExport hidden={this.state.reportExportHidden} setPanel={this.setPanel}
                                           importName={this.state.uploadLink}/>
                         </div>

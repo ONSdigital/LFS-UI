@@ -36,26 +36,19 @@ let headerLinks = [
         label: "New Batch"
     },
     {
-        link: "/Import",
-        label: "Import"
+        link: "/import",
+        label: "Import",
+        hidden: true,
+        nonGenericPage: true
     },
     {
         link: "/ViewData",
         label: "View Data"
     },
     {
-        link: "/Outputs",
-        label: "Outputs"
-    },
-    {
-        link: "/Link-to-item-5",
-        label: "Link 5"
-    },
-    {
         link: "/Admin",
         label: "User Management"
     },
-
 ];
 
 export function HeaderNavigation(props: Props) {
