@@ -70,26 +70,24 @@ export class HeaderNav extends Component <Props, State> {
                         {
                             this.props.loggedIn ?
                                 this.state.links.map((link, index) =>
-                                    link.hidden ?
-                                        <Fragment key={index}/>
-                                        :
-                                        <LinkContainer  key={index} to={link.link}>
+                                    !link.hidden &&
+                                        <Fragment key={index}>
                                             <li className={"header-nav__item " + (link.current === true ? "header-nav__item--active" : "")}
                                                 onClick={() => this.changePage(link.label)}>
                                                 <a href={link.link}
                                                    className="header-nav__link">{link.label}
                                                 </a>
                                             </li>
-                                        </LinkContainer>
+                                        </Fragment>
                                 )
                                 :
-                                <LinkContainer key={0} to={"/"}>
+                                <Fragment key={0}>
                                     <li className={"header-nav__item header-nav__item--active"}>
                                         <a href={"/"}
                                            className="header-nav__link">Login
                                         </a>
                                     </li>
-                                </LinkContainer>
+                                </Fragment>
                         }
                     </ul>
                 </nav>
