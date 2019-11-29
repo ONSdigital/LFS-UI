@@ -75,7 +75,11 @@ export class Import extends Component <Props, State> {
         });
         // TODO: Send correct data for each file type
         if (this.state.built) {
-            postImportFile(this.state.uploadFile, this.state.uploadLink, this.state.fileName)
+            let uploadLink = this.state.uploadLink;
+            if (this.state.validFromDate !== null) {
+                uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString()
+            }
+            postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                 .then(response => {
                     (isDevEnv && console.log(response));
                     if (response.status === 'ERROR') {
@@ -188,22 +192,12 @@ export class Import extends Component <Props, State> {
                     hasImportReport: true
                 });
                 break;
-            case "Value Labels GB":
+            case "Value Labels":
                 type = '.csv';
                 this.setState({
                     built: true,
                     fileName: "value_labels",
-                    uploadLink: 'value/labels/gb',
-                    validFromDateHidden: false,
-                    hasImportReport: false
-                });
-                break;
-            case "Value Labels NI":
-                type = '.csv';
-                this.setState({
-                    built: true,
-                    fileName: "value_labels",
-                    uploadLink: 'value/labels/ni',
+                    uploadLink: 'value/labels',
                     validFromDateHidden: false,
                     hasImportReport: false
                 });
@@ -226,8 +220,7 @@ export class Import extends Component <Props, State> {
         //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
          {"label":"APS Design Weights", "value":"Design Weights"},
         {"label": "Geographical Classifications", "value": "Geographical Classifications"},
-        {"label": "Value Labels GB", "value": "Value Labels GB"},
-        {"label": "Value Labels NI", "value": "Value Labels NI"},
+        {"label": "Value Labels", "value": "Value Labels"},
         {"label": "Population Estimates", "value": "Population Estimates"},
         {"label": "Variable Definitions", "value": "Variable Definitions"}
     ];
