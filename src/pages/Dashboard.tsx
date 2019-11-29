@@ -4,7 +4,6 @@ import {ONSRadioButton} from "../components/ONS_DesignSystem/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
 import DocumentTitle from "react-document-title";
-import { ONSLabel } from '../components/ONS_DesignSystem/ONSLabel';
 
 const MONTHLY_BATCH = 'Monthly';
 const QUARTERLY_BATCH = 'Quarterly';
