@@ -11,7 +11,8 @@ describe("ONS Data Input Test", () => {
     const Props = {
         label: "Input",
         onChange: "",
-        date: getDate
+        date: getDate,
+        value: "input"
     }
 
     function wrapper(render: any, props: any| null) {
@@ -28,6 +29,7 @@ describe("ONS Data Input Test", () => {
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
+    
 
 
 })

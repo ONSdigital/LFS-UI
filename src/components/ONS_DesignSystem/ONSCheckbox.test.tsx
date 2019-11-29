@@ -69,7 +69,6 @@ describe("ONS Checkbox Test", () => {
         //For with label
         wrapper(mount, checkboxWithLabelProps).find('input').simulate('change')
         expect(checkboxWithLabelProps.onCheckboxClick).toHaveBeenCalled()
-
     });
 
     
