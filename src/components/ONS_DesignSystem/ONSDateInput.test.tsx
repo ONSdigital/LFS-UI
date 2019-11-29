@@ -6,6 +6,13 @@ import {ONSDateInput} from "./ONSDateInput";
 describe("ONS Date Input", () => {
     Enzyme.configure({adapter: new Adapter()});
 
+    const Props = {
+        label: "Input",
+        onChange: "",
+        date: getDate,
+        value: "input"
+    }
+
     const dateInputProps = {
         label: 'Date Input',
         onChange: jest.fn(),

@@ -1,18 +1,18 @@
 # LFS-UI
-LFS UI
 
-How do you run it? 
+### Installing/Running
 
 Install npm: https://www.npmjs.com/get-npm
 
-clone the project. Navigate to the project in a terminal.
+clone the project. Navigate to the project root folder in a terminal.
 
 `npm install` - This will download all the dependencies. 
 
-`npm run start` - this will run the development build
+`npm run start` - this will run the development build.
 
-### Tests 
+### Testing
 
+#### Running Unit tests
 Run all Tests
 ```
 npm test

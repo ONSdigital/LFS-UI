@@ -2,11 +2,12 @@ import React from 'react';
 import Enzyme, {mount, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {ONSCheckbox} from "./ONSCheckbox";
+import {Builder, By, WebDriver} from 'selenium-webdriver';
 
 describe("ONS Checkbox Test", () => {
     Enzyme.configure({adapter: new Adapter()});
 
-    const checkboxProps = {
+    const Props = {
         id: '12',
         onCheckboxClick: jest.fn(),
     };
@@ -14,14 +15,14 @@ describe("ONS Checkbox Test", () => {
     const checkboxWithLabelProps = {
         label: "Enable",
         id: '12',
-        onCheckboxClick: jest.fn()
+        onCheckboxClick: jest.fn(),
+        checked: true
     };
 
     const checkboxCheckedProps = {
         label: "Enable",
         id: '12',
         checked: true,
-        onCheckboxClick: jest.fn()
     };
 
     function wrapper(render: any, props: any) {
@@ -33,15 +34,26 @@ describe("ONS Checkbox Test", () => {
                          checked={props.checked}
                          style={props.style}/>)
     }
+    
+    let url = 'http://localhost:3000';
+    let browser: WebDriver;
 
-    it("should render correctly", () => expect(wrapper(shallow, checkboxProps).exists()).toEqual(true));
+    // beforeEach(async  () => browser = await new Builder().forBrowser('chrome').build())
+
+    // afterEach(async () => {
+    //     if (browser !== undefined) {
+    //         await browser.quit();
+    //     }
+    // });
+
+    it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
     it("should render with the correct label", () => {
         expect(wrapper(mount, checkboxWithLabelProps).find("ONSCheckbox").getElement().props.label).toEqual(checkboxWithLabelProps.label);
     });
 
     it("should render without label if prop not passed in", () => {
-            expect(wrapper(mount, checkboxProps).find("ONSCheckbox").getElement().props.label).toBeUndefined();
+            expect(wrapper(mount, Props).find("ONSCheckbox").getElement().props.label).toBeUndefined();
         }
     );
 
@@ -50,9 +62,16 @@ describe("ONS Checkbox Test", () => {
     });
 
     it('simulates change events', () => {
-        wrapper(mount, checkboxProps).find('input').simulate('change');
-        expect(checkboxProps.onCheckboxClick).toHaveBeenCalled()
+        //For no label
+        wrapper(mount, Props).find('input').simulate('change')
+        expect(Props.onCheckboxClick).toHaveBeenCalled()
+
+        //For with label
+        wrapper(mount, checkboxWithLabelProps).find('input').simulate('change')
+        expect(checkboxWithLabelProps.onCheckboxClick).toHaveBeenCalled()
     });
+
+    
 
     // it('matches snapshot', () => {
     //     expect(wrapper(mount, checkboxProps)).toMatchSnapshot()
