@@ -16,7 +16,6 @@ interface State {
     batchData: [] | null
     metadata: Array<MetaDataListItem>
     batchFound: boolean,
-    summaryRedirect: string
     summaryOpen: boolean
     surveyAuditWeek: string
     surveyAuditMonth: string
@@ -61,7 +60,6 @@ export class View_Quarterly_Batch extends Component <Props, State> {
             batchData: null,
             metadata: [],
             batchFound: true,
-            summaryRedirect: (props.match.params.summary),
             summaryOpen: false,
             surveyAuditWeek: "",
             surveyAuditMonth: "",
@@ -72,10 +70,6 @@ export class View_Quarterly_Batch extends Component <Props, State> {
 
     componentDidMount(): void {
         this.batchData();
-        let summaryRedirect = (this.props.match.params.summary);
-        if (summaryRedirect !== undefined && summaryRedirect.length > 0) {
-            this.openSummaryModalFromRedirect(summaryRedirect);
-        }
         this.updateMetaDataList();
     }
 
@@ -94,27 +88,6 @@ export class View_Quarterly_Batch extends Component <Props, State> {
         //         this.setState({batchFound: false});
         //     });
     };
-
-    openSummaryModalFromRedirect = (summaryRedirect: string) => {
-        let [type, week, month, year] = summaryRedirect.split('-');
-        this.openSummaryModal({
-            type: type.toUpperCase(),
-            week: +week,
-            month: +month,
-            year: +year,
-        })
-    };
-
-    openSummaryModal = (row: any) => {
-        this.setState({
-            summaryOpen: true,
-            surveyAuditWeek: row.week,
-            surveyAuditMonth: row.month,
-            surveyAuditUploadType: row.type
-        });
-    };
-
-    closeSummaryModal = () => this.setState({summaryOpen: false});
 
     formatMetaData() {
         return (
@@ -137,18 +110,6 @@ export class View_Quarterly_Batch extends Component <Props, State> {
 
     updateMetaDataList = () => {
         this.setState({metadata: this.formatMetaData()})
-    };
-
-    summaryModal = () => {
-        if (this.state.summaryOpen)
-            return (
-                <SurveyAuditModal modelOpen={this.state.summaryOpen}
-                                  week={this.state.surveyAuditWeek}
-                                  month={this.state.surveyAuditMonth}
-                                  year={this.state.year}
-                                  surveyType={this.state.surveyAuditUploadType}
-                                  closeSummaryModal={this.closeSummaryModal}/>
-            )
     };
 
     render() {
