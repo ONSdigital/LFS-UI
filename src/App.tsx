@@ -94,7 +94,7 @@ class App extends React.Component<Props, State> {
                           <this.PrivateRoute exact path='/surveyUpload/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
                           <this.PrivateRoute exact path='/Outputs' component={Outputs} page_id={6}/>
                           <this.PrivateRoute exact path='/ViewData' component={ViewData} page_id={10}/>
-                          <this.PrivateRoute exact path='/Import' component={Import} page_id={7}/>
+                          <this.PrivateRoute exact path='/Import/:file?' component={Import} page_id={7}/>
                           <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
                           <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
                           <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
