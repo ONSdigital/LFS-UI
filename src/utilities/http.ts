@@ -55,6 +55,26 @@ function getSurveyAudit(survey: string, year: string, period: string): Promise<a
     return requestPromise("GET", url)
 }
 
+function getImportReportFile(importName: string): Promise<any> {
+    let url = "/" + importName + "/report";
+
+    return new Promise((resolve: any, reject: any) => {
+        fetch(url, {
+            "method": "GET"
+        })
+            .then(response => {
+                console.log("Response");
+                console.log(response);
+                resolve(response);
+            })
+            .catch(err => {
+                console.log("Error");
+                console.log(err);
+                reject(err)
+            });
+    })
+}
+
 
 function requestPromise(method: string, url: string, body: any = null): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
@@ -75,4 +95,4 @@ function requestPromise(method: string, url: string, body: any = null): Promise<
     })
 }
 
-export {postSurveyFile, postImportFile, createNewBatch, getBatchData, getAllBatches, getVariableDefinitions, getValueLabels, getSurveyAudit}
+export {postSurveyFile, postImportFile, createNewBatch, getBatchData, getAllBatches, getVariableDefinitions, getValueLabels, getSurveyAudit, getImportReportFile}

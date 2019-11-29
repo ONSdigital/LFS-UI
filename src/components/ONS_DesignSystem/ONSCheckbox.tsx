@@ -36,7 +36,7 @@ export const ONSCheckbox = (props: Props) => (
                 id={props.id}
                 className="checkbox__input js-checkbox "
                 checked={props.checked}
-                onChange={(e) => props.onChange && props.onChange(e)}
+                onChange={(e) => props.onChange !== undefined && props.onChange(e)}
                 style={{position: "unset"}}
             />
         </span>
