@@ -6,7 +6,7 @@ import {ONSMetadata} from '../../components/ONS_DesignSystem/ONSMetadata';
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../../components/SurveyAuditModal";
-import {QuarterlyBatchUploadTable} from "./QuarterlyBatchUploadTable";
+import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 
 interface State {
     UploadsData: Data | null
@@ -106,7 +106,12 @@ export class View_Quarterly_Batch extends Component <Props, State> {
     };
 
     openSummaryModal = (row: any) => {
-        this.setState({summaryOpen: true, surveyAuditWeek: row.week, surveyAuditMonth: row.month, surveyAuditUploadType: row.type});
+        this.setState({
+            summaryOpen: true,
+            surveyAuditWeek: row.week,
+            surveyAuditMonth: row.month,
+            surveyAuditUploadType: row.type
+        });
     };
 
     closeSummaryModal = () => this.setState({summaryOpen: false});
@@ -156,11 +161,6 @@ export class View_Quarterly_Batch extends Component <Props, State> {
                             <>
                                 <ONSMetadata List={this.state.metadata}/>
                                 <div style={{width: "55%"}}>
-                                    <QuarterlyBatchUploadTable batchData={this.state.batchData}
-                                                               openModel={this.openSummaryModal}
-                                                               batchType={this.state.batchType} year={this.state.year}
-                                                               period={this.state.period}/>
-                                    {this.summaryModal()}
                                     <ONSPanel label="Quarterly Batch" status="info" spacious={false}>
                                         <p>Design Weights Must be Imported to Run Process</p>
                                     </ONSPanel>
@@ -176,6 +176,10 @@ export class View_Quarterly_Batch extends Component <Props, State> {
                                             )
                                         }
                                     })()}
+                                </div>
+                                <br/>
+                                <div style={{width: "80%"}}>
+                                    <ReferenceFileImportTable/>
                                 </div>
                             </>
                             :

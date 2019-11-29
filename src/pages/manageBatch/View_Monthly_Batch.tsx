@@ -8,6 +8,7 @@ import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../../components/SurveyAuditModal";
 import {MonthlyBatchUploadTable} from "./MonthlyBatchUploadTable";
 import {getBatchData} from "../../utilities/http";
+import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 
 interface State {
     UploadsData: Data | null
@@ -110,11 +111,15 @@ export class View_Monthly_Batch extends Component <Props, State> {
 
     openSummaryModal = (row: any) => {
         window.history.pushState({}, document.title, this.state.pathName);
-        this.setState({summaryOpen: true, surveyAuditWeek: row.week, surveyAuditMonth: row.month, surveyAuditUploadType: row.type});
+        this.setState({
+            summaryOpen: true,
+            surveyAuditWeek: row.week,
+            surveyAuditMonth: row.month,
+            surveyAuditUploadType: row.type
+        });
     };
 
     closeSummaryModal = () => this.setState({summaryOpen: false});
-
 
 
     formatMetaData() {
@@ -181,6 +186,10 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                             )
                                         }
                                     })()}
+                                </div>
+                                <br/>
+                                <div style={{width: "75%"}}>
+                                    <ReferenceFileImportTable/>
                                 </div>
                             </>
                             :
