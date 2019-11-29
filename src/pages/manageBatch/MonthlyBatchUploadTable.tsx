@@ -37,7 +37,7 @@ export function MonthlyBatchUploadTable(props: Props) {
                 <td className="table__cell ">
                     <Link
                         to={"/surveyUpload/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year}>
-                        <ONSButton label={"Import"} primary={false} small={true}/>
+                        <ONSButton id={"import-" + row.week + "-" + row.month + "-" + row.year} label={"Import"} primary={false} small={true}/>
                     </Link>
                 </td>
                 {
