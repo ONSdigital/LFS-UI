@@ -12,13 +12,14 @@ export class ONSMetadata extends Component < Props, {} > {
     render () {         
         let Lspacing = this.props.LSpacing;
         let Rspacing = this.props.RSpacing;
-
+        
         if(this.props.LSpacing === undefined) Lspacing = "2";
         if(this.props.RSpacing === undefined) Rspacing = "10";
         
         if (this.props.List !== null) {
             return(
                 <div>
+                    {console.log(this.props.List)}
                     <dl className="metadata metadata__list grid grid--gutterless u-cf u-mb-l" title="This is an example of the metadata component" aria-label="This is an example of the metadata component">
                         {this.props.List.map((item:any) => (
                             <Fragment key ={item.L}>
@@ -30,6 +31,5 @@ export class ONSMetadata extends Component < Props, {} > {
                 </div>
             )
         }
-
     }
 }

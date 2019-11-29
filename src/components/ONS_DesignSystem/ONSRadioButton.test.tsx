@@ -9,6 +9,11 @@ describe("ONS Radio Button Test", () => {
     const radioProps = {
         label: "On/Off",
         id: '12',
+    }
+
+    const clickedRadioProps = {
+        label: "On/Off",
+        id: '12',
         onRadioClick: jest.fn()
     };
 
@@ -26,7 +31,7 @@ describe("ONS Radio Button Test", () => {
     });
 
     it('simulates change events', () => {
-        wrapper(mount, radioProps).find('input').simulate('change');
-        expect(radioProps.onRadioClick).toHaveBeenCalled()
+        wrapper(mount, clickedRadioProps).find('input').simulate('change');
+        expect(clickedRadioProps.onRadioClick).toHaveBeenCalled()
     });
 });

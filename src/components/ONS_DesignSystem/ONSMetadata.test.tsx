@@ -6,20 +6,26 @@ import Enzyme from 'enzyme';
 
 describe("ONS MetaData Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
+    
+    const list = [{L: "Batch Type", R: "Monthly"},
+                {L: "Year", R: "2015"}]
 
     const Props = {
-        List: [],
+        List: list,
         LSpacing: "10",
         RSpacing: "10"
+    }
+
+    const nullProps = {
+        List: null
     }
 
     function wrapper(render: any, props: any) {
         return render(
             <ONSMetadata
-            List={props.List}
-            LSpacing={props.LSpacing}
-            RSpacing={props.RSpacing}
-            >
+                List={props.List}
+                LSpacing={props.LSpacing}
+                RSpacing={props.RSpacing}>
             </ONSMetadata>
             
         )
@@ -27,10 +33,15 @@ describe("ONS MetaData Test", () => {
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
-    //was gonna checkk the class names but they in a loop
+    it("should render correctly", () => expect(wrapper(shallow, nullProps).exists()).toEqual(true));
+
     it('displays the correct left and right margins', () => {
         expect(wrapper(mount, Props).getElement().props.LSpacing).toEqual(Props.LSpacing)
         expect(wrapper(mount, Props).getElement().props.RSpacing).toEqual(Props.RSpacing)
+    })
+
+    it('displays the correct left and right margins', () => {
+        expect(wrapper(mount, Props).at(0).find("dt")).toHaveLength(2)
     })
 
 
