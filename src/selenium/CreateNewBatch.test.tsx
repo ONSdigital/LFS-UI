@@ -1,5 +1,5 @@
-import {Builder, By, WebDriver} from 'selenium-webdriver';
-import chrome from 'selenium-webdriver/chrome';
+import {Builder, By, WebDriver} from "selenium-webdriver";
+import chrome from "selenium-webdriver/chrome";
 import {loginUserToUI} from "./WebsiteNavigationFunctions";
 
 /*
@@ -8,13 +8,15 @@ https://www.guru99.com/xpath-selenium.html
 */
 
 describe("Selenium - Create New Batch Test", () => {
-    let url = 'http://localhost:3000/New_Batch';
+    let url = "http://localhost:3000/New_Batch";
     let browser: WebDriver;
     // Setup Chrome driver
-    chrome.setDefaultService(new chrome.ServiceBuilder(process.env.REACT_APP_CHROME_DRIVER).build());
+    chrome.setDefaultService(
+        new chrome.ServiceBuilder(process.env.REACT_APP_CHROME_DRIVER).build()
+    );
 
-    beforeAll(async  () => {
-        browser = await new Builder().forBrowser('chrome').build();
+    beforeAll(async () => {
+        browser = await new Builder().forBrowser("chrome").build();
         await browser.get(url);
 
         // logs in the user
@@ -44,10 +46,12 @@ describe("Selenium - Create New Batch Test", () => {
         let periodOption = await browser.findElement(By.id("period"));
 
         // selects the January option from the dropdown
-        await periodOption.findElement(By.xpath('option[text()="January"]')).click();
+        await periodOption
+            .findElement(By.xpath('option[text()="January"]'))
+            .click();
 
         // Get Submit Button
-        let SubmitButton = await browser.findElement(By.id('newBatchSubmit'));
+        let SubmitButton = await browser.findElement(By.id("newBatchSubmit"));
 
         // Press Button
         await SubmitButton.click();
@@ -57,20 +61,21 @@ describe("Selenium - Create New Batch Test", () => {
         // Get Site Title
         const title = await browser.getTitle();
 
-        expect(title).toContain('LFS Manage Batch')
+        expect(title).toContain("LFS Manage Batch");
     });
 
     it("should render the Manage Batch page correctly", async () => {
-        await browser.get('http://localhost:3000/manage-batch/monthly/2014/5');
-        let filepath = '/Users/palmem2/Documents/Dev/LFS/LFS Upload Files/LFSwk18PERS_non_confidential.sav';
+        await browser.get("http://localhost:3000/manage-batch/monthly/2014/5");
+        let filepath =
+            "/Users/palmem2/Documents/Dev/LFS/LFS Upload Files/LFSwk18PERS_non_confidential.sav";
 
         await browser.sleep(20);
 
         // Get the first row of the monthly batch imports table
-        let tableRow = await browser.findElement(By.xpath('//tbody/tr[1]'));
+        let tableRow = await browser.findElement(By.xpath("//tbody/tr[1]"));
 
         // Get the Import Button
-        let importButton = await tableRow.findElement(By.id('import-18-5-2014'));
+        let importButton = await tableRow.findElement(By.id("import-18-5-2014"));
 
         await importButton.click();
 
@@ -81,40 +86,56 @@ describe("Selenium - Create New Batch Test", () => {
         let title = await browser.getTitle();
 
         // Check the page has moved to the Survey Import
-        expect(title).toContain('LFS Survey Import ');
+        expect(title).toContain("LFS Survey Import ");
 
         // get Survey metadata
-        let metadata = await browser.findElement(By.className('metadata metadata__list grid grid--gutterless u-cf u-mb-l'));
+        let metadata = await browser.findElement(
+            By.className("metadata metadata__list grid grid--gutterless u-cf u-mb-l")
+        );
 
         // get metaData text
         let metadataText = await metadata.getText();
 
         // Confirm the page is setup for the correct survey
-        expect(metadataText).toMatch('Survey:\nGB\nYear:\n2014\nPeriod:\nWeek 18');
+        expect(metadataText).toMatch("Survey:\nGB\nYear:\n2014\nPeriod:\nWeek 18");
 
-
-        let uploadFileInput = await browser.findElement(By.xpath('//input[@type="file"]'));
+        let uploadFileInput = await browser.findElement(
+            By.xpath('//input[@type="file"]')
+        );
 
         await uploadFileInput.sendKeys(filepath);
 
         // Get Submit Button
-        let SubmitButton = await browser.findElement(By.id('import-btn'));
+        let SubmitButton = await browser.findElement(By.id("import-btn"));
 
         // Press Button
         await SubmitButton.click();
 
         await browser.sleep(20);
 
-        let panel = await browser.findElement(By.className('panel'));
+        // Get button className
+        let submitButtonClassName = await SubmitButton.getAttribute("className");
 
-        let panelText = await panel.findElement(By.xpath('//p'));
+        // Check Button is loading in file.
+        expect(submitButtonClassName).toMatch("btn btn--loader is-loading field");
 
-        console.log(await panelText.getText())
+        let panels = await browser.findElements(By.className("panel"));
+        console.log(await panels.toString());
+        let panel1 = await panels[0];
+        let panel2 = await panels[1];
+        console.log(await panel1.getText());
+        console.log(await panel2.getText());
 
+        let panelText1 = await panel1.findElement(By.xpath("/p"));
+
+        console.log(await panelText1.getText());
+
+        let panelText2 = await panel2.findElement(By.xpath("/p"));
+
+        console.log(await panelText2.getText());
 
         // let batchTypeMetadataValue = await browser.findElement(By.xpath('dd[text()="Monthly"]'));
         //         //
         //         // expect(batchTypeMetadataValue).toEqual('Monthly')
     });
-
 });
