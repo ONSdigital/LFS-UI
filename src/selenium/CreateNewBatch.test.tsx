@@ -32,19 +32,19 @@ describe("Selenium - Create New Batch Test", () => {
         let batchOption = await browser.findElement(By.id("batch"));
 
         // selects the monthly option from the dropdown
-        await batchOption.findElement(By.xpath('option[@value="monthly"]')).click();
+        await batchOption.findElement(By.xpath("option[@value=\"monthly\"]")).click();
 
         // get the year select field
         let yearOption = await browser.findElement(By.id("year"));
 
         // selects the 2010 option from the dropdown
-        await yearOption.findElement(By.xpath('option[@value="2010"]')).click();
+        await yearOption.findElement(By.xpath("option[@value=\"2010\"]")).click();
 
         // get the period select field
         let periodOption = await browser.findElement(By.id("period"));
 
         // selects the January option from the dropdown
-        await periodOption.findElement(By.xpath('option[text()="January"]')).click();
+        await periodOption.findElement(By.xpath("option[text()=\"January\"]")).click();
 
         // Get Submit Button
         let SubmitButton = await browser.findElement(By.id("newBatchSubmit"));
