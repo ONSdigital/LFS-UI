@@ -53,10 +53,16 @@
       "last 1 safari version"
     ]
   },
+  "prettier": {
+    "tabWidth": 4,
+    "bracketSpacing": false,
+    "parser": "typescript"
+  },
   "devDependencies": {
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.23",
     "@types/sinon": "^7.5.0",
+    "@typescript-eslint/typescript-estree": "^2.9.0",
     "dotenv": "^8.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
