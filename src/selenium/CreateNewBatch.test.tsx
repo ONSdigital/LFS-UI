@@ -60,7 +60,7 @@ describe("Selenium - Create New Batch Test", () => {
         expect(title).toContain("LFS Manage Batch");
     });
 
-    it("should render the Manage Batch page correctly", async () => {
+    it("should import a Survey file from the Manage Batch Page", async () => {
         await browser.get("http://localhost:3000/manage-batch/monthly/2014/5");
         let filepath = "/Users/palmem2/Documents/Dev/LFS/LFS Upload Files/LFSwk18PERS_non_confidential.sav";
 
