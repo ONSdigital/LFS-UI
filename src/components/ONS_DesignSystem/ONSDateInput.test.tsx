@@ -1,14 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-<<<<<<< Updated upstream
 import Enzyme from 'enzyme';
 import { ONSDateInput } from './ONSDateInput';
-import { getDate } from 'date-fns';
-=======
-import {ONSDateInput} from "./ONSDateInput";
 import DatePicker from 'react-datepicker';
->>>>>>> Stashed changes
 
 describe("ONS Data Input Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -19,9 +14,6 @@ describe("ONS Data Input Test", () => {
     
     let x: any
 
-<<<<<<< Updated upstream
-    function wrapper(render: any, props: any| null) {
-=======
     const dateInputProps = {
         label: 'Date Input',
         onChange: jest.fn(),
@@ -34,8 +26,7 @@ describe("ONS Data Input Test", () => {
         date: new Date()
     };
 
-    function wrapper(render: any, dateInputProps: any) {
->>>>>>> Stashed changes
+    function wrapper(render: any, props: any) {
         return render(
             <ONSDateInput
                 label={props.label}
@@ -49,12 +40,6 @@ describe("ONS Data Input Test", () => {
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
-    
-
-<<<<<<< Updated upstream
-
-})
-=======
     // TODO: can't get change event to work on Date input
     it.skip('simulates change events', () => {
         wrapper(mount, dateInputProps).find(DatePicker).simulate('change');
@@ -64,13 +49,12 @@ describe("ONS Data Input Test", () => {
         expect(undefinedDateInputProps.onChange).toBeUndefined()
     });
 
-    it('clicks on the onclick', () => {
+    // it('clicks on the onclick', () => {
 
-    }
-    )
+    // }
+    // )
 
     // it('matches snapshot', () => {
     //     expect(wrapper(mount, checkboxProps)).toMatchSnapshot()
     // });
 });
->>>>>>> Stashed changes

@@ -10,7 +10,7 @@ describe("ONS Pagination Test", () => {
 
     const Props = {
         steps: 5,
-        count: 1,
+        count: 2,
         pageChange: sinon.spy()
     }
 
@@ -23,6 +23,8 @@ describe("ONS Pagination Test", () => {
     const emptyProps = {
         
     }
+
+
 
     function wrapper(render: any, props: any) {
         return render(
@@ -40,5 +42,10 @@ describe("ONS Pagination Test", () => {
     it("should render correctly", () => expect(wrapper(shallow, countGreaterProps).exists()).toEqual(true));
     it("should render correctly", () => expect(wrapper(shallow, emptyProps).exists()).toEqual(true));
 
-
+    it.skip('simulates click events', () => {
+        console.log(wrapper(mount, Props).find('li.pagination__item--previous'))
+        console.log(wrapper(mount, Props).find('li.pagination__item--previous').find('button'))
+        wrapper(shallow, Props).find('button').simulate('click');
+        expect(Props.pageChange).toHaveProperty('callCount', 1);
+    })
 })

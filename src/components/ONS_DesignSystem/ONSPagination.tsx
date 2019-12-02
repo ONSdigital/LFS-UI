@@ -82,6 +82,7 @@ export class ONSPagination extends Component <Props, State> {
             <li key={page} style={{cursor: "pointer"}}
                 className={"pagination__item " + (this.state.page === page ? "pagination__item--current" : "")}>
                 <button
+                    id="link"
                     style={this.buttonStyle}
                     onClick={(e) => this.pageChange(e, page)} className="pagination__link"
                     aria-label={"Go to page " + page}>{page}
@@ -100,9 +101,10 @@ export class ONSPagination extends Component <Props, State> {
                     <ul className="pagination__items" style={{marginLeft:'0px'}}>
                         {this.state.page > 1 &&
                         <li className="pagination__item pagination__item--previous" style={{backgroundColor:"#c1c9ca2e"}}>
-                            <button style={this.buttonStyle}
+                            <button id="prev"
+                                      style={this.buttonStyle}
                                     onClick={(e) => this.previous(e)}
-                                    className="pagination__link"
+                                    className="x pagination__links"
                                     aria-label="Go to the previous page">Previous
                             </button>
                         </li>
@@ -112,8 +114,10 @@ export class ONSPagination extends Component <Props, State> {
                         {this.link(this.state.maxPage)}
                         {this.state.page < this.state.maxPage &&
                         <li className="pagination__item pagination__item--next" style={{backgroundColor:"#c1c9ca2e"}}>
-                            <button style={this.buttonStyle}
-                                    onClick={(e) => this.next(e)} className="pagination__link"
+                            <button id="next"
+                                    style={this.buttonStyle}
+                                    onClick={(e) => this.next(e)} 
+                                    className="pagination__link"
                                     aria-label="Go to the next page">Next
                             </button>
                         </li>
