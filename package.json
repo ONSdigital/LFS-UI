@@ -57,8 +57,9 @@
     "tabWidth": 4,
     "bracketSpacing": false,
     "parser": "typescript",
-    "printWidth": 150,
-    "singleQuote": false
+    "printWidth": 160,
+    "singleQuote": false,
+    "jsxBracketSameLine": true
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.3",

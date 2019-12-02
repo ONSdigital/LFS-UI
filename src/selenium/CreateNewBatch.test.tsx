@@ -11,9 +11,7 @@ describe("Selenium - Create New Batch Test", () => {
     let url = "http://localhost:3000/New_Batch";
     let browser: WebDriver;
     // Setup Chrome driver
-    chrome.setDefaultService(
-        new chrome.ServiceBuilder(process.env.REACT_APP_CHROME_DRIVER).build()
-    );
+    chrome.setDefaultService(new chrome.ServiceBuilder(process.env.REACT_APP_CHROME_DRIVER).build());
 
     beforeAll(async () => {
         browser = await new Builder().forBrowser("chrome").build();
@@ -46,9 +44,7 @@ describe("Selenium - Create New Batch Test", () => {
         let periodOption = await browser.findElement(By.id("period"));
 
         // selects the January option from the dropdown
-        await periodOption
-            .findElement(By.xpath('option[text()="January"]'))
-            .click();
+        await periodOption.findElement(By.xpath('option[text()="January"]')).click();
 
         // Get Submit Button
         let SubmitButton = await browser.findElement(By.id("newBatchSubmit"));
@@ -66,8 +62,7 @@ describe("Selenium - Create New Batch Test", () => {
 
     it("should render the Manage Batch page correctly", async () => {
         await browser.get("http://localhost:3000/manage-batch/monthly/2014/5");
-        let filepath =
-            "/Users/palmem2/Documents/Dev/LFS/LFS Upload Files/LFSwk18PERS_non_confidential.sav";
+        let filepath = "/Users/palmem2/Documents/Dev/LFS/LFS Upload Files/LFSwk18PERS_non_confidential.sav";
 
         await browser.sleep(20);
 
@@ -89,9 +84,7 @@ describe("Selenium - Create New Batch Test", () => {
         expect(title).toContain("LFS Survey Import ");
 
         // get Survey metadata
-        let metadata = await browser.findElement(
-            By.className("metadata metadata__list grid grid--gutterless u-cf u-mb-l")
-        );
+        let metadata = await browser.findElement(By.className("metadata metadata__list grid grid--gutterless u-cf u-mb-l"));
 
         // get metaData text
         let metadataText = await metadata.getText();
@@ -99,9 +92,7 @@ describe("Selenium - Create New Batch Test", () => {
         // Confirm the page is setup for the correct survey
         expect(metadataText).toMatch("Survey:\nGB\nYear:\n2014\nPeriod:\nWeek 18");
 
-        let uploadFileInput = await browser.findElement(
-            By.xpath('//input[@type="file"]')
-        );
+        let uploadFileInput = await browser.findElement(By.xpath('//input[@type="file"]'));
 
         await uploadFileInput.sendKeys(filepath);
 
@@ -116,26 +107,7 @@ describe("Selenium - Create New Batch Test", () => {
         // Get button className
         let submitButtonClassName = await SubmitButton.getAttribute("className");
 
-        // Check Button is loading in file.
+        // Check Button is loading set to loading
         expect(submitButtonClassName).toMatch("btn btn--loader is-loading field");
-
-        let panels = await browser.findElements(By.className("panel"));
-        console.log(await panels.toString());
-        let panel1 = await panels[0];
-        let panel2 = await panels[1];
-        console.log(await panel1.getText());
-        console.log(await panel2.getText());
-
-        let panelText1 = await panel1.findElement(By.xpath("/p"));
-
-        console.log(await panelText1.getText());
-
-        let panelText2 = await panel2.findElement(By.xpath("/p"));
-
-        console.log(await panelText2.getText());
-
-        // let batchTypeMetadataValue = await browser.findElement(By.xpath('dd[text()="Monthly"]'));
-        //         //
-        //         // expect(batchTypeMetadataValue).toEqual('Monthly')
     });
 });
