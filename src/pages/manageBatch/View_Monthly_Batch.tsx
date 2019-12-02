@@ -108,6 +108,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
             week: +week,
             month: +month,
             year: +year,
+            status: 1
         })
     };
 
