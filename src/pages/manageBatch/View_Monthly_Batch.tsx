@@ -179,7 +179,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                                              period={this.state.period}/>
                                     {this.summaryModal()}
                                     <ONSPanel label="Monthly Batch" status="info" spacious={false}>
-                                        <p>Every File Must be Uploaded to Run Process</p>
+                                        <p>Every Survey File Must be Uploaded to Run Process</p>
                                     </ONSPanel>
                                     <br/>
                                 </div>
