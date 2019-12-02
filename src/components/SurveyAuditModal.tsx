@@ -2,10 +2,9 @@ import React, {Component} from "react";
 import {ONSMetadata} from "./ONS_DesignSystem/ONSMetadata";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
 import ReactModal from "react-modal";
-import {getSurveyAudit} from "../utilities/http";
+import {getSurveyAudit, surveyAuditResponse} from "../utilities/http";
 import {isDevEnv, monthNumberToString} from "../utilities/Common_Functions";
 import moment from "moment";
-import {surveyAuditResponse} from "../utilities/httpLinks";
 
 interface Props {
     week: string
