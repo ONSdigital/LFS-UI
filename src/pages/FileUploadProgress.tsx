@@ -2,14 +2,14 @@ import React, {Component} from "react";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {UPLOAD_HEADERS} from "../utilities/Headers"
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
-import {getUploadStatusStyle, toUpperCaseFirstChar} from '../utilities/Common_Functions';
+import {getUploadStatusStyle, isDevEnv, toUpperCaseFirstChar} from '../utilities/Common_Functions';
 import {ONSProgressBar} from "../components/ONS_DesignSystem/ONSProgressBar";
 
 interface Props {
     importName: string
     fileName: string
     hidden: boolean
-    importOptionVisible: Function
+    fileUploading: Function
     setPanel: Function
     redirectOnComplete?: any
 }
@@ -73,24 +73,24 @@ export class FileUploadProgress extends Component <Props, State> {
 
     handleWSOnOpen = (evt: Event) => {
         console.log("WebSocket Open");
-        console.log(evt);
+        (isDevEnv && console.log(evt));
         this.getFileUploadProgress();
     };
 
     handleWSOnClose = (evt: Event) => {
         console.log("WebSocket Closed");
-        console.log(evt);
+        (isDevEnv && console.log(evt));
         clearInterval(this.state.websocketID);
     };
 
     handleWSOnError = (evt: Event) => {
         console.log("WebSocket Error");
-        console.log(evt);
+        (isDevEnv && console.log(evt));
         clearInterval(this.state.websocketID);
     };
 
     handleWSOnMessage = (evt: any) => {
-        console.log(evt);
+        (isDevEnv && console.log(evt));
         if (evt.status === 3 || evt.errorMessage.length > 0) {
             if (evt.errorMessage === "fileName not found") {
                 this.setState({
@@ -102,12 +102,12 @@ export class FileUploadProgress extends Component <Props, State> {
         }
         if (evt.status === 1) {
             this.props.setPanel("", "", false);
-            this.props.importOptionVisible(false);
+            this.props.fileUploading(true);
         }
         let percentage = Math.round(evt.percent * 10) / 10;
         if (evt.status === 2 && evt.errorMessage.length === 0) {
             this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success', true);
-            this.props.importOptionVisible(true);
+            this.props.fileUploading(false);
             if (this.props.redirectOnComplete !== undefined) {
                 this.props.redirectOnComplete(false);
             }

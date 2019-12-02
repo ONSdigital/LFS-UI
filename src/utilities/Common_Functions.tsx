@@ -126,4 +126,9 @@ function toUpperCaseFirstChar(string: string){
     return string.charAt(0).toUpperCase() + string.slice(1, string.length)
 }
 
-export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle}
+
+function isDevEnv() {
+    return process.env.NODE_ENV === 'development'
+}
+
+export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv}

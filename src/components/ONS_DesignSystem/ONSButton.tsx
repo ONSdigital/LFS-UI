@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
+import './ONSButton.css'
 
 interface Props {
     label: string,
     id?: string,
     primary: boolean,
-    small: boolean,
+    small?: boolean,
     field?: boolean,
     loading?: boolean,
     marginRight?: number,

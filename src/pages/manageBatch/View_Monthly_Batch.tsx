@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {ONSPanel} from '../../components/ONS_DesignSystem/ONSPanel';
 import {ONSButton} from '../../components/ONS_DesignSystem/ONSButton';
-import {getMonth, monthNumberToString, qList, toUpperCaseFirstChar} from '../../utilities/Common_Functions';
+import {monthNumberToString, toUpperCaseFirstChar} from '../../utilities/Common_Functions';
 import {ONSMetadata} from '../../components/ONS_DesignSystem/ONSMetadata';
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../../components/SurveyAuditModal";
 import {MonthlyBatchUploadTable} from "./MonthlyBatchUploadTable";
 import {getBatchData} from "../../utilities/http";
+import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 
 interface State {
     UploadsData: Data | null
@@ -110,11 +111,15 @@ export class View_Monthly_Batch extends Component <Props, State> {
 
     openSummaryModal = (row: any) => {
         window.history.pushState({}, document.title, this.state.pathName);
-        this.setState({summaryOpen: true, surveyAuditWeek: row.week, surveyAuditMonth: row.month, surveyAuditUploadType: row.type});
+        this.setState({
+            summaryOpen: true,
+            surveyAuditWeek: row.week,
+            surveyAuditMonth: row.month,
+            surveyAuditUploadType: row.type
+        });
     };
 
     closeSummaryModal = () => this.setState({summaryOpen: false});
-
 
 
     formatMetaData() {
@@ -174,13 +179,12 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                 <div>
                                     <ONSButton label="Run Monthly Process" small={false} primary={true}
                                                marginRight={10}/>
-                                    {(() => {
-                                        if (qList.some(item => String(getMonth(this.state.period)) === String(item))) {
-                                            return (
-                                                <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
-                                            )
-                                        }
-                                    })()}
+                                    <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
+
+                                </div>
+                                <br/>
+                                <div style={{width: "75%"}}>
+                                    <ReferenceFileImportTable/>
                                 </div>
                             </>
                             :
