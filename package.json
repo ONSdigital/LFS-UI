@@ -53,14 +53,6 @@
       "last 1 safari version"
     ]
   },
-  "prettier": {
-    "tabWidth": 4,
-    "bracketSpacing": false,
-    "parser": "typescript",
-    "printWidth": 160,
-    "singleQuote": false,
-    "jsxBracketSameLine": true
-  },
   "devDependencies": {
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.23",
@@ -71,7 +63,6 @@
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
     "jest": "^24.9.0",
-    "prettier": "1.19.1",
     "react-test-renderer": "^16.10.2",
     "serve": "^11.2.0",
     "ts-jest": "^24.1.0",
