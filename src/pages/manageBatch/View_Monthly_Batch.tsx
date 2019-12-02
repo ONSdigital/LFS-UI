@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ONSPanel} from '../../components/ONS_DesignSystem/ONSPanel';
 import {ONSButton} from '../../components/ONS_DesignSystem/ONSButton';
-import {monthNumberToString, toUpperCaseFirstChar} from '../../utilities/Common_Functions';
+import {isDevEnv, monthNumberToString, toUpperCaseFirstChar} from "../../utilities/Common_Functions";
 import {ONSMetadata} from '../../components/ONS_DesignSystem/ONSMetadata';
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
@@ -24,6 +24,7 @@ interface State {
     surveyAuditMonth: string
     importAudit: any
     surveyAuditUploadType: string
+    surveyAuditStatus: number
     pathName: string
 }
 
@@ -69,6 +70,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
             surveyAuditWeek: "",
             surveyAuditMonth: "",
             surveyAuditUploadType: "",
+            surveyAuditStatus: 0,
             importAudit: null,
             pathName: "/manage-batch/monthly/" + props.match.params.year + "/" + props.match.params.period
         };
@@ -94,7 +96,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                 this.updateMetaDataList()
             })
             .catch(error => {
-                console.log(error);
+                (isDevEnv() && console.log(error));
                 this.setState({batchFound: false});
             });
     };
@@ -115,7 +117,8 @@ export class View_Monthly_Batch extends Component <Props, State> {
             summaryOpen: true,
             surveyAuditWeek: row.week,
             surveyAuditMonth: row.month,
-            surveyAuditUploadType: row.type
+            surveyAuditUploadType: row.type,
+            surveyAuditStatus: row.status
         });
     };
 
@@ -152,7 +155,9 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                   month={this.state.surveyAuditMonth}
                                   year={this.state.year}
                                   surveyType={this.state.surveyAuditUploadType}
-                                  closeSummaryModal={this.closeSummaryModal}/>
+                                  status={this.state.surveyAuditStatus}
+                                  closeSummaryModal={this.closeSummaryModal}
+                                  reloadBatchData={this.batchData}/>
             )
     };
 
@@ -168,7 +173,8 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                 <div style={{width: "55%"}}>
                                     <MonthlyBatchUploadTable batchData={this.state.batchData}
                                                              openModel={this.openSummaryModal}
-                                                             batchType={this.state.batchType} year={this.state.year}
+                                                             batchType={this.state.batchType}
+                                                             year={this.state.year}
                                                              period={this.state.period}/>
                                     {this.summaryModal()}
                                     <ONSPanel label="Monthly Batch" status="info" spacious={false}>
