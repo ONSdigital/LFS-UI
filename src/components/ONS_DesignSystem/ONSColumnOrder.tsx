@@ -34,10 +34,10 @@ export class ONSColumnOrder extends Component <Props, State>{
     return (
       <div style={{display:"inline-block", marginLeft:"10px", cursor:"pointer"}} onClick={() => this.clickHandler()}>
         {this.state.asc &&
-          <img src={process.env.PUBLIC_URL + '/img/Sort-Up.svg'} style={{width:"10px", display: "block", marginBottom: this.state.sort ? "0px" : "-10px"}} alt={"Sort Column Ascending"}/>
+          <img id="asc" src={process.env.PUBLIC_URL + '/img/Sort-Up.svg'} style={{width:"10px", display: "block", marginBottom: this.state.sort ? "0px" : "-10px"}} alt={"Sort Column Ascending"}/>
         }
         {this.state.desc &&
-          <img src={process.env.PUBLIC_URL + '/img/Sort-Down.svg'} style={{width:"10px"}} alt={"Sort Column Descending"}/>
+          <img id="desc" src={process.env.PUBLIC_URL + '/img/Sort-Down.svg'} style={{width:"10px"}} alt={"Sort Column Descending"}/>
         }
       </div>
     );

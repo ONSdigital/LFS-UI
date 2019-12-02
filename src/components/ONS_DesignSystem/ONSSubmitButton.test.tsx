@@ -11,14 +11,15 @@ describe("ONS Submit Button Test", () => {
     const submitProps = {
         label: "Submit",
         primary: true,
-        small: false
+        small: true,
     }
 
     const clickSubmitProps = {
         label: "Submit",
-        primary: true,
+        primary: false,
         small: false,
-        onClick: sinon.spy()
+        onClick: sinon.spy(),
+        onChange: undefined
     }
 
     const loadingButtonProps = {
@@ -31,11 +32,12 @@ describe("ONS Submit Button Test", () => {
 
     function wrapper(render: any, props:any) {
         return render(
-            <ONSSubmitButton    label={props.label}
-                                primary={props.primary}
-                                small={props.small}
-                                loading={props.loading}
-                                onClick={props.onClick}>
+            <ONSSubmitButton    
+                label={props.label}
+                primary={props.primary}
+                small={props.small}
+                loading={props.loading}
+                onClick={props.onClick}>
             </ONSSubmitButton>
         )
     }
