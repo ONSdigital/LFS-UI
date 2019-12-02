@@ -20,11 +20,12 @@ interface State {
 interface VariableDefinitionTableRow {
     variable: string
     description: {String: string, Valid: boolean}
+    label: {String: string, Valid: boolean}
     type: string
     validFrom: Date
     length: number
     precision: number
-    alias: string
+    alias: {String: string, Valid: boolean}
     editable: boolean
     expanded: boolean
     imputation: boolean
@@ -123,11 +124,10 @@ const VarDefTableRow = (rowData: any) => {
                 {row.variable}
             </td>
             <td className="table__cell ">
-                {row.description.String}
+                {row.description.Valid ? row.description.String : "No Description Provided"}
             </td>
             <td className="table__cell ">
                 {moment(row.validFrom).format('L')}
-                {}
             </td>
             <td className="table__cell ">
                 <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>
