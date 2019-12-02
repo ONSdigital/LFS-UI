@@ -19,7 +19,6 @@ export class ONSMetadata extends Component < Props, {} > {
         if (this.props.List !== null) {
             return(
                 <div>
-                    {console.log(this.props.List)}
                     <dl className="metadata metadata__list grid grid--gutterless u-cf u-mb-l" title="This is an example of the metadata component" aria-label="This is an example of the metadata component">
                         {this.props.List.map((item:any) => (
                             <Fragment key ={item.L}>
