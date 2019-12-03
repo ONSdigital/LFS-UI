@@ -16,7 +16,7 @@ export class GenericNotFound extends Component <Props, {}> {
                 <div className="container">
                     <h1>Page Not Found</h1>
                     <p>{this.props.label ? this.props.label : "The page you are trying to access does not exist"}</p>
-                    <Link to={"/Dashboard"}>
+                    <Link to={"/dashboard"}>
                         <ONSButton label={"Return to Dashboard"} primary={true} small={false} />
                     </Link>
                 </div>
