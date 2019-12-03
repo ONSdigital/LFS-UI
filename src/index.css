@@ -36,17 +36,6 @@ caption{
   border-radius: 5px;
 }
 
-.selectableTableRow:focus {
-  -webkit-box-shadow: 0 0 0 3px #fd0;
-  box-shadow: 0 0 0 3px #fd0;
-  outline: none;
-  padding: 0 0 0 1.85rem;
-}
-
-.itemCursorHover :hover {
-  cursor: pointer
-}
-
 .progress-bar {
   position: relative;
   height: 20px;
@@ -58,26 +47,6 @@ caption{
   height: 100%;
   border-radius: inherit;
   transition: width .2s ease-in;
-}
-
-.accordion-table-chevron {
-  display: block;
-  padding: 6px 10px 6px 18px;
-}
-
-.accordion-table-chevron-svg {
-  display: block;
-  width: 15px;
-  height: 15px;
-
-}
-
-.accordion-table-chevron-rotate {
-  -webkit-transform:rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
 }
 
 

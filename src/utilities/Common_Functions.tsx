@@ -1,6 +1,6 @@
 function weeks() {
     let i;
-    let weekList = []
+    let weekList = [];
     for (i=1; i<=52; i++) {
         weekList.push({"label":"Week "+String(i), "value":String(i)})
     }
@@ -111,6 +111,17 @@ function getUploadStatusStyle(statusNo: number) {
     return status
 }
 
+function getBatchProgressStatusStyle(statusText: string) {
+    let status: status = {text: "", colour: 'dead', hexCode: '#888'};
+    switch (statusText){
+        case "Completed": status = {text: "Completed", colour: 'success', hexCode: '#12c864'}; break;
+        case "In Progress": status = {text: "In Progress", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case "Failed": status = {text: "Failed", colour: 'error', hexCode: '#fd112e'}; break;
+        case "Not Run": status = {text: "Not Run", colour: 'dead', hexCode: '#888'}; break;
+    }
+    return status
+}
+
 
 function getStatusStyle(statusNo: number) {
     let status: status = {text: "", colour: 'info', hexCode: '#222'};
@@ -133,4 +144,4 @@ function isDevEnv() {
     return process.env.NODE_ENV === 'development'
 }
 
-export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv}
+export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle}
