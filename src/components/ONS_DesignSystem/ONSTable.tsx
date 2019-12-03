@@ -264,7 +264,7 @@ export class ONSTable extends Component <Props, State> {
                     </tbody>
                 </table>
                 {this.state.Pagination && this.props.pageChange !== undefined && this.props.Steps !== undefined &&
-                <ONSPagination steps={this.props.Steps} count={this.state.Data.Count} pageChange={this.pageChange}/>
+                <ONSPagination listLength={this.props.Steps} count={this.state.Data.Count} pageChange={this.pageChange}/>
                 }
             </div>
         );
@@ -310,7 +310,7 @@ export class ONSTable extends Component <Props, State> {
                     </tbody>
                 </table>
                 {this.state.Pagination && this.props.pageChange !== undefined && this.props.Steps !== undefined &&
-                <ONSPagination steps={this.props.Steps} count={this.state.Data.Count} pageChange={this.pageChange}/>
+                <ONSPagination listLength={this.props.Steps} count={this.state.Data.Count} pageChange={this.pageChange}/>
                 }
             </div>
         );

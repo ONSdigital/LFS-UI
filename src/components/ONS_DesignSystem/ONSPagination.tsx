@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
 interface Props {
-    steps: number,
+    listLength: number,
     count: number,
-    pageChange: (offset: number, steps: number) => void
+    pageChange: (offset: number, listLength: number) => void
 }
 
 interface State {
@@ -15,16 +15,16 @@ interface State {
 export class ONSPagination extends Component <Props, State> {
     constructor(props: Props) {
         super(props);
-        let maxPage = Math.ceil(props.count / props.steps);
+        let maxPage = Math.ceil(props.count / props.listLength);
         this.state = {page: 1, maxPage: maxPage, disabled: false}
     }
 
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-        if (nextProps.count < nextProps.steps) {
+        if (nextProps.count < nextProps.listLength) {
             return {disabled: true};
         }
 
-        let maxPage = Math.ceil(nextProps.count / nextProps.steps);
+        let maxPage = Math.ceil(nextProps.count / nextProps.listLength);
         if (maxPage !== prevState.maxPage) {
             return {page: 1, maxPage: maxPage, disabled: false};
         } else return {disabled: false};
@@ -64,7 +64,7 @@ export class ONSPagination extends Component <Props, State> {
 
     pageChange = (e: React.MouseEvent, page: number) => {
         if (page !== this.state.page) {
-            this.props.pageChange((page - 1) * this.props.steps, this.props.steps);
+            this.props.pageChange((page - 1) * this.props.listLength, this.props.listLength);
             this.setState({page: page})
         }
     };
@@ -104,7 +104,7 @@ export class ONSPagination extends Component <Props, State> {
                             <button id="prev"
                                       style={this.buttonStyle}
                                     onClick={(e) => this.previous(e)}
-                                    className="x pagination__links"
+                                    className="pagination__links"
                                     aria-label="Go to the previous page">Previous
                             </button>
                         </li>

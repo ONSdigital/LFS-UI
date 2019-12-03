@@ -52,10 +52,10 @@ export class ONSAccordionTable extends Component <Props, State> {
         } else return null;
     }
 
-    pageChange = (offset: number, steps: number) => {
+    pageChange = (offset: number, listLength: number) => {
         this.setState({offset: offset});
         if (this.props.data === null) return;
-        let slicedData: any[] = this.state.data.slice(offset, offset + steps);
+        let slicedData: any[] = this.state.data.slice(offset, offset + listLength);
         if (slicedData !== null) {
             this.setState({
                 slicedData: slicedData
@@ -172,8 +172,9 @@ export class ONSAccordionTable extends Component <Props, State> {
                 }
                 {this.props.pagination ?
                     <ONSPagination
-                        steps={(this.props.paginationSize !== undefined ? this.props.paginationSize : 20)}
-                        count={this.state.data.length} pageChange={this.pageChange}/>
+                    listLength={(this.props.paginationSize !== undefined ? this.props.paginationSize : 20)}
+                    count={this.state.data.length} 
+                    pageChange={this.pageChange}/>
                     :
                     <br/>
                 }
