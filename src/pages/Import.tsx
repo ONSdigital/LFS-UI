@@ -236,11 +236,13 @@ export class Import extends Component <Props, State> {
 
     fileSelection = [
         //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
-        {"label": "APS Design Weights", "value": "Design Weights"},
-        {"label": "Geographical Classifications", "value": "Geographical Classifications"},
-        {"label": "Value Labels", "value": "Value Labels"},
-        {"label": "Population Estimates", "value": "Population Estimates"},
-        {"label": "Variable Definitions", "value": "Variable Definitions"}
+        {label: "APS Design Weights", value: "APS Design Weights"},
+        {label: "Geographical Classifications", value: "Geographical Classifications"},
+        {label: "Variable Definitions", value: "Variable Definitions"},
+        {label: "Value Labels", value: "Value Labels"},
+        {label: "Population Estimates", value: "Population Estimates"},
+        {label: "Output Specification", value: "Output Specification"},
+
     ];
 
     render() {
