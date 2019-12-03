@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {ONSAccordionTable} from "./ONS_DesignSystem/ONSAccordionTable";
 import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
 import {ONSStatus} from "./ONS_DesignSystem/ONSStatus";
@@ -76,7 +76,7 @@ const DashboardTableRow = (rowData: any) => {
                            status={getStatusStyle(+row.status).colour}/>
             </td>
         </>
-    )
+    );
 };
 
 const DashboardExpandedRow = (rowData: any) => {
@@ -89,7 +89,6 @@ const DashboardExpandedRow = (rowData: any) => {
                 <ONSButton label={"Manage Batch"} primary={true} small={false} field={true}/>
             </Link>
         </>
-    )
-
+    );
 };
 
