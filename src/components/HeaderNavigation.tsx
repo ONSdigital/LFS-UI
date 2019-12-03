@@ -31,16 +31,21 @@ let headerLinks = [
         nonGenericPage: true
     },
     {
+        link: "/New_Batch",
+        label: "New Batch"
+    },
+
+    {
+        link: "/ViewData",
+        label: "View Data"
+    },
+    {
         link: "/import",
         label: "Import"
     },
     {
-        link: "/New_Batch",
-        label: "New Batch"
-    },
-    {
-        link: "/ViewData",
-        label: "View Data"
+        link: "/export",
+        label: "Export"
     },
     {
         link: "/Admin",

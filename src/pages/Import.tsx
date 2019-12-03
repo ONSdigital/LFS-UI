@@ -99,23 +99,23 @@ export class Import extends Component <Props, State> {
             postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                 .then(response => {
                     (isDevEnv && console.log(response));
-                    if (response.status === 'ERROR') {
-                        this.setPanel('Error Occurred when uploading files: ' + response.errorMessage.toString(), 'error');
-                        this.setState({importHidden: false, uploadProgressHidden: true})
+                    if (response.status === "ERROR") {
+                        this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
+                        this.setState({importHidden: false, uploadProgressHidden: true});
                     } else {
                         if (response.status === "OK") {
-                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ': File Uploaded Successfully', 'success');
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
                         } else if (response.status === "SUCCESS" && response.filename === "design_weights") {
-                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, 'info');
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
                         }
                     }
                     this.setState({
-                        uploading: false,
+                        uploading: false
                     });
                 })
                 .catch(err => {
                     console.log(err);
-                    this.setPanel('Error Occurred when uploading files: ' + err.toString(), 'error',);
+                    this.setPanel("Error Occurred when uploading files: " + err.toString(), "error");
                     this.setState({
                         uploading: false,
                         uploadProgressHidden: false
