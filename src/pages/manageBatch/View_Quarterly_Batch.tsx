@@ -5,7 +5,6 @@ import {getMonth, qList,} from '../../utilities/Common_Functions';
 import {ONSMetadata} from '../../components/ONS_DesignSystem/ONSMetadata';
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
-import {SurveyAuditModal} from "../../components/SurveyAuditModal";
 import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 
 interface State {

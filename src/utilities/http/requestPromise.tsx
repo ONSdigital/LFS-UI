@@ -5,12 +5,10 @@ function requestPromise(method: string, url: string, body: any = null): Promise<
             "body": (body !== null ? body : body)
         })
             .then(response => {
-                console.log("Response");
                 console.log(response);
                 resolve(response.json());
             })
             .catch(err => {
-                console.log("Error");
                 console.log(err);
                 reject(err)
             });
