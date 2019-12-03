@@ -86,12 +86,12 @@ class App extends React.Component<Props, State> {
                   <Layout loggedIn={!!(this.state.user !== null || "")}>
                       <Switch>
                           <this.PrivateRoute exact path='/' component={Dashboard} page_id={1}/>
-                          <this.PrivateRoute exact path='/Dashboard' component={Dashboard} page_id={2}/>
-                          <this.PrivateRoute exact path='/New_Batch' component={New_Batch} page_id={3}/>
+                          <this.PrivateRoute exact path='/dashboard' component={Dashboard} page_id={2}/>
+                          <this.PrivateRoute exact path='/new-batch' component={New_Batch} page_id={3}/>
                           <this.PrivateRoute exact path='/manage-batch/monthly/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
                           <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>
-                          <this.PrivateRoute exact path='/surveyUpload/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
-                          <this.PrivateRoute exact path='/ViewData' component={ViewData} page_id={10}/>
+                          <this.PrivateRoute exact path='/survey-import/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
+                          <this.PrivateRoute exact path='/view-data' component={ViewData} page_id={10}/>
                           <this.PrivateRoute exact path='/Import/:file?' component={Import} page_id={7}/>
                           <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
                           <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>

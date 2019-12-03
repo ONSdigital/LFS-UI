@@ -15,7 +15,7 @@ interface LinkRow {
 
 let headerLinks = [
     {
-        link: "/Dashboard",
+        link: "/dashboard",
         label: "Dashboard"
     },
     {
@@ -25,18 +25,18 @@ let headerLinks = [
         nonGenericPage: true
     },
     {
-        link: "/surveyUpload",
+        link: "/survey-import",
         label: "Import Survey",
         hidden: true,
         nonGenericPage: true
     },
     {
-        link: "/New_Batch",
+        link: "/new-batch",
         label: "New Batch"
     },
 
     {
-        link: "/ViewData",
+        link: "/view-data",
         label: "View Data"
     },
     {
@@ -48,7 +48,7 @@ let headerLinks = [
         label: "Export"
     },
     {
-        link: "/Admin",
+        link: "/admin",
         label: "User Management"
     }
 ];
@@ -62,7 +62,7 @@ export function HeaderNavigation(props: Props) {
     if (link !== undefined) {
         if (link.nonGenericPage) link.hidden = true;
         link.current = false;
-    } else console.log("There is no current!");
+    }
 
     // Set Current Page and set to visible if its a hidden header
     link = links.find(x => x.link === "/" + location.pathname.split("/")[1]);
@@ -72,7 +72,14 @@ export function HeaderNavigation(props: Props) {
             link.hidden = false;
             // link.link = location.pathname
         }
-    } else console.log("Somehow it's undefined!");
+    } else {
+        if (location.pathname.split("/")[1].length === 0) {
+            link = links.find(x => x.label === "Dashboard");
+            if (link !== undefined) {
+                link.current = true;
+            }
+        }
+    }
 
     return (
         <>
