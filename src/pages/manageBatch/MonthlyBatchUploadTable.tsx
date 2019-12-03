@@ -1,7 +1,7 @@
 import React from 'react';
 import {BATCH_HEADERS} from "../../utilities/Headers";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
-import {getStatusStyle, monthNumberToString} from "../../utilities/Common_Functions";
+import {getUploadStatusStyle, monthNumberToString} from "../../utilities/Common_Functions";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
@@ -31,8 +31,8 @@ export function MonthlyBatchUploadTable(props: Props) {
                     }
                 </td>
                 <td className="table__cell ">
-                    <ONSStatus label={getStatusStyle(+row.status).text} small={false}
-                               status={getStatusStyle(+row.status).colour}/>
+                    <ONSStatus label={getUploadStatusStyle(+row.status).text} small={false}
+                               status={getUploadStatusStyle(+row.status).colour}/>
                 </td>
                 <td className="table__cell ">
                     <Link
