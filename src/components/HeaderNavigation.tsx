@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment} from "react";
 import {Link, useLocation} from "react-router-dom";
 
 interface Props {
@@ -32,9 +32,7 @@ let headerLinks = [
     },
     {
         link: "/import",
-        label: "Import",
-        hidden: true,
-        nonGenericPage: true
+        label: "Import"
     },
     {
         link: "/New_Batch",
@@ -47,7 +45,7 @@ let headerLinks = [
     {
         link: "/Admin",
         label: "User Management"
-    },
+    }
 ];
 
 export function HeaderNavigation(props: Props) {
@@ -62,7 +60,7 @@ export function HeaderNavigation(props: Props) {
     } else console.log("There is no current!");
 
     // Set Current Page and set to visible if its a hidden header
-    link = links.find(x => x.link === '/' + location.pathname.split('/')[1]);
+    link = links.find(x => x.link === "/" + location.pathname.split("/")[1]);
     if (link !== undefined) {
         link.current = true;
         if (link.nonGenericPage) {
