@@ -252,6 +252,7 @@ export class Import extends Component <Props, State> {
                                   hidden={!this.state.panel.visible}>
                             <p>{this.state.panel.label}</p>
                         </ONSPanel>
+                        <br/>
                         <div hidden={this.state.importSelectHidden}>
                             <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
                                        onChange={this.handleImportChange}/>
