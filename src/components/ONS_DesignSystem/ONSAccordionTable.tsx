@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {ONSPanel} from "./ONSPanel";
 import update from 'immutability-helper';
 import {ONSPagination} from "./ONSPagination";
+import uuidv4 from 'uuid/v4'
 import './ONSAccordionTable.css';
 
 interface Props {
@@ -100,7 +101,7 @@ export class ONSAccordionTable extends Component <Props, State> {
                     {
                         this.state.data !== null && this.state.data.length !== 0 ?
                             this.state.slicedData.map((row: DashboardTableRow, index: number) =>
-                                <Fragment key={(this.props.expandedRowEnabled ? row.id : index)}>
+                                <Fragment key={uuidv4()}>
                                     <tr className={("table__row " + (this.props.expandedRowEnabled ? "selectableTableRow" : 'nonSelectableTableRow'))}
                                         onClick={((e) => this.handleClickOnRow(e, row, index))}
                                         tabIndex={0}
