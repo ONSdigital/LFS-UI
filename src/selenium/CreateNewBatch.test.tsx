@@ -8,14 +8,14 @@ https://www.guru99.com/xpath-selenium.html
 */
 
 describe("Selenium - Create New Batch Test", () => {
-    let url = "http://localhost:3000/New_Batch";
     let browser: WebDriver;
     // Setup Chrome driver
     chrome.setDefaultService(new chrome.ServiceBuilder(process.env.REACT_APP_CHROME_DRIVER).build());
 
     beforeAll(async () => {
         browser = await new Builder().forBrowser("chrome").build();
-        await browser.get(url);
+
+        await browser.get("http://localhost:3000");
 
         // logs in the user
         await loginUserToUI(browser);
@@ -28,6 +28,8 @@ describe("Selenium - Create New Batch Test", () => {
     });
 
     it("should Create a New Batch for January 2010 and then redirect to the Manage Batch Page", async () => {
+        await browser.get("http://localhost:3000/new-batch");
+
         // get the batch type select field
         let batchOption = await browser.findElement(By.id("batch"));
 
@@ -92,7 +94,7 @@ describe("Selenium - Create New Batch Test", () => {
         // Confirm the page is setup for the correct survey
         expect(metadataText).toMatch("Survey:\nGB\nYear:\n2014\nPeriod:\nWeek 18");
 
-        let uploadFileInput = await browser.findElement(By.xpath('//input[@type="file"]'));
+        let uploadFileInput = await browser.findElement(By.xpath("//input[@type='file']"));
 
         await uploadFileInput.sendKeys(filepath);
 
