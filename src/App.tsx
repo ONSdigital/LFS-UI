@@ -5,7 +5,7 @@ import {Dashboard} from './pages/Dashboard';
 import {Login} from './auth/Login';
 import {Admin} from './pages/Admin';
 import Logout from './auth/Logout';
-import {Import} from "./pages/Import";
+import {Import} from "./pages/import/Import";
 import {New_Batch} from './pages/New_Batch';
 import {View_Monthly_Batch} from './pages/manageBatch/View_Monthly_Batch';
 import {GenericNotFound} from "./pages/GenericNotFound";
@@ -15,7 +15,7 @@ import {FileUploadProgress} from './pages/FileUploadProgress';
 import DocumentTitle from "react-document-title";
 import {ViewData} from "./pages/ViewData";
 import {View_Quarterly_Batch} from "./pages/manageBatch/View_Quarterly_Batch";
-import {ImportOverview} from "./pages/ImportOverview";
+import {ImportOverview} from "./pages/import/ImportOverview";
 
 interface Props {
     cookies: Cookies

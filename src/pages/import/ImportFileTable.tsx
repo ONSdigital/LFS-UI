@@ -2,13 +2,15 @@ import React from 'react';
 import {REFERENCE_FILE_HEADERS} from "../../utilities/Headers";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
+import {Link} from "react-router-dom";
+import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import moment from "moment";
 
 interface Props {
 
 }
 
-export function ReferenceFileImportTable() {
+export function ImportFileTable() {
     let imports = [
         {name: "APS Design Weights", "status": "Imported"},
         {name: "Geographical Classifications", "status": "File Older than One year"},
@@ -31,6 +33,12 @@ export function ReferenceFileImportTable() {
                 </td>
                 <td className="table__cell ">
                     <ONSStatus label={row.status} small={false} status={'info'}/>
+                </td>
+                <td className="table__cell ">
+                    <Link
+                        to={"/import/" + row.name}>
+                        <ONSButton label={"Import"} primary={false} small={true}/>
+                    </Link>
                 </td>
             </>
         )

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import DocumentTitle from "react-document-title";
-import {ReferenceFileImportTable} from "./manageBatch/ReferenceFileImportTable";
+import {ImportFileTable} from "./ImportFileTable";
 
 interface Props {
     match: any
@@ -18,7 +18,7 @@ export class ImportOverview extends Component <Props, State> {
             <DocumentTitle title={"LFS Imports Overview"}>
                 <div className="container">
                     <h3>Import Overview</h3>
-                    <ReferenceFileImportTable/>
+                    <ImportFileTable/>
                 </div>
             </DocumentTitle>
         );
