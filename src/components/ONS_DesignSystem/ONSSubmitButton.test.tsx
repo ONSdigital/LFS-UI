@@ -1,9 +1,8 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import { ONSSubmitButton } from "./ONSSubmitButton";
 import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
 
 describe("ONS Submit Button Test", () => {
     Enzyme.configure({ adapter: new Adapter() })

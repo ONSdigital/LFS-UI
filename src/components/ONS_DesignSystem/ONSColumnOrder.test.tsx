@@ -1,9 +1,8 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import {ONSColumnOrder} from "./ONSColumnOrder";
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
-import Enzyme from 'enzyme';
 
 describe("ONS Column Order Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -30,7 +29,6 @@ describe("ONS Column Order Test", () => {
     it("Image is shown as descending after one click as shown by image)", () => {
         wrapper(mount, Props).find('ONSColumnOrder').simulate('click');
         let wrapperStyle = wrapper(mount, Props).find(ONSColumnOrder).prop('style')
-        console.log(wrapperStyle)
         expect(Props.onClick).toHaveProperty('callCount', 1);
     })
 

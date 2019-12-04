@@ -1,52 +1,109 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import {ONSAccordionTable} from "./ONSAccordionTable";
 import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
 import {DASHBOARD_HEADERS} from "./ONS_TestData/headers";
+import { ONSPagination } from './ONSPagination';
+import { ONSPanel } from './ONSPanel';
 
-interface VarDefTableRow {
-    variable: string
-    description: string
-    type: string
-    validFrom: Date
-    length: number
-    precision: number
-    alias: string
-    editable: boolean
-    expanded: boolean
-    imputation: boolean
-    dv: boolean
-    }
+interface tableRow {
+    id: string
+    status: string
+}
 
 describe("ONS Accordion Table Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
     
-    const rowData = [{label:1, status:3},
-                     {label:2, status:3}]
-    
-    
+    let emptyData: any = []
 
-    const VarDefTableRow = (rowData: any) => {
-        let row: VarDefTableRow = rowData.row;
+    const singleRowData = [{id:"1", status:"3"}] 
+
+    const manyRowData = [{id:"1", status:"3"},
+                          {id:"1", status:"3"},
+                          {id:"1", status:"3"},
+                          {id:"1", status:"3"}]
+
+    const tableRow = (rowData: any) => {
+        let row: tableRow = rowData.row;
         return (
             <>
                 <td className="table__cell ">
-                    {row.variable}
+                    {row.id}
                 </td>
                 <td className="table__cell ">
-                    {row.description}
+                    {row.status}
                 </td>
             </>
     )}
 
-    const Props = {
+    const DashboardExpandedRow = (rowData: any) => {
+        let row: tableRow = rowData.row;
+        return (
+            <>
+                <p>heyyyyyyy</p> 
+            </>
+        )
+    };
+
+    const singleRowProps = {
         Headers: DASHBOARD_HEADERS,
-        data: rowData,
-        Row:""
+        data: singleRowData,
+        Row: tableRow,
+        expandedRowEnabled: true,
+        expandedRow: DashboardExpandedRow,
+        noDataMessage: "no data mate 1"
     }
 
-    
+    const falseExSingleRowProps = {
+        Headers: DASHBOARD_HEADERS,
+        data: singleRowData,
+        Row: tableRow,
+        expandedRowEnabled: false,
+        expandedRow: DashboardExpandedRow,
+        noDataMessage: "no data mate 2"
+    }
+
+    const emptyProps = {
+        Headers: DASHBOARD_HEADERS,
+        data: emptyData,
+        Row: tableRow,
+        expandedRowEnabled: false,
+        expandedRow: DashboardExpandedRow,
+        noDataMessage: "no data mate 3"
+    }
+
+    const trueEmptyProps = {
+        Headers: DASHBOARD_HEADERS,
+        data: emptyData,
+        Row: tableRow,
+        expandedRowEnabled: true,
+        expandedRow: DashboardExpandedRow,
+        noDataMessage: "no data mate 3"
+    }
+
+    const manyRowProps = {
+        Headers: DASHBOARD_HEADERS,
+        data: manyRowData,
+        Row: tableRow,
+        expandedRowEnabled: true,
+        expandedRow: DashboardExpandedRow,
+        noDataMessage: "no data mate 4",
+        pagination: true,
+        paginationSize: 1,
+        scrollable: true
+    }
+
+    const uManyRowProps = {
+        //pagination is undefined
+        Headers: DASHBOARD_HEADERS,
+        data: manyRowData,
+        Row: tableRow,
+        expandedRowEnabled: true,
+        expandedRow: DashboardExpandedRow,
+        noDataMessage: "no data mate 5",
+        pagination: true,
+        paginationSize: undefined
+    }
 
     function wrapper(render: any, props: any) {
         return render(
@@ -64,5 +121,47 @@ describe("ONS Accordion Table Test", () => {
         )
     }
 
-    it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
+    it("should render correctly", () => expect(wrapper(shallow, singleRowProps).exists()).toEqual(true));
+
+    it("should render with the correct headers", () => {
+        expect(wrapper(mount, falseExSingleRowProps).find("ONSAccordionTable").getElement().props.Headers).toEqual(falseExSingleRowProps.Headers);
+    })
+
+    it("should render with the correct headers", () => {
+        expect(wrapper(mount, trueEmptyProps).find("ONSAccordionTable").getElement().props.noDataMessage).toEqual(trueEmptyProps.noDataMessage);
+    })
+
+    it('simulates click events', () => {
+        let exWrapper = wrapper(mount, singleRowProps)
+        let exRow = exWrapper.find('tr.selectableTableRow')
+        exRow.simulate('click');
+        expect(exRow.find('rowExpanded')).toBeTruthy();
+
+        let unexWrapper = wrapper(mount, falseExSingleRowProps)
+        let unexRow = unexWrapper.find('tr.nonSelectableTableRow')
+        unexRow.simulate('click');
+        expect(unexRow.find('rowExpanded')).not.toEqual(true);
+
+    })
+
+    it('simulates keypress events', () => {
+        let thisWrapper = wrapper(mount, uManyRowProps)
+        let thisRow = thisWrapper.find('tr.selectableTableRow').at(0)
+        thisRow.simulate('keypress', {key: 'Enter'});
+        expect(thisRow.find('rowExpanded')).toBeTruthy();   
+        thisRow.simulate('keypress')
+        expect(thisRow.find('rowExpanded')).not.toEqual(true);
+    })
+
+    it('simulates pageChange event', () => {
+        let thisWrapper = wrapper(shallow, manyRowProps)
+        let offset = thisWrapper.state('offset')
+        thisWrapper.find(ONSPagination).dive().find("li.pagination__item--next").find('button').simulate('click')
+        expect(thisWrapper.state('offset')).not.toEqual(offset)            
+    })
+
+    it('should display a message if the data is empty', () => {
+        const thisWrapper = wrapper(mount, emptyProps)
+        expect(thisWrapper.find(ONSPanel).find('p').text()).toEqual(emptyProps.noDataMessage)
+    })
 })

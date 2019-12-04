@@ -23,7 +23,6 @@ export class ONSUpload extends Component <Props, {}>{
             this.props.onChange(e);
         }
         this.value = e.target.value;
-
     };
 
     render() {

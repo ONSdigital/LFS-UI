@@ -109,7 +109,6 @@ export class New_Batch extends Component <{}, State> {
     };
 
     errorGone = () => {
-        console.log(this.state.batchType + " " + this.state.year + " " + this.state.period + " "+ this.state.submit + " " + this.state.inputError);
         if(this.state.batchType !== "" && this.state.year !== "" && (this.state.batchType !== "yearly" || this.state.period !== "")) this.setState({inputError: false})
     };
 

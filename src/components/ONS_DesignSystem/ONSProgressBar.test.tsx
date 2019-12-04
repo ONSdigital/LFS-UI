@@ -1,8 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import {ONSProgressBar} from "./ONSProgressBar";
 import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
 import {getUploadStatusStyle} from "../../utilities/Common_Functions";
 
 describe("ONS Progress Bar Test", () => {

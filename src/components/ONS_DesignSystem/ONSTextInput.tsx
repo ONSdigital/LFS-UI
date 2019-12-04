@@ -22,9 +22,8 @@ export class ONSTextInput extends Component <Props, {}> {
     }
 
     handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (this.props.onChange !== undefined) {
-            this.props.onChange(e, this.props.label);
-        }
+        if (this.props.onChange !== undefined) this.props.onChange(e, this.props.label);
+        
         this.value = e.target.value;
     };
 
