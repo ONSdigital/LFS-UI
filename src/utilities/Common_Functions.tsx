@@ -1,6 +1,6 @@
 function weeks() {
     let i;
-    let weekList = []
+    let weekList = [];
     for (i=1; i<=52; i++) {
         weekList.push({"label":"Week "+String(i), "value":String(i)})
     }
@@ -101,10 +101,23 @@ interface status {
 function getUploadStatusStyle(statusNo: number) {
     let status: status = {text: "", colour: 'info', hexCode: '#222'};
     switch (statusNo){
-        case 0: status = {text: "Not Started", colour: 'info', hexCode: '#5e7dd8'}; break;
-        case 1: status = {text: "File Uploading", colour: 'info', hexCode: '#5e7dd8'}; break;
-        case 2: status = {text: "Upload Successful", colour: 'success', hexCode: '#12c864'}; break;
+        case 0: status = {text: "Not Started", colour: 'dead', hexCode: '#989898'}; break;
+        case 1: status = {text: "File Uploaded", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 2: status = {text: "File Reloaded", colour: 'info', hexCode: '#5e7dd8'}; break;
         case 3: status = {text: "Upload Failed", colour: 'error', hexCode: '#fd112e'}; break;
+        case 4: status = {text: "Upload Accepted", colour: 'success', hexCode: '#12c864'}; break;
+        case 5: status = {text: "Upload Rejected", colour: 'error', hexCode: '#fd112e'}; break;
+    }
+    return status
+}
+
+function getBatchProgressStatusStyle(statusText: string) {
+    let status: status = {text: "", colour: 'dead', hexCode: '#888'};
+    switch (statusText){
+        case "Completed": status = {text: "Completed", colour: 'success', hexCode: '#12c864'}; break;
+        case "In Progress": status = {text: "In Progress", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case "Failed": status = {text: "Failed", colour: 'error', hexCode: '#fd112e'}; break;
+        case "Not Run": status = {text: "Not Run", colour: 'dead', hexCode: '#888'}; break;
     }
     return status
 }
@@ -131,4 +144,4 @@ function isDevEnv() {
     return process.env.NODE_ENV === 'development'
 }
 
-export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv}
+export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle}

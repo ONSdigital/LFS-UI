@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {ChangeEvent, Component} from "react";
 import {ONSUpload} from "../components/ONS_DesignSystem/ONSUpload";
 import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {postImportFile} from "../utilities/http";
@@ -8,6 +8,7 @@ import {isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
 import {ONSDateInput} from "../components/ONS_DesignSystem/ONSDateInput";
 import {ReportExport} from "../components/ReportExport";
+import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
 
 interface Props {
     match: any
@@ -22,6 +23,7 @@ interface State {
     uploadProgressHidden: boolean
     validFromDateHidden: boolean
     reportExportHidden: boolean
+    importSelectHidden: boolean
     fileType: string
     uploadLink: string
     //check to see if functionality is built and whether to send the request
@@ -53,15 +55,16 @@ export class Import extends Component <Props, State> {
             uploadProgressHidden: true,
             validFromDateHidden: true,
             reportExportHidden: true,
+            importSelectHidden: false,
             fileType: "",
             uploadLink: "",
             built: false,
-            fileName: "string",
+            fileName: "",
             hasImportReport: false,
             panel: {
-                label: '',
+                label: "",
                 visible: false,
-                status: 'info'
+                status: "info"
             }
         };
         this.setPanel.bind(this);
@@ -76,51 +79,52 @@ export class Import extends Component <Props, State> {
             this.setState({
                 importHidden: false,
                 uploadProgressHidden: true,
+                importSelectHidden: true
             });
         }
     }
 
     upload = () => {
-        console.log('Uploading File');
+        console.log("Uploading File");
         this.hidePanel();
         this.setState({
-            uploading: true,
+            uploading: true
         });
         // TODO: Send correct data for each file type
         if (this.state.built) {
             let uploadLink = this.state.uploadLink;
             if (this.state.validFromDate !== null) {
-                uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString()
+                uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString();
             }
             postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                 .then(response => {
                     (isDevEnv && console.log(response));
-                    if (response.status === 'ERROR') {
-                        this.setPanel(response.errorMessage.toString(), 'error');
-                        this.setState({importHidden: true, uploadProgressHidden: true})
+                    if (response.status === "ERROR") {
+                        this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
+                        this.setState({importHidden: false, uploadProgressHidden: true});
                     } else {
                         if (response.status === "OK") {
-                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ': File Uploaded Successfully', 'success');
-                        } else if (response.status === "INFO" && response.filename === "design_weights") {
-                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, 'info');
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
+                        } else if (response.status === "SUCCESS" && response.filename === "design_weights") {
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
                         }
                     }
                     this.setState({
-                        uploading: false,
+                        uploading: false
                     });
                 })
                 .catch(err => {
                     console.log(err);
-                    this.setPanel(err.toString(), 'error',);
+                    this.setPanel("Error Occurred when uploading files: " + err.toString(), "error");
                     this.setState({
                         uploading: false,
                         uploadProgressHidden: false
                     });
                 });
         } else {
-            this.setPanel(this.state.importName + ': Import Not Implemented Yet', 'error');
+            this.setPanel(this.state.importName + ": Import Not Implemented Yet", "error");
             this.setState({
-                uploading: false,
+                uploading: false
             });
         }
     };
@@ -145,6 +149,17 @@ export class Import extends Component <Props, State> {
         });
     };
 
+    handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        this.setState({
+            importName: e.target.value,
+            importHidden: false,
+            uploadProgressHidden: false,
+            validFromDate: null
+        });
+        this.fileType(e.target.value);
+        this.hidePanel();
+    };
+
     handleFileChange = (selectorFiles: FileList | null) => {
         console.log(selectorFiles);
         this.setState({uploadFile: selectorFiles});
@@ -157,7 +172,7 @@ export class Import extends Component <Props, State> {
     setFileUploading = (bool: boolean) => {
         this.setState({importHidden: bool});
         if (this.state.hasImportReport) {
-            this.setState({reportExportHidden: false})
+            this.setState({reportExportHidden: false});
         }
     };
 
@@ -165,10 +180,10 @@ export class Import extends Component <Props, State> {
         switch (file) {
             case "Geographical Classifications":
                 this.setState({
-                    fileType: '.csv',
+                    fileType: ".csv",
                     built: true,
                     fileName: "address",
-                    uploadLink: 'address',
+                    uploadLink: "address",
                     validFromDateHidden: true,
                     hasImportReport: false
                 });
@@ -176,42 +191,42 @@ export class Import extends Component <Props, State> {
             case "Bulk Amendments":
                 this.setState({});
                 break;
-            case "Design Weights":
+            case "APS Design Weights":
                 this.setState({
-                    fileType: '.csv',
+                    fileType: ".csv",
                     built: true,
                     fileName: "design_weights",
-                    uploadLink: 'design/weights',
+                    uploadLink: "design/weights",
                     validFromDateHidden: true,
                     hasImportReport: false
                 });
                 break;
             case "Population Estimates":
                 this.setState({
-                    fileType: '.xlsx',
+                    fileType: ".xlsx",
                     built: true,
                     fileName: "population",
-                    uploadLink: 'population',
+                    uploadLink: "population",
                     validFromDateHidden: true,
                     hasImportReport: true
                 });
                 break;
             case "Value Labels":
                 this.setState({
-                    fileType: '.csv',
+                    fileType: ".csv",
                     built: true,
                     fileName: "value_labels",
-                    uploadLink: 'value/labels',
+                    uploadLink: "value/labels",
                     validFromDateHidden: false,
                     hasImportReport: false
                 });
                 break;
             case "Variable Definitions":
                 this.setState({
-                    fileType: '.csv',
+                    fileType: ".csv",
                     built: true,
                     fileName: "variable_definitions",
-                    uploadLink: 'variable/definitions',
+                    uploadLink: "variable/definitions",
                     validFromDateHidden: false,
                     hasImportReport: false
                 });
@@ -219,15 +234,31 @@ export class Import extends Component <Props, State> {
         }
     };
 
+    fileSelection = [
+        //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
+        {label: "APS Design Weights", value: "APS Design Weights"},
+        {label: "Geographical Classifications", value: "Geographical Classifications"},
+        {label: "Variable Definitions", value: "Variable Definitions"},
+        {label: "Value Labels", value: "Value Labels"},
+        {label: "Population Estimates", value: "Population Estimates"},
+        {label: "Output Specification", value: "Output Specification"},
+
+    ];
+
     render() {
         return (
-            <DocumentTitle title={'LFS Import ' + this.state.importName}>
+            <DocumentTitle title={"LFS Import " + this.state.importName}>
                 <div className="container">
                     <form>
                         <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
                                   hidden={!this.state.panel.visible}>
                             <p>{this.state.panel.label}</p>
                         </ONSPanel>
+                        <br/>
+                        <div hidden={this.state.importSelectHidden}>
+                            <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
+                                       onChange={this.handleImportChange}/>
+                        </div>
                         <br/>
                         <div hidden={this.state.importHidden}>
                             <div hidden={this.state.validFromDateHidden}>
@@ -245,7 +276,7 @@ export class Import extends Component <Props, State> {
                                        onClick={this.upload}
                                        primary={true}
                                        loading={this.state.uploading}/>
-                            <ONSButton label={'Return to Manage Batch'}
+                            <ONSButton label={"Return to Manage Batch"}
                                        primary={false}
                                        field={true}
                                        onClick={() => window.history.back()}/>
@@ -261,6 +292,6 @@ export class Import extends Component <Props, State> {
                 </div>
             </
                 DocumentTitle>
-        )
+        );
     }
 }

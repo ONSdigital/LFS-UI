@@ -2,6 +2,8 @@ import React, {Component, Fragment} from 'react';
 import {ONSPanel} from "./ONSPanel";
 import update from 'immutability-helper';
 import {ONSPagination} from "./ONSPagination";
+import uuidv4 from 'uuid/v4'
+import './ONSAccordionTable.css';
 
 interface Props {
     Headers: Header[]
@@ -96,14 +98,15 @@ export class ONSAccordionTable extends Component <Props, State> {
                         }
                     </tr>
                     </thead>
-                    <tbody className="table__body">
+                    <tbody className={"table__body " + (this.props.expandedRowEnabled ? "expandedRowEnabled " : "")}>
                     {
                         this.state.data !== null && this.state.data.length !== 0 ?
                             this.state.slicedData.map((row: DashboardTableRow, index: number) =>
-                                <Fragment key={(this.props.expandedRowEnabled ? row.id : index)}>
-                                    <tr className={("table__row selectableTableRow " + (this.props.expandedRowEnabled ? "itemCursorHover " : ""))}
+                                <Fragment key={uuidv4()}>
+                                    <tr className={("table__row " + (this.props.expandedRowEnabled ? "selectableTableRow" : 'nonSelectableTableRow'))}
                                         onClick={((e) => this.handleClickOnRow(e, row, index))}
                                         tabIndex={0}
+                                        title="Click to Expand"
                                         onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>
                                         {
                                             this.props.expandedRowEnabled &&
@@ -121,18 +124,19 @@ export class ONSAccordionTable extends Component <Props, State> {
                                     {
                                         this.props.expandedRowEnabled &&
                                             <tr hidden={!row.rowExpanded}>
-                                                <td colSpan={this.props.Headers.length + 1}
-                                                    className="table__cell ">
+                                                <td className="table__cell expandedRow" />
+                                                <td colSpan={this.props.Headers.length}
+                                                    className="table__cell expandedRow">
                                                     <this.props.expandedRow row={row}/>
                                                 </td>
                                             </tr>
                                     }
-
                                 </Fragment>
                             )
                             :
                             <tr>
-                                <td colSpan={this.props.Headers.length} className="table__cell ">
+                                <td colSpan={this.props.Headers.length + (this.props.expandedRowEnabled ? 1 : 0)}
+                                    className="table__cell ">
                                     <ONSPanel label={'No Batches Matching the Criteria'}>
                                         <p>{this.props.noDataMessage}</p>
                                     </ONSPanel>
