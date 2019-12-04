@@ -1,14 +1,15 @@
 import React, {ChangeEvent, Component} from 'react';
 
 interface Props{
-  label?: string,
-  onChange? : (e: ChangeEvent<HTMLSelectElement>, ...args: any[]) => void,
-  value: string,
+  label?: string
+  id?: string
+  onChange? : (e: ChangeEvent<HTMLSelectElement>, ...args: any[]) => void
+  value: string
   options: Option[]
 }
 
 interface Option{
-  label:string,
+  label:string
   value?:string
   id?: string
 }
@@ -38,7 +39,7 @@ export class ONSSelect extends Component <Props, State>{
           {this.props.label !== undefined &&
             <label className="label">{this.props.label}</label>
           }
-          <select id="select" name="select" defaultValue="" className="input input--select" onChange={(e) => this.handleChange(e)}>
+          <select id={this.props.id} name="select" defaultValue="" className="input input--select" onChange={(e) => this.handleChange(e)}>
             <option value="" disabled>
               Select an option
             </option>

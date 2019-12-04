@@ -1,5 +1,6 @@
 import {Builder, By, WebDriver} from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
+import {loginUserToUI} from "./WebsiteNavigationFunctions/LoginUserToUI";
 
 
 describe("Selenium - User Login Test", () => {
@@ -55,29 +56,8 @@ describe("Selenium - User Login Test", () => {
 
         await browser.get(url);
 
-        // Get Login Form
-        let loginForm = await browser.findElement(By.id('loginForm'));
-
-        // Get Username input field from form
-        let usernameField = await loginForm.findElement(By.id('username'));
-
-        // enter text into input field
-        await usernameField.sendKeys('Admin');
-
-        // Get Password input field from form
-        let passwordField = await loginForm.findElement(By.id('password'));
-
-        // Enter text into input field
-        await passwordField.sendKeys('password');
-
-        // Get Submit Button
-        let SubmitButton = await loginForm.findElement(By.id('login'));
-
-        // Press Button
-        await SubmitButton.click();
-
-        // Wait for page to change
-        await browser.sleep(10);
+        // Login User
+        await loginUserToUI(browser);
 
         // Find FieldSet title
         let fieldsetTitle = await browser.findElement(By.className('fieldset__legend'));
