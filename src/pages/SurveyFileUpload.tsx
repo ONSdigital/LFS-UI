@@ -189,7 +189,7 @@ export class SurveyFileUpload extends Component <Props, State> {
         return (
             <>
                 <td className="table__cell ">
-                    {moment(new Date(row.referenceDate)).format('L H:mm')}
+                    {moment(new Date(row.uploadDate)).format('L H:mm')}
                 </td>
                 <td className="table__cell ">
                     <ONSStatus label={row.message} small={false}
