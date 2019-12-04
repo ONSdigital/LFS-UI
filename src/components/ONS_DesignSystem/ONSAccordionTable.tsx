@@ -67,6 +67,7 @@ export class ONSAccordionTable extends Component <Props, State> {
     };
 
     handleClickOnRow = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, row: any, index: number) => {
+        console.log(this.props.noDataMessage)
         if (this.props.expandedRowEnabled) {
             row.rowExpanded = !row.rowExpanded;
             // @ts-ignore

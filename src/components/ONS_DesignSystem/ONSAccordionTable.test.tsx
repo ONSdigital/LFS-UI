@@ -49,9 +49,18 @@ describe("ONS Accordion Table Test", () => {
         Headers: DASHBOARD_HEADERS,
         data: singleRowData,
         Row: tableRow,
+        expandedRowEnabled: true,
+        expandedRow: DashboardExpandedRow,
+        noDataMessage: "no data mate 1"
+    }
+
+    const falseExSingleRowProps = {
+        Headers: DASHBOARD_HEADERS,
+        data: singleRowData,
+        Row: tableRow,
         expandedRowEnabled: false,
         expandedRow: DashboardExpandedRow,
-        noDataMessage: "no data mate"
+        noDataMessage: "no data mate 2"
     }
 
     const emptyProps = {
@@ -60,7 +69,16 @@ describe("ONS Accordion Table Test", () => {
         Row: tableRow,
         expandedRowEnabled: false,
         expandedRow: DashboardExpandedRow,
-        noDataMessage: "no data mate"
+        noDataMessage: "no data mate 3"
+    }
+
+    const trueEmptyProps = {
+        Headers: DASHBOARD_HEADERS,
+        data: emptyData,
+        Row: tableRow,
+        expandedRowEnabled: true,
+        expandedRow: DashboardExpandedRow,
+        noDataMessage: "no data mate 3"
     }
 
     const manyRowProps = {
@@ -69,7 +87,7 @@ describe("ONS Accordion Table Test", () => {
         Row: tableRow,
         expandedRowEnabled: true,
         expandedRow: DashboardExpandedRow,
-        noDataMessage: "no data mate",
+        noDataMessage: "no data mate 4",
         pagination: true,
         paginationSize: 1,
         scrollable: true
@@ -82,7 +100,7 @@ describe("ONS Accordion Table Test", () => {
         Row: tableRow,
         expandedRowEnabled: true,
         expandedRow: DashboardExpandedRow,
-        noDataMessage: "no data mate",
+        noDataMessage: "no data mate 5",
         pagination: true,
         paginationSize: undefined
     }
@@ -105,11 +123,25 @@ describe("ONS Accordion Table Test", () => {
 
     it("should render correctly", () => expect(wrapper(shallow, singleRowProps).exists()).toEqual(true));
 
+    it("should render with the correct headers", () => {
+        expect(wrapper(mount, falseExSingleRowProps).find("ONSAccordionTable").getElement().props.Headers).toEqual(falseExSingleRowProps.Headers);
+    })
+
+    it("should render with the correct headers", () => {
+        expect(wrapper(mount, trueEmptyProps).find("ONSAccordionTable").getElement().props.noDataMessage).toEqual(trueEmptyProps.noDataMessage);
+    })
+
     it('simulates click events', () => {
-        let thisWrapper = wrapper(mount, singleRowProps)
-        let thisRow = thisWrapper.find('tr.selectableTableRow')
-        thisRow.simulate('click');
-        expect(thisRow.find('rowExpanded')).toBeTruthy();
+        let exWrapper = wrapper(mount, singleRowProps)
+        let exRow = exWrapper.find('tr.selectableTableRow')
+        exRow.simulate('click');
+        expect(exRow.find('rowExpanded')).toBeTruthy();
+
+        let unexWrapper = wrapper(mount, falseExSingleRowProps)
+        let unexRow = unexWrapper.find('tr.nonSelectableTableRow')
+        unexRow.simulate('click');
+        expect(unexRow.find('rowExpanded')).not.toEqual(true);
+
     })
 
     it('simulates keypress events', () => {
