@@ -69,7 +69,6 @@ export class SurveyAuditModal extends Component <Props, State> {
             });
     };
 
-
     acceptLoad = () => {
         this.sendSurveyAuditResponse(true);
         this.props.closeSummaryModal();
