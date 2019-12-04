@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {ONSPanel} from '../../components/ONS_DesignSystem/ONSPanel';
-import {ONSButton} from '../../components/ONS_DesignSystem/ONSButton';
+import React, {Component} from "react";
+import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
+import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import {isDevEnv, monthNumberToString, toUpperCaseFirstChar} from "../../utilities/Common_Functions";
-import {ONSMetadata} from '../../components/ONS_DesignSystem/ONSMetadata';
+import {ONSMetadata} from "../../components/ONS_DesignSystem/ONSMetadata";
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../../components/SurveyAuditModal";
@@ -59,7 +59,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
 
         this.state = {
             UploadsData: null,
-            batchType: 'monthly',
+            batchType: "monthly",
             year: props.match.params.year,
             period: props.match.params.period,
             batchData: null,
@@ -90,10 +90,10 @@ export class View_Monthly_Batch extends Component <Props, State> {
             .then(r => {
                 if (r[0] === undefined) {
                     // Batch does not exist, load not found page
-                    this.setState({batchFound: false})
+                    this.setState({batchFound: false});
                 }
                 this.setState({batchData: r});
-                this.updateMetaDataList()
+                this.updateMetaDataList();
             })
             .catch(error => {
                 (isDevEnv() && console.log(error));
@@ -102,14 +102,14 @@ export class View_Monthly_Batch extends Component <Props, State> {
     };
 
     openSummaryModalFromRedirect = (summaryRedirect: string) => {
-        let [type, week, month, year] = summaryRedirect.split('-');
+        let [type, week, month, year] = summaryRedirect.split("-");
         this.openSummaryModal({
             type: type.toUpperCase(),
             week: +week,
             month: +month,
             year: +year,
             status: 1
-        })
+        });
     };
 
     openSummaryModal = (row: any) => {
@@ -130,22 +130,22 @@ export class View_Monthly_Batch extends Component <Props, State> {
         return (
             [{
                 L: "Batch Type",
-                R: 'Monthly',
+                R: "Monthly"
             }, {
                 L: "Year",
-                R: this.state.year.toString(),
+                R: this.state.year.toString()
             }, {
                 L: "Period",
-                R: (this.state.batchType === "monthly" ? monthNumberToString(Number(this.state.period)).toString() : this.state.period.toString()),
+                R: (this.state.batchType === "monthly" ? monthNumberToString(Number(this.state.period)).toString() : this.state.period.toString())
             }, {
                 L: "Status",
-                R: "",
+                R: ""
             }]
-        )
+        );
     }
 
     updateMetaDataList = () => {
-        this.setState({metadata: this.formatMetaData()})
+        this.setState({metadata: this.formatMetaData()});
     };
 
     summaryModal = () => {
@@ -159,40 +159,44 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                   status={this.state.surveyAuditStatus}
                                   closeSummaryModal={this.closeSummaryModal}
                                   reloadBatchData={this.batchData}/>
-            )
+            );
     };
 
     render() {
         return (
             <DocumentTitle
-                title={'LFS Manage Batch ' + monthNumberToString(+this.state.period) + " " + this.state.year}>
+                title={"LFS Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}>
                 <div className="container">
                     {
                         this.state.batchFound ?
                             <>
                                 <ONSMetadata List={this.state.metadata}/>
-                                <div style={{width: "55%"}}>
+
+                                <div className={"grid__col col-6@m "}>
                                     <MonthlyBatchUploadTable batchData={this.state.batchData}
                                                              openModel={this.openSummaryModal}
                                                              batchType={this.state.batchType}
                                                              year={this.state.year}
                                                              period={this.state.period}/>
                                     {this.summaryModal()}
+
+                                </div>
+                                <div className={"grid__col col-6@m "}>
+                                    <ReferenceFileImportTable/>
+                                </div>
+                                <br/>
+                                <div className={"grid__col col-6@m "}>
                                     <ONSPanel label="Monthly Batch" status="info" spacious={false}>
                                         <p>Every Survey File Must be Uploaded to Run Process</p>
                                     </ONSPanel>
                                     <br/>
-                                </div>
-                                <div>
                                     <ONSButton label="Run Monthly Process" small={false} primary={true}
                                                marginRight={10}/>
                                     <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
 
                                 </div>
                                 <br/>
-                                <div style={{width: "75%"}}>
-                                    <ReferenceFileImportTable/>
-                                </div>
+
                             </>
                             :
                             <GenericNotFound label={toUpperCaseFirstChar(this.state.batchType) + " batch Not Found "}/>
