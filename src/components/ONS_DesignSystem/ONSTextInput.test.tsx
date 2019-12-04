@@ -1,9 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import {ONSTextInput} from "./ONSTextInput";
 import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
-import sinon from 'sinon'
 
 describe("ONS Text Input Test", () => {
     Enzyme.configure({ adapter: new Adapter() });

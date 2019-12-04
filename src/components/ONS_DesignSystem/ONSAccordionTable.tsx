@@ -48,19 +48,20 @@ export class ONSAccordionTable extends Component <Props, State> {
 
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
         if (nextProps.data !== prevState.data && nextProps.data !== null) {
-            return {data: nextProps.data, slicedData: nextProps.data.slice(0, nextProps.paginationSize)};
+            return {data: nextProps.data, slicedData: nextProps.data.slice(0, nextProps.paginationSize !== undefined ? nextProps.paginationSize : 20)};
         } else return null;
     }
 
     pageChange = (offset: number, listLength: number) => {
         this.setState({offset: offset});
-        if (this.props.data === null) return;
         let slicedData: any[] = this.state.data.slice(offset, offset + listLength);
-        if (slicedData !== null) {
+        
+        // Dont think is needed and removed as couldn't test, would only fail if the slice breaks (we think!!!!!)
+        // if (slicedData !== null) {
             this.setState({
                 slicedData: slicedData
             })
-        }
+        // }
     };
 
     handleClickOnRow = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, row: any, index: number) => {
@@ -118,16 +119,13 @@ export class ONSAccordionTable extends Component <Props, State> {
                                         <this.props.Row row={row}/>
                                     </tr>
                                     {
-                                        this.props.expandedRowEnabled ?
+                                        this.props.expandedRowEnabled &&
                                             <tr hidden={!row.rowExpanded}>
                                                 <td colSpan={this.props.Headers.length + 1}
                                                     className="table__cell ">
                                                     <this.props.expandedRow row={row}/>
                                                 </td>
                                             </tr>
-                                            :
-                                            <>
-                                            </>
                                     }
 
                                 </Fragment>
@@ -170,11 +168,11 @@ export class ONSAccordionTable extends Component <Props, State> {
                             <this.Table/>
                         </>
                 }
-                {this.props.pagination ?
+                {this.props.pagination ?                    
                     <ONSPagination
-                    listLength={(this.props.paginationSize !== undefined ? this.props.paginationSize : 20)}
-                    count={this.state.data.length} 
-                    pageChange={this.pageChange}/>
+                        listLength={(this.props.paginationSize !== undefined ? this.props.paginationSize : 20)}
+                        count={this.state.data.length} 
+                        pageChange={this.pageChange}/>
                     :
                     <br/>
                 }

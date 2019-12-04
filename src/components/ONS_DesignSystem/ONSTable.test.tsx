@@ -1,8 +1,7 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import { ONSTable } from "./ONSTable";
 import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
 import {tableData} from './ONS_TestData/dataSources'
 
 describe("ONS Table Test", () => {

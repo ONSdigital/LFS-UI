@@ -21,7 +21,7 @@ export const ONSDateInput = (props: Props) => {
             dateFormat="dd/MM/yyyy"
             selected={props.date}
             openToDate={new Date()}
-            onChange={date => (props.onChange(date))}
+            onChange={(date) => props.onChange(date)}
             customInput={<CustomInput/>}
         />
     );

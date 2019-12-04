@@ -1,32 +1,28 @@
 import React from 'react';
 import Enzyme, {mount, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
 import { ONSDateInput } from './ONSDateInput';
 import DatePicker from 'react-datepicker';
+import { ONSTextInput } from './ONSTextInput';
 
 describe("ONS Date Input", () => {
     Enzyme.configure({adapter: new Adapter()});
-
-    const Props = {
     
-    }
-    
-    let x: any
+    let newDate: any = null
 
     const dateInputProps = {
         label: 'Date Input',
-        onChange: jest.fn(),
-        date: null
+        onChange: (date: any) => {newDate = date},
+        date: new Date()
     };
 
     const undefinedDateInputProps = {
         label: 'undefined Date Input',
         onChange: undefined,
-        date: new Date()
+        date: null
     };
 
-    const dateInputProps = {
+    const dateInputProps1 = {
         label: 'Date Input',
         onChange: jest.fn(),
         date: new Date()
@@ -41,32 +37,17 @@ describe("ONS Date Input", () => {
 
     it("should render correctly", () => expect(wrapper(shallow, dateInputProps).exists()).toEqual(true));
 
-    // TODO: can't get change event to work on Date input
-    it.skip('simulates change events', () => {
-        wrapper(mount, dateInputProps).find(DatePicker).simulate('change');
-        expect(dateInputProps.onChange).toHaveBeenCalled()
-
-        wrapper(mount, undefinedDateInputProps).find('ONSDateInput').simulate('change');
-        expect(undefinedDateInputProps.onChange).toBeUndefined()
-    });
-
-    // it('clicks on the onclick', () => {
-
-    // }
-    // )
-
     it("should render with the correct label", () => {
         expect(wrapper(mount, dateInputProps).find("ONSDateInput").getElement().props.label).toEqual(dateInputProps.label);
     });
 
     // TODO: can't get change event to work on Date input
-    it.skip('simulates change events', () => {
-        wrapper(mount, dateInputProps).find('ONSDateInput').simulate('change');
-        expect(dateInputProps.onChange).toHaveBeenCalled()
-    });
+    it('simulates change events', () => {
+        wrapper(mount, dateInputProps).find(DatePicker).instance().props.onChange('2018-01-26')
+        expect(newDate).toBe('2018-01-26')
 
-    // it('matches snapshot', () => {
-    //     expect(wrapper(mount, checkboxProps)).toMatchSnapshot()
-    // });
+        wrapper(mount, undefinedDateInputProps).find('ONSDateInput').simulate('change');
+        expect(undefinedDateInputProps.onChange).toBeUndefined()
+    });
 
 });

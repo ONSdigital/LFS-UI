@@ -111,7 +111,6 @@ export class TableWithModal extends Component <Props, State> {
 
     //save modal functions
     openSaveModal = () => {
-        console.log("=============");
         this.setState({showSaveModal:true});
     };
 

@@ -1,8 +1,7 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import {ONSPagination} from "./ONSPagination";
 import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
 import sinon from 'sinon'
 
 describe("ONS Pagination Test", () => {
