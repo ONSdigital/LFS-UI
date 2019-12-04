@@ -15,6 +15,7 @@ import {FileUploadProgress} from './pages/FileUploadProgress';
 import DocumentTitle from "react-document-title";
 import {ViewData} from "./pages/ViewData";
 import {View_Quarterly_Batch} from "./pages/manageBatch/View_Quarterly_Batch";
+import {ImportOverview} from "./pages/ImportOverview";
 
 interface Props {
     cookies: Cookies
@@ -92,9 +93,10 @@ class App extends React.Component<Props, State> {
                           <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>
                           <this.PrivateRoute exact path='/survey-import/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
                           <this.PrivateRoute exact path='/view-data' component={ViewData} page_id={10}/>
-                          <this.PrivateRoute exact path='/Import/:file?' component={Import} page_id={7}/>
+                          <this.PrivateRoute exact path='/import/overview' component={ImportOverview} page_id={7}/>
+                          <this.PrivateRoute exact path='/import/:file?' component={Import} page_id={7}/>
                           <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
-                          <this.PrivateRoute exact path='/Admin' component={Admin} page_id={9}/>
+                          <this.PrivateRoute exact path='/admin' component={Admin} page_id={9}/>
                           <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
                           <Route exact path='/login' component={Login}/>
                           <Route component={GenericNotFound}/>

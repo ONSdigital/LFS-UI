@@ -241,7 +241,7 @@ export class Import extends Component <Props, State> {
         {label: "Variable Definitions", value: "Variable Definitions"},
         {label: "Value Labels", value: "Value Labels"},
         {label: "Population Estimates", value: "Population Estimates"},
-        {label: "Output Specification", value: "Output Specification"},
+        {label: "Output Specification", value: "Output Specification"}
 
     ];
 
@@ -276,7 +276,7 @@ export class Import extends Component <Props, State> {
                                        onClick={this.upload}
                                        primary={true}
                                        loading={this.state.uploading}/>
-                            <ONSButton label={"Return to Manage Batch"}
+                            <ONSButton label={"Return to Import Overview"}
                                        primary={false}
                                        field={true}
                                        onClick={() => window.history.back()}/>
