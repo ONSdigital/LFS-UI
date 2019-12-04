@@ -1,14 +1,14 @@
 import React, {ChangeEvent, Component} from "react";
-import {ONSUpload} from "../components/ONS_DesignSystem/ONSUpload";
-import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
-import {postImportFile} from "../utilities/http";
-import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
-import {FileUploadProgress} from "./FileUploadProgress";
-import {isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
+import {ONSUpload} from "../../components/ONS_DesignSystem/ONSUpload";
+import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
+import {postImportFile} from "../../utilities/http";
+import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
+import {FileUploadProgress} from "../FileUploadProgress";
+import {isDevEnv, toUpperCaseFirstChar} from "../../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
-import {ONSDateInput} from "../components/ONS_DesignSystem/ONSDateInput";
-import {ReportExport} from "../components/ReportExport";
-import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
+import {ONSDateInput} from "../../components/ONS_DesignSystem/ONSDateInput";
+import {ReportExport} from "../../components/ReportExport";
+import {ONSSelect} from "../../components/ONS_DesignSystem/ONSSelect";
 
 interface Props {
     match: any
@@ -90,7 +90,6 @@ export class Import extends Component <Props, State> {
         this.setState({
             uploading: true
         });
-        // TODO: Send correct data for each file type
         if (this.state.built) {
             let uploadLink = this.state.uploadLink;
             if (this.state.validFromDate !== null) {
@@ -241,7 +240,7 @@ export class Import extends Component <Props, State> {
         {label: "Variable Definitions", value: "Variable Definitions"},
         {label: "Value Labels", value: "Value Labels"},
         {label: "Population Estimates", value: "Population Estimates"},
-        {label: "Output Specification", value: "Output Specification"},
+        {label: "Output Specification", value: "Output Specification"}
 
     ];
 
@@ -276,7 +275,7 @@ export class Import extends Component <Props, State> {
                                        onClick={this.upload}
                                        primary={true}
                                        loading={this.state.uploading}/>
-                            <ONSButton label={"Return to Manage Batch"}
+                            <ONSButton label={"Return to Import Overview"}
                                        primary={false}
                                        field={true}
                                        onClick={() => window.history.back()}/>

@@ -40,7 +40,7 @@ let headerLinks = [
         label: "View Data"
     },
     {
-        link: "/import",
+        link: "/import/overview",
         label: "Import"
     },
     {
@@ -65,7 +65,7 @@ export function HeaderNavigation(props: Props) {
     }
 
     // Set Current Page and set to visible if its a hidden header
-    link = links.find(x => x.link === "/" + location.pathname.split("/")[1]);
+    link = links.find(x => "/" + x.link.split("/")[1] === "/" + location.pathname.split("/")[1]);
     if (link !== undefined) {
         link.current = true;
         if (link.nonGenericPage) {

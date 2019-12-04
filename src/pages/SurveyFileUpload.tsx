@@ -224,7 +224,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                                    fileID={"U1"}
                                    accept=".sav" onChange={(e) => this.handleFileChange(e.target.files)}/>
                         <br/>
-                        <ONSButton label={"Import"} field={true} onClick={this.uploadFile} primary={true} small={false}
+                        <ONSButton id={'import-btn'} label={"Import"} field={true} onClick={this.uploadFile} primary={true} small={false}
                                    loading={this.state.uploading}/>
                         <Link className={'field'} style={{marginLeft: "15px"}}
                               to={"/manage-batch/monthly/" + this.state.year + "/" + this.state.month}>
