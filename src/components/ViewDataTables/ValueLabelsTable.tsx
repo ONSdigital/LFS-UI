@@ -1,11 +1,11 @@
-import React, {ChangeEvent, Component} from 'react';
+import React, {ChangeEvent, Component} from "react";
 import {ONSAccordionTable} from "../ONS_DesignSystem/ONSAccordionTable";
 import {VALUE_LABELS_HEADERS} from "../../utilities/Headers";
 import DocumentTitle from "react-document-title";
-import moment from "moment";
 import {getValueLabels} from "../../utilities/http";
 import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
 import {ONSButton} from "../ONS_DesignSystem/ONSButton";
+import dateFormatter from "dayjs";
 
 interface Props {
 }
@@ -115,7 +115,7 @@ const ValueLabelTableRow = (rowData: any) => {
                 {row.description}
             </td>
             <td className="table__cell ">
-                {moment(row.last_updated).format('L')}
+                {dateFormatter(row.last_updated).format("DD/MM/YYYY")}
                 {}
             </td>
 
