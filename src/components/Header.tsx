@@ -15,7 +15,7 @@ export class Header extends Component <Props,{}>{
                 <div className="container col-8">
                 <div className="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap">
                     <div className="grid__col col-auto">
-                        <a href={"/Dashboard"}>
+                        <a href={"/dashboard"}>
                             <img className="header__logo" src={"/img/ons-logo-white.svg"} alt="Office for National Statistics logo"/>
                         </a>
                     </div>

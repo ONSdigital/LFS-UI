@@ -17,14 +17,15 @@ interface State {
     search: string
 }
 
-interface VarDefTableRow {
+interface VariableDefinitionTableRow {
     variable: string
-    description: string
+    description: {String: string, Valid: boolean}
+    label: {String: string, Valid: boolean}
     type: string
     validFrom: Date
     length: number
     precision: number
-    alias: string
+    alias: {String: string, Valid: boolean}
     editable: boolean
     expanded: boolean
     imputation: boolean
@@ -116,18 +117,17 @@ export class VariableDefinitionTable extends Component <Props, State> {
 }
 
 const VarDefTableRow = (rowData: any) => {
-    let row: VarDefTableRow = rowData.row;
+    let row: VariableDefinitionTableRow = rowData.row;
     return (
         <>
             <td className="table__cell ">
                 {row.variable}
             </td>
             <td className="table__cell ">
-                {row.description}
+                {row.description.Valid ? row.description.String : "No Description Provided"}
             </td>
             <td className="table__cell ">
                 {moment(row.validFrom).format('L')}
-                {}
             </td>
             <td className="table__cell ">
                 <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>
@@ -146,7 +146,7 @@ const VarDefTableRow = (rowData: any) => {
 };
 
 // const VarDefExpandedRow = (rowData: any) => {
-//     let row: VarDefTableRow = rowData.row;
+//     let row: VariableDefinitionTableRow = rowData.row;
 //     return (
 //         <>
 //             <ONSButton label={"Manage Batch"} primary={true} small={false} onClick={() => {
