@@ -1,5 +1,5 @@
 import React from "react";
-import {REFERENCE_FILE_HEADERS} from "../../utilities/Headers";
+import {REFERENCE_FILE_IMPORT_HEADERS} from "../../utilities/Headers";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
@@ -45,7 +45,7 @@ export function ImportFileTable() {
     };
 
     return (
-        <ONSAccordionTable Headers={REFERENCE_FILE_HEADERS}
+        <ONSAccordionTable Headers={REFERENCE_FILE_IMPORT_HEADERS}
                            data={imports}
                            Row={BatchUploadTableRow}
                            expandedRowEnabled={false}
