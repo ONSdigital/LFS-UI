@@ -1,9 +1,9 @@
 import {Cookies} from "react-cookie";
-import moment from "moment";
+import dateFormatter from "dayjs";
 
 function createNewUserCookie(cookies: Cookies, user: { name: string }) {
     // Set Session Cookie, Expires in 30 minutes
-    let cookieExpire = moment(new Date()).add(30, 'm').toDate();
+    let cookieExpire = dateFormatter(new Date()).add(30, 'm').toDate();
     cookies.set('username', user.name, {path: '/', expires: cookieExpire, sameSite: true});
     return user;
 
