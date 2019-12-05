@@ -1,9 +1,9 @@
-import React, {ChangeEvent, Component} from 'react';
+import React, {ChangeEvent, Component} from "react";
 import {ONSAccordionTable} from "../ONS_DesignSystem/ONSAccordionTable";
 import {VARIABLE_DEFINITION_HEADERS} from "../../utilities/Headers";
 import {ONSCheckbox} from "../ONS_DesignSystem/ONSCheckbox";
 import DocumentTitle from "react-document-title";
-import moment from "moment";
+import dateFormatter from "dayjs";
 import {getVariableDefinitions} from "../../utilities/http";
 import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
 import {ONSButton} from "../ONS_DesignSystem/ONSButton";
@@ -50,8 +50,8 @@ export class VariableDefinitionTable extends Component <Props, State> {
             })
             .catch(error => {
                 console.log(error);
-                if (process.env.NODE_ENV === 'development') {
-                    this.getMockVarDefData()
+                if (process.env.NODE_ENV === "development") {
+                    this.getMockVarDefData();
                 }
             });
     };
@@ -66,30 +66,30 @@ export class VariableDefinitionTable extends Component <Props, State> {
             })
             .catch(error => {
                 console.log(error);
-                if (process.env.NODE_ENV === 'development') {
-                    this.getMockVarDefData()
+                if (process.env.NODE_ENV === "development") {
+                    this.getMockVarDefData();
                 }
             });
     };
 
     getMockVarDefData = () => {
-        fetch('/jsons/MOCK_VAR_DEFS.json')
+        fetch("/jsons/MOCK_VAR_DEFS.json")
             .then(response => response.json())
             .then(response => {
                 this.setState({data: response.Rows});
-            })
+            });
     };
 
     noDataMessage = "No Variable Definitions matching this criteria";
 
     viewAll = () => {
-        this.setState({filteredData: this.state.data, search: ""})
+        this.setState({filteredData: this.state.data, search: ""});
     };
 
     handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({search: e.target.value});
         if (e.target.value.length === 0) {
-            this.setState({filteredData: this.state.data})
+            this.setState({filteredData: this.state.data});
         }
     };
 
@@ -127,7 +127,7 @@ const VarDefTableRow = (rowData: any) => {
                 {row.description.Valid ? row.description.String : "No Description Provided"}
             </td>
             <td className="table__cell ">
-                {moment(row.validFrom).format('L')}
+                {dateFormatter(row.validFrom).format("DD/MM/YYYY")}
             </td>
             <td className="table__cell ">
                 <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>
@@ -142,7 +142,7 @@ const VarDefTableRow = (rowData: any) => {
                 <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
             </td>
         </>
-    )
+    );
 };
 
 // const VarDefExpandedRow = (rowData: any) => {

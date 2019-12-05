@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import {REFERENCE_FILE_HEADERS} from "../../utilities/Headers";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
-import moment from "moment";
+import dateFormatter from "dayjs";
 
 interface Props {
 
@@ -29,7 +29,7 @@ export function ImportFileTable() {
                     {row.name}
                 </td>
                 <td className="table__cell ">
-                    {moment(new Date()).format("L")}
+                    {dateFormatter(new Date()).format("DD/MM/YYYY")}
                 </td>
                 <td className="table__cell ">
                     <ONSStatus label={row.status} small={false} status={'info'}/>
