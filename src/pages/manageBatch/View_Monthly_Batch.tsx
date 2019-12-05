@@ -135,7 +135,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                 R: this.state.year.toString()
             }, {
                 L: "Period",
-                R: (this.state.batchType === "monthly" ? monthNumberToString(Number(this.state.period)).toString() : this.state.period.toString())
+                R: monthNumberToString(Number(this.state.period)).toString()
             }, {
                 L: "Status",
                 R: <ONSStatus label={"Survey Imports Incomplete"} small={false} status={'info'}/>
@@ -220,6 +220,8 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                     <ReferenceFileImportTable/>
                                 </div>
                                 <div style={{float: "right"}}>
+                                    <hr/>
+                                    <br/>
                                     <ONSButton label="Run Monthly Process" small={false} primary={true}
                                                marginRight={10}/>
                                     <br/>
