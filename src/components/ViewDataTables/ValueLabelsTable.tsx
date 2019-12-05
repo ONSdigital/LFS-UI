@@ -14,6 +14,7 @@ interface State {
     data: ValueLabelTableRow[]
     filteredData: ValueLabelTableRow[]
     search: string
+    noDataMessage: string
 }
 
 interface ValueLabelTableRow {
@@ -30,7 +31,12 @@ export class ValueLabelsTable extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {data: [], filteredData: [], search: ""};
+        this.state = {
+            data: [],
+            filteredData: [],
+            search: "",
+            noDataMessage: this.noDataMessage
+        };
         this.getVariableDefinitionData();
     }
 
@@ -40,36 +46,44 @@ export class ValueLabelsTable extends Component <Props, State> {
                 console.log(r);
                 if (r.message !== "no data found") {
                     this.setState({data: r, filteredData: r});
-                } else this.setState({filteredData: []});
+                } else this.setState({filteredData: [], noDataMessage: "No Value Labels found"});
             })
             .catch(error => {
                 console.log(error);
+                this.setState({filteredData: [], noDataMessage: "Error occurred while getting Value Labels"});
             });
     };
 
     getSingleVariableDefinitionData = () => {
+        if (this.state.search.length === 0) {
+            return;
+        }
         getValueLabels(this.state.search.toUpperCase())
             .then(r => {
                 console.log(r);
                 if (r.message !== "no data found") {
                     this.setState({filteredData: r});
-                } else this.setState({filteredData: []});
+                } else this.setState({
+                    filteredData: [],
+                    noDataMessage: "Variable: " + this.state.search + ", could not be found"
+                });
             })
             .catch(error => {
                 console.log(error);
+                this.setState({filteredData: [], noDataMessage: "Error occurred while searching for Variable"});
             });
     };
 
     noDataMessage = "No Value Labels matching this criteria";
 
     viewAll = () => {
-        this.setState({filteredData: this.state.data, search: ""})
+        this.setState({filteredData: this.state.data, search: "", noDataMessage: "No Value Labels found"});
     };
 
     handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({search: e.target.value});
         if (e.target.value.length === 0) {
-            this.setState({filteredData: this.state.data})
+            this.setState({filteredData: this.state.data});
         }
     };
 
@@ -85,7 +99,7 @@ export class ValueLabelsTable extends Component <Props, State> {
                                onClick={this.viewAll}/>
                     <ONSAccordionTable data={this.state.filteredData} Row={ValueLabelTableRow}
                                        expandedRowEnabled={false}
-                                       noDataMessage={this.noDataMessage}
+                                       noDataMessage={this.state.noDataMessage}
                                        Headers={VALUE_LABELS_HEADERS}
                                        pagination={true}
                                        paginationSize={20}
@@ -95,7 +109,6 @@ export class ValueLabelsTable extends Component <Props, State> {
         );
     }
 }
-
 
 
 const ValueLabelTableRow = (rowData: any) => {
@@ -120,6 +133,6 @@ const ValueLabelTableRow = (rowData: any) => {
             </td>
 
         </>
-    )
+    );
 };
 

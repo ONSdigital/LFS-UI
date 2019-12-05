@@ -15,6 +15,7 @@ interface State {
     data: []
     filteredData: []
     search: string
+    noDataMessage: string
 }
 
 interface VariableDefinitionTableRow {
@@ -36,7 +37,12 @@ export class VariableDefinitionTable extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {data: [], filteredData: [], search: ""};
+        this.state = {
+            data: [],
+            filteredData: [],
+            search: "",
+            noDataMessage: this.noDataMessage
+        };
         this.getVariableDefinitionData();
     }
 
@@ -46,37 +52,31 @@ export class VariableDefinitionTable extends Component <Props, State> {
                 console.log(r);
                 if (r.message !== "no data found") {
                     this.setState({data: r, filteredData: r});
-                } else this.setState({filteredData: []});
+                } else this.setState({filteredData: [], noDataMessage: "No Variable Definitions found"});
             })
             .catch(error => {
                 console.log(error);
-                if (process.env.NODE_ENV === "development") {
-                    this.getMockVarDefData();
-                }
+                this.setState({filteredData: [], noDataMessage: "Error occurred while getting Variable Definitions"});
             });
     };
 
     getSingleVariableDefinitionData = () => {
+        if (this.state.search.length === 0) {
+            return;
+        }
         getVariableDefinitions(this.state.search.toUpperCase())
             .then(r => {
                 console.log(r);
                 if (r.message !== "no data found") {
                     this.setState({filteredData: r});
-                } else this.setState({filteredData: []});
+                } else this.setState({
+                    filteredData: [],
+                    noDataMessage: "Variable: " + this.state.search + ", could not be found"
+                });
             })
             .catch(error => {
                 console.log(error);
-                if (process.env.NODE_ENV === "development") {
-                    this.getMockVarDefData();
-                }
-            });
-    };
-
-    getMockVarDefData = () => {
-        fetch("/jsons/MOCK_VAR_DEFS.json")
-            .then(response => response.json())
-            .then(response => {
-                this.setState({data: response.Rows});
+                this.setState({filteredData: [], noDataMessage: "Error occurred while searching for Variable"});
             });
     };
 
@@ -105,7 +105,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
                                onClick={this.viewAll}/>
                     <ONSAccordionTable data={this.state.filteredData} Row={VarDefTableRow}
                                        expandedRowEnabled={false}
-                                       noDataMessage={this.noDataMessage}
+                                       noDataMessage={this.state.noDataMessage}
                                        Headers={VARIABLE_DEFINITION_HEADERS}
                                        pagination={true}
                                        paginationSize={20}
