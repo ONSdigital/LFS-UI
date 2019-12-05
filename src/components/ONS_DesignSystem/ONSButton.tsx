@@ -18,20 +18,20 @@ export const ONSButton = (props: Props) => {
 
     let spacing = () => {
         return {
-            marginRight: String(props.marginRight) + "px",
-        }
+            marginRight: String(props.marginRight) + "px"
+        };
     };
 
     let className = "btn ";
     if (props.exportExcelBtn) {
-        className = className + " " + (props.loading ? "btn--secondary btn--loader is-loading  " : " btn--excel")
+        className = className + " " + (props.loading ? "btn--secondary btn--loader is-loading  " : " btn--excel");
     } else {
         className = className +
             (props.loading ? "btn--loader is-loading " : "") +
             (props.field ? "field " : "") +
             (props.primary ? "" : "btn--secondary ") +
             (props.small ? "btn--small " : "") +
-            (props.disabled ? "btn--disabled ": "");
+            (props.disabled ? "btn--disabled " : "");
     }
 
     return (
