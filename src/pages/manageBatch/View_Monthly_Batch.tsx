@@ -8,6 +8,8 @@ import {SurveyAuditModal} from "../../components/SurveyAuditModal";
 import {MonthlyBatchUploadTable} from "./MonthlyBatchUploadTable";
 import {getBatchData} from "../../utilities/http";
 import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
+import {AccordionDropDown} from "../../components/AccordionDropDown";
+import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 
 interface State {
     UploadsData: Data | null
@@ -161,7 +163,26 @@ export class View_Monthly_Batch extends Component <Props, State> {
             );
     };
 
+    accordionDropDownHeader = () => {
+        return (
+            <ONSStatus status={"success"} label={"All Survey files have been Imported"} small={false}/>
+        );
+    };
+
     render() {
+        // TODO: Temporary way to check if imports are complete, should eventually be able to get this from batch status
+        let importComplete = true;
+        if (this.state.batchFound) {
+            if (this.state.batchData !== null) {
+                this.state.batchData.forEach(row => {
+                    // @ts-ignore
+                    if (row.status !== 4) {
+                        importComplete = false;
+                    }
+                });
+            }
+        }
+
         return (
             <DocumentTitle
                 title={"LFS Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}>
@@ -169,25 +190,44 @@ export class View_Monthly_Batch extends Component <Props, State> {
                     {
                         this.state.batchFound ?
                             <>
-                                <h3> Manage monthly batch: {monthNumberToString(+this.state.period)} {this.state.year} </h3>
+                                <h3> Manage monthly
+                                    batch: {monthNumberToString(+this.state.period)} {this.state.year} </h3>
                                 {/*<ONSMetadata List={this.state.metadata}/>*/}
-                                <div style={{width: "35rem"}}>
-                                    <MonthlyBatchUploadTable batchData={this.state.batchData}
-                                                             openModel={this.openSummaryModal}
-                                                             batchType={this.state.batchType}
-                                                             year={this.state.year}
-                                                             period={this.state.period}/>
+                                <div style={{width: "35rem", float: "left"}}>
+                                    {
+                                        importComplete ?
+                                            <AccordionDropDown caption={"Survey Files"}
+                                                               expandableHeader={this.accordionDropDownHeader}>
+                                                <MonthlyBatchUploadTable batchData={this.state.batchData}
+                                                                         openModel={this.openSummaryModal}
+                                                                         batchType={this.state.batchType}
+                                                                         year={this.state.year}
+                                                                         period={this.state.period}
+                                                                         caption={false}/>
+                                            </AccordionDropDown>
+                                            :
+                                            <MonthlyBatchUploadTable batchData={this.state.batchData}
+                                                                     openModel={this.openSummaryModal}
+                                                                     batchType={this.state.batchType}
+                                                                     year={this.state.year}
+                                                                     period={this.state.period}
+                                                                     caption={true}/>
+                                    }
                                     {this.summaryModal()}
                                     <ReferenceFileImportTable/>
                                     <ONSPanel label="Monthly Batch" status="info" spacious={false}>
                                         <p>Every Survey File Must be Uploaded to Run Process</p>
                                     </ONSPanel>
                                     <br/>
+                                </div>
+                                <div style={{float: "right"}}>
                                     <ONSButton label="Run Monthly Process" small={false} primary={true}
                                                marginRight={10}/>
+                                    <br/>
+                                    <br/>
                                     <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
-
                                 </div>
+                                <div className="grid__col col-6@m "/>
                                 <br/>
                             </>
                             :

@@ -12,6 +12,7 @@ interface Props {
     batchType: string
     year: string
     period: string
+    caption: boolean
 }
 
 export function MonthlyBatchUploadTable(props: Props) {
@@ -59,6 +60,7 @@ export function MonthlyBatchUploadTable(props: Props) {
                            Row={BatchUploadTableRow}
                            expandedRowEnabled={false}
                            noDataMessage={"No Data"}
-                           caption={"Survey Files"}/>
+                           caption={props.caption ? "Survey Files" : undefined}
+        />
     );
 }
