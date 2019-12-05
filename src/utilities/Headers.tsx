@@ -42,11 +42,6 @@ const REFERENCE_FILE_HEADERS =
         column_name: "status",
         filter: false,
         order: false
-    }, {
-        label: "",
-        column_name: "button",
-        filter: false,
-        order: false
     }];
 
 

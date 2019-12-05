@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import {isDevEnv, monthNumberToString, toUpperCaseFirstChar} from "../../utilities/Common_Functions";
-import {ONSMetadata} from "../../components/ONS_DesignSystem/ONSMetadata";
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../../components/SurveyAuditModal";
@@ -170,22 +169,16 @@ export class View_Monthly_Batch extends Component <Props, State> {
                     {
                         this.state.batchFound ?
                             <>
-                                <ONSMetadata List={this.state.metadata}/>
-
-                                <div className={"grid__col col-6@m "}>
+                                <h3> Manage monthly batch: {monthNumberToString(+this.state.period)} {this.state.year} </h3>
+                                {/*<ONSMetadata List={this.state.metadata}/>*/}
+                                <div style={{width: "35rem"}}>
                                     <MonthlyBatchUploadTable batchData={this.state.batchData}
                                                              openModel={this.openSummaryModal}
                                                              batchType={this.state.batchType}
                                                              year={this.state.year}
                                                              period={this.state.period}/>
                                     {this.summaryModal()}
-
-                                </div>
-                                <div className={"grid__col col-6@m "}>
                                     <ReferenceFileImportTable/>
-                                </div>
-                                <br/>
-                                <div className={"grid__col col-6@m "}>
                                     <ONSPanel label="Monthly Batch" status="info" spacious={false}>
                                         <p>Every Survey File Must be Uploaded to Run Process</p>
                                     </ONSPanel>
@@ -196,7 +189,6 @@ export class View_Monthly_Batch extends Component <Props, State> {
 
                                 </div>
                                 <br/>
-
                             </>
                             :
                             <GenericNotFound label={toUpperCaseFirstChar(this.state.batchType) + " batch Not Found "}/>
