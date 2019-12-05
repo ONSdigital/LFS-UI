@@ -130,7 +130,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
 
     formatMetaData() {
         return (
-            [ {
+            [{
                 L: "Year",
                 R: this.state.year.toString()
             }, {
@@ -138,7 +138,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                 R: monthNumberToString(Number(this.state.period)).toString()
             }, {
                 L: "Status",
-                R: <ONSStatus label={"Survey Imports Incomplete"} small={false} status={'info'}/>
+                R: <ONSStatus label={"Survey Imports Incomplete"} small={false} status={"info"}/>
             }]
         );
     }
@@ -222,11 +222,17 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                 <div style={{float: "right"}}>
                                     <hr/>
                                     <br/>
-                                    <ONSButton label="Run Monthly Process" small={false} primary={true}
-                                               marginRight={10}/>
+                                    <ONSButton label="Run Monthly Process"
+                                               small={false}
+                                               primary={true}
+                                               marginRight={10}
+                                               disabled={!importComplete}/>
                                     <br/>
                                     <br/>
-                                    <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
+                                    <ONSButton label="Run Interim Weighting"
+                                               small={false}
+                                               primary={false}
+                                               disabled={!importComplete}/>
                                 </div>
                                 <div className="grid__col col-6@m "/>
                                 <br/>
