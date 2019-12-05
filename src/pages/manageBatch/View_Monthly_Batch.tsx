@@ -1,14 +1,16 @@
-import React, {Component} from 'react';
-import {ONSPanel} from '../../components/ONS_DesignSystem/ONSPanel';
-import {ONSButton} from '../../components/ONS_DesignSystem/ONSButton';
+import React, {Component} from "react";
+import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
+import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import {isDevEnv, monthNumberToString, toUpperCaseFirstChar} from "../../utilities/Common_Functions";
-import {ONSMetadata} from '../../components/ONS_DesignSystem/ONSMetadata';
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../../components/SurveyAuditModal";
 import {MonthlyBatchUploadTable} from "./MonthlyBatchUploadTable";
 import {getBatchData} from "../../utilities/http";
 import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
+import {AccordionDropDown} from "../../components/AccordionDropDown";
+import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
+import {ONSMetadata} from "../../components/ONS_DesignSystem/ONSMetadata";
 
 interface State {
     UploadsData: Data | null
@@ -29,8 +31,8 @@ interface State {
 }
 
 interface MetaDataListItem {
-    R: string
-    L: string
+    R: any
+    L: any
 }
 
 interface Data {
@@ -59,7 +61,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
 
         this.state = {
             UploadsData: null,
-            batchType: 'monthly',
+            batchType: "monthly",
             year: props.match.params.year,
             period: props.match.params.period,
             batchData: null,
@@ -90,10 +92,10 @@ export class View_Monthly_Batch extends Component <Props, State> {
             .then(r => {
                 if (r[0] === undefined) {
                     // Batch does not exist, load not found page
-                    this.setState({batchFound: false})
+                    this.setState({batchFound: false});
                 }
                 this.setState({batchData: r});
-                this.updateMetaDataList()
+                this.updateMetaDataList();
             })
             .catch(error => {
                 (isDevEnv() && console.log(error));
@@ -102,14 +104,14 @@ export class View_Monthly_Batch extends Component <Props, State> {
     };
 
     openSummaryModalFromRedirect = (summaryRedirect: string) => {
-        let [type, week, month, year] = summaryRedirect.split('-');
+        let [type, week, month, year] = summaryRedirect.split("-");
         this.openSummaryModal({
             type: type.toUpperCase(),
             week: +week,
             month: +month,
             year: +year,
             status: 1
-        })
+        });
     };
 
     openSummaryModal = (row: any) => {
@@ -129,23 +131,20 @@ export class View_Monthly_Batch extends Component <Props, State> {
     formatMetaData() {
         return (
             [{
-                L: "Batch Type",
-                R: 'Monthly',
-            }, {
                 L: "Year",
-                R: this.state.year.toString(),
+                R: this.state.year.toString()
             }, {
                 L: "Period",
-                R: (this.state.batchType === "monthly" ? monthNumberToString(Number(this.state.period)).toString() : this.state.period.toString()),
+                R: monthNumberToString(Number(this.state.period)).toString()
             }, {
                 L: "Status",
-                R: "",
+                R: <ONSStatus label={"Survey Imports Incomplete"} small={false} status={"info"}/>
             }]
-        )
+        );
     }
 
     updateMetaDataList = () => {
-        this.setState({metadata: this.formatMetaData()})
+        this.setState({metadata: this.formatMetaData()});
     };
 
     summaryModal = () => {
@@ -159,40 +158,84 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                   status={this.state.surveyAuditStatus}
                                   closeSummaryModal={this.closeSummaryModal}
                                   reloadBatchData={this.batchData}/>
-            )
+            );
+    };
+
+    accordionDropDownHeader = () => {
+        return (
+            <ONSStatus status={"success"} label={"All Survey files have been Imported"} small={false}/>
+        );
     };
 
     render() {
+        // TODO: Temporary way to check if imports are complete, should eventually be able to get this from batch status
+        let importComplete = true;
+        if (this.state.batchFound) {
+            if (this.state.batchData !== null) {
+                this.state.batchData.forEach(row => {
+                    // @ts-ignore
+                    if (row.status !== 4) {
+                        importComplete = false;
+                    }
+                });
+            }
+        }
+
         return (
             <DocumentTitle
-                title={'LFS Manage Batch ' + monthNumberToString(+this.state.period) + " " + this.state.year}>
+                title={"LFS Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}>
                 <div className="container">
                     {
                         this.state.batchFound ?
                             <>
+                                <h3> Manage Monthly Batch</h3>
                                 <ONSMetadata List={this.state.metadata}/>
-                                <div style={{width: "55%"}}>
-                                    <MonthlyBatchUploadTable batchData={this.state.batchData}
-                                                             openModel={this.openSummaryModal}
-                                                             batchType={this.state.batchType}
-                                                             year={this.state.year}
-                                                             period={this.state.period}/>
+                                <div style={{width: "35rem", float: "left"}}>
+                                    {
+                                        importComplete ?
+                                            <AccordionDropDown caption={"Survey Files"}
+                                                               expandableHeader={this.accordionDropDownHeader}>
+                                                <MonthlyBatchUploadTable batchData={this.state.batchData}
+                                                                         openModel={this.openSummaryModal}
+                                                                         batchType={this.state.batchType}
+                                                                         year={this.state.year}
+                                                                         period={this.state.period}
+                                                                         caption={false}/>
+                                            </AccordionDropDown>
+                                            :
+                                            <>
+                                                <MonthlyBatchUploadTable batchData={this.state.batchData}
+                                                                         openModel={this.openSummaryModal}
+                                                                         batchType={this.state.batchType}
+                                                                         year={this.state.year}
+                                                                         period={this.state.period}
+                                                                         caption={true}/>
+                                                <ONSPanel label="Monthly Batch" status="info" spacious={false}>
+                                                    <p>Every Survey File Must be Uploaded to Run Process</p>
+                                                </ONSPanel>
+                                                <br/>
+                                            </>
+                                    }
                                     {this.summaryModal()}
-                                    <ONSPanel label="Monthly Batch" status="info" spacious={false}>
-                                        <p>Every Survey File Must be Uploaded to Run Process</p>
-                                    </ONSPanel>
-                                    <br/>
-                                </div>
-                                <div>
-                                    <ONSButton label="Run Monthly Process" small={false} primary={true}
-                                               marginRight={10}/>
-                                    <ONSButton label="Run Interim Weighting" small={false} primary={false}/>
-
-                                </div>
-                                <br/>
-                                <div style={{width: "75%"}}>
                                     <ReferenceFileImportTable/>
                                 </div>
+                                <div style={{float: "right"}}>
+                                    <h4>Run Processes</h4>
+                                    <br/>
+                                    <ONSButton label="Run Monthly Process"
+                                               small={false}
+                                               primary={true}
+                                               marginRight={10}
+                                               disabled={!importComplete}/>
+                                    <br/>
+                                    <br/>
+                                    <ONSButton label="Run Interim Weighting"
+                                               small={false}
+                                               primary={false}
+                                               disabled={!importComplete}/>
+                                </div>
+                                <div className="grid__col col-6@m "/>
+                                <br/>
                             </>
                             :
                             <GenericNotFound label={toUpperCaseFirstChar(this.state.batchType) + " batch Not Found "}/>

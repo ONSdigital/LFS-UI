@@ -15,7 +15,7 @@ export function ReferenceFileImportTable() {
         {name: "Variable Definitions", "status": "Imported"},
         {name: "Value Labels", "status": "Imported"},
         {name: "Output Specification", "status": "Not Imported"},
-        {name: "Population Estimates", "status": "Not Imported"},
+        {name: "Population Estimates", "status": "Not Imported"}
     ];
 
 
@@ -30,10 +30,10 @@ export function ReferenceFileImportTable() {
                     {dateFormatter(new Date()).format("DD/MM/YYYY")}
                 </td>
                 <td className="table__cell ">
-                    <ONSStatus label={row.status} small={false} status={'info'}/>
+                    <ONSStatus label={row.status} small={false} status={"info"}/>
                 </td>
             </>
-        )
+        );
     };
 
     return (
@@ -41,6 +41,7 @@ export function ReferenceFileImportTable() {
                            data={imports}
                            Row={BatchUploadTableRow}
                            expandedRowEnabled={false}
-                           noDataMessage={"No Data"}/>
-    )
+                           noDataMessage={"No Data"}
+                           caption={"Reference Files"}/>
+    );
 }
