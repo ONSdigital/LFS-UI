@@ -220,7 +220,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                     <ReferenceFileImportTable/>
                                 </div>
                                 <div style={{float: "right"}}>
-                                    <hr/>
+                                    <h4>Run Processes</h4>
                                     <br/>
                                     <ONSButton label="Run Monthly Process"
                                                small={false}
