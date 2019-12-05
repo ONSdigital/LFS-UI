@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {ONSPanel} from '../../components/ONS_DesignSystem/ONSPanel';
-import {ONSButton} from '../../components/ONS_DesignSystem/ONSButton';
-import {getMonth, qList,} from '../../utilities/Common_Functions';
-import {ONSMetadata} from '../../components/ONS_DesignSystem/ONSMetadata';
+import React, {Component} from "react";
+import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
+import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
+import {getMonth, qList} from "../../utilities/Common_Functions";
+import {ONSMetadata} from "../../components/ONS_DesignSystem/ONSMetadata";
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
+import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 
 interface State {
     UploadsData: Data | null
@@ -24,8 +25,8 @@ interface State {
 }
 
 interface MetaDataListItem {
-    R: string
-    L: string
+    R: any
+    L: any
 }
 
 interface Data {
@@ -101,7 +102,7 @@ export class View_Quarterly_Batch extends Component <Props, State> {
                 R: this.state.period.toString(),
             }, {
                 L: "Status",
-                R: "",
+                R: <ONSStatus label={"Missing Reference Files"} small={false} status={'info'}/>,
             }
             ]
         )
