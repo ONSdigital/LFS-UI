@@ -1,9 +1,9 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component, Fragment} from "react";
 import {ONSPanel} from "./ONSPanel";
-import update from 'immutability-helper';
+import update from "immutability-helper";
 import {ONSPagination} from "./ONSPagination";
-import uuidv4 from 'uuid/v4'
-import './ONSAccordionTable.css';
+import uuidv4 from "uuid/v4";
+import "./ONSAccordionTable.css";
 
 interface Props {
     Headers: Header[]
@@ -138,7 +138,7 @@ export class ONSAccordionTable extends Component <Props, State> {
                             <tr>
                                 <td colSpan={this.props.Headers.length + (this.props.expandedRowEnabled ? 1 : 0)}
                                     className="table__cell ">
-                                    <ONSPanel label={'No Batches Matching the Criteria'}>
+                                    <ONSPanel status={(this.props.noDataMessage.toLowerCase().includes('error') ? "error": "info")} label={'No Batches Matching the Criteria'}>
                                         <p>{this.props.noDataMessage}</p>
                                     </ONSPanel>
                                 </td>
