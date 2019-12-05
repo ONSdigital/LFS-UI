@@ -10,6 +10,7 @@
     "As a temporary measure we are using a forked version with the latest dependency updates (03/12/2019)"
   ],
   "dependencies": {
+    "@ons/design-system": "latest",
     "@types/bootstrap": "^4.3.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/node": "^12.11.1",

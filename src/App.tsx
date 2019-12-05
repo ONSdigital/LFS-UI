@@ -1,21 +1,22 @@
-import React from 'react';
-import {Route, RouteProps, Switch, BrowserRouter} from "react-router-dom";
-import {Layout} from './components/Layout';
-import {Dashboard} from './pages/Dashboard';
-import {Login} from './auth/Login';
-import {Admin} from './pages/Admin';
-import Logout from './auth/Logout';
+import React from "react";
+import {BrowserRouter, Route, RouteProps, Switch} from "react-router-dom";
+import {Layout} from "./components/Layout";
+import {Dashboard} from "./pages/Dashboard";
+import {Login} from "./auth/Login";
+import {Admin} from "./pages/Admin";
+import Logout from "./auth/Logout";
 import {Import} from "./pages/import/Import";
-import {New_Batch} from './pages/New_Batch';
-import {View_Monthly_Batch} from './pages/manageBatch/View_Monthly_Batch';
+import {New_Batch} from "./pages/New_Batch";
+import {View_Monthly_Batch} from "./pages/manageBatch/View_Monthly_Batch";
 import {GenericNotFound} from "./pages/GenericNotFound";
 import {Cookies, withCookies} from "react-cookie";
 import {SurveyFileUpload} from "./pages/SurveyFileUpload";
-import {FileUploadProgress} from './pages/FileUploadProgress';
+import {FileUploadProgress} from "./pages/FileUploadProgress";
 import DocumentTitle from "react-document-title";
 import {ViewData} from "./pages/ViewData";
 import {View_Quarterly_Batch} from "./pages/manageBatch/View_Quarterly_Batch";
 import {ImportOverview} from "./pages/import/ImportOverview";
+import "@ons/design-system/css/main.css";
 
 interface Props {
     cookies: Cookies
