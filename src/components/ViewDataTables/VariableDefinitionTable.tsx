@@ -7,6 +7,7 @@ import dateFormatter from "dayjs";
 import {getVariableDefinitions} from "../../utilities/http";
 import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
 import {ONSButton} from "../ONS_DesignSystem/ONSButton";
+import {isDevEnv} from "../../utilities/Common_Functions";
 
 interface Props {
 }
@@ -49,13 +50,13 @@ export class VariableDefinitionTable extends Component <Props, State> {
     getVariableDefinitionData = () => {
         getVariableDefinitions()
             .then(r => {
-                console.log(r);
+                (isDevEnv() && console.log(r));
                 if (r.message !== "no data found") {
                     this.setState({data: r, filteredData: r});
                 } else this.setState({filteredData: [], noDataMessage: "No Variable Definitions found"});
             })
             .catch(error => {
-                console.log(error);
+                (isDevEnv() && console.log(error));
                 this.setState({filteredData: [], noDataMessage: "Error occurred while getting Variable Definitions"});
             });
     };
@@ -66,7 +67,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
         }
         getVariableDefinitions(this.state.search.toUpperCase())
             .then(r => {
-                console.log(r);
+                (isDevEnv() && console.log(r));
                 if (r.message !== "no data found") {
                     this.setState({filteredData: r});
                 } else this.setState({
@@ -75,7 +76,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
                 });
             })
             .catch(error => {
-                console.log(error);
+                (isDevEnv() && console.log(error));
                 this.setState({filteredData: [], noDataMessage: "Error occurred while searching for Variable"});
             });
     };
