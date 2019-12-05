@@ -16,6 +16,7 @@ interface Props {
     pagination?: boolean
     paginationSize?: number
     scrollable?: boolean
+    caption?: string
 }
 
 interface State {
@@ -87,6 +88,7 @@ export class ONSAccordionTable extends Component <Props, State> {
         return (
             <table id="basic-table" className="table ">
                 <>
+                    {this.props.caption && <caption className="table__caption">{this.props.caption}</caption>}
                     <thead className="table__head">
                     <tr className="table__row">
                         {
@@ -174,13 +176,11 @@ export class ONSAccordionTable extends Component <Props, State> {
                             <this.Table/>
                         </>
                 }
-                {this.props.pagination ?
+                {this.props.pagination &&
                     <ONSPagination
                         listLength={(this.props.paginationSize !== undefined ? this.props.paginationSize : 20)}
                         count={this.state.data.length}
                         pageChange={this.pageChange}/>
-                    :
-                    <br/>
                 }
             </>
         );
