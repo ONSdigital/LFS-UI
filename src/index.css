@@ -20,6 +20,7 @@ caption{
 }
 
 .Modal {
+  outline: none;
   position: absolute;
   text-align: unset;
   left: 50%;
@@ -44,6 +45,7 @@ caption{
 }
 
 .Bigger-Modal {
+  outline: none;
   position: absolute;
   text-align: unset;
   left: 50%;
