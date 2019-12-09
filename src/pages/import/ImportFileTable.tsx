@@ -6,10 +6,6 @@ import {Link} from "react-router-dom";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import dateFormatter from "dayjs";
 
-interface Props {
-
-}
-
 export function ImportFileTable() {
     let imports = [
         {name: "APS Design Weights", "status": "Imported"},

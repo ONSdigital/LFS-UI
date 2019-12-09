@@ -24,7 +24,7 @@ export const ONSButton = (props: Props) => {
 
     let className = "btn ";
     if (props.exportExcelBtn) {
-        className = className + " " + (props.loading ? "btn--secondary btn--loader is-loading  " : " btn--excel");
+        className = className + " " + (props.loading ? "btn--secondary btn--loader is-loading  " : " btn--excel btn--secondary");
     } else {
         className = className +
             (props.loading ? "btn--loader is-loading " : "") +
