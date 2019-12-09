@@ -10,8 +10,12 @@ interface Props {
     data: any[] | null
     id?: string
     Row: any
+    // Is expanded row enabled
     expandedRowEnabled: boolean
+    // The Row to show when expanded
     expandedRow?: any
+    // Is the expandedRow additional rows for the table, this is so the table is formatted correctly
+    expandedAdditionalRows?: boolean
     noDataMessage: string
     pagination?: boolean
     paginationSize?: number
@@ -126,14 +130,22 @@ export class ONSAccordionTable extends Component <Props, State> {
                                         <this.props.Row row={row}/>
                                     </tr>
                                     {
-                                        this.props.expandedRowEnabled &&
-                                        <tr hidden={!row.rowExpanded}>
-                                            <td className="table__cell expandedRow"/>
-                                            <td colSpan={this.props.Headers.length}
-                                                className="table__cell expandedRow">
+                                        this.props.expandedRowEnabled && (
+                                            this.props.expandedAdditionalRows ? (
+                                                // Additional Hidden Rows for table being passed in
+                                                row.rowExpanded &&
                                                 <this.props.expandedRow row={row}/>
-                                            </td>
-                                        </tr>
+                                            ) : (
+                                                // ExpandedRow not table rows so its styled accordingly
+                                                <tr hidden={!row.rowExpanded}>
+                                                    <td className="table__cell expandedRow"/>
+                                                    <td colSpan={this.props.Headers.length}
+                                                        className="table__cell expandedRow">
+                                                        <this.props.expandedRow row={row}/>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )
                                     }
                                 </Fragment>
                             )
@@ -141,7 +153,9 @@ export class ONSAccordionTable extends Component <Props, State> {
                             <tr>
                                 <td colSpan={this.props.Headers.length + (this.props.expandedRowEnabled ? 1 : 0)}
                                     className="table__cell ">
-                                    <ONSPanel status={(this.props.noDataMessage.toLowerCase().includes('error') ? "error": "info")} label={"No Batches Matching the Criteria"}>
+                                    <ONSPanel
+                                        status={(this.props.noDataMessage.toLowerCase().includes("error") ? "error" : "info")}
+                                        label={"No Batches Matching the Criteria"}>
                                         <p>{this.props.noDataMessage}</p>
                                     </ONSPanel>
                                 </td>
@@ -177,10 +191,10 @@ export class ONSAccordionTable extends Component <Props, State> {
                         </>
                 }
                 {this.props.pagination &&
-                    <ONSPagination
-                        listLength={(this.props.paginationSize !== undefined ? this.props.paginationSize : 20)}
-                        count={this.state.data.length}
-                        pageChange={this.pageChange}/>
+                <ONSPagination
+                    listLength={(this.props.paginationSize !== undefined ? this.props.paginationSize : 20)}
+                    count={this.state.data.length}
+                    pageChange={this.pageChange}/>
                 }
             </>
         );
