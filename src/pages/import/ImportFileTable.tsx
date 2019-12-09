@@ -18,6 +18,7 @@ export function ImportFileTable() {
         {name: "Value Labels", "status": "Imported"},
         {name: "Output Specification", "status": "Not Imported"},
         {name: "Population Estimates", "status": "Not Imported"},
+        {name: "Bulk Amendments", "status": "Not Imported"},
     ];
 
 

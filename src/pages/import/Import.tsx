@@ -188,7 +188,14 @@ export class Import extends Component <Props, State> {
                 });
                 break;
             case "Bulk Amendments":
-                this.setState({});
+                this.setState({
+                    fileType: ".sav",
+                    built: false,
+                    fileName: "bulk_amendments",
+                    uploadLink: "bulk/amendments",
+                    validFromDateHidden: true,
+                    hasImportReport: true
+                });
                 break;
             case "APS Design Weights":
                 this.setState({
@@ -234,7 +241,7 @@ export class Import extends Component <Props, State> {
     };
 
     fileSelection = [
-        //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
+        {"label": "Bulk Amendments", "value": "Bulk Amendments"},
         {label: "APS Design Weights", value: "APS Design Weights"},
         {label: "Geographical Classifications", value: "Geographical Classifications"},
         {label: "Variable Definitions", value: "Variable Definitions"},
@@ -249,22 +256,35 @@ export class Import extends Component <Props, State> {
             <DocumentTitle title={"LFS Import " + this.state.importName}>
                 <div className="container">
                     <form>
-                        <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
-                                  hidden={!this.state.panel.visible}>
-                            <p>{this.state.panel.label}</p>
-                        </ONSPanel>
-                        <br/>
-                        <div hidden={this.state.importSelectHidden}>
-                            <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
-                                       onChange={this.handleImportChange}/>
-                        </div>
-                        <br/>
+                        {
+                            this.state.panel.visible &&
+                            <>
+                                <ONSPanel status={this.state.panel.status} label={this.state.panel.label}>
+                                    <p>{this.state.panel.label}</p>
+                                </ONSPanel>
+                                <br/>
+                            </>
+                        }
+                        {
+                            !this.state.importSelectHidden &&
+                            <>
+
+                                <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
+                                           onChange={this.handleImportChange}/>
+
+                                <br/>
+                            </>
+                        }
                         <div hidden={this.state.importHidden}>
-                            <div hidden={this.state.validFromDateHidden}>
-                                <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
-                                              date={this.state.validFromDate}/>
-                                <br/><br/>
-                            </div>
+                            {
+                                !this.state.validFromDateHidden &&
+                                <>
+                                    <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
+                                                  date={this.state.validFromDate}/>
+                                    <br/>
+                                    <br/>
+                                </>
+                            }
                             <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
                                        description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}
                                        fileID={"U1"}
@@ -283,14 +303,14 @@ export class Import extends Component <Props, State> {
                                           importName={this.state.uploadLink}/>
                         </div>
                     </form>
+                    <br/>
                     <FileUploadProgress importName={this.state.importName}
                                         fileName={this.state.fileName}
                                         hidden={this.state.uploadProgressHidden}
                                         fileUploading={this.setFileUploading}
                                         setPanel={this.setPanel}/>
                 </div>
-            </
-                DocumentTitle>
+            </DocumentTitle>
         );
     }
 }
