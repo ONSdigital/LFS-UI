@@ -135,6 +135,18 @@ const VarDefTableRow = (rowData: any) => {
 
 const VarDefExpandedRow = (rowData: any) => {
     let rows: any[] = lodash.drop(rowData.row, 1);
+    if (rows.length === 0) {
+        return (
+            <Fragment key={uuid()}>
+                <tr className={("table__row")} style={{color: "darkblue"}}>
+                    <td className="table__cell "/>
+                    <td className="table__cell " colSpan={6}>
+                        No Previous Metadata
+                    </td>
+                </tr>
+            </Fragment>
+        );
+    }
     return rows.map((row: VariableDefinitionTableRow, index: number) => (
             <Fragment key={uuid()}>
                 <tr className={("table__row")} style={{color: "darkblue"}}>
