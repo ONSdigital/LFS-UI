@@ -21,11 +21,10 @@ caption{
 
 .Modal {
   position: absolute;
-  text-align: unset; 
-  top:20%;
-  bottom: 50%;
-  /* right: c%; */
-  left: 35%;
+  text-align: unset;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   height: 465px;
   width: 465px;
   background: white;
@@ -47,10 +46,9 @@ caption{
 .Bigger-Modal {
   position: absolute;
   text-align: unset;
-  top:20%;
-  bottom: 50%;
-  /* right: c%; */
-  left: 35%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   height: 565px;
   width: 565px;
   background: white;
