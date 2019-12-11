@@ -4,7 +4,10 @@ import {ONSButton} from "./ONS_DesignSystem/ONSButton";
 import ReactModal from "react-modal";
 import {getSurveyAudit, surveyAuditResponse} from "../utilities/http";
 import {isDevEnv, monthNumberToString} from "../utilities/Common_Functions";
-import moment from "moment";
+import dateFormatter from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+
+dateFormatter.extend(advancedFormat);
 
 interface Props {
     week: string
@@ -93,7 +96,7 @@ export class SurveyAuditModal extends Component <Props, State> {
             return (
                 [{
                     L: "Reference Date",
-                    R: moment(new Date(this.state.importAudit.referenceDate)).format("Do MMMM YYYY")
+                    R: dateFormatter(this.state.importAudit.referenceDate).format("Do MMMM YYYY")
                 }, {
                     L: "Variables in File",
                     R: this.state.importAudit.numVarFile
