@@ -24,6 +24,7 @@ interface ValueLabelTableRow {
     source: string
     variable: string
     last_updated: Date
+    valid_from: Date
 }
 
 
@@ -128,7 +129,7 @@ const ValueLabelTableRow = (rowData: any) => {
                 {row.description}
             </td>
             <td className="table__cell ">
-                {dateFormatter(row.last_updated).format("DD/MM/YYYY")}
+                {dateFormatter(row.valid_from).format("DD/MM/YYYY")}
                 {}
             </td>
 
