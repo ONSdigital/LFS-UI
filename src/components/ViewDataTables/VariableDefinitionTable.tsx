@@ -55,13 +55,13 @@ export class VariableDefinitionTable extends Component <Props, State> {
                 (isDevEnv() && console.log(r));
                 if (r.message !== "no data found") {
                     let list = lodash(r)
+                        .sortBy("variable")
                         .groupBy("variable")
                         .map(rows => {
                             return lodash.sortBy(rows, item => {
                                 return item.validFrom;
                             }).reverse();
                         })
-                        .sortBy("variable")
                         .value();
 
                     this.setState({data: list, filteredData: list});

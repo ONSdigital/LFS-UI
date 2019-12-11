@@ -6,13 +6,14 @@ import {getValueLabels} from "../../utilities/http";
 import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
 import {ONSButton} from "../ONS_DesignSystem/ONSButton";
 import dateFormatter from "dayjs";
+import lodash from "lodash";
 
 interface Props {
 }
 
 interface State {
-    data: ValueLabelTableRow[]
-    filteredData: ValueLabelTableRow[]
+    data: any[]
+    filteredData: any[]
     search: string
     noDataMessage: string
 }
@@ -55,26 +56,6 @@ export class ValueLabelsTable extends Component <Props, State> {
             });
     };
 
-    getSingleVariableDefinitionData = () => {
-        if (this.state.search.length === 0) {
-            return;
-        }
-        getValueLabels(this.state.search.toUpperCase())
-            .then(r => {
-                console.log(r);
-                if (r.message !== "no data found") {
-                    this.setState({filteredData: r});
-                } else this.setState({
-                    filteredData: [],
-                    noDataMessage: "Variable: " + this.state.search + ", could not be found"
-                });
-            })
-            .catch(error => {
-                console.log(error);
-                this.setState({filteredData: [], noDataMessage: "Error occurred while searching for Variable"});
-            });
-    };
-
     noDataMessage = "No Value Labels matching this criteria";
 
     viewAll = () => {
@@ -82,10 +63,8 @@ export class ValueLabelsTable extends Component <Props, State> {
     };
 
     handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({search: e.target.value});
-        if (e.target.value.length === 0) {
-            this.setState({filteredData: this.state.data});
-        }
+        let newFilteredList = lodash.filter(this.state.data, (variableRow) => variableRow.variable.includes(e.target.value.toUpperCase()));
+        this.setState({search: e.target.value, filteredData: newFilteredList});
     };
 
     render() {
@@ -94,8 +73,6 @@ export class ValueLabelsTable extends Component <Props, State> {
                 <>
                     <ONSTextInput value={this.state.search} label={"Filter by Variable Name"}
                                   onChange={this.handleSearch}/>
-                    <ONSButton label={"Search"} primary={true} small={false} field={true}
-                               onClick={this.getSingleVariableDefinitionData}/>
                     <ONSButton label={"View All"} primary={false} small={false} field={true}
                                onClick={this.viewAll}/>
                     <ONSAccordionTable data={this.state.filteredData} Row={ValueLabelTableRow}
