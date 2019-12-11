@@ -1,4 +1,4 @@
-﻿import React, {ChangeEvent, Component} from 'react';
+﻿import React, {ChangeEvent, Component} from "react";
 import {DashboardTable} from "../components/DashboardTable";
 import {ONSRadioButton} from "../components/ONS_DesignSystem/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
@@ -62,9 +62,9 @@ export class Dashboard extends Component <{}, State> {
 
     filterListByStatus = (row: any): boolean => {
         if (this.state.batchType === 'completed') {
-            return (row.status === 'Completed')
+            return (row.status === 4)
         }
-        return (row.status !== 'Completed')
+        return (row.status !== 4)
     };
 
     filterListByBatchType = (row: any): boolean => {
