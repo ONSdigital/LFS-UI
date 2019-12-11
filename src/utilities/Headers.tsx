@@ -173,6 +173,16 @@ const VARIABLE_DEFINITION_HEADERS =
         column_name: "DV",
         filter: false,
         order: false
+    }, {
+        label: "Type",
+        column_name: "Type",
+        filter: false,
+        order: false
+    }, {
+        label: "Length",
+        column_name: "Length",
+        filter: false,
+        order: false
     }
     ];
 

@@ -129,6 +129,12 @@ const VarDefTableRow = (rowData: any) => {
             <td className="table__cell ">
                 <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
             </td>
+            <td className="table__cell ">
+                {row.type}
+            </td>
+            <td className="table__cell ">
+                {row.length}
+            </td>
         </>
     );
 };
@@ -168,6 +174,12 @@ const VarDefExpandedRow = (rowData: any) => {
                     </td>
                     <td className="table__cell ">
                         <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
+                    </td>
+                    <td className="table__cell ">
+                        {row.type}
+                    </td>
+                    <td className="table__cell ">
+                        {row.length}
                     </td>
                 </tr>
             </Fragment>
