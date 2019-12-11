@@ -146,7 +146,7 @@ const VarDefExpandedRow = (rowData: any) => {
             <Fragment key={uuid()}>
                 <tr className={("table__row")} style={{color: "darkblue"}}>
                     <td className="table__cell "/>
-                    <td className="table__cell " colSpan={6}>
+                    <td className="table__cell " colSpan={8}>
                         No Previous Metadata
                     </td>
                 </tr>
