@@ -129,6 +129,12 @@ const VarDefTableRow = (rowData: any) => {
             <td className="table__cell ">
                 <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
             </td>
+            <td className="table__cell ">
+                {row.type}
+            </td>
+            <td className="table__cell ">
+                {row.length}
+            </td>
         </>
     );
 };
@@ -140,7 +146,7 @@ const VarDefExpandedRow = (rowData: any) => {
             <Fragment key={uuid()}>
                 <tr className={("table__row")} style={{color: "darkblue"}}>
                     <td className="table__cell "/>
-                    <td className="table__cell " colSpan={6}>
+                    <td className="table__cell " colSpan={8}>
                         No Previous Metadata
                     </td>
                 </tr>
@@ -168,6 +174,12 @@ const VarDefExpandedRow = (rowData: any) => {
                     </td>
                     <td className="table__cell ">
                         <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
+                    </td>
+                    <td className="table__cell ">
+                        {row.type}
+                    </td>
+                    <td className="table__cell ">
+                        {row.length}
                     </td>
                 </tr>
             </Fragment>
