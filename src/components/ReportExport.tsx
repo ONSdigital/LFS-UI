@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
-import {getImportReportFile} from "../utilities/http";
+import {getImportReportFile} from "../utilities/http/http";
 
 interface Props {
     hidden: boolean

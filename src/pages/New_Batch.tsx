@@ -19,6 +19,7 @@ interface State{
     submit: boolean
     inputError: boolean
     panel: Panel
+    errorGone: boolean
 }
 
 export class New_Batch extends Component <{}, State> {
@@ -36,7 +37,8 @@ export class New_Batch extends Component <{}, State> {
                 label: '',
                 visible: false,
                 status: ''
-            }
+            },
+            errorGone: false
         };
     }
     error = false;
@@ -79,38 +81,53 @@ export class New_Batch extends Component <{}, State> {
                                 visible: true,
                                 status: 'info'
                             }
-                        });
-                        // redirect to Manage batch Page
-                        window.location.href = "/manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period
-                    }
-                })
-                .catch(error => console.log(error));
+                    });
+                    // redirect to Manage batch Page
+                    window.location.href = "/manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period
+                }
+            })
+            .catch(error => console.log(error));
         }
 
         if(this.state.batchType === "yearly") this.setState({period: ""});
-        this.setState({inputError: this.error});
-
+        if(this.state.errorGone === false) this.setState({inputError: true});
+        else this.setState({inputError: false})
     };
 
     handleBatchTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
         this.setState({batchType: e.target.value, period: ""});
-        this.errorGone()
-
+        this.errorGone("Batch")
     };
 
     handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
         this.setState({year: e.target.value});
-        this.errorGone()
+        this.errorGone("Year")
     };
 
     handlePeriodChange = (e: ChangeEvent<HTMLSelectElement>) => {
         this.setState({period: e.target.value});
-        this.errorGone()
+        this.errorGone("Period")
     };
 
-    errorGone = () => {
-        if(this.state.batchType !== "" && this.state.year !== "" && (this.state.batchType !== "yearly" || this.state.period !== "")) this.setState({inputError: false})
-    };
+    errorGone = (value: string) => {
+        console.log(value)
+        console.log(this.state.batchType)
+        console.log(this.state.year)
+        console.log(this.state.period)
+        //batch
+        if(value === "Batch")
+            if(this.state.year !== "" && (this.state.batchType !== "yearly" && this.state.period !== "")) {
+                this.setState({inputError: false, errorGone: true})
+            }
+        //Year
+        if(value === "Year")
+            if(this.state.batchType !== "" && this.state.batchType === "yearly") this.setState({inputError: false, errorGone: true})
+            else if(this.state.batchType !== "yearly" && this.state.period !== "") this.setState({inputError: false, errorGone: true})
+        //Period
+        if(value === "Period") 
+            if(this.state.batchType !== "" && this.state.year !== "") this.setState({inputError: false, errorGone: true});
+        
+    }
 
     render() {
         return (

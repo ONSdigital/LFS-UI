@@ -1,4 +1,4 @@
-import {requestPromise} from "./requestPromise";
+import {requestPromiseJson} from "./requestPromise";
 
 function postSurveyFile(lfsfile: any, fileName: string, fileType: string, survey: string, period: string, year: string): Promise<any> {
     let url = "/imports/" + fileType + "/" + survey + "/" + year + "/" + period;
@@ -7,12 +7,12 @@ function postSurveyFile(lfsfile: any, fileName: string, fileType: string, survey
     formData.append("fileName", fileName);
     formData.append("fileSource", survey);
 
-    return requestPromise("POST", url, formData);
+    return requestPromiseJson("POST", url, formData);
 }
 
 function surveyAuditResponse(survey: string, status: string, year: string, period: string): Promise<any> {
     let url = "/survey/" + survey.toLowerCase() + "/status/" + status + "/" + year + "/" + period;
-    return requestPromise("POST", url);
+    return requestPromiseJson("POST", url);
 }
 
 export {postSurveyFile, surveyAuditResponse};
