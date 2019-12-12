@@ -38,6 +38,7 @@ interface State {
     inputError: boolean
     errorGone: boolean
     outputSpec: boolean
+    linkUrl: string
 }
 
 interface Panel {
@@ -78,7 +79,8 @@ export class Import extends Component <Props, State> {
             period: "",
             inputError: false,
             errorGone: false,
-            outputSpec: false
+            outputSpec: false,
+            linkUrl: ""
         };
         this.setPanel.bind(this);
         this.setFileUploading.bind(this);
@@ -124,12 +126,10 @@ export class Import extends Component <Props, State> {
                                 this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
                             } else if (response.status === 200 && this.state.outputSpec) {
                                 this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, ", "success");
+                                
                                 response.blob().then((blob: any) => {
                                     let url = window.URL.createObjectURL(blob);
-                                    let a = document.createElement('a');
-                                    a.href = url;
-                                    a.download = this.state.importName + ' Summary Report.xlsx';
-                                    a.click();
+                                    this.setState({linkUrl: url, reportExportHidden: false}) 
                                 });
                             } 
                         }
@@ -423,7 +423,7 @@ export class Import extends Component <Props, State> {
                                        field={true}
                                        onClick={() => window.history.back()}/>
                             <ReportExport hidden={this.state.reportExportHidden} setPanel={this.setPanel}
-                                          importName={this.state.uploadLink}/>
+                                          importName={this.state.uploadLink} url={this.state.linkUrl}/>
                         </div>
                     </form>
                     <FileUploadProgress importName={this.state.importName}

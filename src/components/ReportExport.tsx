@@ -6,19 +6,26 @@ interface Props {
     hidden: boolean
     setPanel: Function
     importName: string
+    url?: string
 }
 
 export const ReportExport = (props: Props) => {
     let [loading, setLoading] = useState(false)
     const onClick = () => {
         setLoading(true);
-        getImportReportFile(props.importName)
+        if (props.url) {
+            let a = document.createElement('a');
+            a.href = props.url
+            a.download = props.importName + ' Summary Report.xlsx';
+            a.click();
+            setLoading(false)}
+        else getImportReportFile(props.importName)
             .then(response => {
                 response.blob().then((blob: any) => {
                     let url = window.URL.createObjectURL(blob);
                     let a = document.createElement('a');
                     a.href = url;
-                    a.download = 'Population Summary Report.xlsx';
+                    a.download = props.importName + ' Summary Report.xlsx';
                     a.click();
                     setLoading(false)
                 });
