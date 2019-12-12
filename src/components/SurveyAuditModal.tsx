@@ -132,24 +132,29 @@ export class SurveyAuditModal extends Component <Props, State> {
                 shouldFocusAfterRender={true}
                 shouldReturnFocusAfterClose={true}
                 ariaHideApp={false}>
-                <h3>{this.summaryTitle()}</h3>
-                <div>
-                    <ONSMetadata List={this.summaryMetaData()} LSpacing="6" RSpacing="5"/>
-                    <ONSButton label="Export / View Report" primary={false} small={false}/>
+                <div className="Modal-Content">
+                    <h3>{this.summaryTitle()}</h3>
+                    <div>
+                        <ONSMetadata List={this.summaryMetaData()} LSpacing="6" RSpacing="5"/>
+                        <ONSButton label="Export / View Report" primary={false} small={false}/>
+                    </div>
+                    <br/>
+
                 </div>
-                <br/>
-                {
-                    this.props.status === 1 || this.props.status === 2 ?
-                        <div>
-                            <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
-                            <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}
-                                       marginRight={155}/>
-                            <ONSButton label="Close" primary={false} small={false}
-                                       onClick={this.props.closeSummaryModal}/>
-                        </div>
-                        :
-                        <ONSButton label="Close" primary={false} small={false} onClick={this.props.closeSummaryModal}/>
-                }
+                <footer className="Model-Footer">
+                    {
+                        this.props.status === 1 || this.props.status === 2 ?
+                            <div>
+                                <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
+                                <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}
+                                           marginRight={155}/>
+                                <ONSButton label="Close" primary={false} small={false}
+                                           onClick={this.props.closeSummaryModal}/>
+                            </div>
+                            :
+                            <ONSButton label="Close" primary={false} small={false} onClick={this.props.closeSummaryModal}/>
+                    }
+                </footer>
             </ReactModal>
         );
     }

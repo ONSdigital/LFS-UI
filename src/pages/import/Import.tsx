@@ -4,12 +4,12 @@ import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import {postImportFile} from "../../utilities/http";
 import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
 import {FileUploadProgress} from "../FileUploadProgress";
-import {isDevEnv, toUpperCaseFirstChar} from "../../utilities/Common_Functions";
+import {isDevEnv, quarters, toUpperCaseFirstChar, years} from "../../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
 import {ONSDateInput} from "../../components/ONS_DesignSystem/ONSDateInput";
 import {ReportExport} from "../../components/ReportExport";
 import {ONSSelect} from "../../components/ONS_DesignSystem/ONSSelect";
-import {quarters, years} from "../../utilities/Common_Functions";
+import {BulkAmendmentsModel} from "./BulkAmendmentsModel";
 
 interface Props {
     match: any
@@ -30,7 +30,7 @@ interface State {
     uploadLink: string
     //check to see if functionality is built and whether to send the request
     built: boolean
-    hasImportReport: boolean
+    importReport: importReport
     fileName: string
     panel: Panel
     year: string
@@ -39,12 +39,19 @@ interface State {
     errorGone: boolean
     outputSpec: boolean
     linkUrl: string
+    summaryModelOpen: boolean
 }
 
 interface Panel {
     label: string,
     visible: boolean
     status: string
+}
+
+interface importReport {
+    hasImportReport: boolean
+    reportFileType: string
+
 }
 
 export class Import extends Component <Props, State> {
@@ -69,7 +76,10 @@ export class Import extends Component <Props, State> {
             uploadLink: "",
             built: false,
             fileName: "",
-            hasImportReport: false,
+            importReport: {
+                hasImportReport: false,
+                reportFileType: ""
+            },
             panel: {
                 label: "",
                 visible: false,
@@ -80,7 +90,8 @@ export class Import extends Component <Props, State> {
             inputError: false,
             errorGone: false,
             outputSpec: false,
-            linkUrl: ""
+            linkUrl: "",
+            summaryModelOpen: false
         };
         this.setPanel.bind(this);
         this.setFileUploading.bind(this);
@@ -96,7 +107,7 @@ export class Import extends Component <Props, State> {
                     uploadProgressHidden: true,
                     importSelectHidden: true
                     });
-                }               
+                }
     }
 
     upload = () => {
@@ -126,12 +137,12 @@ export class Import extends Component <Props, State> {
                                 this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
                             } else if (response.status === 200 && this.state.outputSpec) {
                                 this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, ", "success");
-                                
+
                                 response.blob().then((blob: any) => {
                                     let url = window.URL.createObjectURL(blob);
-                                    this.setState({linkUrl: url, reportExportHidden: false}) 
+                                    this.setState({linkUrl: url, reportExportHidden: false})
                                 });
-                            } 
+                            }
                         }
                         this.setState({
                             uploading: false
@@ -197,7 +208,7 @@ export class Import extends Component <Props, State> {
 
     setFileUploading = (bool: boolean) => {
         this.setState({importHidden: bool});
-        if (this.state.hasImportReport) {
+        if (this.state.importReport.hasImportReport) {
             this.setState({reportExportHidden: false});
         }
     };
@@ -226,10 +237,24 @@ export class Import extends Component <Props, State> {
                     fileName: "address",
                     uploadLink: "address",
                     validFromDateHidden: true,
-                    hasImportReport: false
+                    importReport: {
+                        hasImportReport: false,
+                        reportFileType: ""
+                    }
                 });
                 break;
             case "Bulk Amendments":
+                this.setState({
+                    fileType: ".sav",
+                    built: false,
+                    fileName: "bulk_amendments",
+                    uploadLink: "bulk/amendments",
+                    validFromDateHidden: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ".csv"
+                    }
+                });
                 this.setState({});
                 break;
             case "Output Specification":
@@ -242,7 +267,10 @@ export class Import extends Component <Props, State> {
                     fileName: "design_weights",
                     uploadLink: "design/weights",
                     validFromDateHidden: true,
-                    hasImportReport: false
+                    importReport: {
+                        hasImportReport: false,
+                        reportFileType: ""
+                    }
                 });
                 break;
             case "Population Estimates":
@@ -252,7 +280,10 @@ export class Import extends Component <Props, State> {
                     fileName: "population",
                     uploadLink: "population",
                     validFromDateHidden: true,
-                    hasImportReport: true
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ".xlsx"
+                    }
                 });
                 break;
             case "Value Labels":
@@ -262,7 +293,10 @@ export class Import extends Component <Props, State> {
                     fileName: "value_labels",
                     uploadLink: "value/labels",
                     validFromDateHidden: false,
-                    hasImportReport: false
+                    importReport: {
+                        hasImportReport: false,
+                        reportFileType: ""
+                    }
                 });
                 break;
             case "Variable Definitions":
@@ -272,7 +306,10 @@ export class Import extends Component <Props, State> {
                     fileName: "variable_definitions",
                     uploadLink: "variable/definitions",
                     validFromDateHidden: false,
-                    hasImportReport: false
+                    importReport: {
+                        hasImportReport: false,
+                        reportFileType: ""
+                    }
                 });
                 break;
            case "APS Person Variable Specification":
@@ -282,7 +319,10 @@ export class Import extends Component <Props, State> {
                     fileName: "APS_Person",
                     uploadLink: "aps/person",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
@@ -294,11 +334,14 @@ export class Import extends Component <Props, State> {
                     fileName: "APS_Household",
                     uploadLink: "aps/household",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
-                break; 
+                break;
             case "Eurostat Variable Specification":
                 this.setState({
                     fileType: ".csv",
@@ -306,7 +349,10 @@ export class Import extends Component <Props, State> {
                     fileName: "eurostat",
                     uploadLink: "eurostat",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
@@ -318,7 +364,10 @@ export class Import extends Component <Props, State> {
                     fileName: "LFS_Person",
                     uploadLink: "lfs/person",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
@@ -330,16 +379,19 @@ export class Import extends Component <Props, State> {
                     fileName: "LFS_Household",
                     uploadLink: "lfs/household",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
-                break;   
+                break;
         }
     };
 
     fileSelection = [
-        //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
+        {label: "Bulk Amendments", value: "Bulk Amendments"},
         {label: "APS Design Weights", value: "APS Design Weights"},
         {label: "Geographical Classifications", value: "Geographical Classifications"},
         {label: "Output Specification", value: "Output Specification"},
@@ -348,21 +400,51 @@ export class Import extends Component <Props, State> {
         {label: "Variable Definitions", value: "Variable Definitions"},
 
         {label: "APS Person Variable Specification", value: "Imported"},
-        {label: "APS Household Variable Specification", value: "Imported"},    
+        {label: "APS Household Variable Specification", value: "Imported"},
         {label: "Eurostat Variable Specification", value: "Not Imported"},
         {label: "LFS Person Variable Specification", value: "Imported"},
         {label: "LFS Household Variable Specification", value: "File Older than One year"},
     ];
 
+    openSummaryModal = (row: any) => {
+        if (this.state.importName === "Bulk Amendments") {
+            // window.history.pushState({}, document.title, this.state.pathName);
+            this.setState({
+                summaryModelOpen: true
+            });
+        }
+
+    };
+
+    closeSummaryModal = () => this.setState({summaryModelOpen: false});
+
+
+    summaryModal = () => {
+        if (this.state.summaryModelOpen)
+            return (
+                <BulkAmendmentsModel modelOpen={this.state.summaryModelOpen}
+                                     importName={this.state.importName}
+                                     fileName={this.state.fileName}
+                                     uploadLink={this.state.uploadLink}
+                                     reportFileType={this.state.importReport.reportFileType}
+                                     closeSummaryModal={this.closeSummaryModal}
+                                     reloadBatchData={this.closeSummaryModal}/>
+            );
+    };
+
     render() {
         return (
             <DocumentTitle title={"LFS Import " + this.state.importName}>
                     <div className="container">
-                        <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
-                                  hidden={!this.state.panel.visible}>
-                            <p>{this.state.panel.label}</p>
-                        </ONSPanel>
-                        <br/>
+                        {
+                            this.state.panel.visible &&
+                            <>
+                                <ONSPanel status={this.state.panel.status} label={this.state.panel.label}>
+                                    <p>{this.state.panel.label}</p>
+                                </ONSPanel>
+                                <br/>
+                            </>
+                        }
                         {(this.state.inputError) &&
                             <div>
                                 <div className="panel panel--error">
@@ -376,7 +458,7 @@ export class Import extends Component <Props, State> {
                                                     <p className="list__link js-inpagelink">
                                                     Please select a Year.
                                                     </p>
-                                                </li>  
+                                                </li>
                                             }
                                             {(this.state.period === "") &&
                                                 <li className="list__item ">
@@ -392,10 +474,15 @@ export class Import extends Component <Props, State> {
                             </div>
                         }
                     <form>
-                        <div hidden={this.state.importSelectHidden}>
-                            <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
-                                       onChange={this.handleImportChange}/>
-                        </div>
+                        {
+                            !this.state.validFromDateHidden &&
+                            <>
+                                <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
+                                              date={this.state.validFromDate}/>
+                                <br/>
+                                <br/>
+                            </>
+                        }
                         <div hidden={this.state.quarterPeriodInputHidden}>
                             <ONSSelect id="year" label="Year" value="year" options={years()} onChange={this.handleYearChange} />
                             <ONSSelect id="quarter" label="Quarter" value="quarter" options={quarters} onChange={this.handlePeriodChange} />
@@ -422,15 +509,20 @@ export class Import extends Component <Props, State> {
                                        primary={false}
                                        field={true}
                                        onClick={() => window.history.back()}/>
-                            <ReportExport hidden={this.state.reportExportHidden} setPanel={this.setPanel}
-                                          importName={this.state.uploadLink} url={this.state.linkUrl}/>
+                            <ReportExport hidden={this.state.reportExportHidden}
+                                          setPanel={this.setPanel}
+                                          importName={this.state.uploadLink}
+                                          reportFileType={this.state.importReport.reportFileType}
+                                          url={this.state.linkUrl}/>
                         </div>
                     </form>
+                    <br/>
                     <FileUploadProgress importName={this.state.importName}
                                         fileName={this.state.fileName}
                                         hidden={this.state.uploadProgressHidden}
                                         fileUploading={this.setFileUploading}
-                                        setPanel={this.setPanel}/>
+                                        setPanel={this.setPanel}
+                                        redirectOnComplete={this.openSummaryModal}/>
                 </div>
             </DocumentTitle>
         );

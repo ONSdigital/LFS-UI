@@ -6,9 +6,7 @@ import {Link} from "react-router-dom";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import dateFormatter from "dayjs";
 
-interface Props {
 
-}
 
 interface BatchUploadTableRow {
     id: number
@@ -25,6 +23,7 @@ export function ImportFileTable() {
         {name: "Geographical Classifications", "status": "File Older than One year"},
         {name: "Output Specification", "status": "Not Imported"},
         {name: "Population Estimates", "status": "Not Imported"},
+        {name: "Bulk Amendments", "status": "Not Imported"},
         {name: "Variable Definitions", "status": "Imported"},
         {name: "Value Labels", "status": "Imported"},
     ];

@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
-import {UPLOAD_HEADERS} from "../utilities/Headers"
+import {UPLOAD_HEADERS} from "../utilities/Headers";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
-import {getUploadStatusStyle, isDevEnv, toUpperCaseFirstChar} from '../utilities/Common_Functions';
+import {getUploadStatusStyle, isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import {ONSProgressBar} from "../components/ONS_DesignSystem/ONSProgressBar";
 
 interface Props {
@@ -30,7 +30,7 @@ interface UploadStatusData {
 }
 
 export class FileUploadProgress extends Component <Props, State> {
-    ws = new WebSocket("ws://127.0.0.1:8000/ws");
+    ws = new WebSocket("ws://127.0.0.1:8001/ws");
 
     constructor(props: Props) {
         super(props);
