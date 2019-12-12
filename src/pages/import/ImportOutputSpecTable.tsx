@@ -4,7 +4,7 @@ import {REFERENCE_FILE_HEADERS} from "../../utilities/Headers";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
-import moment from "moment";
+import dateFormatter from "dayjs";
 
 interface Props {
 
@@ -22,7 +22,7 @@ export class ImportOutputSpecTable extends Component <{},{}> {
 
     ];
 
-    BatchUploadTableRow = (rowData: any) => {
+    outputSpecTableRow = (rowData: any) => {
         let row = rowData.row;
         let link = "/import/" + row.name
         return (
@@ -31,7 +31,7 @@ export class ImportOutputSpecTable extends Component <{},{}> {
                     {row.name}
                 </td>
                 <td className="table__cell ">
-                    {moment(new Date()).format("L")}
+                    {dateFormatter(new Date()).format("DD/MM/YYYY")}
                 </td>
                 <td className="table__cell ">
                     <ONSStatus label={row.status} small={false} status={'info'}/>
@@ -51,7 +51,7 @@ export class ImportOutputSpecTable extends Component <{},{}> {
             <div>
                 <ONSAccordionTable Headers={REFERENCE_FILE_HEADERS}
                                 data={this.imports}
-                                Row={this.BatchUploadTableRow}
+                                Row={this.outputSpecTableRow}
                                 expandedRowEnabled={false}
                                 noDataMessage={"No Data"}/>
             </div>
