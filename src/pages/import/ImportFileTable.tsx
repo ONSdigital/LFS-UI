@@ -6,20 +6,33 @@ import {Link} from "react-router-dom";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import dateFormatter from "dayjs";
 
+
+
+interface BatchUploadTableRow {
+    id: number
+    type: string
+    period: string
+    status: string
+    year: number,
+    expanded: boolean
+}
+
 export function ImportFileTable() {
     let imports = [
         {name: "APS Design Weights", "status": "Imported"},
         {name: "Geographical Classifications", "status": "File Older than One year"},
-        {name: "Variable Definitions", "status": "Imported"},
-        {name: "Value Labels", "status": "Imported"},
         {name: "Output Specification", "status": "Not Imported"},
         {name: "Population Estimates", "status": "Not Imported"},
         {name: "Bulk Amendments", "status": "Not Imported"},
+        {name: "Variable Definitions", "status": "Imported"},
+        {name: "Value Labels", "status": "Imported"},
     ];
-
 
     let BatchUploadTableRow = (rowData: any) => {
         let row = rowData.row;
+        let link = "/import/" + row.name
+        if (row.name === "Output Specification") link = "/import/Output"
+        console.log(link)
         return (
             <>
                 <td className="table__cell ">
@@ -33,7 +46,7 @@ export function ImportFileTable() {
                 </td>
                 <td className="table__cell ">
                     <Link
-                        to={"/import/" + row.name}>
+                        to={link}>
                         <ONSButton label={"Import"} primary={false} small={true}/>
                     </Link>
                 </td>

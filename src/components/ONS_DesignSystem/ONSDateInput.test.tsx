@@ -3,8 +3,7 @@ import Enzyme, {mount, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ONSDateInput } from './ONSDateInput';
 import DatePicker from 'react-datepicker';
-import { ONSTextInput } from './ONSTextInput';
-
+           
 describe("ONS Date Input", () => {
     Enzyme.configure({adapter: new Adapter()});
     

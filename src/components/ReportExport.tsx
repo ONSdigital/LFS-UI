@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
+import {getImportReportFile} from "../utilities/http/http";
 import {getImportReportFile} from "../utilities/http";
 import {toUpperCaseFirstChar} from "../utilities/Common_Functions";
 
@@ -7,6 +8,7 @@ interface Props {
     hidden: boolean
     setPanel: Function
     importName: string
+    url?: string
     reportFileType: string
 }
 
@@ -14,7 +16,13 @@ export const ReportExport = (props: Props) => {
     let [loading, setLoading] = useState(false);
     const onClick = () => {
         setLoading(true);
-        getImportReportFile(props.importName)
+        if (props.url) {
+            let a = document.createElement('a');
+            a.href = props.url
+            a.download = props.importName + ' Summary Report.xlsx';
+            a.click();
+            setLoading(false)}
+        else getImportReportFile(props.importName)
             .then(response => {
                 if (response.status !== 200) {
                     props.setPanel("Error Occurred When Getting Report: " + response.statusText, "error");

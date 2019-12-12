@@ -1,4 +1,4 @@
-import {requestPromise} from "./requestPromise";
+import {requestPromiseJson, requestPromise} from "./requestPromise";
 
 function postImportFile(importFile: any, link :string, fileName: string): Promise<any> {
     let url = "/imports/" + link;
@@ -12,19 +12,19 @@ function postImportFile(importFile: any, link :string, fileName: string): Promis
 function getVariableDefinitions(variable: string | null = null): Promise<any> {
     let url = "/variable/definitions" + (variable !== null ? "/"  + variable : "");
 
-    return requestPromise("GET", url)
+    return requestPromiseJson("GET", url)
 }
 
 function getValueLabels(variable: string | null = null): Promise<any> {
     let url = "/value/labels" + (variable !== null ? "/"  + variable : "");
 
-    return requestPromise("GET", url)
+    return requestPromiseJson("GET", url)
 }
 
 function getSurveyAudit(survey: string, year: string, period: string): Promise<any> {
     let url = "/audits/" + (survey === 'GB' ? 'week' : 'month') + "/" + year + "/" + period;
 
-    return requestPromise("GET", url)
+    return requestPromiseJson("GET", url)
 }
 
 function getImportReportFile(importName: string): Promise<any> {
