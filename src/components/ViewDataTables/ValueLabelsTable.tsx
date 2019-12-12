@@ -1,19 +1,21 @@
-import React, {ChangeEvent, Component} from 'react';
+import React, {ChangeEvent, Component} from "react";
 import {ONSAccordionTable} from "../ONS_DesignSystem/ONSAccordionTable";
 import {VALUE_LABELS_HEADERS} from "../../utilities/Headers";
 import DocumentTitle from "react-document-title";
-import moment from "moment";
 import {getValueLabels} from "../../utilities/http";
 import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
 import {ONSButton} from "../ONS_DesignSystem/ONSButton";
+import dateFormatter from "dayjs";
+import lodash from "lodash";
 
 interface Props {
 }
 
 interface State {
-    data: ValueLabelTableRow[]
-    filteredData: ValueLabelTableRow[]
+    data: any[]
+    filteredData: any[]
     search: string
+    noDataMessage: string
 }
 
 interface ValueLabelTableRow {
@@ -23,6 +25,7 @@ interface ValueLabelTableRow {
     source: string
     variable: string
     last_updated: Date
+    valid_from: Date
 }
 
 
@@ -30,7 +33,12 @@ export class ValueLabelsTable extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {data: [], filteredData: [], search: ""};
+        this.state = {
+            data: [],
+            filteredData: [],
+            search: "",
+            noDataMessage: this.noDataMessage
+        };
         this.getVariableDefinitionData();
     }
 
@@ -40,37 +48,23 @@ export class ValueLabelsTable extends Component <Props, State> {
                 console.log(r);
                 if (r.message !== "no data found") {
                     this.setState({data: r, filteredData: r});
-                } else this.setState({filteredData: []});
+                } else this.setState({filteredData: [], noDataMessage: "No Value Labels found"});
             })
             .catch(error => {
                 console.log(error);
-            });
-    };
-
-    getSingleVariableDefinitionData = () => {
-        getValueLabels(this.state.search.toUpperCase())
-            .then(r => {
-                console.log(r);
-                if (r.message !== "no data found") {
-                    this.setState({filteredData: r});
-                } else this.setState({filteredData: []});
-            })
-            .catch(error => {
-                console.log(error);
+                this.setState({filteredData: [], noDataMessage: "Error occurred while getting Value Labels"});
             });
     };
 
     noDataMessage = "No Value Labels matching this criteria";
 
     viewAll = () => {
-        this.setState({filteredData: this.state.data, search: ""})
+        this.setState({filteredData: this.state.data, search: "", noDataMessage: "No Value Labels found"});
     };
 
     handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({search: e.target.value});
-        if (e.target.value.length === 0) {
-            this.setState({filteredData: this.state.data})
-        }
+        let newFilteredList = lodash.filter(this.state.data, (variableRow) => variableRow.variable.includes(e.target.value.toUpperCase()));
+        this.setState({search: e.target.value, filteredData: newFilteredList});
     };
 
     render() {
@@ -79,13 +73,11 @@ export class ValueLabelsTable extends Component <Props, State> {
                 <>
                     <ONSTextInput value={this.state.search} label={"Filter by Variable Name"}
                                   onChange={this.handleSearch}/>
-                    <ONSButton label={"Search"} primary={true} small={false} field={true}
-                               onClick={this.getSingleVariableDefinitionData}/>
                     <ONSButton label={"View All"} primary={false} small={false} field={true}
                                onClick={this.viewAll}/>
                     <ONSAccordionTable data={this.state.filteredData} Row={ValueLabelTableRow}
                                        expandedRowEnabled={false}
-                                       noDataMessage={this.noDataMessage}
+                                       noDataMessage={this.state.noDataMessage}
                                        Headers={VALUE_LABELS_HEADERS}
                                        pagination={true}
                                        paginationSize={20}
@@ -95,7 +87,6 @@ export class ValueLabelsTable extends Component <Props, State> {
         );
     }
 }
-
 
 
 const ValueLabelTableRow = (rowData: any) => {
@@ -115,11 +106,11 @@ const ValueLabelTableRow = (rowData: any) => {
                 {row.description}
             </td>
             <td className="table__cell ">
-                {moment(row.last_updated).format('L')}
+                {dateFormatter(row.valid_from).format("DD/MM/YYYY")}
                 {}
             </td>
 
         </>
-    )
+    );
 };
 

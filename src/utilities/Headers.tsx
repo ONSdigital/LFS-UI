@@ -42,13 +42,30 @@ const REFERENCE_FILE_HEADERS =
         column_name: "status",
         filter: false,
         order: false
+    }];
+
+const REFERENCE_FILE_IMPORT_HEADERS =
+    [{
+        label: "File Name",
+        column_name: "File Name",
+        filter: false,
+        order: true
     }, {
+        label: "Import Date",
+        column_name: "Import Date",
+        filter: false,
+        order: false
+    }, {
+        label: "Status",
+        column_name: "status",
+        filter: false,
+        order: false
+    },{
         label: "",
-        column_name: "button",
+        column_name: "",
         filter: false,
         order: false
     }];
-
 
 const UPLOAD_HEADERS =
     [{
@@ -147,11 +164,6 @@ const VARIABLE_DEFINITION_HEADERS =
         filter: false,
         order: false
     }, {
-        label: "Expanded",
-        column_name: "Expanded",
-        filter: false,
-        order: false
-    }, {
         label: "Imputation",
         column_name: "Imputation",
         filter: false,
@@ -159,6 +171,16 @@ const VARIABLE_DEFINITION_HEADERS =
     }, {
         label: "DV",
         column_name: "DV",
+        filter: false,
+        order: false
+    }, {
+        label: "Type",
+        column_name: "Type",
+        filter: false,
+        order: false
+    }, {
+        label: "Length",
+        column_name: "Length",
         filter: false,
         order: false
     }
@@ -240,4 +262,4 @@ function roleHeaders() {
 }
 
 export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, userHeaders, roleHeaders,
-    DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS, VALUE_LABELS_HEADERS, REFERENCE_FILE_HEADERS, BATCH_PROGRESS_TABLE}
+    DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS, REFERENCE_FILE_IMPORT_HEADERS, VALUE_LABELS_HEADERS, REFERENCE_FILE_HEADERS, BATCH_PROGRESS_TABLE}

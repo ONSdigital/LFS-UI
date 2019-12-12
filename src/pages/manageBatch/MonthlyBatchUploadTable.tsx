@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {BATCH_HEADERS} from "../../utilities/Headers";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
 import {getUploadStatusStyle, monthNumberToString} from "../../utilities/Common_Functions";
@@ -12,6 +12,7 @@ interface Props {
     batchType: string
     year: string
     period: string
+    caption: boolean
 }
 
 export function MonthlyBatchUploadTable(props: Props) {
@@ -50,7 +51,7 @@ export function MonthlyBatchUploadTable(props: Props) {
                         </td>
                 }
             </>
-        )
+        );
     };
 
     return (
@@ -58,6 +59,8 @@ export function MonthlyBatchUploadTable(props: Props) {
                            data={props.batchData}
                            Row={BatchUploadTableRow}
                            expandedRowEnabled={false}
-                           noDataMessage={"No Data"}/>
-    )
+                           noDataMessage={"No Data"}
+                           caption={props.caption ? "Survey Files" : undefined}
+        />
+    );
 }

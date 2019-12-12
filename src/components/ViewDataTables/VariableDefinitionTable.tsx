@@ -1,20 +1,25 @@
-import React, {ChangeEvent, Component} from 'react';
+import React, {ChangeEvent, Component, Fragment} from "react";
 import {ONSAccordionTable} from "../ONS_DesignSystem/ONSAccordionTable";
 import {VARIABLE_DEFINITION_HEADERS} from "../../utilities/Headers";
 import {ONSCheckbox} from "../ONS_DesignSystem/ONSCheckbox";
 import DocumentTitle from "react-document-title";
-import moment from "moment";
+import dateFormatter from "dayjs";
 import {getVariableDefinitions} from "../../utilities/http";
 import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
 import {ONSButton} from "../ONS_DesignSystem/ONSButton";
+import {isDevEnv} from "../../utilities/Common_Functions";
+// Useful lodash cheat sheet:  https://devhints.io/lodash
+import lodash from "lodash";
+import uuid from "uuid/v4";
 
 interface Props {
 }
 
 interface State {
-    data: []
-    filteredData: []
+    data: any[]
+    filteredData: any[]
     search: string
+    noDataMessage: string
 }
 
 interface VariableDefinitionTableRow {
@@ -27,7 +32,6 @@ interface VariableDefinitionTableRow {
     precision: number
     alias: {String: string, Valid: boolean}
     editable: boolean
-    expanded: boolean
     imputation: boolean
     dv: boolean
 }
@@ -36,61 +40,48 @@ export class VariableDefinitionTable extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {data: [], filteredData: [], search: ""};
+        this.state = {
+            data: [],
+            filteredData: [],
+            search: "",
+            noDataMessage: this.noDataMessage
+        };
         this.getVariableDefinitionData();
     }
 
     getVariableDefinitionData = () => {
         getVariableDefinitions()
             .then(r => {
-                console.log(r);
+                (isDevEnv() && console.log(r));
                 if (r.message !== "no data found") {
-                    this.setState({data: r, filteredData: r});
-                } else this.setState({filteredData: []});
+                    let list = lodash(r)
+                        .sortBy("variable")
+                        .groupBy("variable")
+                        .map(rows => {
+                            return lodash.sortBy(rows, item => {
+                                return item.validFrom;
+                            }).reverse();
+                        })
+                        .value();
+
+                    this.setState({data: list, filteredData: list});
+                } else this.setState({filteredData: [], noDataMessage: "No Variable Definitions found"});
             })
             .catch(error => {
-                console.log(error);
-                if (process.env.NODE_ENV === 'development') {
-                    this.getMockVarDefData()
-                }
+                (isDevEnv() && console.log(error));
+                this.setState({filteredData: [], noDataMessage: "Error occurred while getting Variable Definitions"});
             });
-    };
-
-    getSingleVariableDefinitionData = () => {
-        getVariableDefinitions(this.state.search.toUpperCase())
-            .then(r => {
-                console.log(r);
-                if (r.message !== "no data found") {
-                    this.setState({filteredData: r});
-                } else this.setState({filteredData: []});
-            })
-            .catch(error => {
-                console.log(error);
-                if (process.env.NODE_ENV === 'development') {
-                    this.getMockVarDefData()
-                }
-            });
-    };
-
-    getMockVarDefData = () => {
-        fetch('/jsons/MOCK_VAR_DEFS.json')
-            .then(response => response.json())
-            .then(response => {
-                this.setState({data: response.Rows});
-            })
     };
 
     noDataMessage = "No Variable Definitions matching this criteria";
 
     viewAll = () => {
-        this.setState({filteredData: this.state.data, search: ""})
+        this.setState({filteredData: this.state.data, search: ""});
     };
 
     handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({search: e.target.value});
-        if (e.target.value.length === 0) {
-            this.setState({filteredData: this.state.data})
-        }
+        let newFilteredList = lodash.filter(this.state.data, (variableRow) => variableRow[0].variable.includes(e.target.value.toUpperCase()));
+        this.setState({search: e.target.value, filteredData: newFilteredList});
     };
 
     render() {
@@ -99,13 +90,13 @@ export class VariableDefinitionTable extends Component <Props, State> {
                 <>
                     <ONSTextInput value={this.state.search} label={"Filter by Variable Name"}
                                   onChange={this.handleSearch}/>
-                    <ONSButton label={"Search"} primary={true} small={false} field={true}
-                               onClick={this.getSingleVariableDefinitionData}/>
-                    <ONSButton label={"View All"} primary={false} small={false} field={true}
+                    <ONSButton label={"Clear"} primary={false} small={false} field={true}
                                onClick={this.viewAll}/>
                     <ONSAccordionTable data={this.state.filteredData} Row={VarDefTableRow}
-                                       expandedRowEnabled={false}
-                                       noDataMessage={this.noDataMessage}
+                                       expandedRowEnabled={true}
+                                       expandedRow={VarDefExpandedRow}
+                                       expandedAdditionalRows={true}
+                                       noDataMessage={this.state.noDataMessage}
                                        Headers={VARIABLE_DEFINITION_HEADERS}
                                        pagination={true}
                                        paginationSize={20}
@@ -117,7 +108,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
 }
 
 const VarDefTableRow = (rowData: any) => {
-    let row: VariableDefinitionTableRow = rowData.row;
+    let row: VariableDefinitionTableRow = rowData.row[0];
     return (
         <>
             <td className="table__cell ">
@@ -127,13 +118,10 @@ const VarDefTableRow = (rowData: any) => {
                 {row.description.Valid ? row.description.String : "No Description Provided"}
             </td>
             <td className="table__cell ">
-                {moment(row.validFrom).format('L')}
+                {dateFormatter(row.validFrom).format("DD/MM/YYYY")}
             </td>
             <td className="table__cell ">
                 <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>
-            </td>
-            <td className="table__cell ">
-                <ONSCheckbox id={"expanded"} checked={row.expanded} disabled={true}/>
             </td>
             <td className="table__cell ">
                 <ONSCheckbox id={"imputation"} checked={row.imputation} disabled={true}/>
@@ -141,19 +129,62 @@ const VarDefTableRow = (rowData: any) => {
             <td className="table__cell ">
                 <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
             </td>
+            <td className="table__cell ">
+                {row.type}
+            </td>
+            <td className="table__cell ">
+                {row.length}
+            </td>
         </>
-    )
+    );
 };
 
-// const VarDefExpandedRow = (rowData: any) => {
-//     let row: VariableDefinitionTableRow = rowData.row;
-//     return (
-//         <>
-//             <ONSButton label={"Manage Batch"} primary={true} small={false} onClick={() => {
-//                 window.location.href = "/View_Monthly_Batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
-//             }}/>
-//         </>
-//     )
-//
-// };
+const VarDefExpandedRow = (rowData: any) => {
+    let rows: any[] = lodash.drop(rowData.row, 1);
+    if (rows.length === 0) {
+        return (
+            <Fragment key={uuid()}>
+                <tr className={("table__row")} style={{color: "darkblue"}}>
+                    <td className="table__cell "/>
+                    <td className="table__cell " colSpan={8}>
+                        No Previous Metadata
+                    </td>
+                </tr>
+            </Fragment>
+        );
+    }
+    return rows.map((row: VariableDefinitionTableRow, index: number) => (
+            <Fragment key={uuid()}>
+                <tr className={("table__row")} style={{color: "darkblue"}}>
+                    <td className="table__cell "/>
+                    <td className="table__cell ">
+                        {row.variable}
+                    </td>
+                    <td className="table__cell ">
+                        {row.description.Valid ? row.description.String : "No Description Provided"}
+                    </td>
+                    <td className="table__cell ">
+                        {dateFormatter(row.validFrom).format("DD/MM/YYYY")}
+                    </td>
+                    <td className="table__cell ">
+                        <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>
+                    </td>
+                    <td className="table__cell ">
+                        <ONSCheckbox id={"imputation"} checked={row.imputation} disabled={true}/>
+                    </td>
+                    <td className="table__cell ">
+                        <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
+                    </td>
+                    <td className="table__cell ">
+                        {row.type}
+                    </td>
+                    <td className="table__cell ">
+                        {row.length}
+                    </td>
+                </tr>
+            </Fragment>
+        )
+    );
+
+};
 

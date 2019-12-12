@@ -8,10 +8,10 @@ import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {SURVEY_UPLOAD_HISTORY} from "../utilities/Headers";
-import moment from "moment";
 import DocumentTitle from "react-document-title";
 import {FileUploadProgress} from "./FileUploadProgress";
 import {Link} from "react-router-dom";
+import dateFormatter from "dayjs";
 
 interface Props {
     period: string,
@@ -189,7 +189,7 @@ export class SurveyFileUpload extends Component <Props, State> {
         return (
             <>
                 <td className="table__cell ">
-                    {moment(new Date(row.uploadDate)).format('L H:mm')}
+                    {dateFormatter(row.uploadDate).format("DD/MM/YYYY HH:mm")}
                 </td>
                 <td className="table__cell ">
                     <ONSStatus label={row.message} small={false}
