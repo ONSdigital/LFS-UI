@@ -9,6 +9,7 @@ import DocumentTitle from "react-document-title";
 import {ONSDateInput} from "../../components/ONS_DesignSystem/ONSDateInput";
 import {ReportExport} from "../../components/ReportExport";
 import {ONSSelect} from "../../components/ONS_DesignSystem/ONSSelect";
+import {quarters, years} from "../../utilities/Common_Functions";
 
 interface Props {
     match: any
@@ -24,6 +25,7 @@ interface State {
     validFromDateHidden: boolean
     reportExportHidden: boolean
     importSelectHidden: boolean
+    quarterPeriodInputHidden: boolean
     fileType: string
     uploadLink: string
     //check to see if functionality is built and whether to send the request
@@ -31,6 +33,12 @@ interface State {
     hasImportReport: boolean
     fileName: string
     panel: Panel
+    year: string
+    period: string
+    inputError: boolean
+    errorGone: boolean
+    outputSpec: boolean
+    linkUrl: string
 }
 
 interface Panel {
@@ -56,6 +64,7 @@ export class Import extends Component <Props, State> {
             validFromDateHidden: true,
             reportExportHidden: true,
             importSelectHidden: false,
+            quarterPeriodInputHidden: true,
             fileType: "",
             uploadLink: "",
             built: false,
@@ -65,7 +74,13 @@ export class Import extends Component <Props, State> {
                 label: "",
                 visible: false,
                 status: "info"
-            }
+            },
+            year: "",
+            period: "",
+            inputError: false,
+            errorGone: false,
+            outputSpec: false,
+            linkUrl: ""
         };
         this.setPanel.bind(this);
         this.setFileUploading.bind(this);
@@ -77,86 +92,98 @@ export class Import extends Component <Props, State> {
         if (this.state.importName.length > 0) {
             this.fileType(this.state.importName);
             this.setState({
-                importHidden: false,
-                uploadProgressHidden: true,
-                importSelectHidden: true
-            });
-        }
+                    importHidden: false,
+                    uploadProgressHidden: true,
+                    importSelectHidden: true
+                    });
+                }               
     }
 
     upload = () => {
-        console.log("Uploading File");
-        this.hidePanel();
-        this.setState({
-            uploading: true
-        });
-        if (this.state.built) {
-            let uploadLink = this.state.uploadLink;
-            if (this.state.validFromDate !== null) {
-                uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString();
-            }
-            postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
-                .then(response => {
-                    (isDevEnv && console.log(response));
-                    if (response.status === "ERROR") {
-                        this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
-                        this.setState({importHidden: false, uploadProgressHidden: true});
-                    } else {
-                        if (response.status === "OK") {
-                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
-                        } else if (response.status === "SUCCESS" && response.filename === "design_weights") {
-                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
-                        }
-                    }
-                    this.setState({
-                        uploading: false
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
-                    this.setPanel("Error Occurred when uploading files: " + err.toString(), "error");
-                    this.setState({
-                        uploading: false,
-                        uploadProgressHidden: false
-                    });
-                });
-        } else {
-            this.setPanel(this.state.importName + ": Import Not Implemented Yet", "error");
+        if(this.state.outputSpec === false || (this.state.period !== "" && this.state.year !== "")) {
+            console.log("Uploading File");
+            this.hidePanel();
             this.setState({
-                uploading: false
+                uploading: true
             });
-        }
-    };
-
-    hidePanel = () => {
-        this.setState({
-            panel: {
-                label: "",
-                visible: false,
-                status: "info"
+            if (this.state.built) {
+                let uploadLink = this.state.uploadLink;
+                if (this.state.validFromDate !== null) {
+                    uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString();
+                } if (this.state.outputSpec) {
+                    uploadLink = "output/specification/" + uploadLink + "/variable/" + this.state.year + "/" + this.state.period.slice(1)
+                }
+                postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
+                    .then(response => {
+                        (isDevEnv && console.log(response));
+                        if (response.status === "ERROR") {
+                            this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
+                            this.setState({importHidden: false, uploadProgressHidden: true});
+                        } else {
+                            if (response.status === "OK") {
+                                this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
+                            } else if (response.status === "SUCCESS" && response.filename === "design_weights") {
+                                this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
+                            } else if (response.status === 200 && this.state.outputSpec) {
+                                this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, ", "success");
+                                
+                                response.blob().then((blob: any) => {
+                                    let url = window.URL.createObjectURL(blob);
+                                    this.setState({linkUrl: url, reportExportHidden: false}) 
+                                });
+                            } 
+                        }
+                        this.setState({
+                            uploading: false
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        this.setPanel("Error Occurred when uploading files: " + err.toString(), "error");
+                        this.setState({
+                            uploading: false,
+                            uploadProgressHidden: false
+                        });
+                    });
+            } else {
+                this.setPanel(this.state.importName + ": Import Not Implemented Yet", "error");
+                this.setState({
+                    uploading: false
+                });
             }
-        });
-    };
+        }else if(this.state.errorGone === false) this.setState({inputError: true})
+        else this.setState({inputError: false})
+        };
 
-    setPanel = (message: string, status: string, visible: boolean = true) => {
-        this.setState({
-            panel: {
-                label: message,
-                visible: visible,
-                status: status
-            }
-        });
-    };
+        hidePanel = () => {
+            this.setState({
+                panel: {
+                    label: "",
+                    visible: false,
+                    status: "info"
+                }
+            });
+        };
 
-    handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        this.setState({
-            importName: e.target.value,
-            importHidden: false,
-            uploadProgressHidden: false,
-            validFromDate: null
-        });
-        this.fileType(e.target.value);
-        this.hidePanel();
+        setPanel = (message: string, status: string, visible: boolean = true) => {
+            this.setState({
+                panel: {
+                    label: message,
+                    visible: visible,
+                    status: status
+                }
+            });
+        };
+
+        handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
+            this.setState({
+                importName: e.target.value,
+                importHidden: false,
+                uploadProgressHidden: false,
+                validFromDate: null
+            });
+            this.fileType(e.target.value);
+            this.hidePanel();
     };
 
     handleFileChange = (selectorFiles: FileList | null) => {
@@ -175,6 +202,21 @@ export class Import extends Component <Props, State> {
         }
     };
 
+    handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        this.setState({year: e.target.value});
+        this.errorGone("year")
+    };
+
+    handlePeriodChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        this.setState({period: e.target.value});
+        this.errorGone("period")
+    };
+
+    errorGone = (value: string) => {
+        if(value === "year" && this.state.period !== "") this.setState({inputError: false, errorGone: true})
+        if(this.state.year !== "" && value === "period") this.setState({inputError: false, errorGone: true})
+    };
+
     fileType = (file: string) => {
         switch (file) {
             case "Geographical Classifications":
@@ -189,6 +231,9 @@ export class Import extends Component <Props, State> {
                 break;
             case "Bulk Amendments":
                 this.setState({});
+                break;
+            case "Output Specification":
+                this.setState({outputSpec: true});
                 break;
             case "APS Design Weights":
                 this.setState({
@@ -230,6 +275,66 @@ export class Import extends Component <Props, State> {
                     hasImportReport: false
                 });
                 break;
+           case "APS Person Variable Specification":
+                this.setState({
+                    fileType: ".csv",
+                    built: true,
+                    fileName: "APS_Person",
+                    uploadLink: "aps/person",
+                    validFromDateHidden: true,
+                    hasImportReport: true,
+                    quarterPeriodInputHidden: false,
+                    outputSpec: true
+                });
+                break;
+            case "APS Household Variable Specification":
+                this.setState({
+                    fileType: ".csv",
+                    built: true,
+                    fileName: "APS_Household",
+                    uploadLink: "aps/household",
+                    validFromDateHidden: true,
+                    hasImportReport: true,
+                    quarterPeriodInputHidden: false,
+                    outputSpec: true
+                });
+                break; 
+            case "Eurostat Variable Specification":
+                this.setState({
+                    fileType: ".csv",
+                    built: true,
+                    fileName: "eurostat",
+                    uploadLink: "eurostat",
+                    validFromDateHidden: true,
+                    hasImportReport: true,
+                    quarterPeriodInputHidden: false,
+                    outputSpec: true
+                });
+                break;
+            case "LFS Person Variable Specification":
+                this.setState({
+                    fileType: ".csv",
+                    built: true,
+                    fileName: "LFS_Person",
+                    uploadLink: "lfs/person",
+                    validFromDateHidden: true,
+                    hasImportReport: true,
+                    quarterPeriodInputHidden: false,
+                    outputSpec: true
+                });
+                break;
+            case "LFS Household Variable Specification":
+                this.setState({
+                    fileType: ".csv",
+                    built: true,
+                    fileName: "LFS_Household",
+                    uploadLink: "lfs/household",
+                    validFromDateHidden: true,
+                    hasImportReport: true,
+                    quarterPeriodInputHidden: false,
+                    outputSpec: true
+                });
+                break;   
         }
     };
 
@@ -237,26 +342,64 @@ export class Import extends Component <Props, State> {
         //  {"label":"Bulk Amendments", "value":"Bulk Amendments"},
         {label: "APS Design Weights", value: "APS Design Weights"},
         {label: "Geographical Classifications", value: "Geographical Classifications"},
-        {label: "Variable Definitions", value: "Variable Definitions"},
-        {label: "Value Labels", value: "Value Labels"},
+        {label: "Output Specification", value: "Output Specification"},
         {label: "Population Estimates", value: "Population Estimates"},
-        {label: "Output Specification", value: "Output Specification"}
+        {label: "Value Labels", value: "Value Labels"},
+        {label: "Variable Definitions", value: "Variable Definitions"},
 
+        {label: "APS Person Variable Specification", value: "Imported"},
+        {label: "APS Household Variable Specification", value: "Imported"},    
+        {label: "Eurostat Variable Specification", value: "Not Imported"},
+        {label: "LFS Person Variable Specification", value: "Imported"},
+        {label: "LFS Household Variable Specification", value: "File Older than One year"},
     ];
 
     render() {
         return (
             <DocumentTitle title={"LFS Import " + this.state.importName}>
-                <div className="container">
-                    <form>
+                    <div className="container">
                         <ONSPanel status={this.state.panel.status} label={this.state.panel.label}
                                   hidden={!this.state.panel.visible}>
                             <p>{this.state.panel.label}</p>
                         </ONSPanel>
                         <br/>
+                        {(this.state.inputError) &&
+                            <div>
+                                <div className="panel panel--error">
+                                    <div className="panel__header">
+                                        <h1 className="panel__title u-fs-r--b">This page has errors</h1>
+                                    </div>
+                                    <div className="panel__body">
+                                        <ul className="list list--bare">
+                                            {(this.state.year === "") &&
+                                                <li className="list__item ">
+                                                    <p className="list__link js-inpagelink">
+                                                    Please select a Year.
+                                                    </p>
+                                                </li>  
+                                            }
+                                            {(this.state.period === "") &&
+                                                <li className="list__item ">
+                                                    <p className="list__link js-inpagelink">
+                                                    Please select a Quarter. {this.state.period}
+                                                    </p>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                                <br></br>
+                            </div>
+                        }
+                    <form>
                         <div hidden={this.state.importSelectHidden}>
                             <ONSSelect label="Select Import" value="select value" options={this.fileSelection}
                                        onChange={this.handleImportChange}/>
+                        </div>
+                        <div hidden={this.state.quarterPeriodInputHidden}>
+                            <ONSSelect id="year" label="Year" value="year" options={years()} onChange={this.handleYearChange} />
+                            <ONSSelect id="quarter" label="Quarter" value="quarter" options={quarters} onChange={this.handlePeriodChange} />
+
                         </div>
                         <br/>
                         <div hidden={this.state.importHidden}>
@@ -280,7 +423,7 @@ export class Import extends Component <Props, State> {
                                        field={true}
                                        onClick={() => window.history.back()}/>
                             <ReportExport hidden={this.state.reportExportHidden} setPanel={this.setPanel}
-                                          importName={this.state.uploadLink}/>
+                                          importName={this.state.uploadLink} url={this.state.linkUrl}/>
                         </div>
                     </form>
                     <FileUploadProgress importName={this.state.importName}
@@ -289,8 +432,7 @@ export class Import extends Component <Props, State> {
                                         fileUploading={this.setFileUploading}
                                         setPanel={this.setPanel}/>
                 </div>
-            </
-                DocumentTitle>
+            </DocumentTitle>
         );
     }
 }
