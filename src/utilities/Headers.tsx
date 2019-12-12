@@ -164,11 +164,6 @@ const VARIABLE_DEFINITION_HEADERS =
         filter: false,
         order: false
     }, {
-        label: "Expanded",
-        column_name: "Expanded",
-        filter: false,
-        order: false
-    }, {
         label: "Imputation",
         column_name: "Imputation",
         filter: false,
@@ -176,6 +171,16 @@ const VARIABLE_DEFINITION_HEADERS =
     }, {
         label: "DV",
         column_name: "DV",
+        filter: false,
+        order: false
+    }, {
+        label: "Type",
+        column_name: "Type",
+        filter: false,
+        order: false
+    }, {
+        label: "Length",
+        column_name: "Length",
         filter: false,
         order: false
     }
