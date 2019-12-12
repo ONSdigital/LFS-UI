@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {ONSButton} from "./ONS_DesignSystem/ONSButton";
-import {getImportReportFile} from "../utilities/http/http";
 import {getImportReportFile} from "../utilities/http";
 import {toUpperCaseFirstChar} from "../utilities/Common_Functions";
 

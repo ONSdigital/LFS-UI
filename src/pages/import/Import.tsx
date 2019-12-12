@@ -4,13 +4,12 @@ import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import {postImportFile} from "../../utilities/http";
 import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
 import {FileUploadProgress} from "../FileUploadProgress";
-import {isDevEnv, toUpperCaseFirstChar} from "../../utilities/Common_Functions";
+import {isDevEnv, quarters, toUpperCaseFirstChar, years} from "../../utilities/Common_Functions";
 import DocumentTitle from "react-document-title";
 import {ONSDateInput} from "../../components/ONS_DesignSystem/ONSDateInput";
 import {ReportExport} from "../../components/ReportExport";
 import {ONSSelect} from "../../components/ONS_DesignSystem/ONSSelect";
 import {BulkAmendmentsModel} from "./BulkAmendmentsModel";
-import {quarters, years} from "../../utilities/Common_Functions";
 
 interface Props {
     match: any
@@ -91,8 +90,7 @@ export class Import extends Component <Props, State> {
             inputError: false,
             errorGone: false,
             outputSpec: false,
-            linkUrl: ""
-            },
+            linkUrl: "",
             summaryModelOpen: false
         };
         this.setPanel.bind(this);
@@ -321,7 +319,10 @@ export class Import extends Component <Props, State> {
                     fileName: "APS_Person",
                     uploadLink: "aps/person",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
@@ -333,7 +334,10 @@ export class Import extends Component <Props, State> {
                     fileName: "APS_Household",
                     uploadLink: "aps/household",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
@@ -345,7 +349,10 @@ export class Import extends Component <Props, State> {
                     fileName: "eurostat",
                     uploadLink: "eurostat",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
@@ -357,7 +364,10 @@ export class Import extends Component <Props, State> {
                     fileName: "LFS_Person",
                     uploadLink: "lfs/person",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
@@ -369,7 +379,10 @@ export class Import extends Component <Props, State> {
                     fileName: "LFS_Household",
                     uploadLink: "lfs/household",
                     validFromDateHidden: true,
-                    hasImportReport: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ""
+                    },
                     quarterPeriodInputHidden: false,
                     outputSpec: true
                 });
