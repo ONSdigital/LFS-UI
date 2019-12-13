@@ -1,7 +1,16 @@
 import React, {ChangeEvent, Component} from "react";
 import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
 import {ONSSubmitButton} from "../components/ONS_DesignSystem/ONSSubmitButton";
-import {batches, monthNames, months, quarters, years} from "../utilities/Common_Functions";
+import {
+    batches,
+    isDevEnv,
+    monthNames,
+    monthNumberToString,
+    months,
+    quarters,
+    toUpperCaseFirstChar,
+    years
+} from "../utilities/Common_Functions";
 import {createNewBatch} from "../utilities/http";
 import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 import DocumentTitle from "react-document-title";
@@ -66,12 +75,19 @@ export class New_Batch extends Component <{}, State> {
 
             createNewBatch(this.state.batchType, this.state.year, this.state.period, "")
                 .then(r => {
-                    console.log(r);
+                    (isDevEnv() && console.log(r));
 
                     if (r.status === "ERROR") {
+                        let errorMessage = r.errorMessage;
+                        if (errorMessage.includes("already exists")) {
+                            errorMessage =
+                                toUpperCaseFirstChar(this.state.batchType) + " Batch for " +
+                                (this.state.batchType === "monthly" ? monthNumberToString(+this.state.period) : this.state.period) + " " +
+                                this.state.year + " already exists, "
+                        }
                         this.setState({
                             panel: {
-                                label: r.errorMessage,
+                                label: errorMessage,
                                 visible: true,
                                 status: "error"
                             }
@@ -88,7 +104,7 @@ export class New_Batch extends Component <{}, State> {
                         window.location.href = "/manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period;
                     }
                 })
-                .catch(error => console.log(error));
+                .catch(error => (isDevEnv() && console.log(error)));
         }
 
         if (this.state.batchType === "yearly") this.setState({period: ""});
@@ -150,10 +166,11 @@ export class New_Batch extends Component <{}, State> {
                                       status={this.state.panel.status}>
                                 {
                                     this.state.panel.label.includes("already exists") ?
-                                        <p>{this.state.panel.label + ", "}
+                                        <p>
+                                            {this.state.panel.label}
                                             <Link
                                                 to={"manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period}>
-                                                go to existing Batch
+                                                Go to existing Batch
                                             </Link>
                                         </p>
                                         :
