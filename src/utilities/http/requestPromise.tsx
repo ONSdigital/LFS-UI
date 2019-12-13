@@ -10,9 +10,9 @@ function requestPromiseJson(method: string, url: string, body: any = null): Prom
             })
             .catch(err => {
                 console.log(err);
-                reject(err)
+                reject(err);
             });
-    })
+    });
 }
 
 function requestPromise(method: string, url: string, body: any = null): Promise<any> {
@@ -27,9 +27,9 @@ function requestPromise(method: string, url: string, body: any = null): Promise<
             })
             .catch(err => {
                 console.log(err);
-                reject(err)
+                reject(err);
             });
-    })
+    });
 }
 
 export {requestPromiseJson, requestPromise};

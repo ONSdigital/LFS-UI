@@ -1,6 +1,6 @@
-import {requestPromiseJson, requestPromise} from "./requestPromise";
+import {requestPromise, requestPromiseJson} from "./requestPromise";
 
-function postImportFile(importFile: any, link :string, fileName: string): Promise<any> {
+function postImportFile(importFile: any, link: string, fileName: string): Promise<any> {
     let url = "/imports/" + link;
     let formData = new FormData();
     formData.append("lfsFile", importFile[0]);
@@ -10,21 +10,21 @@ function postImportFile(importFile: any, link :string, fileName: string): Promis
 }
 
 function getVariableDefinitions(variable: string | null = null): Promise<any> {
-    let url = "/variable/definitions" + (variable !== null ? "/"  + variable : "");
+    let url = "/variable/definitions" + (variable !== null ? "/" + variable : "");
 
-    return requestPromiseJson("GET", url)
+    return requestPromiseJson("GET", url);
 }
 
 function getValueLabels(variable: string | null = null): Promise<any> {
-    let url = "/value/labels" + (variable !== null ? "/"  + variable : "");
+    let url = "/value/labels" + (variable !== null ? "/" + variable : "");
 
-    return requestPromiseJson("GET", url)
+    return requestPromiseJson("GET", url);
 }
 
 function getSurveyAudit(survey: string, year: string, period: string): Promise<any> {
-    let url = "/audits/" + (survey === 'GB' ? 'week' : 'month') + "/" + year + "/" + period;
+    let url = "/audits/" + (survey === "GB" ? "week" : "month") + "/" + year + "/" + period;
 
-    return requestPromiseJson("GET", url)
+    return requestPromiseJson("GET", url);
 }
 
 function getImportReportFile(importName: string): Promise<any> {
@@ -42,9 +42,9 @@ function getImportReportFile(importName: string): Promise<any> {
             .catch(err => {
                 console.log("Error");
                 console.log(err);
-                reject(err)
+                reject(err);
             });
-    })
+    });
 }
 
-export {postImportFile, getVariableDefinitions, getValueLabels, getSurveyAudit, getImportReportFile}
+export {postImportFile, getVariableDefinitions, getValueLabels, getSurveyAudit, getImportReportFile};

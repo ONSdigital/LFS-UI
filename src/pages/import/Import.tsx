@@ -10,6 +10,7 @@ import {ONSDateInput} from "../../components/ONS_DesignSystem/ONSDateInput";
 import {ReportExport} from "../../components/ReportExport";
 import {ONSSelect} from "../../components/ONS_DesignSystem/ONSSelect";
 import {BulkAmendmentsModal} from "./BulkAmendmentsModal";
+import * as XLSX from "xlsx";
 
 interface Props {
     match: any
@@ -103,50 +104,70 @@ export class Import extends Component <Props, State> {
         if (this.state.importName.length > 0) {
             this.fileType(this.state.importName);
             this.setState({
-                    importHidden: false,
-                    uploadProgressHidden: true,
-                    importSelectHidden: true
-                    });
-                }
+                importHidden: false,
+                uploadProgressHidden: true,
+                importSelectHidden: true
+            });
+        }
     }
 
     upload = () => {
-        if(this.state.outputSpec === false || (this.state.period !== "" && this.state.year !== "")) {
+        if (!this.state.outputSpec || (this.state.period !== "" && this.state.year !== "")) {
             console.log("Uploading File");
             this.hidePanel();
             this.setState({
                 uploading: true
             });
-            if (this.state.built) {
-                let uploadLink = this.state.uploadLink;
-                if (this.state.validFromDate !== null) {
-                    uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString();
-                } if (this.state.outputSpec) {
-                    uploadLink = "output/specification/" + uploadLink + "/variable/" + this.state.year + "/" + this.state.period.slice(1)
-                }
+
+            if (!this.state.built) {
+                this.setPanel(this.state.importName + ": Import Not Implemented Yet", "error");
+                this.setState({
+                    uploading: false
+                });
+                return;
+            }
+
+            let uploadLink = this.state.uploadLink;
+            if (this.state.validFromDate !== null) {
+                uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString();
+            }
+            if (this.state.outputSpec) {
+                uploadLink = "output/specification/" + uploadLink + "/variable/" + this.state.year + "/" + this.state.period.slice(1);
+
                 postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                     .then(response => {
                         (isDevEnv && console.log(response));
-                        if (response.status === 400) {
-                            this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
-                            this.setState({importHidden: false, uploadProgressHidden: true});
-                        } else {
-                            if (response.status === 200) {
-                                this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
-                                if (response.filename === "design_weights") {
-                                    this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
-                                }
-                                if (this.state.outputSpec) {
-                                    this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, ", "success");
-                                    response.blob().then((blob: any) => {
-                                        let url = window.URL.createObjectURL(blob);
-                                        this.setState({linkUrl: url, reportExportHidden: false})
-                                    });
-                                }
+
+                        response.clone().arrayBuffer().then((array: any) => {
+                            // Read array into Uint8Array
+                            let data = new Uint8Array(array);
+                            // Get workbook
+                            let workbook = XLSX.read(data, {type: "array"});
+                            // Get the first worksheet
+                            let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+                            // Read cells in File
+                            let fileName = worksheet["A2"].v;
+                            let status = worksheet["B2"].v.toLowerCase();
+                            let message = worksheet["C2"].v;
+
+                            if (status === "error") {
+                                this.setPanel(fileName + ": File Import Failed, " + message, "error");
+                            } else {
+                                this.setPanel(fileName + ": File Uploaded Successfully, " + message, "success");
                             }
-                        }
+                        });
+
                         this.setState({
                             uploading: false
+                        });
+
+                        //Create Download for File
+                        response.blob().then((blob: any) => {
+                            let url = window.URL.createObjectURL(blob);
+                            this.setState({linkUrl: url, reportExportHidden: false});
+                        }).catch((err: Error) => {
+                            this.setPanel("File Import Failed, Error while creating download report: " + err, "error");
                         });
                     })
                     .catch(err => {
@@ -157,45 +178,59 @@ export class Import extends Component <Props, State> {
                             uploadProgressHidden: false
                         });
                     });
-            } else {
-                this.setPanel(this.state.importName + ": Import Not Implemented Yet", "error");
-                this.setState({
-                    uploading: false
-                });
+                return;
             }
-        }else if(this.state.errorGone === false) this.setState({inputError: true})
-        else this.setState({inputError: false})
-        };
 
-        hidePanel = () => {
-            this.setState({
-                panel: {
-                    label: "",
-                    visible: false,
-                    status: "info"
-                }
-            });
-        };
+            postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
+                .then(response => {
+                    (isDevEnv && console.log(response));
+                    if (response.status === 400) {
+                        this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
+                        this.setState({importHidden: false, uploadProgressHidden: true});
+                    } else {
+                        if (response.status === 200) {
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
+                            if (response.filename === "design_weights") {
+                                this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
+                            }
 
-        setPanel = (message: string, status: string, visible: boolean = true) => {
-            this.setState({
-                panel: {
-                    label: message,
-                    visible: visible,
-                    status: status
-                }
-            });
-        };
+                        }
+                    }
+                    this.setState({
+                        uploading: false
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.setPanel("Error Occurred when uploading files: " + err.toString(), "error");
+                    this.setState({
+                        uploading: false,
+                        uploadProgressHidden: false
+                    });
+                });
 
-        handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
-            this.setState({
-                importName: e.target.value,
-                importHidden: false,
-                uploadProgressHidden: false,
-                validFromDate: null
-            });
-            this.fileType(e.target.value);
-            this.hidePanel();
+        } else if (!this.state.errorGone) this.setState({inputError: true});
+        else this.setState({inputError: false});
+    };
+
+    hidePanel = () => {
+        this.setState({
+            panel: {
+                label: "",
+                visible: false,
+                status: "info"
+            }
+        });
+    };
+
+    setPanel = (message: string, status: string, visible: boolean = true) => {
+        this.setState({
+            panel: {
+                label: message,
+                visible: visible,
+                status: status
+            }
+        });
     };
 
     handleFileChange = (selectorFiles: FileList | null) => {
@@ -216,17 +251,17 @@ export class Import extends Component <Props, State> {
 
     handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
         this.setState({year: e.target.value});
-        this.errorGone("year")
+        this.errorGone("year");
     };
 
     handlePeriodChange = (e: ChangeEvent<HTMLSelectElement>) => {
         this.setState({period: e.target.value});
-        this.errorGone("period")
+        this.errorGone("period");
     };
 
     errorGone = (value: string) => {
-        if(value === "year" && this.state.period !== "") this.setState({inputError: false, errorGone: true})
-        if(this.state.year !== "" && value === "period") this.setState({inputError: false, errorGone: true})
+        if (value === "year" && this.state.period !== "") this.setState({inputError: false, errorGone: true});
+        if (this.state.year !== "" && value === "period") this.setState({inputError: false, errorGone: true});
     };
 
     fileType = (file: string) => {
@@ -313,7 +348,7 @@ export class Import extends Component <Props, State> {
                     }
                 });
                 break;
-           case "APS Person Variable Specification":
+            case "APS Person Variable Specification":
                 this.setState({
                     fileType: ".csv",
                     built: true,
@@ -391,22 +426,6 @@ export class Import extends Component <Props, State> {
         }
     };
 
-    fileSelection = [
-        {label: "APS Design Weights", value: "APS Design Weights"},
-        {label: "Bulk Amendments", value: "Bulk Amendments"},
-        {label: "Geographical Classifications", value: "Geographical Classifications"},
-        {label: "Output Specification", value: "Output Specification"},
-        {label: "Population Estimates", value: "Population Estimates"},
-        {label: "Value Labels", value: "Value Labels"},
-        {label: "Variable Definitions", value: "Variable Definitions"},
-
-        {label: "APS Person Variable Specification", value: "Imported"},
-        {label: "APS Household Variable Specification", value: "Imported"},
-        {label: "Eurostat Variable Specification", value: "Not Imported"},
-        {label: "LFS Person Variable Specification", value: "Imported"},
-        {label: "LFS Household Variable Specification", value: "File Older than One year"},
-    ];
-
     openSummaryModal = (row: any) => {
         if (this.state.importName === "Bulk Amendments") {
             // window.history.pushState({}, document.title, this.state.pathName);
@@ -436,63 +455,65 @@ export class Import extends Component <Props, State> {
     render() {
         return (
             <DocumentTitle title={"LFS Import " + this.state.importName}>
-                    <div className="container">
-                         <h3>Import {this.state.importName}</h3>
-                         <br></br>
-                        {
-                            this.state.panel.visible &&
-                            <>
-                                <ONSPanel status={this.state.panel.status} label={this.state.panel.label}>
-                                    <p>{this.state.panel.label}</p>
-                                </ONSPanel>
-                                <br/>
-                            </>
-                        }
-                        {(this.state.inputError) &&
-                            <div>
-                                <div className="panel panel--error">
-                                    <div className="panel__header">
-                                        <h1 className="panel__title u-fs-r--b">This page has errors</h1>
-                                    </div>
-                                    <div className="panel__body">
-                                        <ul className="list list--bare">
-                                            {(this.state.year === "") &&
-                                                <li className="list__item ">
-                                                    <p className="list__link js-inpagelink">
-                                                    Please select a Year.
-                                                    </p>
-                                                </li>
-                                            }
-                                            {(this.state.period === "") &&
-                                                <li className="list__item ">
-                                                    <p className="list__link js-inpagelink">
-                                                    Please select a Quarter. {this.state.period}
-                                                    </p>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </div>
-                                <br></br>
+                <div className="container">
+                    <h3>Import {this.state.importName}</h3>
+                    <br/>
+                    {
+                        this.state.panel.visible &&
+                        <>
+                            <ONSPanel status={this.state.panel.status} label={this.state.panel.label}>
+                                <p>{this.state.panel.label}</p>
+                            </ONSPanel>
+                            <br/>
+                        </>
+                    }
+                    {(this.state.inputError) &&
+                    <div>
+                        <div className="panel panel--error">
+                            <div className="panel__header">
+                                <h1 className="panel__title u-fs-r--b">This page has errors</h1>
                             </div>
-                        }
+                            <div className="panel__body">
+                                <ul className="list list--bare">
+                                    {(this.state.year === "") &&
+                                    <li className="list__item ">
+                                        <p className="list__link js-inpagelink">
+                                            Please select a Year.
+                                        </p>
+                                    </li>
+                                    }
+                                    {(this.state.period === "") &&
+                                    <li className="list__item ">
+                                        <p className="list__link js-inpagelink">
+                                            Please select a Quarter. {this.state.period}
+                                        </p>
+                                    </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                    }
                     <form>
-                        
-                        
+
+
                         <div hidden={this.state.importHidden}>
-                                <div hidden={this.state.quarterPeriodInputHidden}>
-                                <ONSSelect id="year" label="Year" value="year" options={years()} onChange={this.handleYearChange} />
-                                <ONSSelect id="quarter" label="Quarter" value="quarter" options={quarters} onChange={this.handlePeriodChange} />
+                            <div hidden={this.state.quarterPeriodInputHidden}>
+                                <ONSSelect id="year" label="Year" value="year" options={years()}
+                                           onChange={this.handleYearChange}/>
+                                <ONSSelect id="quarter" label="Quarter" value="quarter" options={quarters}
+                                           onChange={this.handlePeriodChange}/>
                                 <br/>
                             </div>
                             {
                                 !this.state.validFromDateHidden &&
-                                    <>
-                                        <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
-                                                    date={this.state.validFromDate}/>
-                                        <br/>
-                                        <br></br>
-                                    </>
+                                <>
+                                    <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
+                                                  date={this.state.validFromDate}/>
+                                    <br/>
+                                    <br/>
+                                </>
                             }
                             <ONSUpload label={"Import File"}
                                        description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}

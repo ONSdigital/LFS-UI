@@ -40,7 +40,8 @@
     "selenium-webdriver": "^4.0.0-alpha.5",
     "sinon": "^7.5.0",
     "typescript": "^3.7.3",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "xlsx": "^0.15.3"
   },
   "scripts": {
     "start": "react-scripts start",
