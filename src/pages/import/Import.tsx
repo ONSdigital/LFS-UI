@@ -9,7 +9,7 @@ import DocumentTitle from "react-document-title";
 import {ONSDateInput} from "../../components/ONS_DesignSystem/ONSDateInput";
 import {ReportExport} from "../../components/ReportExport";
 import {ONSSelect} from "../../components/ONS_DesignSystem/ONSSelect";
-import {BulkAmendmentsModel} from "./BulkAmendmentsModel";
+import {BulkAmendmentsModal} from "./BulkAmendmentsModal";
 
 interface Props {
     match: any
@@ -39,7 +39,7 @@ interface State {
     errorGone: boolean
     outputSpec: boolean
     linkUrl: string
-    summaryModelOpen: boolean
+    summaryModalOpen: boolean
 }
 
 interface Panel {
@@ -91,7 +91,7 @@ export class Import extends Component <Props, State> {
             errorGone: false,
             outputSpec: false,
             linkUrl: "",
-            summaryModelOpen: false
+            summaryModalOpen: false
         };
         this.setPanel.bind(this);
         this.setFileUploading.bind(this);
@@ -411,19 +411,19 @@ export class Import extends Component <Props, State> {
         if (this.state.importName === "Bulk Amendments") {
             // window.history.pushState({}, document.title, this.state.pathName);
             this.setState({
-                summaryModelOpen: true
+                summaryModalOpen: true
             });
         }
 
     };
 
-    closeSummaryModal = () => this.setState({summaryModelOpen: false});
+    closeSummaryModal = () => this.setState({summaryModalOpen: false});
 
 
     summaryModal = () => {
-        if (this.state.summaryModelOpen)
+        if (this.state.summaryModalOpen)
             return (
-                <BulkAmendmentsModel modelOpen={this.state.summaryModelOpen}
+                <BulkAmendmentsModal modalOpen={this.state.summaryModalOpen}
                                      importName={this.state.importName}
                                      fileName={this.state.fileName}
                                      uploadLink={this.state.uploadLink}
