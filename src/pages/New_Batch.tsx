@@ -30,6 +30,7 @@ interface State {
     inputError: boolean
     panel: Panel
     errorGone: boolean
+    batchURL: string
 }
 
 export class New_Batch extends Component <{}, State> {
@@ -48,7 +49,8 @@ export class New_Batch extends Component <{}, State> {
                 visible: false,
                 status: ""
             },
-            errorGone: false
+            errorGone: false,
+            batchURL: ""
         };
     }
 
@@ -83,7 +85,9 @@ export class New_Batch extends Component <{}, State> {
                             errorMessage =
                                 toUpperCaseFirstChar(this.state.batchType) + " Batch for " +
                                 (this.state.batchType === "monthly" ? monthNumberToString(+this.state.period) : this.state.period) + " " +
-                                this.state.year + " already exists, "
+                                this.state.year + " already exists, ";
+
+                            this.setState({batchURL: "manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period})
                         }
                         this.setState({
                             panel: {
@@ -169,7 +173,7 @@ export class New_Batch extends Component <{}, State> {
                                         <p>
                                             {this.state.panel.label}
                                             <Link
-                                                to={"manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period}>
+                                                to={this.state.batchURL}>
                                                 Go to existing Batch
                                             </Link>
                                         </p>
