@@ -150,7 +150,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
     summaryModal = () => {
         if (this.state.summaryOpen)
             return (
-                <SurveyAuditModal modelOpen={this.state.summaryOpen}
+                <SurveyAuditModal modalOpen={this.state.summaryOpen}
                                   week={this.state.surveyAuditWeek}
                                   month={this.state.surveyAuditMonth}
                                   year={this.state.year}
@@ -196,7 +196,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                             <AccordionDropDown caption={"Survey Files"}
                                                                expandableHeader={this.accordionDropDownHeader}>
                                                 <MonthlyBatchUploadTable batchData={this.state.batchData}
-                                                                         openModel={this.openSummaryModal}
+                                                                         openModal={this.openSummaryModal}
                                                                          batchType={this.state.batchType}
                                                                          year={this.state.year}
                                                                          period={this.state.period}
@@ -205,7 +205,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                             :
                                             <>
                                                 <MonthlyBatchUploadTable batchData={this.state.batchData}
-                                                                         openModel={this.openSummaryModal}
+                                                                         openModal={this.openSummaryModal}
                                                                          batchType={this.state.batchType}
                                                                          year={this.state.year}
                                                                          period={this.state.period}
