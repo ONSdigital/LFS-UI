@@ -127,21 +127,22 @@ export class Import extends Component <Props, State> {
                 postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                     .then(response => {
                         (isDevEnv && console.log(response));
-                        if (response.status === "ERROR") {
+                        if (response.status === 400) {
                             this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
                             this.setState({importHidden: false, uploadProgressHidden: true});
                         } else {
-                            if (response.status === "OK") {
+                            if (response.status === 200) {
                                 this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
-                            } else if (response.status === "SUCCESS" && response.filename === "design_weights") {
-                                this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
-                            } else if (response.status === 200 && this.state.outputSpec) {
-                                this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, ", "success");
-
-                                response.blob().then((blob: any) => {
-                                    let url = window.URL.createObjectURL(blob);
-                                    this.setState({linkUrl: url, reportExportHidden: false})
-                                });
+                                if (response.filename === "design_weights") {
+                                    this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
+                                }
+                                if (this.state.outputSpec) {
+                                    this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, ", "success");
+                                    response.blob().then((blob: any) => {
+                                        let url = window.URL.createObjectURL(blob);
+                                        this.setState({linkUrl: url, reportExportHidden: false})
+                                    });
+                                }
                             }
                         }
                         this.setState({
@@ -391,8 +392,8 @@ export class Import extends Component <Props, State> {
     };
 
     fileSelection = [
-        {label: "Bulk Amendments", value: "Bulk Amendments"},
         {label: "APS Design Weights", value: "APS Design Weights"},
+        {label: "Bulk Amendments", value: "Bulk Amendments"},
         {label: "Geographical Classifications", value: "Geographical Classifications"},
         {label: "Output Specification", value: "Output Specification"},
         {label: "Population Estimates", value: "Population Estimates"},
@@ -436,6 +437,8 @@ export class Import extends Component <Props, State> {
         return (
             <DocumentTitle title={"LFS Import " + this.state.importName}>
                     <div className="container">
+                         <h3>Import {this.state.importName}</h3>
+                         <br></br>
                         {
                             this.state.panel.visible &&
                             <>
@@ -474,28 +477,24 @@ export class Import extends Component <Props, State> {
                             </div>
                         }
                     <form>
-                        {
-                            !this.state.validFromDateHidden &&
-                            <>
-                                <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
-                                              date={this.state.validFromDate}/>
-                                <br/>
-                                <br/>
-                            </>
-                        }
-                        <div hidden={this.state.quarterPeriodInputHidden}>
-                            <ONSSelect id="year" label="Year" value="year" options={years()} onChange={this.handleYearChange} />
-                            <ONSSelect id="quarter" label="Quarter" value="quarter" options={quarters} onChange={this.handlePeriodChange} />
-
-                        </div>
-                        <br/>
+                        
+                        
                         <div hidden={this.state.importHidden}>
-                            <div hidden={this.state.validFromDateHidden}>
-                                <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
-                                              date={this.state.validFromDate}/>
-                                <br/><br/>
+                                <div hidden={this.state.quarterPeriodInputHidden}>
+                                <ONSSelect id="year" label="Year" value="year" options={years()} onChange={this.handleYearChange} />
+                                <ONSSelect id="quarter" label="Quarter" value="quarter" options={quarters} onChange={this.handlePeriodChange} />
+                                <br/>
                             </div>
-                            <ONSUpload label={"Import " + toUpperCaseFirstChar(this.state.importName)}
+                            {
+                                !this.state.validFromDateHidden &&
+                                    <>
+                                        <ONSDateInput label="Select Valid From Date" onChange={this.handleDateChange}
+                                                    date={this.state.validFromDate}/>
+                                        <br/>
+                                        <br></br>
+                                    </>
+                            }
+                            <ONSUpload label={"Import File"}
                                        description={"Only " + this.state.fileType + " accepted"} fileName={"Upload 1"}
                                        fileID={"U1"}
                                        accept={this.state.fileType}

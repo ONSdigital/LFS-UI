@@ -20,10 +20,10 @@ interface BatchUploadTableRow {
 export function ImportFileTable() {
     let imports = [
         {name: "APS Design Weights", "status": "Imported"},
+        {name: "Bulk Amendments", "status": "Not Imported"},
         {name: "Geographical Classifications", "status": "File Older than One year"},
         {name: "Output Specification", "status": "Not Imported"},
         {name: "Population Estimates", "status": "Not Imported"},
-        {name: "Bulk Amendments", "status": "Not Imported"},
         {name: "Variable Definitions", "status": "Imported"},
         {name: "Value Labels", "status": "Imported"},
     ];
@@ -32,7 +32,6 @@ export function ImportFileTable() {
         let row = rowData.row;
         let link = "/import/" + row.name
         if (row.name === "Output Specification") link = "/import/Output"
-        console.log(link)
         return (
             <>
                 <td className="table__cell ">

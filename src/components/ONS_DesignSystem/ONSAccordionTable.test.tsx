@@ -52,7 +52,7 @@ describe("ONS Accordion Table Test", () => {
         Row: tableRow,
         expandedRowEnabled: true,
         expandedRow: DashboardExpandedRow,
-        noDataMessage: "no data mate 1"
+        noDataMessage:  "data mate 1"
     };
 
     const falseExSingleRowProps = {
@@ -61,7 +61,7 @@ describe("ONS Accordion Table Test", () => {
         Row: tableRow,
         expandedRowEnabled: false,
         expandedRow: DashboardExpandedRow,
-        noDataMessage: "no data mate 2"
+        noDataMessage: "info in your data mate 2"
     };
 
     const emptyProps = {
@@ -70,7 +70,7 @@ describe("ONS Accordion Table Test", () => {
         Row: tableRow,
         expandedRowEnabled: false,
         expandedRow: DashboardExpandedRow,
-        noDataMessage: "no data mate 3"
+        noDataMessage: "error in your data mate 3"
     };
 
     const trueEmptyProps = {
@@ -101,6 +101,7 @@ describe("ONS Accordion Table Test", () => {
         Row: tableRow,
         expandedRowEnabled: true,
         expandedRow: DashboardExpandedRow,
+        expandedAdditionalRows: true,
         noDataMessage: "no data mate 5",
         pagination: true,
         paginationSize: undefined
@@ -119,16 +120,7 @@ describe("ONS Accordion Table Test", () => {
     function wrapper(render: any, props: any) {
         return render(
             <ONSAccordionTable
-                Headers={props.Headers}
-                data={props.data}
-                Row={props.Row}
-                expandedRowEnabled={props.expandedRowEnabled}
-                expandedRow={props.expandedRow}
-                noDataMessage={props.noDataMessage}
-                pagination={props.pagination}
-                paginationSize={props.paginationSize}
-                scrollable={props.scrollable}
-                caption={props.caption}>
+                {...props}>
             </ONSAccordionTable>
         );
     }
