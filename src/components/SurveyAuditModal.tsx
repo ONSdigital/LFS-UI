@@ -16,7 +16,7 @@ interface Props {
     surveyType: string
     status: number
     closeSummaryModal: any
-    modelOpen: boolean
+    modalOpen: boolean
     reloadBatchData: Function
 }
 
@@ -126,7 +126,7 @@ export class SurveyAuditModal extends Component <Props, State> {
     render() {
         return (
             <ReactModal
-                isOpen={this.props.modelOpen}
+                isOpen={this.props.modalOpen}
                 contentLabel="Minimal Modal Example"
                 className='Modal'
                 shouldFocusAfterRender={true}
@@ -141,7 +141,7 @@ export class SurveyAuditModal extends Component <Props, State> {
                     <br/>
 
                 </div>
-                <footer className="Model-Footer">
+                <footer className="Modal-Footer">
                     {
                         this.props.status === 1 || this.props.status === 2 ?
                             <div>

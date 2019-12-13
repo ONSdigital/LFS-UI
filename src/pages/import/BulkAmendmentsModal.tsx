@@ -12,7 +12,7 @@ interface Props {
     importName: string
     fileName: string
     closeSummaryModal: any
-    modelOpen: boolean
+    modalOpen: boolean
     reloadBatchData: Function
     uploadLink: string
     reportFileType: string
@@ -38,7 +38,7 @@ interface MetaDataListItem {
     L: string
 }
 
-export class BulkAmendmentsModel extends Component <Props, State> {
+export class BulkAmendmentsModal extends Component <Props, State> {
 
     constructor(props: any) {
         super(props);
@@ -143,7 +143,7 @@ export class BulkAmendmentsModel extends Component <Props, State> {
     render() {
         return (
             <ReactModal
-                isOpen={this.props.modelOpen}
+                isOpen={this.props.modalOpen}
                 contentLabel="Minimal Modal Example"
                 className='Bigger-Modal'
                 shouldFocusAfterRender={true}
@@ -179,7 +179,7 @@ export class BulkAmendmentsModel extends Component <Props, State> {
                     {/*        <ONSButton label="Close" primary={false} small={false} onClick={this.props.closeSummaryModal}/>*/}
                     {/*}*/}
                 </div>
-                <footer className="Model-Footer">
+                <footer className="Modal-Footer">
                     <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
                     <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}
                                marginRight={255}/>

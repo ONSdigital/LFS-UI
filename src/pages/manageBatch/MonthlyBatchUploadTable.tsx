@@ -8,7 +8,7 @@ import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 
 interface Props {
     batchData: [] | null
-    openModel: Function
+    openModal: Function
     batchType: string
     year: string
     period: string
@@ -47,7 +47,7 @@ export function MonthlyBatchUploadTable(props: Props) {
                         :
                         <td className="table__cell ">
                             <ONSButton label={"Summary"} primary={true} small={true}
-                                       onClick={(() => props.openModel(row))}/>
+                                       onClick={(() => props.openModal(row))}/>
                         </td>
                 }
             </>
