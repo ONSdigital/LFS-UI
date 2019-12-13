@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
-import {REFERENCE_FILE_HEADERS} from "../../utilities/Headers";
+import {REFERENCE_FILE_IMPORT_HEADERS} from "../../utilities/Headers";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
@@ -49,7 +49,7 @@ export class ImportOutputSpecTable extends Component <{},{}> {
     render() {
         return (
             <div>
-                <ONSAccordionTable Headers={REFERENCE_FILE_HEADERS}
+                <ONSAccordionTable Headers={REFERENCE_FILE_IMPORT_HEADERS}
                                 data={this.imports}
                                 Row={this.outputSpecTableRow}
                                 expandedRowEnabled={false}
