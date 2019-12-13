@@ -92,7 +92,7 @@ export class New_Batch extends Component <{}, State> {
         }
 
         if (this.state.batchType === "yearly") this.setState({period: ""});
-        if (this.state.errorGone === false) this.setState({inputError: true});
+        if (!this.state.errorGone) this.setState({inputError: true});
         else this.setState({inputError: false});
     };
 
