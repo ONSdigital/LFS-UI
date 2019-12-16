@@ -187,11 +187,17 @@ export class Import extends Component <Props, State> {
                     if (response.status === 400) {
                         this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
                         this.setState({importHidden: false, uploadProgressHidden: true});
+                    } if (response.status === 403) {
+                        this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
+                        this.setState({importHidden: false, uploadProgressHidden: true});
                     } else {
                         if (response.status === 200) {
                             this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
                             if (response.filename === "design_weights") {
                                 this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
+                            } if(this.state.importName === "Bulk Amendments"){
+                                console.log("---------------------")
+                                this.openSummaryModal()
                             }
 
                         }
@@ -426,7 +432,7 @@ export class Import extends Component <Props, State> {
         }
     };
 
-    openSummaryModal = (row: any) => {
+    openSummaryModal = () => {
         if (this.state.importName === "Bulk Amendments") {
             // window.history.pushState({}, document.title, this.state.pathName);
             this.setState({
@@ -467,6 +473,7 @@ export class Import extends Component <Props, State> {
                             <br/>
                         </>
                     }
+                    {this.summaryModal()}
                     {(this.state.inputError) &&
                     <div>
                         <div className="panel panel--error">
