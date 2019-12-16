@@ -41,7 +41,7 @@ interface State {
     outputSpec: boolean
     linkUrl: string
     summaryModalOpen: boolean
-    amendments: any
+    amendments: any[]
 }
 
 interface Panel {
@@ -94,7 +94,7 @@ export class Import extends Component <Props, State> {
             outputSpec: false,
             linkUrl: "",
             summaryModalOpen: false,
-            amendments: null
+            amendments: []
         };
         this.setPanel.bind(this);
         this.setFileUploading.bind(this);

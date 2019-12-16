@@ -17,7 +17,7 @@ interface Props {
     reloadBatchData: Function
     uploadLink: string
     reportFileType: string
-    amendments: any
+    amendments: any[]
     panel: Panel
 }
 
@@ -134,24 +134,13 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                             <br/>
                         </>
                     }
-                    {
-                        this.props.amendments !== null ?
-                            <ONSAccordionTable Headers={AMENDMENT_HEADERS}
-                                               data={this.props.amendments}
-                                               Row={amendmentItemTableRow}
-                                               expandedRowEnabled={false}
-                                               noDataMessage={"hmm"}
-                                               pagination={true}
-                                               paginationSize={6}/>
-                            :
-                            this.setState({
-                                panel: {
-                                    label: "Error Occurred When getting Amendments",
-                                    visible: true,
-                                    status: "error"
-                                }
-                            })
-                    }
+                    <ONSAccordionTable Headers={AMENDMENT_HEADERS}
+                                       data={this.props.amendments}
+                                       Row={amendmentItemTableRow}
+                                       expandedRowEnabled={false}
+                                       noDataMessage={"No Amendments Errors Found"}
+                                       pagination={true}
+                                       paginationSize={6}/>
                     {/*<ReportExport hidden={false}*/}
                     {/*              setPanel={this.setPanel}*/}
                     {/*              importName={this.props.uploadLink}*/}
