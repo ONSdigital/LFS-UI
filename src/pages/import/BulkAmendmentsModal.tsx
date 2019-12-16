@@ -3,8 +3,9 @@ import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import ReactModal from "react-modal";
 import dateFormatter from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import {ReportExport} from "../../components/ReportExport";
 import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
+import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
+import {AMENDMENT_HEADERS} from "../../utilities/Headers";
 
 dateFormatter.extend(advancedFormat);
 
@@ -16,6 +17,14 @@ interface Props {
     reloadBatchData: Function
     uploadLink: string
     reportFileType: string
+    amendments: any
+    panel: Panel
+}
+
+interface Panel {
+    label: string,
+    visible: boolean
+    status: string
 }
 
 interface State {
@@ -38,6 +47,13 @@ interface MetaDataListItem {
     L: string
 }
 
+interface AmendmentItem {
+    caseNo: string
+    found: boolean
+    refDate: string
+    variable: string
+}
+
 export class BulkAmendmentsModal extends Component <Props, State> {
 
     constructor(props: any) {
@@ -49,11 +65,7 @@ export class BulkAmendmentsModal extends Component <Props, State> {
             summaryOpen: false,
             uploadType: "",
             importAudit: null,
-            panel: {
-                label: "",
-                visible: false,
-                status: "info"
-            }
+            panel: props.panel
         };
     }
 
@@ -92,11 +104,6 @@ export class BulkAmendmentsModal extends Component <Props, State> {
         this.props.closeSummaryModal();
     };
 
-    summaryTitle = () => {
-
-        return;
-    };
-
     setPanel = (message: string, status: string, visible: boolean = true) => {
         this.setState({
             panel: {
@@ -106,39 +113,6 @@ export class BulkAmendmentsModal extends Component <Props, State> {
             }
         });
     };
-
-    // TODO: Waiting for returned data
-    // summaryMetaData() {
-    //     if (this.state.importAudit !== null) {
-    //         return (
-    //             [{
-    //                 L: "Reference Date",
-    //                 R: dateFormatter(this.state.importAudit.referenceDate).format("Do MMMM YYYY")
-    //             }, {
-    //                 L: "Variables in File",
-    //                 R: this.state.importAudit.numVarFile
-    //             }, {
-    //                 L: "Variables Uploaded",
-    //                 R: this.state.importAudit.numVarLoaded
-    //             }, {
-    //                 L: "Observations in File",
-    //                 R: this.state.importAudit.numObFile
-    //             }, {
-    //                 L: "Observations Uploaded",
-    //                 R: this.state.importAudit.numObLoaded
-    //             }
-    //             ]
-    //         );
-    //     } else {
-    //         return (
-    //             [{
-    //                 L: "Error",
-    //                 R: "Error Occurred when getting Surrey Audit"
-    //             }
-    //             ]
-    //         );
-    //     }
-    // }
 
     render() {
         return (
@@ -160,29 +134,33 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                             <br/>
                         </>
                     }
-                    {/*<div>*/}
-                    {/*    <ONSMetadata List={this.summaryMetaData()} LSpacing="6" RSpacing="5"/>*/}
-                    {/*    <ONSButton label="Export / View Report" primary={false} small={false}/>*/}
-                    {/*</div>*/}
-                    {/*<br/>*/}
-                    {/*{*/}
-                    {/*    this.props.status === 1 || this.props.status === 2 ?*/}
-                    {/*<ReportExport hidden={false} setPanel={this.setPanel}*/}
-                    {/*              importName={this.state.uploadLink}/>*/}
-
-                    <ReportExport hidden={false}
-                                  setPanel={this.setPanel}
-                                  importName={this.props.uploadLink}
-                                  reportFileType={this.props.reportFileType}/>
-
-                    {/*        :*/}
-                    {/*        <ONSButton label="Close" primary={false} small={false} onClick={this.props.closeSummaryModal}/>*/}
-                    {/*}*/}
+                    {
+                        this.props.amendments !== null ?
+                            <ONSAccordionTable Headers={AMENDMENT_HEADERS}
+                                               data={this.props.amendments}
+                                               Row={amendmentItemTableRow}
+                                               expandedRowEnabled={false}
+                                               noDataMessage={"hmm"}
+                                               pagination={true}
+                                               paginationSize={6}/>
+                            :
+                            this.setState({
+                                panel: {
+                                    label: "Error Occurred When getting Amendments",
+                                    visible: true,
+                                    status: "error"
+                                }
+                            })
+                    }
+                    {/*<ReportExport hidden={false}*/}
+                    {/*              setPanel={this.setPanel}*/}
+                    {/*              importName={this.props.uploadLink}*/}
+                    {/*              reportFileType={this.props.reportFileType}/>*/}
                 </div>
                 <footer className="Modal-Footer">
                     <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
                     <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}
-                               marginRight={255}/>
+                               marginRight={355}/>
                     <ONSButton label="Close" primary={false} small={false}
                                onClick={this.props.closeSummaryModal}/>
                 </footer>
@@ -190,3 +168,25 @@ export class BulkAmendmentsModal extends Component <Props, State> {
         );
     }
 }
+
+const amendmentItemTableRow = (rowData: any) => {
+    let row: AmendmentItem = rowData.row;
+    return (
+        <>
+            <td className="table__cell ">
+                {row.caseNo}
+            </td>
+            <td className="table__cell ">
+                {row.variable}
+            </td>
+
+            <td className="table__cell ">
+                {row.found ? "Yes" : "No"}
+            </td>
+            <td className="table__cell ">
+                {row.refDate}
+            </td>
+
+        </>
+    );
+};

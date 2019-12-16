@@ -41,6 +41,7 @@ interface State {
     outputSpec: boolean
     linkUrl: string
     summaryModalOpen: boolean
+    amendments: any
 }
 
 interface Panel {
@@ -92,7 +93,8 @@ export class Import extends Component <Props, State> {
             errorGone: false,
             outputSpec: false,
             linkUrl: "",
-            summaryModalOpen: false
+            summaryModalOpen: false,
+            amendments: null
         };
         this.setPanel.bind(this);
         this.setFileUploading.bind(this);
@@ -184,22 +186,31 @@ export class Import extends Component <Props, State> {
             postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                 .then(response => {
                     (isDevEnv && console.log(response));
+
+
+                    if (this.state.importName === "Bulk Amendments") {
+
+                        if (response.status === 403) {
+                            response.json().then((json: any) => {
+                                console.log(json);
+                                this.setPanel("Error Occurred: " + json.errorMessage, "error");
+                                this.setState({amendments: json.AmendmentItems});
+                                this.openSummaryModal();
+                            });
+                        }
+                    }
+
                     if (response.status === 400) {
                         this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
                         this.setState({importHidden: false, uploadProgressHidden: true});
-                    } if (response.status === 403) {
+                    }
+                    if (response.status === 403) {
                         this.setPanel("Error Occurred when uploading files: " + response.errorMessage.toString(), "error");
                         this.setState({importHidden: false, uploadProgressHidden: true});
-                    } else {
-                        if (response.status === 200) {
-                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
-                            if (response.filename === "design_weights") {
-                                this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
-                            } if(this.state.importName === "Bulk Amendments"){
-                                console.log("---------------------")
-                                this.openSummaryModal()
-                            }
-
+                    } else if (response.status === 200) {
+                        this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully", "success");
+                        if (response.filename === "design_weights") {
+                            this.setPanel(toUpperCaseFirstChar(this.state.importName) + ": File Uploaded Successfully, " + response.message, "info");
                         }
                     }
                     this.setState({
@@ -454,7 +465,9 @@ export class Import extends Component <Props, State> {
                                      uploadLink={this.state.uploadLink}
                                      reportFileType={this.state.importReport.reportFileType}
                                      closeSummaryModal={this.closeSummaryModal}
-                                     reloadBatchData={this.closeSummaryModal}/>
+                                     reloadBatchData={this.closeSummaryModal}
+                                     amendments={this.state.amendments}
+                                     panel={this.state.panel}/>
             );
     };
 
