@@ -3,7 +3,7 @@ const BATCH_HEADERS =
         label: "Source",
         column_name: "type",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Period",
         column_name: "month",
@@ -31,12 +31,12 @@ const REFERENCE_FILE_HEADERS =
         label: "File Name",
         column_name: "File Name",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Import Date",
         column_name: "Import Date",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Status",
         column_name: "status",
@@ -49,17 +49,17 @@ const REFERENCE_FILE_IMPORT_HEADERS =
         label: "File Name",
         column_name: "File Name",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Import Date",
         column_name: "Import Date",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Status",
         column_name: "status",
         filter: false,
-        order: false
+        order: true
     },{
         label: "",
         column_name: "",
@@ -72,12 +72,12 @@ const UPLOAD_HEADERS =
         label: "File Name ",
         column_name: "fileName",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Step",
         column_name: "step",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Status",
         column_name: "status",
@@ -88,29 +88,29 @@ const UPLOAD_HEADERS =
 const DASHBOARD_HEADERS =
     [{
         label: "BatchID",
-        column_name: "BatchID",
+        column_name: "id",
         filter: false,
         order: true
     }, {
         label: "Batch Type",
-        column_name: "Batch Type",
+        column_name: "type",
         filter: false,
         order: true
     }, {
         label: "Period",
-        column_name: "Period",
+        column_name: "period",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Year",
-        column_name: "Year",
+        column_name: "year",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Status",
         column_name: "status",
         filter: false,
-        order: false
+        order: true
     }
     ];
 
@@ -145,42 +145,42 @@ const SURVEY_UPLOAD_HISTORY =
 const VARIABLE_DEFINITION_HEADERS =
     [{
         label: "Variable",
-        column_name: "Variable",
+        column_name: "variable",
         filter: false,
         order: false
     }, {
         label: "Description",
-        column_name: "Description",
+        column_name: "description",
         filter: false,
         order: false
     }, {
         label: "Valid From",
-        column_name: "Valid From",
+        column_name: "validFrom",
         filter: false,
         order: false
     }, {
         label: "Editable",
-        column_name: "Editable",
+        column_name: "editable",
         filter: false,
         order: false
     }, {
         label: "Imputation",
-        column_name: "Imputation",
+        column_name: "imputation",
         filter: false,
         order: false
     }, {
         label: "DV",
-        column_name: "DV",
+        column_name: "dv",
         filter: false,
         order: false
     }, {
         label: "Type",
-        column_name: "Type",
+        column_name: "type",
         filter: false,
         order: false
     }, {
         label: "Length",
-        column_name: "Length",
+        column_name: "length",
         filter: false,
         order: false
     }
@@ -239,7 +239,7 @@ function userHeaders() {
             label: "Role",
             column_name: "role",
             filter: false,
-            order: false,
+            order: true,
             create: true
         }]
     )

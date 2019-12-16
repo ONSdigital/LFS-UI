@@ -4,6 +4,7 @@ import update from "immutability-helper";
 import {ONSPagination} from "./ONSPagination";
 import uuidv4 from "uuid/v4";
 import "./ONSAccordionTable.css";
+import lodash from "lodash";
 
 interface Props {
     Headers: Header[]
@@ -27,6 +28,7 @@ interface State {
     data: any[]
     slicedData: any[]
     offset: number
+    Headers: Header[]
 }
 
 interface DashboardTableRow {
@@ -50,11 +52,11 @@ export class ONSAccordionTable extends Component <Props, State> {
     constructor(props: Props) {
         super(props);
 
-        this.state = {data: [], offset: 0, slicedData: []};
+        this.state = {data: [], offset: 0, slicedData: [], Headers: props.Headers};
     }
 
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-        if (nextProps.data !== prevState.data && nextProps.data !== null) {
+        if (nextProps.data !== null && nextProps.data.length !== prevState.data.length) {
             return {
                 data: nextProps.data,
                 slicedData: nextProps.data.slice(0, nextProps.paginationSize !== undefined ? nextProps.paginationSize : 20)
@@ -88,20 +90,48 @@ export class ONSAccordionTable extends Component <Props, State> {
         }
     };
 
+    orderByRow = (onClick: any, header: any, index: number) => {
+        let list = lodash.sortBy(this.state.data, header.column_name);
+        if (header.descending) list = list.reverse();
+
+        this.setState({data: list});
+        if (this.props.pagination) {
+            let slicedList = list.slice(this.state.offset, this.props.paginationSize !== undefined ? this.props.paginationSize : 20);
+            this.setState({slicedData: slicedList});
+        } else {
+            this.setState({slicedData: list});
+        }
+
+        header.descending = !header.descending;
+        // @ts-ignore
+        this.setState({Headers: update(this.state.Headers, {[index]: {$set: header}})});
+    };
+
     Table = () => {
         return (
-            <table id="basic-table" className="table ">
+            <table id="basic-table" className="table table--sortable" data-aria-sort="Sort by" data-aria-asc="ascending"
+                   data-aria-desc="descending">
                 <>
                     {this.props.caption && <caption className="table__caption">{this.props.caption}</caption>}
                     <thead className="table__head">
                     <tr className="table__row">
                         {
                             this.props.expandedRowEnabled &&
-                            <th key={0} scope="col" className="table__header "/>
+                            <th key={0} scope="col" className="table__header " aria-sort="none"/>
                         }
                         {
                             this.props.Headers.map((header: any, index: number) =>
-                                <th key={index} scope="col" className="table__header ">{header.label}</th>
+                                header.order ?
+                                    <th key={index} scope="col" className="table__header "
+                                        aria-sort={header.descending === undefined ? "none" : (header.descending ? "descending" : "ascending")}>
+                                        <button aria-label={"Sort by " + header.label} type="button" data-index={index}
+                                                className="table__sort-button"
+                                                onClick={(e) => this.orderByRow(e, header, index)}>
+                                            {header.label}
+                                        </button>
+                                    </th>
+                                    :
+                                    <th key={index} scope="col" className="table__header ">{header.label}</th>
                             )
                         }
                     </tr>
