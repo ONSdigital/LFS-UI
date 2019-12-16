@@ -173,7 +173,7 @@ const amendmentItemTableRow = (rowData: any) => {
                 {row.found ? "Yes" : "No"}
             </td>
             <td className="table__cell ">
-                {row.refDate}
+                {row.refDate.substr(0, 2) + "/" + row.refDate.substr(2, 2) + "/" + row.refDate.substr(4)}
             </td>
 
         </>
