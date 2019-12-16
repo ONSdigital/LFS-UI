@@ -38,7 +38,7 @@ export class FileUploadProgress extends Component <Props, State> {
             {
                 uploadStatusData: [{
                     fileName: "",
-                    step: 'Import',
+                    step: "Import",
                     status: ""
                 }],
                 uploadStatusCode: 0,
@@ -46,7 +46,7 @@ export class FileUploadProgress extends Component <Props, State> {
                 fileName: this.props.fileName,
                 websocketActive: false,
                 websocketID: 0
-            })
+            });
     }
 
     componentDidUpdate(nextProps: Props) {
@@ -67,7 +67,7 @@ export class FileUploadProgress extends Component <Props, State> {
     }
 
     componentWillUnmount(): void {
-        this.ws.close(1000, 'Upload Component Unmount');
+        this.ws.close(1000, "Upload Component Unmount");
         clearInterval(this.state.websocketID);
     }
 
@@ -98,7 +98,7 @@ export class FileUploadProgress extends Component <Props, State> {
                 });
                 return;
             }
-            this.props.setPanel(evt.errorMessage, 'error', true);
+            this.props.setPanel(evt.errorMessage, "error", true);
         }
         if (evt.status === 1) {
             this.props.setPanel("", "", false);
@@ -106,7 +106,7 @@ export class FileUploadProgress extends Component <Props, State> {
         }
         let percentage = Math.round(evt.percent * 10) / 10;
         if (evt.status === 2 && evt.errorMessage.length === 0) {
-            this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", 'success', true);
+            this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", "success", true);
             this.props.fileUploading(false);
             if (this.props.redirectOnComplete !== undefined) {
                 this.props.redirectOnComplete(false);
@@ -115,20 +115,20 @@ export class FileUploadProgress extends Component <Props, State> {
         this.setState({
             uploadStatusData: [{
                 fileName: toUpperCaseFirstChar(this.props.importName),
-                step: 'Import',
+                step: "Import",
                 status: (evt.status === 2 ? "Import Complete" : evt.status === 3 ? "Failed" : "Importing: " + percentage + "%")
             }],
             uploadPercentage: percentage,
             uploadStatusCode: evt.status,
             websocketActive: true
-        })
+        });
     };
 
     getFileUploadProgress = () => {
         let id = setInterval(_ => {
             this.ws.send(JSON.stringify(
                 {
-                    "fileName": this.props.fileName,
+                    "fileName": this.props.fileName
                 }
             ));
         }, 3000);
@@ -146,11 +146,24 @@ export class FileUploadProgress extends Component <Props, State> {
                     {row.step}
                 </td>
                 <td className="table__cell ">
-                    <ONSStatus label={row.status} small={false}
-                               status={getUploadStatusStyle(this.state.uploadStatusCode).colour}/>
+                    {
+                        row.status.includes("Importing") ?
+                            <>
+                                <img
+                                    className={"loadingIcon-svg "}
+                                    src={"/img/icons--loader.svg"}
+                                    alt="Loading Icon"/>
+                                {row.status}
+                            </>
+                            :
+                            <ONSStatus label={row.status}
+                                       small={false}
+                                       status={getUploadStatusStyle(this.state.uploadStatusCode).colour}/>
+
+                    }
                 </td>
             </>
-        )
+        );
     };
 
     render() {
@@ -166,6 +179,6 @@ export class FileUploadProgress extends Component <Props, State> {
                     <ONSProgressBar statusCode={this.state.uploadStatusCode} percentage={this.state.uploadPercentage}/>
                 </div>
             </div>
-        )
+        );
     }
 }

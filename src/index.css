@@ -74,6 +74,11 @@ caption{
   transition: width .2s ease-in;
 }
 
+.loadingIcon-svg {
+  /*display: block;*/
+  height: 20px;
+  margin: 0 3px 0 0;
+}
 
 .fade:not(.show) {
   opacity: 1;
