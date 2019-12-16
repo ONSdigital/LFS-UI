@@ -282,9 +282,9 @@ export class Import extends Component <Props, State> {
             case "Bulk Amendments":
                 this.setState({
                     fileType: ".sav",
-                    built: false,
+                    built: true,
                     fileName: "bulk_amendments",
-                    uploadLink: "bulk/amendments",
+                    uploadLink: "survey/amendments/validate",
                     validFromDateHidden: true,
                     importReport: {
                         hasImportReport: true,

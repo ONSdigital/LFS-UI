@@ -30,7 +30,7 @@ interface UploadStatusData {
 }
 
 export class FileUploadProgress extends Component <Props, State> {
-    ws = new WebSocket("ws://127.0.0.1:8001/ws");
+    ws = new WebSocket("ws://127.0.0.1:8000/ws");
 
     constructor(props: Props) {
         super(props);
