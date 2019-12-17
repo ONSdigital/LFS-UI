@@ -12,13 +12,11 @@ dateFormatter.extend(advancedFormat);
 interface Props {
     importName: string
     fileName: string
-    closeSummaryModal: any
+    closeBulkAmendmentsModal: any
     modalOpen: boolean
-    reloadBatchData: Function
-    uploadLink: string
-    reportFileType: string
-    amendments: any[]
+    amendmentsResponse: any
     panel: Panel
+    fileUpload: Function
 }
 
 interface Panel {
@@ -70,38 +68,29 @@ export class BulkAmendmentsModal extends Component <Props, State> {
     }
 
     componentDidMount(): void {
-        // this.getSurveyImportAudit(this.props.week, this.props.month, this.props.surveyType);
+        console.log(this.props.amendmentsResponse);
+        if (this.props.amendmentsResponse.status === "OK" && this.props.importName === "Bulk Amendments") {
+            this.setState({
+                panel: {
+                    label: "Validation completed with no errors",
+                    visible: true,
+                    status: "success"
+                }
+            });
+        } else {
+            this.setState({panel: this.props.panel});
+        }
     }
 
-    // getSurveyImportAudit = (week: string, month: string, type: string) => {
-    //     getSurveyAudit(type, this.props.year, (type === "GB" ? week : month))
-    //         .then(r => {
-    //             if (r !== undefined && r.length !== 0) {
-    //                 this.setState({importAudit: r[0]});
-    //             } else {
-    //                 this.setState({importAudit: null});
-    //             }
-    //         })
-    //         .catch(error => {
-    //             (isDevEnv() && console.log(error));
-    //         });
-    // };
-    //
-    // sendSurveyAuditResponse = (accept: boolean) => {
-    //     surveyAuditResponse(this.props.surveyType, (accept ? "accept" : "reject"), this.props.year, (this.props.surveyType === "GB" ? this.props.week : this.props.month))
-    //         .then(() => {
-    //             this.props.reloadBatchData();
-    //         });
-    // };
 
     acceptLoad = () => {
-        // this.sendSurveyAuditResponse(true);
-        this.props.closeSummaryModal();
+        this.props.fileUpload("Bulk Amendments Accept");
+        this.props.closeBulkAmendmentsModal();
     };
 
     rejectLoad = () => {
         // this.sendSurveyAuditResponse(false);
-        this.props.closeSummaryModal();
+        this.props.closeBulkAmendmentsModal(true);
     };
 
     setPanel = (message: string, status: string, visible: boolean = true) => {
@@ -115,6 +104,7 @@ export class BulkAmendmentsModal extends Component <Props, State> {
     };
 
     render() {
+        let response = this.props.amendmentsResponse;
         return (
             <ReactModal
                 isOpen={this.props.modalOpen}
@@ -134,24 +124,38 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                             <br/>
                         </>
                     }
-                    <ONSAccordionTable Headers={AMENDMENT_HEADERS}
-                                       data={this.props.amendments}
-                                       Row={amendmentItemTableRow}
-                                       expandedRowEnabled={false}
-                                       noDataMessage={"No Amendments Errors Found"}
-                                       pagination={true}
-                                       paginationSize={6}/>
-                    {/*<ReportExport hidden={false}*/}
-                    {/*              setPanel={this.setPanel}*/}
-                    {/*              importName={this.props.uploadLink}*/}
-                    {/*              reportFileType={this.props.reportFileType}/>*/}
+                    {
+                        this.props.importName === "Bulk Amendments Accept" &&
+                        <>
+                            <h4>{response.detail}</h4>
+                            <p>{response.message}</p>
+                        </>
+                    }
+                    {
+                        this.props.amendmentsResponse.status !== "OK" &&
+                        <ONSAccordionTable Headers={AMENDMENT_HEADERS}
+                                           data={response.AmendmentItems}
+                                           Row={amendmentItemTableRow}
+                                           expandedRowEnabled={false}
+                                           noDataMessage={"No Amendments Errors Found"}
+                                           pagination={true}
+                                           paginationSize={6}/>
+                    }
                 </div>
                 <footer className="Modal-Footer">
-                    <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
-                    <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}
-                               marginRight={355}/>
-                    <ONSButton label="Close" primary={false} small={false}
-                               onClick={this.props.closeSummaryModal}/>
+                    {
+                        this.props.importName === "Bulk Amendments" ?
+                            <>
+                                <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
+                                <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}
+                                           marginRight={355}/>
+                                <ONSButton label="Close" primary={false} small={false}
+                                           onClick={() => this.props.closeBulkAmendmentsModal(true)}/>
+                            </>
+                            :
+                            <ONSButton label="Close" primary={false} small={false}
+                                       onClick={() => this.props.closeBulkAmendmentsModal(true)}/>
+                    }
                 </footer>
             </ReactModal>
         );

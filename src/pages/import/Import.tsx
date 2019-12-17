@@ -40,7 +40,7 @@ interface State {
     errorGone: boolean
     outputSpec: boolean
     linkUrl: string
-    summaryModalOpen: boolean
+    bulkAmendmentsModalOpen: boolean
     amendments: any[]
 }
 
@@ -93,7 +93,7 @@ export class Import extends Component <Props, State> {
             errorGone: false,
             outputSpec: false,
             linkUrl: "",
-            summaryModalOpen: false,
+            bulkAmendmentsModalOpen: false,
             amendments: []
         };
         this.setPanel.bind(this);
@@ -187,17 +187,26 @@ export class Import extends Component <Props, State> {
                 .then(response => {
                     (isDevEnv && console.log(response));
 
+                    console.log(this.state.importName);
+                    if (this.state.importName.includes("Amendments")) {
+                        response.json().then((json: any) => {
+                            console.log(json);
+                            if (response.status === 403) {
+                                this.setPanel(json.errorMessage, "error");
+                            }
 
-                    if (this.state.importName === "Bulk Amendments") {
+                            if (this.state.importName === "Bulk Amendments Accept") {
+                                if (response.status === 403) {
+                                    this.setPanel("Import Imported With Errors: " + json.errorMessage, "info");
+                                } else {
+                                    this.setPanel("Bulk Amendments: File Uploaded Successfully", "success");
+                                }
+                            }
 
-                        if (response.status === 403) {
-                            response.json().then((json: any) => {
-                                console.log(json);
-                                this.setPanel("Error Occurred: " + json.errorMessage, "error");
-                                this.setState({amendments: json.AmendmentItems});
-                                this.openSummaryModal();
-                            });
-                        }
+                            this.setState({amendments: json, uploading: false});
+                            this.openBulkAmendmentsModal();
+                        });
+                        return;
                     }
 
                     if (response.status === 400) {
@@ -308,7 +317,19 @@ export class Import extends Component <Props, State> {
                         reportFileType: ".csv"
                     }
                 });
-                this.setState({});
+                break;
+            case "Bulk Amendments Accept":
+                this.setState({
+                    fileType: ".sav",
+                    built: true,
+                    fileName: "bulk_amendments",
+                    uploadLink: "survey/amendments",
+                    validFromDateHidden: true,
+                    importReport: {
+                        hasImportReport: true,
+                        reportFileType: ".csv"
+                    }
+                });
                 break;
             case "Output Specification":
                 this.setState({outputSpec: true});
@@ -443,31 +464,39 @@ export class Import extends Component <Props, State> {
         }
     };
 
-    openSummaryModal = () => {
-        if (this.state.importName === "Bulk Amendments") {
-            // window.history.pushState({}, document.title, this.state.pathName);
-            this.setState({
-                summaryModalOpen: true
-            });
-        }
-
+    changeImportAndSend = async (importName: string) => {
+        await this.setState({importName: importName, uploading: true});
+        await this.fileType(importName);
+        this.upload();
     };
 
-    closeSummaryModal = () => this.setState({summaryModalOpen: false});
+    openBulkAmendmentsModal = () => {
+        if (this.state.importName.includes("Bulk Amendments")) {
+            this.setState({
+                bulkAmendmentsModalOpen: true
+            });
+        }
+    };
+
+    closeBulkAmendmentsModal = (reject: boolean = false) => {
+        this.setState({bulkAmendmentsModalOpen: false});
+        if (reject) {
+            this.fileType("Bulk Amendments");
+            this.setState({importName: "Bulk Amendments"});
+        }
+    };
 
 
-    summaryModal = () => {
-        if (this.state.summaryModalOpen)
+    bulkAmendmentsModal = () => {
+        if (this.state.bulkAmendmentsModalOpen)
             return (
-                <BulkAmendmentsModal modalOpen={this.state.summaryModalOpen}
+                <BulkAmendmentsModal modalOpen={this.state.bulkAmendmentsModalOpen}
                                      importName={this.state.importName}
                                      fileName={this.state.fileName}
-                                     uploadLink={this.state.uploadLink}
-                                     reportFileType={this.state.importReport.reportFileType}
-                                     closeSummaryModal={this.closeSummaryModal}
-                                     reloadBatchData={this.closeSummaryModal}
-                                     amendments={this.state.amendments}
-                                     panel={this.state.panel}/>
+                                     closeBulkAmendmentsModal={this.closeBulkAmendmentsModal}
+                                     amendmentsResponse={this.state.amendments}
+                                     panel={this.state.panel}
+                                     fileUpload={this.changeImportAndSend}/>
             );
     };
 
@@ -486,7 +515,7 @@ export class Import extends Component <Props, State> {
                             <br/>
                         </>
                     }
-                    {this.summaryModal()}
+                    {this.bulkAmendmentsModal()}
                     {(this.state.inputError) &&
                     <div>
                         <div className="panel panel--error">
@@ -562,7 +591,7 @@ export class Import extends Component <Props, State> {
                                         hidden={this.state.uploadProgressHidden}
                                         fileUploading={this.setFileUploading}
                                         setPanel={this.setPanel}
-                                        redirectOnComplete={this.openSummaryModal}/>
+                                        redirectOnComplete={this.openBulkAmendmentsModal}/>
                 </div>
             </DocumentTitle>
         );
