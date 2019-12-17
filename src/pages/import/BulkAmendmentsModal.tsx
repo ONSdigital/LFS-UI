@@ -6,6 +6,8 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
 import {AMENDMENT_HEADERS} from "../../utilities/Headers";
+import XLSX from 'xlsx';
+
 
 dateFormatter.extend(advancedFormat);
 
@@ -103,6 +105,14 @@ export class BulkAmendmentsModal extends Component <Props, State> {
         });
     };
 
+    exportReport = () => {
+        let data = this.props.amendmentsResponse.AmendmentItems;
+        var worksheet = XLSX.utils.json_to_sheet(data);
+        var new_workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
+        XLSX.writeFile(new_workbook, "Bulk_Ammendments_File.xlsx")
+    }
+
     render() {
         let response = this.props.amendmentsResponse;
         return (
@@ -147,8 +157,8 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                         this.props.importName === "Bulk Amendments" ?
                             <>
                                 <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
-                                <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}
-                                           marginRight={355}/>
+                                <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}/>
+                                <ONSButton label="Export" primary={true} small={false} onClick={this.exportReport} marginRight={270}/>
                                 <ONSButton label="Close" primary={false} small={false}
                                            onClick={() => this.props.closeBulkAmendmentsModal(true)}/>
                             </>
