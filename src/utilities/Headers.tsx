@@ -85,6 +85,29 @@ const UPLOAD_HEADERS =
         order: false
     }];
 
+const AMENDMENT_HEADERS =
+    [{
+        label: "Case No",
+        column_name: "Case No",
+        filter: false,
+        order: true
+    },{
+        label: "Variable",
+        column_name: "Variable",
+        filter: false,
+        order: true
+    },  {
+        label: "Found",
+        column_name: "Found",
+        filter: false,
+        order: false
+    }, {
+        label: "Reference Date",
+        column_name: "Reference Date",
+        filter: false,
+        order: false
+    }];
+
 const DASHBOARD_HEADERS =
     [{
         label: "BatchID",
@@ -261,5 +284,5 @@ function roleHeaders() {
     )
 }
 
-export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, userHeaders, roleHeaders,
+export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, AMENDMENT_HEADERS, userHeaders, roleHeaders,
     DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS, REFERENCE_FILE_IMPORT_HEADERS, VALUE_LABELS_HEADERS, REFERENCE_FILE_HEADERS, BATCH_PROGRESS_TABLE}

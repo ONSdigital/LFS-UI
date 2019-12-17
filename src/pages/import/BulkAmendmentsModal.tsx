@@ -3,19 +3,28 @@ import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import ReactModal from "react-modal";
 import dateFormatter from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import {ReportExport} from "../../components/ReportExport";
 import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
+import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
+import {AMENDMENT_HEADERS} from "../../utilities/Headers";
+import XLSX from "xlsx";
+
 
 dateFormatter.extend(advancedFormat);
 
 interface Props {
     importName: string
     fileName: string
-    closeSummaryModal: any
+    closeBulkAmendmentsModal: any
     modalOpen: boolean
-    reloadBatchData: Function
-    uploadLink: string
-    reportFileType: string
+    amendmentsResponse: any
+    panel: Panel
+    fileUpload: Function
+}
+
+interface Panel {
+    label: string,
+    visible: boolean
+    status: string
 }
 
 interface State {
@@ -38,6 +47,13 @@ interface MetaDataListItem {
     L: string
 }
 
+interface AmendmentItem {
+    caseNo: string
+    found: boolean
+    refDate: string
+    variable: string
+}
+
 export class BulkAmendmentsModal extends Component <Props, State> {
 
     constructor(props: any) {
@@ -49,52 +65,34 @@ export class BulkAmendmentsModal extends Component <Props, State> {
             summaryOpen: false,
             uploadType: "",
             importAudit: null,
-            panel: {
-                label: "",
-                visible: false,
-                status: "info"
-            }
+            panel: props.panel
         };
     }
 
     componentDidMount(): void {
-        // this.getSurveyImportAudit(this.props.week, this.props.month, this.props.surveyType);
+        console.log(this.props.amendmentsResponse);
+        if (this.props.amendmentsResponse.status === "OK" && this.props.importName === "Bulk Amendments") {
+            this.setState({
+                panel: {
+                    label: "Validation completed with no errors",
+                    visible: true,
+                    status: "success"
+                }
+            });
+        } else {
+            this.setState({panel: this.props.panel});
+        }
     }
 
-    // getSurveyImportAudit = (week: string, month: string, type: string) => {
-    //     getSurveyAudit(type, this.props.year, (type === "GB" ? week : month))
-    //         .then(r => {
-    //             if (r !== undefined && r.length !== 0) {
-    //                 this.setState({importAudit: r[0]});
-    //             } else {
-    //                 this.setState({importAudit: null});
-    //             }
-    //         })
-    //         .catch(error => {
-    //             (isDevEnv() && console.log(error));
-    //         });
-    // };
-    //
-    // sendSurveyAuditResponse = (accept: boolean) => {
-    //     surveyAuditResponse(this.props.surveyType, (accept ? "accept" : "reject"), this.props.year, (this.props.surveyType === "GB" ? this.props.week : this.props.month))
-    //         .then(() => {
-    //             this.props.reloadBatchData();
-    //         });
-    // };
 
     acceptLoad = () => {
-        // this.sendSurveyAuditResponse(true);
-        this.props.closeSummaryModal();
+        this.props.fileUpload("Bulk Amendments Accept");
+        this.props.closeBulkAmendmentsModal();
     };
 
     rejectLoad = () => {
         // this.sendSurveyAuditResponse(false);
-        this.props.closeSummaryModal();
-    };
-
-    summaryTitle = () => {
-
-        return;
+        this.props.closeBulkAmendmentsModal(true);
     };
 
     setPanel = (message: string, status: string, visible: boolean = true) => {
@@ -107,40 +105,22 @@ export class BulkAmendmentsModal extends Component <Props, State> {
         });
     };
 
-    // TODO: Waiting for returned data
-    // summaryMetaData() {
-    //     if (this.state.importAudit !== null) {
-    //         return (
-    //             [{
-    //                 L: "Reference Date",
-    //                 R: dateFormatter(this.state.importAudit.referenceDate).format("Do MMMM YYYY")
-    //             }, {
-    //                 L: "Variables in File",
-    //                 R: this.state.importAudit.numVarFile
-    //             }, {
-    //                 L: "Variables Uploaded",
-    //                 R: this.state.importAudit.numVarLoaded
-    //             }, {
-    //                 L: "Observations in File",
-    //                 R: this.state.importAudit.numObFile
-    //             }, {
-    //                 L: "Observations Uploaded",
-    //                 R: this.state.importAudit.numObLoaded
-    //             }
-    //             ]
-    //         );
-    //     } else {
-    //         return (
-    //             [{
-    //                 L: "Error",
-    //                 R: "Error Occurred when getting Surrey Audit"
-    //             }
-    //             ]
-    //         );
-    //     }
-    // }
+    exportReport = () => {
+        let data = this.props.amendmentsResponse.AmendmentItems;
+        let worksheet = XLSX.utils.json_to_sheet(data);
+        worksheet["!cols"] = [
+            {wch: 20},
+            {wch: 20},
+            {wch: 20},
+            {wch: 20},
+        ];
+        let new_workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
+        XLSX.writeFile(new_workbook, "Bulk_Amendments_File.xlsx");
+    };
 
     render() {
+        let response = this.props.amendmentsResponse;
         return (
             <ReactModal
                 isOpen={this.props.modalOpen}
@@ -160,33 +140,72 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                             <br/>
                         </>
                     }
-                    {/*<div>*/}
-                    {/*    <ONSMetadata List={this.summaryMetaData()} LSpacing="6" RSpacing="5"/>*/}
-                    {/*    <ONSButton label="Export / View Report" primary={false} small={false}/>*/}
-                    {/*</div>*/}
-                    {/*<br/>*/}
-                    {/*{*/}
-                    {/*    this.props.status === 1 || this.props.status === 2 ?*/}
-                    {/*<ReportExport hidden={false} setPanel={this.setPanel}*/}
-                    {/*              importName={this.state.uploadLink}/>*/}
-
-                    <ReportExport hidden={false}
-                                  setPanel={this.setPanel}
-                                  importName={this.props.uploadLink}
-                                  reportFileType={this.props.reportFileType}/>
-
-                    {/*        :*/}
-                    {/*        <ONSButton label="Close" primary={false} small={false} onClick={this.props.closeSummaryModal}/>*/}
-                    {/*}*/}
+                    {
+                        this.props.importName === "Bulk Amendments Accept" &&
+                        <>
+                            <h4>{response.detail}</h4>
+                            <p>{response.message}</p>
+                        </>
+                    }
+                    {
+                        this.props.amendmentsResponse.status !== "OK" &&
+                        <ONSAccordionTable Headers={AMENDMENT_HEADERS}
+                                           data={response.AmendmentItems}
+                                           Row={amendmentItemTableRow}
+                                           expandedRowEnabled={false}
+                                           noDataMessage={"No Amendments Errors Found"}
+                                           pagination={true}
+                                           paginationSize={6}/>
+                    }
                 </div>
                 <footer className="Modal-Footer">
-                    <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
-                    <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}
-                               marginRight={255}/>
-                    <ONSButton label="Close" primary={false} small={false}
-                               onClick={this.props.closeSummaryModal}/>
+                    {
+                        this.props.importName === "Bulk Amendments" ?
+                            <>
+                                <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
+                                {
+                                    this.props.amendmentsResponse.status !== "OK" ? 
+                                        <>
+                                            <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}/>
+                                            <ONSButton label="Export" primary={true} small={false} onClick={this.exportReport}
+                                                    marginRight={240} exportExcelBtn={true}/>
+                                        </>
+                                        :
+                                        <>
+                                            <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad} marginRight={365}/>
+                                        </>
+                                } 
+                                <ONSButton label="Close" primary={false} small={false}
+                                           onClick={() => this.props.closeBulkAmendmentsModal(true)}/>
+                            </>
+                            :
+                            <ONSButton label="Close" primary={false} small={false}
+                                       onClick={() => this.props.closeBulkAmendmentsModal(true)}/>
+                    }
                 </footer>
             </ReactModal>
         );
     }
 }
+
+const amendmentItemTableRow = (rowData: any) => {
+    let row: AmendmentItem = rowData.row;
+    return (
+        <>
+            <td className="table__cell ">
+                {row.caseNo}
+            </td>
+            <td className="table__cell ">
+                {row.variable}
+            </td>
+
+            <td className="table__cell ">
+                {row.found ? "Yes" : "No"}
+            </td>
+            <td className="table__cell ">
+                {row.refDate.substr(0, 2) + "/" + row.refDate.substr(2, 2) + "/" + row.refDate.substr(4)}
+            </td>
+
+        </>
+    );
+};
