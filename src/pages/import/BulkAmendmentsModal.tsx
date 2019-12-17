@@ -163,9 +163,18 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                         this.props.importName === "Bulk Amendments" ?
                             <>
                                 <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
-                                <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}/>
-                                <ONSButton label="Export" primary={true} small={false} onClick={this.exportReport}
-                                           marginRight={240} exportExcelBtn={true}/>
+                                {
+                                    this.props.amendmentsResponse.status !== "OK" ? 
+                                        <>
+                                            <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad}/>
+                                            <ONSButton label="Export" primary={true} small={false} onClick={this.exportReport}
+                                                    marginRight={240} exportExcelBtn={true}/>
+                                        </>
+                                        :
+                                        <>
+                                            <ONSButton label="Reject" primary={false} small={false} onClick={this.rejectLoad} marginRight={365}/>
+                                        </>
+                                } 
                                 <ONSButton label="Close" primary={false} small={false}
                                            onClick={() => this.props.closeBulkAmendmentsModal(true)}/>
                             </>
