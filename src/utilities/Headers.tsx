@@ -119,7 +119,7 @@ const BATCH_PROGRESS_TABLE =
         label: "Step",
         column_name: "Step",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Status",
         column_name: "status",
@@ -133,12 +133,12 @@ const SURVEY_UPLOAD_HISTORY =
         label: "Import Date",
         column_name: "Date",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Status",
         column_name: "Status",
         filter: false,
-        order: true
+        order: false
     }
     ];
 
