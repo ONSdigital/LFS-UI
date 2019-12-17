@@ -108,13 +108,12 @@ export class BulkAmendmentsModal extends Component <Props, State> {
     exportReport = () => {
         let data = this.props.amendmentsResponse.AmendmentItems;
         let worksheet = XLSX.utils.json_to_sheet(data);
-        let worksheetColumns = [
+        worksheet["!cols"] = [
             {wch: 20},
             {wch: 20},
             {wch: 20},
             {wch: 20},
         ];
-        worksheet["!cols"] = worksheetColumns;
         let new_workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
         XLSX.writeFile(new_workbook, "Bulk_Amendments_File.xlsx");
