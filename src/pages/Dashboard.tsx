@@ -123,6 +123,7 @@ export class Dashboard extends Component <{}, State> {
         return (
             <DocumentTitle title={'Labour Force Survey Dashboard'}>
                 <div className="container">
+                    <br/>
                     <fieldset className="fieldset">
                         <legend className="fieldset__legend">Filter Batches</legend>
                         <p className="checkboxes__label">Batch Status</p>

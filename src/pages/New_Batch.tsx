@@ -163,6 +163,7 @@ export class New_Batch extends Component <{}, State> {
         return (
             <DocumentTitle title='LFS: New Batch'>
                 <div className="container">
+                    <br/>
                     {
                         this.state.panel.visible &&
                         <>

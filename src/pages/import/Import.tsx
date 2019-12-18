@@ -11,6 +11,7 @@ import {ReportExport} from "../../components/ReportExport";
 import {ONSSelect} from "../../components/ONS_DesignSystem/ONSSelect";
 import {BulkAmendmentsModal} from "./BulkAmendmentsModal";
 import * as XLSX from "xlsx";
+import { ONSBreadcrumbs } from "../../components/ONS_DesignSystem/ONSBreadcrumbs";
 
 interface Props {
     match: any
@@ -486,7 +487,6 @@ export class Import extends Component <Props, State> {
         }
     };
 
-
     bulkAmendmentsModal = () => {
         if (this.state.bulkAmendmentsModalOpen)
             return (
@@ -500,10 +500,16 @@ export class Import extends Component <Props, State> {
             );
     };
 
+    getBreadcrumbList = () => {
+        if(this.state.outputSpec) return [{name: "Import Overview", link: "import/overview"}, {name: "Output File Specification", link: "import/output"}]
+        else return [{name: "Import Overview", link: "import/overview"}]
+    }
+
     render() {
         return (
             <DocumentTitle title={"LFS Import " + this.state.importName}>
                 <div className="container">
+                    <ONSBreadcrumbs List={this.getBreadcrumbList()} Current={this.state.importName}></ONSBreadcrumbs>
                     <h3>Import {this.state.importName}</h3>
                     <br/>
                     {
