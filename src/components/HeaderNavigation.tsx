@@ -15,26 +15,9 @@ interface LinkRow {
 
 let headerLinks = [
     {
-        link: "/dashboard",
-        label: "Dashboard"
+        link: "/",
+        label: "Home"
     },
-    {
-        link: "/manage-batch",
-        label: "Manage Batch",
-        hidden: true,
-        nonGenericPage: true
-    },
-    {
-        link: "/survey-import",
-        label: "Import Survey",
-        hidden: true,
-        nonGenericPage: true
-    },
-    {
-        link: "/new-batch",
-        label: "New Batch"
-    },
-
     {
         link: "/view-data",
         label: "View Data"
@@ -60,7 +43,6 @@ export function HeaderNavigation(props: Props) {
     let links: LinkRow[] = headerLinks;
     let link = links.find(x => x.current);
     if (link !== undefined) {
-        if (link.nonGenericPage) link.hidden = true;
         link.current = false;
     }
 
@@ -68,17 +50,6 @@ export function HeaderNavigation(props: Props) {
     link = links.find(x => "/" + x.link.split("/")[1] === "/" + location.pathname.split("/")[1]);
     if (link !== undefined) {
         link.current = true;
-        if (link.nonGenericPage) {
-            link.hidden = false;
-            // link.link = location.pathname
-        }
-    } else {
-        if (location.pathname.split("/")[1].length === 0) {
-            link = links.find(x => x.label === "Dashboard");
-            if (link !== undefined) {
-                link.current = true;
-            }
-        }
     }
 
     return (
@@ -90,7 +61,6 @@ export function HeaderNavigation(props: Props) {
                         {
                             props.loggedIn ?
                                 links.map((link, index) =>
-                                    !link.hidden &&
                                     <Fragment key={index}>
                                         <li className={"header-nav__item " + (link.current && "header-nav__item--active")}>
                                             <Link className="header-nav__link"
