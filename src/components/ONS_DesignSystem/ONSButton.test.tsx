@@ -62,6 +62,17 @@ describe("ONS Button Test", () => {
         disabled: true
     };
 
+    const callToActionProps = {
+        label: "Submit1",
+        primary: false,
+        small: true,
+        field: true,
+        onButtonClick: sinon.spy(),
+        exportExcelBtn: false,
+        disabled: false,
+        action: true
+    };
+
     function wrapper(render: any, props: any) {
         return render(
             <ONSButton label={props.label}
@@ -73,7 +84,8 @@ describe("ONS Button Test", () => {
                        marginRight={props.marginRight}
                        onClick={props.onButtonClick}
                        exportExcelBtn={props.exportExcelBtn}
-                       disabled={props.disabled}/>);
+                       disabled={props.disabled}
+                       action={props.action}/>);
     }
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
@@ -101,5 +113,9 @@ describe("ONS Button Test", () => {
 
     it("displays disabled button", () => {
         expect(wrapper(mount, disabledProps).find("button").hasClass("btn--disabled")).toEqual(true);
+    });
+
+    it("displays Call to Action button", () => {
+        expect(wrapper(mount, callToActionProps).find("button").hasClass("btn--link")).toEqual(true);
     });
 });

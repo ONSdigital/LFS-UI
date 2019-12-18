@@ -25,7 +25,7 @@ interface DashboardTableRow {
     expanded: boolean
 }
 
-export class DashboardTable extends Component <Props, State> {
+export class HomeBatchTable extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
