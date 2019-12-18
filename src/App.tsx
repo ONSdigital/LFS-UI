@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Route, RouteProps, Switch} from "react-router-dom";
 import {Layout} from "./components/Layout";
-import {Dashboard} from "./pages/Dashboard";
+import {Home} from "./pages/Home";
 import {Login} from "./auth/Login";
 import {Admin} from "./pages/Admin";
 import Logout from "./auth/Logout";
@@ -88,7 +88,7 @@ class App extends React.Component<Props, State> {
               <DocumentTitle title="Labour Force Survey">
                   <Layout loggedIn={!!(this.state.user !== null || "")}>
                       <Switch>
-                          <this.PrivateRoute exact path='/' component={Dashboard} page_id={1}/>
+                          <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
                           <this.PrivateRoute exact path='/new-batch' component={New_Batch} page_id={3}/>
                           <this.PrivateRoute exact path='/manage-batch/monthly/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
                           <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>

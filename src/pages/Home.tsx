@@ -1,5 +1,5 @@
 ﻿import React, {ChangeEvent, Component} from "react";
-import {DashboardTable} from "../components/DashboardTable";
+import {HomeBatchTable} from "../components/HomeBatchTable";
 import {ONSRadioButton} from "../components/ONS_DesignSystem/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
@@ -21,8 +21,8 @@ interface State {
     annuallyBatchFilter: boolean
 }
 
-export class Dashboard extends Component <{}, State> {
-    displayName = Dashboard.name;
+export class Home extends Component <{}, State> {
+    displayName = Home.name;
 
     constructor(props: any) {
         super(props);
@@ -163,7 +163,7 @@ export class Dashboard extends Component <{}, State> {
                                      style={this.filterOptionStyle}/>
                     </span>
                     </fieldset>
-                    <DashboardTable data={this.state.filteredBatchData}/>
+                    <HomeBatchTable data={this.state.filteredBatchData}/>
                 </div>
             </DocumentTitle>
         );
