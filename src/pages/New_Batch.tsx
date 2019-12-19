@@ -15,6 +15,7 @@ import {createNewBatch} from "../utilities/http";
 import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 import DocumentTitle from "react-document-title";
 import {Link} from "react-router-dom";
+import {ONSBreadcrumbs} from "../components/ONS_DesignSystem/ONSBreadcrumbs";
 
 interface Panel {
     label: string,
@@ -87,7 +88,7 @@ export class New_Batch extends Component <{}, State> {
                                 (this.state.batchType === "monthly" ? monthNumberToString(+this.state.period) : this.state.period) + " " +
                                 this.state.year + " already exists, ";
 
-                            this.setState({batchURL: "manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period})
+                            this.setState({batchURL: "manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period});
                         }
                         this.setState({
                             panel: {
@@ -105,7 +106,7 @@ export class New_Batch extends Component <{}, State> {
                             }
                         });
                         // redirect to Manage batch Page
-                        window.location.href = "/manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period;
+                        window.location.href = "/manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period + "/new";
                     }
                 })
                 .catch(error => (isDevEnv() && console.log(error)));
@@ -163,7 +164,7 @@ export class New_Batch extends Component <{}, State> {
         return (
             <DocumentTitle title='LFS: New Batch'>
                 <div className="container">
-                    <br/>
+                    <ONSBreadcrumbs List={[{name: "Home", link: ""}]} Current={"Create New Batch"}/>
                     {
                         this.state.panel.visible &&
                         <>

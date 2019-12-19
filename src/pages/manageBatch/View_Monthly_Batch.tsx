@@ -11,7 +11,7 @@ import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 import {AccordionDropDown} from "../../components/AccordionDropDown";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {ONSMetadata} from "../../components/ONS_DesignSystem/ONSMetadata";
-import { ONSBreadcrumbs } from "../../components/ONS_DesignSystem/ONSBreadcrumbs";
+import {ONSBreadcrumbs} from "../../components/ONS_DesignSystem/ONSBreadcrumbs";
 
 interface State {
     UploadsData: Data | null
@@ -29,6 +29,7 @@ interface State {
     surveyAuditUploadType: string
     surveyAuditStatus: number
     pathName: string
+    breadcrumbList: any[]
 }
 
 interface MetaDataListItem {
@@ -75,14 +76,20 @@ export class View_Monthly_Batch extends Component <Props, State> {
             surveyAuditUploadType: "",
             surveyAuditStatus: 0,
             importAudit: null,
-            pathName: "/manage-batch/monthly/" + props.match.params.year + "/" + props.match.params.period
+            pathName: "/manage-batch/monthly/" + props.match.params.year + "/" + props.match.params.period,
+            breadcrumbList: [{name:"Home", link:""}]
         };
     }
 
     componentDidMount(): void {
         this.batchData();
         let summaryRedirect = (this.props.match.params.summary);
-        if (summaryRedirect !== undefined && summaryRedirect.length > 0) {
+        if (summaryRedirect !== undefined && summaryRedirect === "new") {
+            window.history.pushState({}, document.title, this.state.pathName);
+            this.state.breadcrumbList.push({name:"Create New Batch", link:"new-batch"})
+        }
+
+        if (summaryRedirect !== undefined && summaryRedirect.length > 0 && summaryRedirect !== "new") {
             this.openSummaryModalFromRedirect(summaryRedirect);
         }
         this.updateMetaDataList();
@@ -186,7 +193,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
             <DocumentTitle
                 title={"LFS Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}>
                 <div className="container">
-                    <ONSBreadcrumbs List={[{name:"Home", link:""}]} Current={"Manage Batch " + monthNumberToString(Number(this.state.period)) + " " + this.state.year}/>
+                    <ONSBreadcrumbs List={this.state.breadcrumbList} Current={"Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}/>
                     {
                         this.state.batchFound ?
                             <>

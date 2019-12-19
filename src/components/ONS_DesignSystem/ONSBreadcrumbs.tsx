@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
 
 interface Props {
     List: any
@@ -14,7 +14,7 @@ export class ONSBreadcrumbs extends Component <Props, {}> {
             <nav className="breadcrumb" aria-label="Breadcrumb">
                 <ol className="breadcrumb__items">
                     {this.props.List.map((item:any, index: number) => (
-                        <li id={"breadcrumb-" + (index + 1)} className="breadcrumb__item u-fs-s">
+                        <li key={index} id={"breadcrumb-" + (index + 1)} className="breadcrumb__item u-fs-s">
                             <Link to={"/" + item.link} className="breadcrumb__link">{item.name}</Link>
                         </li>
                     ))}
