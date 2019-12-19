@@ -94,7 +94,7 @@ export class BulkAmendmentsModal extends Component <Props, State> {
         // this.sendSurveyAuditResponse(false);
         this.props.closeBulkAmendmentsModal(true);
     };
-
+ 
     setPanel = (message: string, status: string, visible: boolean = true) => {
         this.setState({
             panel: {

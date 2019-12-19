@@ -125,6 +125,7 @@ export class Home extends Component <{}, State> {
         return (
             <DocumentTitle title={"Labour Force Survey Dashboard"}>
                 <div className="container">
+                    <br/>
                     <fieldset className="fieldset">
                         <Link to={"/new-batch"} style={{right: 0, float: "right"}}>
                             <ONSButton label={"Create New Batch"} primary={true} field={true} action={true}/>
