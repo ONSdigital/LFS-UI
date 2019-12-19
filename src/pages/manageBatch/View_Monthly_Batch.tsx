@@ -193,11 +193,11 @@ export class View_Monthly_Batch extends Component <Props, State> {
             <DocumentTitle
                 title={"LFS Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}>
                 <div className="container">
-                    <ONSBreadcrumbs List={this.state.breadcrumbList}
-                                    Current={"Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}/>
                     {
                         this.state.batchFound ?
                             <>
+                                <ONSBreadcrumbs List={this.state.breadcrumbList}
+                                                Current={"Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}/>
                                 <h3> Manage Monthly Batch</h3>
                                 <ONSMetadata List={this.state.metadata}/>
                                 <div style={{width: "35rem"}}>
@@ -242,7 +242,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                 <br/>
                             </>
                             :
-                            <GenericNotFound label={toUpperCaseFirstChar(this.state.batchType) + " batch Not Found "}/>
+                            <GenericNotFound label={toUpperCaseFirstChar(this.state.batchType) + " Batch for " + monthNumberToString(+this.state.period) + " " + this.state.year + ", Not Found "}/>
                     }
                 </div>
             </DocumentTitle>
