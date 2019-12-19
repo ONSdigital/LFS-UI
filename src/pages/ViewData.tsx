@@ -57,7 +57,7 @@ export class ViewData extends Component <{}, State> {
             <DocumentTitle title={'LFS View Data'}>
                 <>
                     <div className={'container'}>
-                        <br></br>
+                        <br/>
                         <ONSSelect label="Select Table" value="select value" options={this.tableSelection}
                                    onChange={this.handleImportChange}/>
                         {this.state.table}
