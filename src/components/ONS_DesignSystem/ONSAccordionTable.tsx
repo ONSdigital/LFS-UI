@@ -114,7 +114,7 @@ export class ONSAccordionTable extends Component <Props, State> {
                                     <tr className={("table__row " + (this.props.expandedRowEnabled ? "selectableTableRow" : "nonSelectableTableRow"))}
                                         onClick={((e) => this.handleClickOnRow(e, row, index))}
                                         tabIndex={0}
-                                        title="Click to Expand"
+                                        title={this.props.expandedRowEnabled ? "Click to Expand": "Table Row"}
                                         onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>
                                         {
                                             this.props.expandedRowEnabled &&

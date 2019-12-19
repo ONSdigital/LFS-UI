@@ -28,7 +28,7 @@ const BATCH_HEADERS =
 
 const REFERENCE_FILE_HEADERS =
     [{
-        label: "File Name",
+        label: "Reference File Name",
         column_name: "File Name",
         filter: false,
         order: true

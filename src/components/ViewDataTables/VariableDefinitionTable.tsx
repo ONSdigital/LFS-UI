@@ -4,12 +4,11 @@ import {VARIABLE_DEFINITION_HEADERS} from "../../utilities/Headers";
 import DocumentTitle from "react-document-title";
 import dateFormatter from "dayjs";
 import {getVariableDefinitions} from "../../utilities/http";
-import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
-import {ONSButton} from "../ONS_DesignSystem/ONSButton";
 import {isDevEnv} from "../../utilities/Common_Functions";
 // Useful lodash cheat sheet:  https://devhints.io/lodash
 import lodash from "lodash";
 import uuid from "uuid/v4";
+import {ONSTextInputWithButton} from "../ONS_DesignSystem/ONSTextInputWithButton";
 
 interface Props {
 }
@@ -87,11 +86,13 @@ export class VariableDefinitionTable extends Component <Props, State> {
         return (
             <DocumentTitle title={"LFS View Variable Definitions"}>
                 <>
-                    <ONSTextInput value={this.state.search} label={"Filter by Variable Name"}
-                                  onChange={this.handleSearch}/>
-                    <ONSButton label={"Clear"} primary={false} small={false} field={true}
-                               onClick={this.viewAll}/>
-                    <br/>
+                    <ONSTextInputWithButton inputLabel={"Filter by Variable Name"}
+                                            handleInputChange={this.handleSearch}
+                                            inputValue={this.state.search}
+                                            primaryButton={false}
+                                            buttonLabel={"Clear"}
+                                            onButtonClick={this.viewAll}/>
+
                     <ONSAccordionTable data={this.state.filteredData} Row={VarDefTableRow}
                                        expandedRowEnabled={true}
                                        expandedRow={VarDefExpandedRow}
@@ -114,7 +115,7 @@ const VarDefTableRow = (rowData: any) => {
             <td className="table__cell ">
                 {row.variable}
             </td>
-            <td className="table__cell ">
+            <td className="table__cell " style={{width: "32%"}}>
                 {row.description.Valid ? row.description.String : "No Description Provided"}
             </td>
             <td className="table__cell ">
