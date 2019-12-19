@@ -1,13 +1,14 @@
-import React, {ChangeEvent, Component} from 'react';
-import {ONSSelect} from "../components/ONS_DesignSystem/ONSSelect";
+import React, {ChangeEvent, Component} from "react";
 import {GenericNotFound} from "./GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {VariableDefinitionTable} from "../components/ViewDataTables/VariableDefinitionTable";
 import {ValueLabelsTable} from "../components/ViewDataTables/ValueLabelsTable";
+import {ONSTabs} from "../components/ONS_DesignSystem/ONSTabs";
 
 interface State {
     VarDefData: [] | null,
     table: any | null
+    tabItems: any[]
 }
 
 export class ViewData extends Component <{}, State> {
@@ -17,13 +18,24 @@ export class ViewData extends Component <{}, State> {
         super(props);
         this.state = {
             VarDefData: [],
-            table: null
+            table: null,
+            tabItems: this.tabsSelection
         };
     }
 
-    handleImportChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    componentDidMount(): void {
+        this.handleImportChange("Variable Definitions")
+    }
+
+    handleImportChange = (e: ChangeEvent<HTMLSelectElement> | string) => {
+        console.log(e)
         let table = null;
-        switch (e.target.value) {
+        let name = e;
+        if (typeof e !== "string") {
+            name = e.target.value;
+        }
+
+        switch (name) {
             case "Geographical Classifications":
                 table = <GenericNotFound/>;
                 break;
@@ -40,9 +52,23 @@ export class ViewData extends Component <{}, State> {
                 table = <VariableDefinitionTable/>;
                 break;
         }
-        this.setState({table: table})
+        this.setState({table: table});
+        let items = this.state.tabItems;
+        let item = items.find(x => x.active);
+        if (item !== undefined) {
+            item.active = false;
+        }
 
+        item = items.find(x => x.name === name);
+        if (item !== undefined) {
+            item.active = true;
+        }
     };
+
+    tabsSelection = [
+        {name: "Variable Definitions", active: true},
+        {name: "Value Labels", active: false}
+    ];
 
     tableSelection = [
         // {"label": "Geographical Classifications", "value": "Geographical Classifications"},
@@ -54,14 +80,13 @@ export class ViewData extends Component <{}, State> {
 
     render() {
         return (
-            <DocumentTitle title={'LFS View Data'}>
-                <>
-                    <div className={'container'}>
-                        <ONSSelect label="Select Table" value="select value" options={this.tableSelection}
-                                   onChange={this.handleImportChange}/>
-                        {this.state.table}
-                    </div>
-                </>
+            <DocumentTitle title={"LFS View Data"}>
+                <div className={"container"}>
+                    <ONSTabs label={"Select Table"} items={this.state.tabItems} onClick={this.handleImportChange}/>
+                    {/*<ONSSelect label="Select Table" value="select value" options={this.tableSelection}*/}
+                    {/*           onChange={this.handleImportChange}/>*/}
+                    {this.state.table}
+                </div>
             </DocumentTitle>
         );
     }
