@@ -135,7 +135,7 @@ describe("ONS Accordion Table Test", () => {
         expect(wrapper(mount, trueEmptyProps).find("ONSAccordionTable").getElement().props.noDataMessage).toEqual(trueEmptyProps.noDataMessage);
     });
 
-    it("should render wit Caption above Table", () => {
+    it("should render with Caption above Table", () => {
         expect(wrapper(mount, captionProps).find("caption").text()).toEqual(captionProps.caption);
     });
 

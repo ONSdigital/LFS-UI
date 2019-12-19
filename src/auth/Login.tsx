@@ -87,6 +87,7 @@ export class Login extends Component <Props, State> {
     render() {
         return (
             <div className="container ">
+                <br/>
                 <ONSPanel label={this.state.panel.label} hidden={!this.state.panel.visible} status={this.state.panel.status}>
                     <p>{this.state.panel.label}</p>
                 </ONSPanel>
