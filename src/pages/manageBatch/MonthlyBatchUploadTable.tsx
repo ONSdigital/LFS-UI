@@ -36,7 +36,7 @@ export function MonthlyBatchUploadTable(props: Props) {
                 </td>
                 <td className="table__cell ">
                     <Link
-                        className={"breadcrumb__link"}
+                        className={"breadcrumb__linkbreadcrumb__link"}
                         to={"/survey-import/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year}>
                         Import
                     </Link>

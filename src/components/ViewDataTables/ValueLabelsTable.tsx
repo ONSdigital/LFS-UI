@@ -75,13 +75,14 @@ export class ValueLabelsTable extends Component <Props, State> {
                                   onChange={this.handleSearch}/>
                     <ONSButton label={"View All"} primary={false} small={false} field={true}
                                onClick={this.viewAll}/>
+                    <br/>
                     <ONSAccordionTable data={this.state.filteredData} Row={ValueLabelTableRow}
                                        expandedRowEnabled={false}
                                        noDataMessage={this.state.noDataMessage}
                                        Headers={VALUE_LABELS_HEADERS}
                                        pagination={true}
                                        paginationSize={20}
-                                       scrollable={true}/>
+                                       scrollable={false}/>
                 </>
             </DocumentTitle>
         );
