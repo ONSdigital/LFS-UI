@@ -138,6 +138,7 @@ export class Admin extends Component <{}, State> {
         return (
             <DocumentTitle title={"LFS User Management"}>
                 <div className="container">
+                    <br></br>
                     {[this.saveModal()]}
                     <ONSAccordionTable Headers={roleHeaders()}
                                        data={this.state.RoleData}

@@ -3,9 +3,7 @@ import {REFERENCE_FILE_IMPORT_HEADERS} from "../../utilities/Headers";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
-import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 import dateFormatter from "dayjs";
-
 
 
 interface BatchUploadTableRow {
@@ -25,13 +23,13 @@ export function ImportFileTable() {
         {name: "Output Specification", "status": "Not Imported"},
         {name: "Population Estimates", "status": "Not Imported"},
         {name: "Variable Definitions", "status": "Imported"},
-        {name: "Value Labels", "status": "Imported"},
+        {name: "Value Labels", "status": "Imported"}
     ];
 
     let BatchUploadTableRow = (rowData: any) => {
         let row = rowData.row;
-        let link = "/import/" + row.name
-        if (row.name === "Output Specification") link = "/import/Output"
+        let link = "/import/" + row.name;
+        if (row.name === "Output Specification") link = "/import/Output";
         return (
             <>
                 <td className="table__cell ">
@@ -41,16 +39,17 @@ export function ImportFileTable() {
                     {dateFormatter(new Date()).format("DD/MM/YYYY")}
                 </td>
                 <td className="table__cell ">
-                    <ONSStatus label={row.status} small={false} status={'info'}/>
+                    <ONSStatus label={row.status} small={false} status={"info"}/>
                 </td>
                 <td className="table__cell ">
                     <Link
+                        className={"breadcrumb__link"}
                         to={link}>
-                        <ONSButton label={"Import"} primary={false} small={true}/>
+                        Import
                     </Link>
                 </td>
             </>
-        )
+        );
     };
 
     return (
@@ -59,5 +58,5 @@ export function ImportFileTable() {
                            Row={BatchUploadTableRow}
                            expandedRowEnabled={false}
                            noDataMessage={"No Data"}/>
-    )
+    );
 }
