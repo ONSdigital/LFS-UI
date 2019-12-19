@@ -17,7 +17,6 @@ export class Layout extends Component <Props, {}> {
             <Header title="Labour Force Survey" loggedIn={this.props.loggedIn}>
                 <HeaderNavigation loggedIn={this.props.loggedIn}/>
             </Header>
-            <br/>
             {this.props.children}
           </div>
           <footer style={{height: "50px"}}>
