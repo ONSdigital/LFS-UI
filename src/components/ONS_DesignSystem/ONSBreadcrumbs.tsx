@@ -7,8 +7,6 @@ interface Props {
 }
 
 export class ONSBreadcrumbs extends Component <Props, {}> {
-    
-
     render() {
         return(
             <nav className="breadcrumb" aria-label="Breadcrumb">
