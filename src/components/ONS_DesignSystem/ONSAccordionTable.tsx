@@ -5,8 +5,8 @@ import {ONSPagination} from "./ONSPagination";
 import uuidv4 from "uuid/v4";
 import "./ONSAccordionTable.css";
 import lodash from "lodash";
-import {FixedSizeList as List} from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
+import {Column, Table} from "react-virtualized";
+import "react-virtualized/styles.css"; // only needs to be imported once
 
 
 interface Props {
@@ -80,7 +80,7 @@ export class ONSAccordionTable extends Component <Props, State> {
         // }
     };
 
-    handleClickOnRow = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>, row: any, index: number) => {
+    handleClickOnRow = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, row: any, index: number) => {
         if (this.props.expandedRowEnabled) {
             row.rowExpanded = !row.rowExpanded;
             // @ts-ignore
@@ -112,26 +112,68 @@ export class ONSAccordionTable extends Component <Props, State> {
     };
 
 
-    row = ({data, index, style}: any) => (
-        <tr style={style}
-            className={("table__row " + (this.props.expandedRowEnabled ? "selectableTableRow" : "nonSelectableTableRow"))}
-            onClick={((e) => this.handleClickOnRow(e, data[index], index))}
-            tabIndex={0}
-            title="Click to Expand"
-            onKeyPress={((e => this.handleEnterKeyPressOnRow(e, data[index], index)))}>
+    row = (props: any) => (
+        <>
+            <div
+                key={props.index}
+                style={props.style}
+                className={("table__row " + (this.props.expandedRowEnabled ? "selectableTableRow" : "nonSelectableTableRow"))}
+                onClick={((e) => this.handleClickOnRow(e, props.rowData, props.index))}
+                tabIndex={0}
+                title="Click to Expand"
+                onKeyPress={((e => this.handleEnterKeyPressOnRow(e, props.rowData, props.index)))}>
+                {console.log(props)}
+                {
+                    this.props.expandedRowEnabled &&
+                    <td className="table__cell ">
+                        <div className={"accordion-table-chevron "}>
+                            <img
+                                className={"accordion-table-chevron-svg " + (props.rowData.rowExpanded ? "accordion-table-chevron-rotate" : "")}
+                                src={"/img/icons--chevron-right.svg"}
+                                alt="Expanded Table chevron"/>
+                        </div>
+                    </td>
+                }
+                <this.props.Row row={props.rowData}/>
+                {
+                    this.props.expandedRowEnabled && (
+                        this.props.expandedAdditionalRows ? (
+                            // Additional Hidden Rows for table being passed in
+                            props.rowData.rowExpanded &&
+                            <this.props.expandedRow row={props.rowData}/>
+                        ) : (
+                            // ExpandedRow not table rows so its styled accordingly
+                            <tr hidden={!props.rowData.rowExpanded}>
+                                <td className="table__cell expandedRow"/>
+                                <td colSpan={this.props.Headers.length}
+                                    className="table__cell expandedRow">
+                                    <this.props.expandedRow row={props.rowData}/>
+                                </td>
+                            </tr>
+                        )
+                    )
+                }
+            </div>
             {
-                this.props.expandedRowEnabled &&
-                <td className="table__cell ">
-                    <div className={"accordion-table-chevron "}>
-                        <img
-                            className={"accordion-table-chevron-svg " + (data[index].rowExpanded ? "accordion-table-chevron-rotate" : "")}
-                            src={"/img/icons--chevron-right.svg"}
-                            alt="Expanded Table chevron"/>
-                    </div>
-                </td>
+                this.props.expandedRowEnabled && (
+                    this.props.expandedAdditionalRows ? (
+                        // Additional Hidden Rows for table being passed in
+                        props.rowData.rowExpanded &&
+                        <this.props.expandedRow row={props.rowData}/>
+                    ) : (
+                        // ExpandedRow not table rows so its styled accordingly
+                        <tr hidden={!props.rowData.rowExpanded}>
+                            <td className="table__cell expandedRow"/>
+                            <td colSpan={this.props.Headers.length}
+                                className="table__cell expandedRow">
+                                <this.props.expandedRow row={props.rowData}/>
+                            </td>
+                        </tr>
+                    )
+                )
             }
-            <this.props.Row row={data[index]}/>
-        </tr>
+        </>
+
 
     );
 
@@ -189,112 +231,152 @@ export class ONSAccordionTable extends Component <Props, State> {
     Table = () => {
         const ref = React.createRef();
         return (
-            <table id="basic-table" className="table table--sortable" data-aria-sort="Sort by" data-aria-asc="ascending"
-                   data-aria-desc="descending">
-                <>
-                    {this.props.caption && <caption className="table__caption">{this.props.caption}</caption>}
-                    <thead className="table__head">
-                    <tr className="table__row">
+            <>
+                {/*<AutoSizer>*/}
+                {/*    {({height, width}: any) => (*/}
+
+                {/*)}*/}
+                {/*</AutoSizer>*/}
+
+                <table id="basic-table" className="table table--sortable" data-aria-sort="Sort by"
+                       data-aria-asc="ascending"
+                       data-aria-desc="descending">
+                    <>
+                        {this.props.caption && <caption className="table__caption">{this.props.caption}</caption>}
+                        <thead className="table__head">
+                        <tr className="table__row">
+                            {
+                                this.props.expandedRowEnabled &&
+                                <th key={0} scope="col" className="table__header " aria-sort="none"/>
+                            }
+                            {
+                                this.props.Headers.map((header: any, index: number) =>
+                                    header.order ?
+                                        <th key={index} scope="col" className="table__header "
+                                            aria-sort={header.descending === undefined ? "none" : (header.descending ? "descending" : "ascending")}>
+                                            <button aria-label={"Sort by " + header.label} type="button"
+                                                    data-index={index}
+                                                    className="table__sort-button"
+                                                    onClick={(e) => this.orderByRow(e, header, index)}>
+                                                {header.label}
+                                            </button>
+                                        </th>
+                                        :
+                                        <th key={index} scope="col" className="table__header ">{header.label}</th>
+                                )
+                            }
+                        </tr>
+                        </thead>
+                        <tbody
+                            className={"table__body " + (this.props.expandedRowEnabled ? "expandedRowEnabled " : "")}>
                         {
-                            this.props.expandedRowEnabled &&
-                            <th key={0} scope="col" className="table__header " aria-sort="none"/>
+                            this.state.data !== null && this.state.data.length !== 0 ?
+
+                                <>
+                                    <tr>
+                                        <td colSpan={this.props.Headers.length + (this.props.expandedRowEnabled ? 1 : 0)}>
+                                            <Table
+                                                width={1000}
+                                                height={300}
+                                                headerHeight={30}
+                                                rowHeight={35}
+                                                headerClassName={"table__head table__row table__header"}
+                                                rowClassName={"table table--sortable  table__body table__row"}
+                                                rowCount={this.state.data.length}
+                                                rowGetter={({index}) => this.state.data[index]}
+                                                rowRenderer={this.row}
+                                                disableHeader={true}
+                                            >
+                                                {
+                                                    this.props.Headers.map((header: any, index: number) =>
+                                                        <Column
+                                                            key={index}
+                                                            label={header.label}
+                                                            dataKey={header.column_name}
+                                                            width={1000 / this.props.Headers.length}
+                                                        />
+                                                    )
+                                                }
+                                            </Table>
+                                        </td>
+                                    </tr>
+
+
+                                    {/*<AutoSizer>*/}
+                                    {/*    {({height, width}: any) => (*/}
+                                    {/*        <List*/}
+                                    {/*            className="table table--sortable  table__body"*/}
+                                    {/*            height={500}*/}
+                                    {/*            itemCount={this.state.data.length}*/}
+                                    {/*            itemData={this.state.data}*/}
+                                    {/*            itemSize={35}*/}
+                                    {/*            width={width}*/}
+                                    {/*        >*/}
+                                    {/*            {this.row}*/}
+                                    {/*        </List>*/}
+                                    {/*    )}*/}
+                                    {/*</AutoSizer>*/}
+
+                                    {/*this.state.slicedData.map((row: DashboardTableRow, index: number) =>*/}
+                                    {/*    <Fragment key={uuidv4()}>*/}
+
+                                    {/*        */}
+                                    {/*        <tr className={("table__row " + (this.props.expandedRowEnabled ? "selectableTableRow" : "nonSelectableTableRow"))}*/}
+                                    {/*            onClick={((e) => this.handleClickOnRow(e, row, index))}*/}
+                                    {/*            tabIndex={0}*/}
+                                    {/*            title="Click to Expand"*/}
+                                    {/*            onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>*/}
+                                    {/*            {*/}
+                                    {/*                this.props.expandedRowEnabled &&*/}
+                                    {/*                <td className="table__cell ">*/}
+                                    {/*                    <div className={"accordion-table-chevron "}>*/}
+                                    {/*                        <img*/}
+                                    {/*                            className={"accordion-table-chevron-svg " + (row.rowExpanded ? "accordion-table-chevron-rotate" : "")}*/}
+                                    {/*                            src={"/img/icons--chevron-right.svg"}*/}
+                                    {/*                            alt="Expanded Table chevron"/>*/}
+                                    {/*                    </div>*/}
+                                    {/*                </td>*/}
+                                    {/*            }*/}
+                                    {/*            <this.props.Row row={row}/>*/}
+                                    {/*        </tr>*/}
+                                    {/*        {*/}
+                                    {/*            this.props.expandedRowEnabled && (*/}
+                                    {/*                this.props.expandedAdditionalRows ? (*/}
+                                    {/*                    // Additional Hidden Rows for table being passed in*/}
+                                    {/*                    row.rowExpanded &&*/}
+                                    {/*                    <this.props.expandedRow row={row}/>*/}
+                                    {/*                ) : (*/}
+                                    {/*                    // ExpandedRow not table rows so its styled accordingly*/}
+                                    {/*                    <tr hidden={!row.rowExpanded}>*/}
+                                    {/*                        <td className="table__cell expandedRow"/>*/}
+                                    {/*                        <td colSpan={this.props.Headers.length}*/}
+                                    {/*                            className="table__cell expandedRow">*/}
+                                    {/*                            <this.props.expandedRow row={row}/>*/}
+                                    {/*                        </td>*/}
+                                    {/*                    </tr>*/}
+                                    {/*                )*/}
+                                    {/*            )*/}
+                                    {/*        }*/}
+                                    {/*    </Fragment>*/}
+                                    {/*)*/}
+                                </>
+                                :
+                                <tr>
+                                    <td colSpan={this.props.Headers.length + (this.props.expandedRowEnabled ? 1 : 0)}
+                                        className="table__cell ">
+                                        <ONSPanel
+                                            status={(this.props.noDataMessage.toLowerCase().includes("error") ? "error" : "info")}
+                                            label={"No Batches Matching the Criteria"}>
+                                            <p>{this.props.noDataMessage}</p>
+                                        </ONSPanel>
+                                    </td>
+                                </tr>
+
                         }
-                        {
-                            this.props.Headers.map((header: any, index: number) =>
-                                header.order ?
-                                    <th key={index} scope="col" className="table__header "
-                                        aria-sort={header.descending === undefined ? "none" : (header.descending ? "descending" : "ascending")}>
-                                        <button aria-label={"Sort by " + header.label} type="button" data-index={index}
-                                                className="table__sort-button"
-                                                onClick={(e) => this.orderByRow(e, header, index)}>
-                                            {header.label}
-                                        </button>
-                                    </th>
-                                    :
-                                    <th key={index} scope="col" className="table__header ">{header.label}</th>
-                            )
-                        }
-                    </tr>
-                    </thead>
-                    <tbody className={"table__body " + (this.props.expandedRowEnabled ? "expandedRowEnabled " : "")}>
-                    {
-                        this.state.data !== null && this.state.data.length !== 0 ?
-
-                            <>
-                                <AutoSizer>
-                                    {({height, width}: any) => (
-                                        <List
-                                            className="table table--sortable  table__body"
-                                            height={500}
-                                            itemCount={this.state.data.length}
-                                            itemData={this.state.data}
-                                            itemSize={35}
-                                            width={width}
-                                        >
-                                            {this.row}
-                                        </List>
-                                    )}
-                                </AutoSizer>
-
-                                {/*this.state.slicedData.map((row: DashboardTableRow, index: number) =>*/}
-                                {/*    <Fragment key={uuidv4()}>*/}
-
-                                {/*        */}
-                                {/*        <tr className={("table__row " + (this.props.expandedRowEnabled ? "selectableTableRow" : "nonSelectableTableRow"))}*/}
-                                {/*            onClick={((e) => this.handleClickOnRow(e, row, index))}*/}
-                                {/*            tabIndex={0}*/}
-                                {/*            title="Click to Expand"*/}
-                                {/*            onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>*/}
-                                {/*            {*/}
-                                {/*                this.props.expandedRowEnabled &&*/}
-                                {/*                <td className="table__cell ">*/}
-                                {/*                    <div className={"accordion-table-chevron "}>*/}
-                                {/*                        <img*/}
-                                {/*                            className={"accordion-table-chevron-svg " + (row.rowExpanded ? "accordion-table-chevron-rotate" : "")}*/}
-                                {/*                            src={"/img/icons--chevron-right.svg"}*/}
-                                {/*                            alt="Expanded Table chevron"/>*/}
-                                {/*                    </div>*/}
-                                {/*                </td>*/}
-                                {/*            }*/}
-                                {/*            <this.props.Row row={row}/>*/}
-                                {/*        </tr>*/}
-                                {/*        {*/}
-                                {/*            this.props.expandedRowEnabled && (*/}
-                                {/*                this.props.expandedAdditionalRows ? (*/}
-                                {/*                    // Additional Hidden Rows for table being passed in*/}
-                                {/*                    row.rowExpanded &&*/}
-                                {/*                    <this.props.expandedRow row={row}/>*/}
-                                {/*                ) : (*/}
-                                {/*                    // ExpandedRow not table rows so its styled accordingly*/}
-                                {/*                    <tr hidden={!row.rowExpanded}>*/}
-                                {/*                        <td className="table__cell expandedRow"/>*/}
-                                {/*                        <td colSpan={this.props.Headers.length}*/}
-                                {/*                            className="table__cell expandedRow">*/}
-                                {/*                            <this.props.expandedRow row={row}/>*/}
-                                {/*                        </td>*/}
-                                {/*                    </tr>*/}
-                                {/*                )*/}
-                                {/*            )*/}
-                                {/*        }*/}
-                                {/*    </Fragment>*/}
-                                {/*)*/}
-                            </>
-                            :
-                            <tr>
-                                <td colSpan={this.props.Headers.length + (this.props.expandedRowEnabled ? 1 : 0)}
-                                    className="table__cell ">
-                                    <ONSPanel
-                                        status={(this.props.noDataMessage.toLowerCase().includes("error") ? "error" : "info")}
-                                        label={"No Batches Matching the Criteria"}>
-                                        <p>{this.props.noDataMessage}</p>
-                                    </ONSPanel>
-                                </td>
-                            </tr>
-
-                    }
-                    </tbody>
-                </>
-            </table>
+                        </tbody>
+                    </>
+                </table>
+            </>
         );
     };
 
