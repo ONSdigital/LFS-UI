@@ -41,7 +41,6 @@ export function ReferenceFileImportTable() {
                            data={imports}
                            Row={BatchUploadTableRow}
                            expandedRowEnabled={false}
-                           noDataMessage={"No Data"}
-                           caption={"Reference Files"}/>
+                           noDataMessage={"No Data"}/>
     );
 }

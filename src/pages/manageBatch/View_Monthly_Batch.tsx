@@ -77,7 +77,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
             surveyAuditStatus: 0,
             importAudit: null,
             pathName: "/manage-batch/monthly/" + props.match.params.year + "/" + props.match.params.period,
-            breadcrumbList: [{name:"Home", link:""}]
+            breadcrumbList: [{name: "Home", link: ""}]
         };
     }
 
@@ -86,7 +86,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
         let summaryRedirect = (this.props.match.params.summary);
         if (summaryRedirect !== undefined && summaryRedirect === "new") {
             window.history.pushState({}, document.title, this.state.pathName);
-            this.state.breadcrumbList.push({name:"Create New Batch", link:"new-batch"})
+            this.state.breadcrumbList.push({name: "Create New Batch", link: "new-batch"});
         }
 
         if (summaryRedirect !== undefined && summaryRedirect.length > 0 && summaryRedirect !== "new") {
@@ -193,13 +193,14 @@ export class View_Monthly_Batch extends Component <Props, State> {
             <DocumentTitle
                 title={"LFS Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}>
                 <div className="container">
-                    <ONSBreadcrumbs List={this.state.breadcrumbList} Current={"Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}/>
+                    <ONSBreadcrumbs List={this.state.breadcrumbList}
+                                    Current={"Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}/>
                     {
                         this.state.batchFound ?
                             <>
                                 <h3> Manage Monthly Batch</h3>
                                 <ONSMetadata List={this.state.metadata}/>
-                                <div style={{width: "35rem", float: "left"}}>
+                                <div style={{width: "35rem"}}>
                                     {
                                         importComplete ?
                                             <AccordionDropDown caption={"Survey Files"}
@@ -228,22 +229,16 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                     {this.summaryModal()}
                                     <ReferenceFileImportTable/>
                                 </div>
-                                <div style={{float: "right"}}>
-                                    <h4>Run Processes</h4>
-                                    <br/>
-                                    <ONSButton label="Run Monthly Process"
-                                               small={false}
-                                               primary={true}
-                                               marginRight={10}
-                                               disabled={!importComplete}/>
-                                    <br/>
-                                    <br/>
-                                    <ONSButton label="Run Interim Weighting"
-                                               small={false}
-                                               primary={false}
-                                               disabled={!importComplete}/>
-                                </div>
-                                <div className="grid__col col-6@m "/>
+                                <ONSButton label="Run Monthly Process"
+                                           small={false}
+                                           primary={true}
+                                           marginRight={10}
+                                           disabled={!importComplete}/>
+                                <ONSButton label="Run Interim Weighting"
+                                           small={false}
+                                           primary={false}
+                                           disabled={!importComplete}/>
+                                <br/>
                                 <br/>
                             </>
                             :
