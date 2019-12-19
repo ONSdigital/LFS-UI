@@ -123,25 +123,25 @@ const VarDefTableRow = (rowData: any) => {
             <td className="table__cell ">
                 {
                     row.editable ?
-                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"}/>
+                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"} alt={"True Tick icon"}/>
                         :
-                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"}/>
+                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"} alt={"False icon"}/>
                 }
             </td>
             <td className="table__cell ">
                 {
                     row.imputation ?
-                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"}/>
+                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"} alt={"True Tick icon"}/>
                         :
-                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"}/>
+                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"} alt={"False icon"}/>
                 }
             </td>
             <td className="table__cell ">
                 {
                     row.dv ?
-                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"}/>
+                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"} alt={"True Tick icon"}/>
                         :
-                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"}/>
+                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"} alt={"False icon"}/>
                 }
             </td>
             <td className="table__cell ">
@@ -184,25 +184,25 @@ const VarDefExpandedRow = (rowData: any) => {
                     <td className="table__cell ">
                         {
                             row.editable ?
-                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"}/>
+                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"} alt={"True Tick icon"}/>
                                 :
-                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"}/>
+                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"} alt={"False icon"}/>
                         }
                     </td>
                     <td className="table__cell ">
                         {
                             row.imputation ?
-                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"}/>
+                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"} alt={"True Tick icon"}/>
                                 :
-                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"}/>
+                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"} alt={"False icon"}/>
                         }
                     </td>
                     <td className="table__cell ">
                         {
                             row.dv ?
-                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"}/>
+                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"} alt={"True Tick icon"}/>
                                 :
-                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"}/>
+                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"} alt={"False icon"}/>
                         }
                     </td>
                     <td className="table__cell ">
