@@ -1,4 +1,4 @@
-import React, {ChangeEvent, Component} from "react";
+import React, {Component} from "react";
 import {GenericNotFound} from "./GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {VariableDefinitionTable} from "../components/ViewDataTables/VariableDefinitionTable";
@@ -24,18 +24,13 @@ export class ViewData extends Component <{}, State> {
     }
 
     componentDidMount(): void {
-        this.handleImportChange("Variable Definitions")
+        this.handleTableChange("Variable Definitions");
     }
 
-    handleImportChange = (e: ChangeEvent<HTMLSelectElement> | string) => {
-        console.log(e)
+    handleTableChange = (tableName: string) => {
         let table = null;
-        let name = e;
-        if (typeof e !== "string") {
-            name = e.target.value;
-        }
 
-        switch (name) {
+        switch (tableName) {
             case "Geographical Classifications":
                 table = <GenericNotFound/>;
                 break;
@@ -53,13 +48,16 @@ export class ViewData extends Component <{}, State> {
                 break;
         }
         this.setState({table: table});
+
+        // Set Previous active tab as not active
         let items = this.state.tabItems;
         let item = items.find(x => x.active);
         if (item !== undefined) {
             item.active = false;
         }
 
-        item = items.find(x => x.name === name);
+        // Find new selected tab and set as active
+        item = items.find(x => x.name === tableName);
         if (item !== undefined) {
             item.active = true;
         }
@@ -70,21 +68,12 @@ export class ViewData extends Component <{}, State> {
         {name: "Value Labels", active: false}
     ];
 
-    tableSelection = [
-        // {"label": "Geographical Classifications", "value": "Geographical Classifications"},
-        // {"label":"Design Weights", "value":"Design Weights"},
-        // {"label":"Population Estimates", "value":"Population Estimates"},
-        {"label": "Value Labels", "value": "Value Labels"},
-        {"label": "Variable Definitions", "value": "Variable Definitions"}
-    ];
-
     render() {
         return (
             <DocumentTitle title={"LFS View Data"}>
                 <div className={"container"}>
-                    <ONSTabs label={"Select Table"} items={this.state.tabItems} onClick={this.handleImportChange}/>
-                    {/*<ONSSelect label="Select Table" value="select value" options={this.tableSelection}*/}
-                    {/*           onChange={this.handleImportChange}/>*/}
+                    <br/>
+                    <ONSTabs label={"Select Table"} items={this.state.tabItems} onClick={this.handleTableChange}/>
                     {this.state.table}
                 </div>
             </DocumentTitle>

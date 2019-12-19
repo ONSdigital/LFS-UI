@@ -1,7 +1,6 @@
 import React, {ChangeEvent, Component, Fragment} from "react";
 import {ONSAccordionTable} from "../ONS_DesignSystem/ONSAccordionTable";
 import {VARIABLE_DEFINITION_HEADERS} from "../../utilities/Headers";
-import {ONSCheckbox} from "../ONS_DesignSystem/ONSCheckbox";
 import DocumentTitle from "react-document-title";
 import dateFormatter from "dayjs";
 import {getVariableDefinitions} from "../../utilities/http";
@@ -92,6 +91,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
                                   onChange={this.handleSearch}/>
                     <ONSButton label={"Clear"} primary={false} small={false} field={true}
                                onClick={this.viewAll}/>
+                    <br/>
                     <ONSAccordionTable data={this.state.filteredData} Row={VarDefTableRow}
                                        expandedRowEnabled={true}
                                        expandedRow={VarDefExpandedRow}
@@ -100,7 +100,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
                                        Headers={VARIABLE_DEFINITION_HEADERS}
                                        pagination={true}
                                        paginationSize={20}
-                                       scrollable={true}/>
+                                       scrollable={false}/>
                 </>
             </DocumentTitle>
         );
@@ -121,13 +121,28 @@ const VarDefTableRow = (rowData: any) => {
                 {dateFormatter(row.validFrom).format("DD/MM/YYYY")}
             </td>
             <td className="table__cell ">
-                <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>
+                {
+                    row.editable ?
+                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"}/>
+                        :
+                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"}/>
+                }
             </td>
             <td className="table__cell ">
-                <ONSCheckbox id={"imputation"} checked={row.imputation} disabled={true}/>
+                {
+                    row.imputation ?
+                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"}/>
+                        :
+                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"}/>
+                }
             </td>
             <td className="table__cell ">
-                <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
+                {
+                    row.dv ?
+                        <img className={"loadingIcon-svg"} src={"/img/blackTrue.svg"}/>
+                        :
+                        <img className={"loadingIcon-svg"} src={"/img/blackFalse.svg"}/>
+                }
             </td>
             <td className="table__cell ">
                 {row.type}
@@ -153,7 +168,7 @@ const VarDefExpandedRow = (rowData: any) => {
             </Fragment>
         );
     }
-    return rows.map((row: VariableDefinitionTableRow, index: number) => (
+    return rows.map((row: VariableDefinitionTableRow) => (
             <Fragment key={uuid()}>
                 <tr className={("table__row")} style={{color: "darkblue"}}>
                     <td className="table__cell "/>
@@ -167,13 +182,28 @@ const VarDefExpandedRow = (rowData: any) => {
                         {dateFormatter(row.validFrom).format("DD/MM/YYYY")}
                     </td>
                     <td className="table__cell ">
-                        <ONSCheckbox id={"editable"} checked={row.editable} disabled={true}/>
+                        {
+                            row.editable ?
+                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"}/>
+                                :
+                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"}/>
+                        }
                     </td>
                     <td className="table__cell ">
-                        <ONSCheckbox id={"imputation"} checked={row.imputation} disabled={true}/>
+                        {
+                            row.imputation ?
+                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"}/>
+                                :
+                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"}/>
+                        }
                     </td>
                     <td className="table__cell ">
-                        <ONSCheckbox id={"dv"} checked={row.dv} disabled={true}/>
+                        {
+                            row.dv ?
+                                <img className={"loadingIcon-svg"} src={"/img/blueTrue.svg"}/>
+                                :
+                                <img className={"loadingIcon-svg"} src={"/img/blueFalse.svg"}/>
+                        }
                     </td>
                     <td className="table__cell ">
                         {row.type}
