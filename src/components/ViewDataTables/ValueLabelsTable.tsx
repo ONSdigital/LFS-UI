@@ -3,10 +3,9 @@ import {ONSAccordionTable} from "../ONS_DesignSystem/ONSAccordionTable";
 import {VALUE_LABELS_HEADERS} from "../../utilities/Headers";
 import DocumentTitle from "react-document-title";
 import {getValueLabels} from "../../utilities/http";
-import {ONSTextInput} from "../ONS_DesignSystem/ONSTextInput";
-import {ONSButton} from "../ONS_DesignSystem/ONSButton";
 import dateFormatter from "dayjs";
 import lodash from "lodash";
+import {ONSTextInputWithButton} from "../ONS_DesignSystem/ONSTextInputWithButton";
 
 interface Props {
 }
@@ -71,11 +70,13 @@ export class ValueLabelsTable extends Component <Props, State> {
         return (
             <DocumentTitle title={"LFS View Value Labels"}>
                 <>
-                    <ONSTextInput value={this.state.search} label={"Filter by Variable Name"}
-                                  onChange={this.handleSearch}/>
-                    <ONSButton label={"View All"} primary={false} small={false} field={true}
-                               onClick={this.viewAll}/>
-                    <br/>
+                    <ONSTextInputWithButton inputLabel={"Filter by Variable Name"}
+                                            handleInputChange={this.handleSearch}
+                                            inputValue={this.state.search}
+                                            primaryButton={false}
+                                            buttonLabel={"Clear"}
+                                            onButtonClick={this.viewAll}/>
+
                     <ONSAccordionTable data={this.state.filteredData} Row={ValueLabelTableRow}
                                        expandedRowEnabled={false}
                                        noDataMessage={this.state.noDataMessage}
