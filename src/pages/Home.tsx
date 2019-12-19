@@ -1,13 +1,15 @@
 ﻿import React, {ChangeEvent, Component} from "react";
-import {DashboardTable} from "../components/DashboardTable";
+import {HomeBatchTable} from "../components/HomeBatchTable";
 import {ONSRadioButton} from "../components/ONS_DesignSystem/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
 import DocumentTitle from "react-document-title";
+import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
+import {Link} from "react-router-dom";
 
-const MONTHLY_BATCH = 'Monthly';
-const QUARTERLY_BATCH = 'Quarterly';
-const ANNUALLY_BATCH = 'Annually';
+const MONTHLY_BATCH = "Monthly";
+const QUARTERLY_BATCH = "Quarterly";
+const ANNUALLY_BATCH = "Annually";
 
 interface State {
     batchData: [] | null,
@@ -19,8 +21,8 @@ interface State {
     annuallyBatchFilter: boolean
 }
 
-export class Dashboard extends Component <{}, State> {
-    displayName = Dashboard.name;
+export class Home extends Component <{}, State> {
+    displayName = Home.name;
 
     constructor(props: any) {
         super(props);
@@ -41,30 +43,30 @@ export class Dashboard extends Component <{}, State> {
             .then(r => {
                 console.log(r);
                 this.setState({batchData: r});
-                this.filterBatchData()
+                this.filterBatchData();
             })
             .catch(error => {
                 console.log(error);
-                if (process.env.NODE_ENV === 'development') {
-                    this.getMockBatchData()
+                if (process.env.NODE_ENV === "development") {
+                    this.getMockBatchData();
                 }
             });
     };
 
     getMockBatchData = () => {
-        fetch('/jsons/MOCK_RUNS.json')
+        fetch("/jsons/MOCK_RUNS.json")
             .then(response => response.json())
             .then(response => {
                 this.setState({batchData: response.Rows});
                 this.filterBatchData();
-            })
+            });
     };
 
     filterListByStatus = (row: any): boolean => {
-        if (this.state.batchType === 'completed') {
-            return (row.status === 4)
+        if (this.state.batchType === "completed") {
+            return (row.status === 4);
         }
-        return (row.status !== 4)
+        return (row.status !== 4);
     };
 
     filterListByBatchType = (row: any): boolean => {
@@ -72,13 +74,13 @@ export class Dashboard extends Component <{}, State> {
         let quarterly = false;
         let annually = false;
         if (this.state.monthlyBatchFilter) {
-            monthly = (row.type === MONTHLY_BATCH)
+            monthly = (row.type === MONTHLY_BATCH);
         }
         if (this.state.quarterlyBatchFilter) {
-            quarterly = (row.type === QUARTERLY_BATCH)
+            quarterly = (row.type === QUARTERLY_BATCH);
         }
         if (this.state.annuallyBatchFilter) {
-            annually = (row.type === ANNUALLY_BATCH)
+            annually = (row.type === ANNUALLY_BATCH);
         }
         return monthly || quarterly || annually;
     };
@@ -88,14 +90,14 @@ export class Dashboard extends Component <{}, State> {
             let filteredList: any = this.state.batchData.filter(this.filterListByBatchType);
             filteredList = filteredList.filter(this.filterListByStatus);
             if (filteredList !== null) {
-                this.setState({filteredBatchData: filteredList})
+                this.setState({filteredBatchData: filteredList});
             }
         }
     };
 
     handleBatchTypeRadioChange = async (e: ChangeEvent<HTMLInputElement>) => {
         let liveStatusFilter = false;
-        if (e.target.value === 'live') {
+        if (e.target.value === "live") {
             liveStatusFilter = true;
         }
         await this.setState({batchType: e.target.value, liveStatus: liveStatusFilter});
@@ -117,27 +119,31 @@ export class Dashboard extends Component <{}, State> {
         this.filterBatchData();
     };
 
-    filterOptionStyle = {marginRight: '.5rem', minWidth: '15rem'};
+    filterOptionStyle = {marginRight: ".5rem", minWidth: "15rem"};
 
     render() {
         return (
-            <DocumentTitle title={'Labour Force Survey Dashboard'}>
+            <DocumentTitle title={"Labour Force Survey Dashboard"}>
                 <div className="container">
                     <br/>
                     <fieldset className="fieldset">
-                        <legend className="fieldset__legend">Filter Batches</legend>
+                        <Link to={"/new-batch"} style={{right: 0, float: "right"}}>
+                            <ONSButton label={"Create New Batch"} primary={true} field={true} action={true}/>
+                        </Link>
+                        <h4 className="fieldset__legend">Filter Batches</h4>
                         <p className="checkboxes__label">Batch Status</p>
                         <span className="radios__items">
-                        <ONSRadioButton label={'Live'}
+                        <ONSRadioButton label={"Live"}
                                         onChange={this.handleBatchTypeRadioChange}
                                         id={"live"}
                                         checked={this.state.liveStatus}
                                         style={this.filterOptionStyle}/>
-                        <ONSRadioButton label={'Completed'}
+                        <ONSRadioButton label={"Completed"}
                                         onChange={this.handleBatchTypeRadioChange}
-                                        id={'completed'}
+                                        id={"completed"}
                                         checked={!this.state.liveStatus}
-                                        style={this.filterOptionStyle}/><br/>
+                                        style={this.filterOptionStyle}/>
+                            <br/>
                     </span>
                         <p className="checkboxes__label">Batch Type</p>
                         <span className="checkboxes__items">
@@ -158,7 +164,7 @@ export class Dashboard extends Component <{}, State> {
                                      style={this.filterOptionStyle}/>
                     </span>
                     </fieldset>
-                    <DashboardTable data={this.state.filteredBatchData}/>
+                    <HomeBatchTable data={this.state.filteredBatchData}/>
                 </div>
             </DocumentTitle>
         );

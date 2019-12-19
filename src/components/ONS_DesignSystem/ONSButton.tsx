@@ -12,6 +12,7 @@ interface Props {
     onClick?: (...props: any[]) => void
     exportExcelBtn?: boolean
     disabled?: boolean
+    action?: boolean
 }
 
 export const ONSButton = (props: Props) => {
@@ -27,6 +28,7 @@ export const ONSButton = (props: Props) => {
         className = className + " " + (props.loading ? "btn--secondary btn--loader is-loading  " : " btn--excel btn--secondary");
     } else {
         className = className +
+            (props.action ? "btn--link " : "") +
             (props.loading ? "btn--loader is-loading " : "") +
             (props.field ? "field " : "") +
             (props.primary ? "" : "btn--secondary ") +

@@ -10,8 +10,6 @@ import {ONSDateInput} from "../../components/ONS_DesignSystem/ONSDateInput";
 import {ReportExport} from "../../components/ReportExport";
 import {ONSSelect} from "../../components/ONS_DesignSystem/ONSSelect";
 import {BulkAmendmentsModal} from "./BulkAmendmentsModal";
-import * as XLSX from "xlsx";
-import { ONSBreadcrumbs } from "../../components/ONS_DesignSystem/ONSBreadcrumbs";
 
 interface Props {
     match: any
@@ -135,60 +133,24 @@ export class Import extends Component <Props, State> {
                 uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString();
             }
             if (this.state.outputSpec) {
-                uploadLink = "output/specification/" + uploadLink + "/variable/" + this.state.year + "/" + this.state.period.slice(1);
-
-                postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
-                    .then(response => {
-                        (isDevEnv && console.log(response));
-
-                        response.clone().arrayBuffer().then((array: any) => {
-                            // Read array into Uint8Array
-                            let data = new Uint8Array(array);
-                            // Get workbook
-                            let workbook = XLSX.read(data, {type: "array"});
-                            // Get the first worksheet
-                            let worksheet = workbook.Sheets[workbook.SheetNames[0]];
-
-                            // Read cells in File
-                            let fileName = worksheet["A2"].v;
-                            let status = worksheet["B2"].v.toLowerCase();
-                            let message = worksheet["C2"].v;
-
-                            if (status === "error") {
-                                this.setPanel(fileName + ": File Import Failed, " + message, "error");
-                            } else {
-                                this.setPanel(fileName + ": File Uploaded Successfully, " + message, "success");
-                            }
-                        });
-
-                        this.setState({
-                            uploading: false
-                        });
-
-                        //Create Download for File
-                        response.blob().then((blob: any) => {
-                            let url = window.URL.createObjectURL(blob);
-                            this.setState({linkUrl: url, reportExportHidden: false});
-                        }).catch((err: Error) => {
-                            this.setPanel("File Import Failed, Error while creating download report: " + err, "error");
-                        });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        this.setPanel("Error Occurred when uploading files: " + err.toString(), "error");
-                        this.setState({
-                            uploading: false,
-                            uploadProgressHidden: false
-                        });
-                    });
-                return;
+                uploadLink = uploadLink + "/" + this.state.year + "/" + this.state.period.slice(1);
             }
 
             postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                 .then(response => {
                     (isDevEnv && console.log(response));
 
-                    console.log(this.state.importName);
+                    if (this.state.outputSpec) {
+                        response.clone().json().then((json: any) => {
+                            (isDevEnv && console.log(json));
+                            if (json.status === "OK") {
+                                this.setPanel(json.message + ". Records inserted: " + json.recordsInserted, "success");
+                            } else if (json.status === "ERROR") {
+                                this.setPanel("Error Occurred: " + json.message, "error");
+                            }
+                        });
+                    }
+
                     if (this.state.importName.includes("Amendments")) {
                         response.json().then((json: any) => {
                             console.log(json);
@@ -392,7 +354,7 @@ export class Import extends Component <Props, State> {
                     fileType: ".csv",
                     built: true,
                     fileName: "APS_Person",
-                    uploadLink: "aps/person",
+                    uploadLink: "specification/aps/person",
                     validFromDateHidden: true,
                     importReport: {
                         hasImportReport: true,
@@ -407,7 +369,7 @@ export class Import extends Component <Props, State> {
                     fileType: ".csv",
                     built: true,
                     fileName: "APS_Household",
-                    uploadLink: "aps/household",
+                    uploadLink: "specification/aps/household",
                     validFromDateHidden: true,
                     importReport: {
                         hasImportReport: true,
@@ -422,7 +384,7 @@ export class Import extends Component <Props, State> {
                     fileType: ".csv",
                     built: true,
                     fileName: "eurostat",
-                    uploadLink: "eurostat",
+                    uploadLink: "specification/eurostat",
                     validFromDateHidden: true,
                     importReport: {
                         hasImportReport: true,
@@ -437,7 +399,7 @@ export class Import extends Component <Props, State> {
                     fileType: ".csv",
                     built: true,
                     fileName: "LFS_Person",
-                    uploadLink: "lfs/person",
+                    uploadLink: "specification/lfs/person",
                     validFromDateHidden: true,
                     importReport: {
                         hasImportReport: true,
@@ -452,7 +414,7 @@ export class Import extends Component <Props, State> {
                     fileType: ".csv",
                     built: true,
                     fileName: "LFS_Household",
-                    uploadLink: "lfs/household",
+                    uploadLink: "specification/lfs/household",
                     validFromDateHidden: true,
                     importReport: {
                         hasImportReport: true,
@@ -487,6 +449,7 @@ export class Import extends Component <Props, State> {
         }
     };
 
+
     bulkAmendmentsModal = () => {
         if (this.state.bulkAmendmentsModalOpen)
             return (
@@ -500,16 +463,10 @@ export class Import extends Component <Props, State> {
             );
     };
 
-    getBreadcrumbList = () => {
-        if(this.state.outputSpec) return [{name: "Import Overview", link: "import/overview"}, {name: "Output File Specification", link: "import/output"}]
-        else return [{name: "Import Overview", link: "import/overview"}]
-    }
-
     render() {
         return (
             <DocumentTitle title={"LFS Import " + this.state.importName}>
                 <div className="container">
-                    <ONSBreadcrumbs List={this.getBreadcrumbList()} Current={this.state.importName}></ONSBreadcrumbs>
                     <h3>Import {this.state.importName}</h3>
                     <br/>
                     {
