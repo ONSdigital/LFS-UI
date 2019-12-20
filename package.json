@@ -26,6 +26,7 @@
     "@types/selenium-webdriver": "^4.0.5",
     "@types/uuid": "^3.4.6",
     "dayjs": "^1.8.17",
+    "enzyme-async-helpers": "^0.9.1",
     "immutability-helper": "latest",
     "lodash": "^4.17.15",
     "react": "^16.12.0",
@@ -68,6 +69,7 @@
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.3",
+    "@types/enzyme-async-helpers": "^0.9.1",
     "@types/jest": "^24.0.23",
     "@types/sinon": "^7.5.0",
     "@typescript-eslint/typescript-estree": "^2.9.0",
