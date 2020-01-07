@@ -1,10 +1,11 @@
-import React, {ChangeEvent, Component} from 'react';
+import React, {ChangeEvent, Component} from "react";
 
 interface Props {
-    label?: string,
-    placeholder?: string,
+    label?: string
+    placeholder?: string
     marginTop?: number
-    onChange?: (e: ChangeEvent<HTMLInputElement>, ...args: any[]) => void,
+    onChange?: (e: ChangeEvent<HTMLInputElement>, ...args: any[]) => void
+    value: string
 }
 
 interface State {
@@ -43,6 +44,7 @@ export class ONSPasswordInput extends Component <Props, State> {
                 <input
                     type={this.state.password ? "password" : "text"} id="password"
                     className="input input--text input-type__input u-mt-xs"
+                    value={this.props.value}
                     onChange={(e) => this.handleChange(e)}
                 />
                 <span className="checkbox checkbox--toggle" style={this.spacing()}>
@@ -50,7 +52,6 @@ export class ONSPasswordInput extends Component <Props, State> {
                         type="checkbox"
                         id="password-toggle"
                         className="checkbox__input"
-                        value=""
                         name="show-password"
                         onClick={this.togglePassword}
                     />
