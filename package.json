@@ -11,6 +11,7 @@
   ],
   "dependencies": {
     "@ons/design-system": "^14.3.0",
+    "@testing-library/react": "^9.4.0",
     "@types/bootstrap": "^4.3.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/lodash": "^4.14.149",
