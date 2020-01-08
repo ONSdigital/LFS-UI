@@ -53,16 +53,22 @@ export class VariableDefinitionTable extends Component <Props, State> {
             .then(r => {
                 (isDevEnv() && console.log(r));
                 if (r.message !== "no data found") {
-                    let list = lodash(r)
+                    let list: any = lodash(r)
                         .sortBy("variable")
                         .groupBy("variable")
                         .map(rows => {
-                            return lodash.sortBy(rows, item => {
+                            let itemList = lodash.sortBy(rows, item => {
                                 return item.validFrom;
                             }).reverse();
+
+                            return {
+                                id: itemList[0].id,
+                                validFrom: itemList[0].validFrom,
+                                variable: itemList[0].variable,
+                                itemList
+                            }
                         })
                         .value();
-
                     this.setState({data: list, filteredData: list});
                 } else this.setState({filteredData: [], noDataMessage: "No Variable Definitions found"});
             })
@@ -79,7 +85,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
     };
 
     handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-        let newFilteredList = lodash.filter(this.state.data, (variableRow) => variableRow[0].variable.includes(e.target.value.toUpperCase()));
+        let newFilteredList = lodash.filter(this.state.data, (variableRow) => variableRow.variable.includes(e.target.value.toUpperCase()));
         this.setState({search: e.target.value, filteredData: newFilteredList});
     };
 
@@ -108,7 +114,7 @@ export class VariableDefinitionTable extends Component <Props, State> {
 }
 
 const VarDefTableRow = (rowData: any) => {
-    let row: VariableDefinitionTableRow = rowData.row[0];
+    let row: VariableDefinitionTableRow = rowData.row.itemList[0];
     return (
         <>
             <td className="table__cell ">
@@ -155,7 +161,7 @@ const VarDefTableRow = (rowData: any) => {
 };
 
 const VarDefExpandedRow = (rowData: any) => {
-    let rows: any[] = lodash.drop(rowData.row, 1);
+    let rows: any[] = lodash.drop(rowData.row.itemList, 1);
     if (rows.length === 0) {
         return (
             <Fragment key={uuid()}>

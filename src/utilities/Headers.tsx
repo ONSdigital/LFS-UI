@@ -49,7 +49,7 @@ const REFERENCE_FILE_IMPORT_HEADERS =
         label: "File Name",
         column_name: "File Name",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Import Date",
         column_name: "Import Date",
@@ -60,7 +60,7 @@ const REFERENCE_FILE_IMPORT_HEADERS =
         column_name: "status",
         filter: false,
         order: true
-    },{
+    }, {
         label: "",
         column_name: "",
         filter: false,
@@ -91,12 +91,12 @@ const AMENDMENT_HEADERS =
         column_name: "Case No",
         filter: false,
         order: true
-    },{
+    }, {
         label: "Variable",
         column_name: "Variable",
         filter: false,
         order: true
-    },  {
+    }, {
         label: "Found",
         column_name: "Found",
         filter: false,
@@ -170,7 +170,7 @@ const VARIABLE_DEFINITION_HEADERS =
         label: "Variable",
         column_name: "variable",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Description",
         column_name: "description",
@@ -180,7 +180,7 @@ const VARIABLE_DEFINITION_HEADERS =
         label: "Valid From",
         column_name: "validFrom",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Editable",
         column_name: "editable",
@@ -215,7 +215,7 @@ const VALUE_LABELS_HEADERS =
         column_name: "Variable Name",
         filter: false,
         order: false
-    },{
+    }, {
         label: "Label Name",
         column_name: "Label Name",
         filter: false,
@@ -245,7 +245,7 @@ function userHeaders() {
             column_name: "user_id",
             filter: false,
             order: true,
-            create: false,
+            create: false
         }, {
             label: "Username",
             column_name: "username",
@@ -265,7 +265,7 @@ function userHeaders() {
             order: true,
             create: true
         }]
-    )
+    );
 }
 
 function roleHeaders() {
@@ -281,8 +281,20 @@ function roleHeaders() {
             filter: false,
             order: false
         }]
-    )
+    );
 }
 
-export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, AMENDMENT_HEADERS, userHeaders, roleHeaders,
-    DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS, REFERENCE_FILE_IMPORT_HEADERS, VALUE_LABELS_HEADERS, REFERENCE_FILE_HEADERS, BATCH_PROGRESS_TABLE}
+export {
+    BATCH_HEADERS,
+    SURVEY_UPLOAD_HISTORY,
+    UPLOAD_HEADERS,
+    AMENDMENT_HEADERS,
+    userHeaders,
+    roleHeaders,
+    DASHBOARD_HEADERS,
+    VARIABLE_DEFINITION_HEADERS,
+    REFERENCE_FILE_IMPORT_HEADERS,
+    VALUE_LABELS_HEADERS,
+    REFERENCE_FILE_HEADERS,
+    BATCH_PROGRESS_TABLE
+};
