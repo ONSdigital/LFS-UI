@@ -13,12 +13,12 @@ export class GenericNotFound extends Component <Props, {}> {
     render() {
         return (
             <DocumentTitle title='LFS: 404 Page Not Found'>
-                <div className="container">
+                <div className={!this.props.label ? "container" : ""}>
                     <br/>
                     <h1>Page Not Found</h1>
                     <p>{this.props.label ? this.props.label : "The page you are trying to access does not exist"}</p>
                     <Link to={"/"}>
-                        <ONSButton label={"Return to Dashboard"} primary={true} small={false} />
+                        <ONSButton label={"Return to Home"} primary={true} small={false} />
                     </Link>
                 </div>
             </DocumentTitle>

@@ -1,10 +1,10 @@
 import {Cookies} from "react-cookie";
 import dateFormatter from "dayjs";
 
-function createNewUserCookie(cookies: Cookies, user: { name: string }) {
+function createNewUserCookie(cookies: Cookies, user: {name: string}) {
     // Set Session Cookie, Expires in 30 minutes
-    let cookieExpire = dateFormatter(new Date()).add(30, 'm').toDate();
-    cookies.set('username', user.name, {path: '/', expires: cookieExpire, sameSite: true});
+    let cookieExpire = dateFormatter(new Date()).add(30, "m").toDate();
+    cookies.set("username", user.name, {path: "/", expires: cookieExpire, sameSite: true});
     return user;
 
 }
@@ -12,13 +12,13 @@ function createNewUserCookie(cookies: Cookies, user: { name: string }) {
 function loginUser(username: string, password: string, cookies: Cookies) {
     const request = async () => {
         const res = await fetch("/login/" + username, {
-            "headers":{
+            "headers": {
                 "password": password
             }
         });
 
         // Temp User Setup for when React can't get to the server to authenticate in development environment
-        if (!res.ok && process.env.NODE_ENV === 'development') {
+        if (!res.ok && process.env.NODE_ENV === "development") {
             console.log("Error Calling Server, Setting TEMP USER");
             return createNewUserCookie(cookies, {name: "DEV_USER"});
         }
@@ -28,7 +28,7 @@ function loginUser(username: string, password: string, cookies: Cookies) {
         console.log("DEBUG: password = " + password);
         console.log("DEBUG: data.status = " + data.status);
 
-        if(data.status === "OK") {
+        if (data.status === "OK") {
             let user = {
                 name: username
             };
@@ -37,9 +37,9 @@ function loginUser(username: string, password: string, cookies: Cookies) {
         return null;
     };
 
-    return request()
+    return request();
 }
 
 export {
     loginUser
-}
+};
