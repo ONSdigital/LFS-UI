@@ -4,7 +4,6 @@ import update from "immutability-helper";
 import {ONSPagination} from "./ONSPagination";
 import "./ONSAccordionTable.css";
 import lodash from "lodash";
-import "react-virtualized/styles.css"; // only needs to be imported once
 
 
 interface Props {
