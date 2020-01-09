@@ -129,6 +129,18 @@ export class Import extends Component <Props, State> {
                 return;
             }
 
+            if (this.state.uploadFile.length === 0) {
+                this.setState({
+                    uploading: false,
+                    panel: {
+                        label: 'No File Selected',
+                        visible: true,
+                        status: 'info'
+                    }
+                });
+                return
+            }
+
             let uploadLink = this.state.uploadLink;
             if (this.state.validFromDate !== null) {
                 uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString();
