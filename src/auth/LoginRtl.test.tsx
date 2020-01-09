@@ -29,7 +29,7 @@ describe("Login Test", () => {
         
         await act(async () => {
             await flushPromises();
-          });
+        });
         
         // fill out the form
         await act(async () => {
