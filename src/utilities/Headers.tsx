@@ -113,12 +113,12 @@ const DASHBOARD_HEADERS =
         label: "BatchID",
         column_name: "id",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Batch Type",
         column_name: "type",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Period",
         column_name: "period",
