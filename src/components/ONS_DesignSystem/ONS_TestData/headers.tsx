@@ -1,12 +1,12 @@
 const DASHBOARD_HEADERS =
     [{
-        label: "item",
-        column_name: "Item",
+        label: "id",
+        column_name: "id",
         filter: false,
         order: true
     }, {
         label: "status",
-        column_name: "Status",
+        column_name: "status",
         filter: false,
         order: true
     }];

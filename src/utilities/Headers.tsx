@@ -47,7 +47,7 @@ const REFERENCE_FILE_HEADERS =
 const REFERENCE_FILE_IMPORT_HEADERS =
     [{
         label: "File Name",
-        column_name: "File Name",
+        column_name: "name",
         filter: false,
         order: true
     }, {
@@ -118,7 +118,7 @@ const DASHBOARD_HEADERS =
         label: "Batch Type",
         column_name: "type",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Period",
         column_name: "period",

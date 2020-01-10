@@ -99,7 +99,7 @@ export class ONSAccordionTable extends Component <Props, State> {
 
     orderByRow = (onClick: any, header: any) => {
         let list = lodash.sortBy(this.state.sortedData, header.column_name);
-        if (header.descending) list = list.reverse();
+        if (!header.descending) list = list.reverse();
 
         this.setState({sortedData: list});
         if (this.props.pagination) {
@@ -174,7 +174,8 @@ export class ONSAccordionTable extends Component <Props, State> {
                                                 onClick={((e) => this.handleClickOnRow(e, row, index))}
                                                 tabIndex={0}
                                                 title={this.props.expandedRowEnabled ? "Click to Expand": "Table Row"}
-                                                onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}>
+                                                onKeyPress={((e => this.handleEnterKeyPressOnRow(e, row, index)))}
+                                                data-testid={"table-row"}>
                                                 {
                                                     this.props.expandedRowEnabled &&
                                                     <td className="table__cell ">
