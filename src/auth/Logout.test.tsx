@@ -16,7 +16,7 @@ describe("Logout Page Test", () => {
     const cookie = new Cookies;
     let cookieSpy = sinon.spy(cookie, "remove");
 
-    beforeEach(() =>{
+    beforeEach(() => {
         delete window.location;
         // @ts-ignore - added so it doesnt have all other unused parameters
         // Mock the window.location for the Logout page
@@ -38,7 +38,7 @@ describe("Logout Page Test", () => {
     it("should render correctly", () => expect(wrapper(shallow).exists()).toEqual(true));
 
     it("Should remove the users cookie on logout", async () => {
-      // Check that the cookie provider passed in is called
+        // Check that the cookie provider passed in is called
         expect(cookieSpy.called).toBeTruthy();
     });
 
@@ -51,6 +51,4 @@ describe("Logout Page Test", () => {
         // Check that window.location is changed to redirect the user to the login page.
         expect(window.location.href).toEqual("/?logout");
     });
-
-
 });
