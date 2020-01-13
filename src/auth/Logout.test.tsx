@@ -38,10 +38,7 @@ describe("Logout Page Test", () => {
     it("should render correctly", () => expect(wrapper(shallow).exists()).toEqual(true));
 
     it("Should remove the users cookie on logout", async () => {
-        // Check that setUser is being passed a null to clear user
-        expect(mockSetUser).toHaveBeenCalledWith(null);
-
-        // Check that the cookie provider passed in is called
+      // Check that the cookie provider passed in is called
         expect(cookieSpy.called).toBeTruthy();
     });
 
