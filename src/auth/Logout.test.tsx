@@ -21,6 +21,10 @@ describe("Logout Page Test", () => {
         // @ts-ignore - added so it doesnt have all other unused parameters
         // Mock the window.location for the Logout page
         window.location = {href: "/logout"};
+
+        // Mount the logout page
+        wrapper(mount);
+
     });
 
     function wrapper(render: any) {
@@ -34,9 +38,6 @@ describe("Logout Page Test", () => {
     it("should render correctly", () => expect(wrapper(shallow).exists()).toEqual(true));
 
     it("Should remove the users cookie on logout", async () => {
-        // Mount the logout page
-        wrapper(mount);
-
         // Check that setUser is being passed a null to clear user
         expect(mockSetUser).toHaveBeenCalledWith(null);
 
@@ -45,17 +46,11 @@ describe("Logout Page Test", () => {
     });
 
     test("On logout, setUser should be being passed a null to remove the user from state", async () => {
-        // Mount the logout page
-        wrapper(mount);
-
         // Check that setUser is being passed a null to remove user from state
         expect(mockSetUser).toHaveBeenCalledWith(null);
     });
 
     it("Should redirect the user to the login page with logout as a parameter", () => {
-        // Mount the logout page
-        wrapper(mount);
-
         // Check that window.location is changed to redirect the user to the login page.
         expect(window.location.href).toEqual("/?logout");
     });
