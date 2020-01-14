@@ -125,7 +125,7 @@ export class FileUploadProgress extends Component <Props, State> {
     };
 
     getFileUploadProgress = () => {
-        let id = setInterval(_ => {
+        let id = setInterval(() => {
             this.ws.send(JSON.stringify(
                 {
                     "fileName": this.props.fileName

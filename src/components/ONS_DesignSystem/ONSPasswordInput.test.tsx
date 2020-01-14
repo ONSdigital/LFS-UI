@@ -1,7 +1,7 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { ONSPasswordInput } from './ONSPasswordInput';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {ONSPasswordInput} from "./ONSPasswordInput";
 
 describe("ONS Password Input Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -26,7 +26,8 @@ describe("ONS Password Input Test", () => {
                 label={props.label}
                 placeholder={props.placeholder}
                 marginTop={props.marginTop}
-                onChange={props.onChange}>
+                onChange={props.onChange}
+                value={props.value}>
             </ONSPasswordInput>
         )
     }
