@@ -51,7 +51,9 @@
     "test": "react-scripts test",
     "test-ONS": "react-scripts test --testNamePattern=ONS --coverage --watchAll=false",
     "test-coverage": "npm test -- --coverage --watchAll=false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -69,11 +71,17 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.3",
+    "@storybook/addon-links": "^5.3.3",
+    "@storybook/addons": "^5.3.3",
+    "@storybook/preset-create-react-app": "^1.5.1",
+    "@storybook/react": "^5.3.3",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-async-helpers": "^0.9.1",
     "@types/jest": "^24.0.23",
     "@types/sinon": "^7.5.0",
     "@typescript-eslint/typescript-estree": "^2.9.0",
+    "awesome-typescript-loader": "^5.2.1",
     "dotenv": "^8.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
