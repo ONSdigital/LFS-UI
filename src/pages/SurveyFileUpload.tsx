@@ -93,6 +93,7 @@ export class SurveyFileUpload extends Component <Props, State> {
     getUploadHistory = () => {
         getSurveyAudit(this.state.surveyType, this.state.year, (this.state.surveyType === 'GB' ? this.state.week : this.state.month))
             .then(r => {
+                console.log(r)
                 if (r !== undefined) {
                     // Batch does not exist, load not found page
                     this.setState({uploadHistory: r});
@@ -126,15 +127,14 @@ export class SurveyFileUpload extends Component <Props, State> {
             });
             return
         }
-
         postSurveyFile(this.state.fileOne, this.state.importFileName, 'survey', this.state.surveyType.toLowerCase(), (this.state.surveyType === "GB" ? this.state.week : this.state.month), this.state.year)
             .then(response => {
-                console.log(response);
-                if (response.status === 'ERROR') {
-                    this.setPanel("Error Occurred while Uploading File: " + response.errorMessage.toString(), 'error', true);
-                } else {
+                console.log(response.status);
+                if (response.status === 'OK') {
                     this.setPanel(this.state.surveyType.toUpperCase() + " Survey Uploaded, Starting Import", 'success', true);
-                }
+                } else if (response.status === 'ERROR') {
+                    this.setPanel("Error Occurred while Uploading File: " + response.errorMessage.toString(), 'error', true);
+                } else this.setPanel("File Failed to Upload", 'error', true);
                 this.setState({
                     uploading: false,
                 });
@@ -149,7 +149,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                 this.setState({
                     uploading: false,
                 });
-            });
+        });
     };
 
     returnToManageBatch = (notImported: boolean) => {
@@ -181,7 +181,6 @@ export class SurveyFileUpload extends Component <Props, State> {
     };
 
     handleFileChange = (selectorFiles: FileList | null) => {
-        console.log(selectorFiles);
         this.setState({fileOne: selectorFiles})
     };
 
@@ -208,7 +207,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                 title={'LFS Survey Import ' + this.state.period + ' ' + this.state.year + ' ' + this.state.surveyType.toUpperCase()}>
                 <div className="container">
                     <ONSBreadcrumbs List={[{name: "Home", link: ""}, {name: "Manage Batch " + monthNumberToString(Number(this.state.month)) + " " + this.state.year, link: batchLink}]}
-                                    Current={"Import Survey - " + this.state.period} />
+                                    Current={"Import Survey - " + this.state.period} data-testid="breadcrumb-surveyFile"/>
                     <h2>Import Survey</h2>
                     <ONSMetadata List={this.state.metaData}/>
                     <div style={{width: "55%"}}>
@@ -230,7 +229,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                                    accept=".sav" onChange={(e) => this.handleFileChange(e.target.files)}/>
                         <br/>
                         <ONSButton id={'import-btn'} label={"Import"} field={true} onClick={this.uploadFile} primary={true} small={false}
-                                   loading={this.state.uploading}/>
+                                   loading={this.state.uploading} testid="import"/>
                         <Link className={'field'} style={{marginLeft: "15px"}}
                               to={"/manage-batch/monthly/" + this.state.year + "/" + this.state.month}>
                             <ONSButton label={"Return to Manage Batch"} field={true} primary={false}

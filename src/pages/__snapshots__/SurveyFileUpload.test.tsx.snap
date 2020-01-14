@@ -166,6 +166,7 @@ Object {
             >
               <label
                 class="label"
+                for="U1"
               >
                 Import GB File
                 <br />
@@ -188,6 +189,7 @@ Object {
           <br />
           <button
             class="btn field "
+            data-testid="import-button"
             id="import-btn"
             type="button"
           >
@@ -204,6 +206,7 @@ Object {
           >
             <button
               class="btn field btn--secondary "
+              data-testid="button"
               type="button"
             >
               <span
@@ -460,6 +463,7 @@ Object {
           >
             <label
               class="label"
+              for="U1"
             >
               Import GB File
               <br />
@@ -482,6 +486,7 @@ Object {
         <br />
         <button
           class="btn field "
+          data-testid="import-button"
           id="import-btn"
           type="button"
         >
@@ -498,6 +503,7 @@ Object {
         >
           <button
             class="btn field btn--secondary "
+            data-testid="button"
             type="button"
           >
             <span
