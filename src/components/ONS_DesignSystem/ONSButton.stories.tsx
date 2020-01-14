@@ -2,28 +2,78 @@ import React from "react";
 import {ONSButton} from "./ONSButton";
 import "@ons/design-system/css/main.css";
 import {action} from "@storybook/addon-actions";
+// Using knobs to allow user config:
+// https://github.com/storybookjs/storybook/tree/master/addons/knobs
+import {boolean, number, text, withKnobs} from "@storybook/addon-knobs";
 
 export default {
     component: ONSButton,
-    title: "ONSButton"
+    title: "ONS Button",
+    decorators: [withKnobs]
 };
 
-export const primary = () => <ONSButton label={"Button"} primary={true}/>;
-export const secondary = () => <ONSButton label={"Button"} primary={false}/>;
-export const smallPrimary = () => <ONSButton label={"Button"} primary={true} small={true}/>;
-export const smallSecondary = () => <ONSButton label={"Button"} primary={false} small={true}/>;
-export const loadingPrimary = () => <ONSButton label={"Button"} primary={true} loading={true}/>;
-export const loadingSecondary = () => <ONSButton label={"Button"} primary={false} loading={true}/>;
+export const button = () => (
+    <ONSButton
+        label={text("Label", "Button")}
+        primary={boolean("Primary", true)}
+        small={boolean("Small", false)}
+        loading={boolean("Loading", false)}
+        disabled={boolean("Disabled", false)}/>
+);
+export const small = () => (
+    <ONSButton
+        label={text("Label", "Button")}
+        primary={boolean("Primary", true)}
+        small={boolean("Small", true)}
+        loading={boolean("Loading", false)}/>
+);
+export const loading = () => (
+    <ONSButton
+        label={text("Label", "Button")}
+        primary={boolean("Primary", true)}
+        small={boolean("Small", false)}
+        loading={boolean("Loading", true)}/>
+);
 export const marginRight = () => (
     <>
-        <ONSButton label={"Button"} primary={true} marginRight={10}/>
-        <ONSButton label={"Button"} primary={true} marginRight={10}/>
+        <ONSButton
+            label={text("Label", "First Button")}
+            primary={boolean("Primary", true)}
+            small={boolean("Small", false)}
+            loading={boolean("Loading", false)}
+            marginRight={number("Margin Right", 10)}/>
+        <ONSButton label={"Second Button"} primary={true} marginRight={10}/>
     </>
 );
-export const onClick = () => <ONSButton label={"Button"} primary={false} onClick={action('click')}/>;
-export const exportExcelButton = () => <ONSButton label={"Button"} primary={false} exportExcelBtn={true}/>;
-export const disabled = () => <ONSButton label={"Button"} primary={true} disabled={true}/>;
-export const callToAction = () => <ONSButton label={"Button"} primary={true} action={true}/>;
-
-
+export const onClick = () => (
+    <ONSButton
+        label={text("Label", "Button")}
+        primary={boolean("Primary", true)}
+        small={boolean("Small", false)}
+        loading={boolean("Loading", false)}
+        onClick={action("click")}/>
+);
+export const exportExcelButton = () => (
+    <ONSButton
+        label={text("Label", "Export Excel Button")}
+        primary={true}
+        loading={boolean("Loading", false)}
+        onClick={action("click")}
+        exportExcelBtn={true}/>
+);
+export const disabled = () => (
+    <ONSButton
+        label={text("Label", "Button")}
+        primary={boolean("Primary", true)}
+        small={boolean("Small", false)}
+        loading={boolean("Loading", false)}
+        disabled={boolean("Disabled", true)}/>
+);
+export const callToAction = () => (
+    <ONSButton
+        label={text("Label", "Lets Do something")}
+        primary={boolean("Primary", true)}
+        small={boolean("Small", false)}
+        action={boolean("Call to Action", true)}/>
+);
 
