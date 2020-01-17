@@ -1,17 +1,15 @@
-import React, {Component} from 'react';
+import React from "react";
 
 interface Props {
     label: string,
     small: boolean
     status: string
+    testId?: string
 }
 
-export class ONSStatus extends Component <Props, {}>{
-
-    render() {
-        let className = "status status--" + this.props.status + (this.props.small ? " status--small": "");
-        return(
-            <span className={className}>{this.props.label}</span>
-        )
-    }
-}
+export const ONSStatus = (props: Props) => {
+    let className = "status status--" + props.status + (props.small ? " status--small" : "");
+    return (
+        <span data-testid={props.testId} className={className}>{props.label}</span>
+    );
+};
