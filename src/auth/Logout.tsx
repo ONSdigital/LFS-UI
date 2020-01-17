@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {Cookies} from "react-cookie";
 import {GenericNotFound} from "../pages/GenericNotFound";
 
@@ -22,7 +22,6 @@ class Logout extends Component <Props, {}>{
     }
 
     render () {
-
         return <GenericNotFound/>
     }
 }
