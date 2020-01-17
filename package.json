@@ -56,6 +56,14 @@
     "test-coverage": "npm test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/tests/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/stories/",
+      "<rootDir>/src/selenium/"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
