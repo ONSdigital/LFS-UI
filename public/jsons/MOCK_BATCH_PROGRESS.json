@@ -1,21 +1,25 @@
 {
   "Rows": [
     {
+      "id": 0,
       "step": "Import Survey Files",
       "status": "Completed"
     },
     {
+      "id": 1,
       "step": "Run Monthly Process",
       "status": "In Progress"
     },
     {
+      "id": 2,
       "step": "Run Monthly Weighting",
       "status": "Failed"
     },
     {
+      "id": 3,
       "step": "Run Monthly ____",
       "status": "Not Run"
     }
   ],
-  "Count": 3
+  "Count": 4
 }
