@@ -129,6 +129,18 @@ export class Import extends Component <Props, State> {
                 return;
             }
 
+            if (this.state.uploadFile.length === 0) {
+                this.setState({
+                    uploading: false,
+                    panel: {
+                        label: 'No File Selected',
+                        visible: true,
+                        status: 'info'
+                    }
+                });
+                return
+            }
+
             let uploadLink = this.state.uploadLink;
             if (this.state.validFromDate !== null) {
                 uploadLink = uploadLink + "/" + this.state.validFromDate.toISOString();
@@ -158,6 +170,11 @@ export class Import extends Component <Props, State> {
                             if (response.status === 403) {
                                 this.setPanel(json.errorMessage, "error");
                             }
+                            if (response.status === 400) {
+                                this.setPanel("Import Failed: " + json.errorMessage, "error");
+                                this.setState({uploading: false});
+                                return;
+                            }
 
                             if (this.state.importName === "Bulk Amendments Accept") {
                                 if (response.status === 403) {
@@ -165,6 +182,7 @@ export class Import extends Component <Props, State> {
                                 } else {
                                     this.setPanel("Bulk Amendments: File Uploaded Successfully", "success");
                                 }
+
                             }
 
                             this.setState({amendments: json, uploading: false});
@@ -465,8 +483,11 @@ export class Import extends Component <Props, State> {
     };
 
     getBreadcrumbList = () => {
-        if(this.state.outputSpec) return [{name: "Import Overview", link: "import/overview"}, {name: "Output File Specification", link: "import/output"}];
-        else return [{name: "Import Overview", link: "import/overview"}]
+        if (this.state.outputSpec) return [{
+            name: "Import Overview",
+            link: "import/overview"
+        }, {name: "Output File Specification", link: "import/output"}];
+        else return [{name: "Import Overview", link: "import/overview"}];
     };
 
     render() {

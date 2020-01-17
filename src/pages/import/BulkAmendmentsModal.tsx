@@ -148,7 +148,7 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                         </>
                     }
                     {
-                        this.props.amendmentsResponse.status !== "OK" &&
+                        (this.props.amendmentsResponse.status !== "OK" && response.AmendmentItems !== undefined) &&
                         <ONSAccordionTable Headers={AMENDMENT_HEADERS}
                                            data={response.AmendmentItems}
                                            Row={amendmentItemTableRow}
