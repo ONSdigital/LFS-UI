@@ -1,6 +1,7 @@
 import React from "react";
 import {ONSButton} from "./ONSButton";
 import "@ons/design-system/css/main.css";
+// @ts-ignore
 import {action} from "@storybook/addon-actions";
 // Using knobs to allow user config:
 // https://github.com/storybookjs/storybook/tree/master/addons/knobs
