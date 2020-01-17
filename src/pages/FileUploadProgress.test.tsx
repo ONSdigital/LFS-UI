@@ -1,19 +1,30 @@
 import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {render} from "@testing-library/react";
+import {cleanup, render} from "@testing-library/react";
 import WS from "jest-websocket-mock";
 import {FileUploadProgress} from "./FileUploadProgress";
+import flushPromises from "../tests/util/flushPromises";
 
 
 describe("File Upload Progress", () => {
     Enzyme.configure({adapter: new Adapter()});
 
+    afterEach(cleanup);
 
     const props = {
         importName: "File",
         fileName: "file12",
         hidden: false,
+        fileUploading: jest.fn(),
+        setPanel: jest.fn(),
+        redirectOnComplete: jest.fn()
+    };
+
+    const hiddenProps = {
+        importName: "File",
+        fileName: "file12",
+        hidden: true,
         fileUploading: jest.fn(),
         setPanel: jest.fn(),
         redirectOnComplete: jest.fn()
@@ -26,51 +37,40 @@ describe("File Upload Progress", () => {
     }
 
     it("should return Websocket", async () => {
+        const server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
 
-        const server = new WS("ws://127.0.0.1:8000/ws", { jsonProtocol: true });
-        // const server = new WS("ws://127.0.0.1:8000/ws");
-        let fileUploadPage = wrapper(render, props);
+        const {getByTestId, getByLabelText, getByText} = wrapper(render, props);
 
-        await server.connected;
-
-        server.on("message", (socket: any) => {
-            console.log("onMessage");
-
-            server.send({fileName: "file12", percent: 20, status: 3, errorMessage: "fileName not found - Mock"});
-
+        /*
+        On connection to the server it will return a mock response with the status of a file.
+        This would usually be returned after the message is sent from the client (UI)
+        but here it is returned immediately on connection for the test
+        */
+        server.on("connection", (socket: any) => {
+            server.send({fileName: "file12", percent: 20, status: 1, errorMessage: ""});
             // socket.close({ wasClean: false, code: 1003, reason: "NOPE" });
         });
 
+        await server.connected;
+
+        // Check that the mocked server receives the request the the status of the file import
         await expect(server).toReceiveMessage({
             "fileName": "file12"
         });
 
-        console.log(fileUploadPage.screen)
+        await flushPromises();
 
-        let importStatus = fileUploadPage.screen.getByText(/Import Progress/i);
+        let importStatus = getByText(/Importing/i);
 
-        console.log(importStatus.textContent)
+        // Confirm import status is shown on screen from the websocket response
+        expect(importStatus.textContent).toEqual("Importing: 20%");
+        console.log();
 
-        expect(server).toHaveReceivedMessages([
-            { type: "GREETING", payload: "hello" },
-        ]);
+        // Send a Import Complete status
+        await server.send({fileName: "file12", percent: 100, status: 2, errorMessage: ""});
 
-        // const client1 = new WebSocket("ws://localhost:1234");
-        // await server.connected;
-        // const client2 = new WebSocket("ws://localhost:1234");
-        //
-        // const messages = {client1: [], client2: []};
-        // client1.onmessage = e => {
-        //     messages.client1.push(e.data);
-        // };
-        // client2.onmessage = e => {
-        //     messages.client2.push(e.data);
-        // };
-        //
-        // server.send("hello everyone");
-        // expect(messages).toEqual({
-        //     client1: ["hello everyone"],
-        //     client2: ["hello everyone"]
-        // });
+        await flushPromises();
+
+        expect(importStatus.textContent).toEqual("Import Complete");
     });
 });

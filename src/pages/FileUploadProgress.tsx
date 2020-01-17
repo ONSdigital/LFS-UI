@@ -61,7 +61,11 @@ export class FileUploadProgress extends Component <Props, State> {
 
     componentDidMount(): void {
         this.ws.onopen = (evt => this.handleWSOnOpen(evt));
-        this.ws.onmessage = (evt => this.handleWSOnMessage(JSON.parse(evt.data)));
+        this.ws.onmessage = (evt => {
+            console.log(evt)
+
+            this.handleWSOnMessage(JSON.parse(evt.data))
+        });
         this.ws.onclose = (evt => this.handleWSOnClose(evt));
         this.ws.onerror = (evt => this.handleWSOnError(evt));
     }
@@ -73,7 +77,7 @@ export class FileUploadProgress extends Component <Props, State> {
 
     handleWSOnOpen = (evt: Event) => {
         console.log("WebSocket Open");
-        (isDevEnv && console.log(evt));
+        // (isDevEnv && console.log(evt));
         this.getFileUploadProgress();
     };
 
@@ -90,6 +94,7 @@ export class FileUploadProgress extends Component <Props, State> {
     };
 
     handleWSOnMessage = (evt: any) => {
+        console.log(" ====== received message from sever");
         (isDevEnv && console.log(evt));
         if (evt.status === 3 || evt.errorMessage.length > 0) {
             if (evt.errorMessage === "fileName not found") {

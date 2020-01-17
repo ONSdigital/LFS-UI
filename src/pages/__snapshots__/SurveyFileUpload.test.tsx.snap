@@ -99,7 +99,10 @@ Object {
             Previous imports 
           </h4>
           <table
-            class="table "
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
             id="basic-table"
           >
             <thead
@@ -228,7 +231,10 @@ Object {
             style="width: 60%;"
           >
             <table
-              class="table "
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
               id="basic-table"
             >
               <thead
@@ -262,6 +268,7 @@ Object {
               >
                 <tr
                   class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
                   tabindex="0"
                   title="Table Row"
                 >
@@ -396,7 +403,10 @@ Object {
           Previous imports 
         </h4>
         <table
-          class="table "
+          class="table table--sortable"
+          data-aria-asc="ascending"
+          data-aria-desc="descending"
+          data-aria-sort="Sort by"
           id="basic-table"
         >
           <thead
@@ -525,7 +535,10 @@ Object {
           style="width: 60%;"
         >
           <table
-            class="table "
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
             id="basic-table"
           >
             <thead
@@ -559,6 +572,7 @@ Object {
             >
               <tr
                 class="table__row nonSelectableTableRow"
+                data-testid="table-row"
                 tabindex="0"
                 title="Table Row"
               >
