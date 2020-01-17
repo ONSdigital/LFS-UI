@@ -29,7 +29,7 @@ export class ONSUpload extends Component <Props, {}>{
       return (
         <div className="field">
             <p className="field">
-                <label className="label" >{this.props.label}
+                <label className="label" htmlFor={this.props.fileID}>{this.props.label}
                 <br/>
                   <span className="label__description">{this.props.description}</span>
                 </label>

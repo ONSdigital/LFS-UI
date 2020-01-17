@@ -13,6 +13,7 @@ interface Props {
     exportExcelBtn?: boolean
     disabled?: boolean
     action?: boolean
+    testid?: string
 }
 
 export const ONSButton = (props: Props) => {
@@ -22,6 +23,13 @@ export const ONSButton = (props: Props) => {
             marginRight: String(props.marginRight) + "px"
         };
     };
+
+    let test_id = () => {
+        if(props.testid){
+            return props.testid + "-button"
+        }
+        return "button"
+    }
 
     let className = "btn ";
     if (props.exportExcelBtn) {
@@ -38,7 +46,7 @@ export const ONSButton = (props: Props) => {
 
     return (
         <button id={props.id} style={spacing()} type="button" disabled={props.loading || props.disabled}
-                className={className} onClick={props.onClick}>
+                className={className} onClick={props.onClick} data-testid={test_id()}>
             <span className="btn__inner">{props.label}</span>
         </button>
     );

@@ -20,10 +20,10 @@ export class ONSMetadata extends Component < Props, {} > {
             return(
                 <div>
                     <dl className="metadata metadata__list grid grid--gutterless u-cf u-mb-l" title="This is an example of the metadata component" aria-label="This is an example of the metadata component">
-                        {this.props.List.map((item:any) => (
+                        {this.props.List.map((item:any, index: any) => (
                             <Fragment key ={item.L}>
-                                <dt className={"metadata__term grid__col col-" + Lspacing + "@m"}>{item.L}:</dt>
-                                <dd className={"metadata__value grid__col col-" + Rspacing + "@m"}>{item.R}</dd>
+                                <dt className={"metadata__term grid__col col-" + Lspacing + "@m"} >{item.L}:</dt>
+                                <dd className={"metadata__value grid__col col-" + Rspacing + "@m"} data-testid={"metadata-test-" + index}>{item.R}</dd>
                             </Fragment>)
                         )}
                     </dl>

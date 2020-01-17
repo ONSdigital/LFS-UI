@@ -12,6 +12,7 @@ function postSurveyFile(lfsfile: any, fileName: string, fileType: string, survey
 
 function surveyAuditResponse(survey: string, status: string, year: string, period: string): Promise<any> {
     let url = "/survey/" + survey.toLowerCase() + "/status/" + status + "/" + year + "/" + period;
+    console.log(url)
     return requestPromiseJson("POST", url);
 }
 
