@@ -77,3 +77,9 @@ export const callToAction = () => (
         action={boolean("Call to Action", true)}/>
 );
 
+button.story = {
+    parameters: {
+        jest: ['ONSButton.test.tsx'],
+    },
+};
+

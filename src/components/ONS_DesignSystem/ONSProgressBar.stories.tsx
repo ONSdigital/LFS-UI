@@ -38,3 +38,9 @@ export const success = () => (
     <ONSProgressBar statusCode={select("Status", statusOptions, 4)}
                     percentage={number("Percentage ", 100, percentageRange)}/>
 );
+
+inProgress.story = {
+    parameters: {
+        jest: ['ONSProgressBar.test.tsx'],
+    },
+};
