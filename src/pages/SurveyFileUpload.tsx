@@ -4,7 +4,7 @@ import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {getSurveyAudit, postSurveyFile} from "../utilities/http";
 import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 import {ONSMetadata} from "../components/ONS_DesignSystem/ONSMetadata";
-import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
+import {getFileImportStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {SURVEY_UPLOAD_HISTORY} from "../utilities/Headers";
@@ -193,7 +193,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                 </td>
                 <td className="table__cell ">
                     <ONSStatus label={row.message} small={false}
-                               status={getStatusStyle(+row.status).colour}/>
+                               status={getFileImportStatusStyle(+row.status).colour}/>
                 </td>
             </>
         )

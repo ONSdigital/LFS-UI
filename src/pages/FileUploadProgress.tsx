@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {UPLOAD_HEADERS} from "../utilities/Headers";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
-import {getUploadStatusStyle, isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
+import {getFileImportStatusStyle, isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import {ONSProgressBar} from "../components/ONS_DesignSystem/ONSProgressBar";
 
 interface Props {
@@ -170,7 +170,7 @@ export class FileUploadProgress extends Component <Props, State> {
                             :
                             <ONSStatus label={row.status}
                                        small={false}
-                                       status={getUploadStatusStyle(this.state.uploadStatusCode).colour}/>
+                                       status={getFileImportStatusStyle(this.state.uploadStatusCode).colour}/>
 
                     }
                 </td>
