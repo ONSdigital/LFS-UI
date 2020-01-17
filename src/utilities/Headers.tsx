@@ -3,7 +3,7 @@ const BATCH_HEADERS =
         label: "Source",
         column_name: "type",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Period",
         column_name: "month",
@@ -31,12 +31,12 @@ const REFERENCE_FILE_HEADERS =
         label: "Reference File Name",
         column_name: "File Name",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Import Date",
         column_name: "Import Date",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Status",
         column_name: "status",
@@ -47,20 +47,20 @@ const REFERENCE_FILE_HEADERS =
 const REFERENCE_FILE_IMPORT_HEADERS =
     [{
         label: "File Name",
-        column_name: "File Name",
+        column_name: "name",
         filter: false,
         order: true
     }, {
         label: "Import Date",
         column_name: "Import Date",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Status",
         column_name: "status",
         filter: false,
-        order: false
-    },{
+        order: true
+    }, {
         label: "",
         column_name: "",
         filter: false,
@@ -72,12 +72,12 @@ const UPLOAD_HEADERS =
         label: "File Name ",
         column_name: "fileName",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Step",
         column_name: "step",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Status",
         column_name: "status",
@@ -91,12 +91,12 @@ const AMENDMENT_HEADERS =
         column_name: "Case No",
         filter: false,
         order: true
-    },{
+    }, {
         label: "Variable",
         column_name: "Variable",
         filter: false,
         order: true
-    },  {
+    }, {
         label: "Found",
         column_name: "Found",
         filter: false,
@@ -111,29 +111,29 @@ const AMENDMENT_HEADERS =
 const DASHBOARD_HEADERS =
     [{
         label: "BatchID",
-        column_name: "BatchID",
+        column_name: "id",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Batch Type",
-        column_name: "Batch Type",
+        column_name: "type",
+        filter: false,
+        order: false
+    }, {
+        label: "Period",
+        column_name: "period",
         filter: false,
         order: true
     }, {
-        label: "Period",
-        column_name: "Period",
-        filter: false,
-        order: false
-    }, {
         label: "Year",
-        column_name: "Year",
+        column_name: "year",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Status",
         column_name: "status",
         filter: false,
-        order: false
+        order: true
     }
     ];
 
@@ -142,7 +142,7 @@ const BATCH_PROGRESS_TABLE =
         label: "Step",
         column_name: "Step",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Status",
         column_name: "status",
@@ -156,54 +156,54 @@ const SURVEY_UPLOAD_HISTORY =
         label: "Import Date",
         column_name: "Date",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Status",
         column_name: "Status",
         filter: false,
-        order: true
+        order: false
     }
     ];
 
 const VARIABLE_DEFINITION_HEADERS =
     [{
         label: "Variable",
-        column_name: "Variable",
+        column_name: "variable",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Description",
-        column_name: "Description",
+        column_name: "description",
         filter: false,
         order: false
     }, {
         label: "Valid From",
-        column_name: "Valid From",
+        column_name: "validFrom",
         filter: false,
-        order: false
+        order: true
     }, {
         label: "Editable",
-        column_name: "Editable",
+        column_name: "editable",
         filter: false,
         order: false
     }, {
         label: "Imputation",
-        column_name: "Imputation",
+        column_name: "imputation",
         filter: false,
         order: false
     }, {
         label: "DV",
-        column_name: "DV",
+        column_name: "dv",
         filter: false,
         order: false
     }, {
         label: "Type",
-        column_name: "Type",
+        column_name: "type",
         filter: false,
         order: false
     }, {
         label: "Length",
-        column_name: "Length",
+        column_name: "length",
         filter: false,
         order: false
     }
@@ -215,7 +215,7 @@ const VALUE_LABELS_HEADERS =
         column_name: "Variable Name",
         filter: false,
         order: false
-    },{
+    }, {
         label: "Label Name",
         column_name: "Label Name",
         filter: false,
@@ -245,7 +245,7 @@ function userHeaders() {
             column_name: "user_id",
             filter: false,
             order: true,
-            create: false,
+            create: false
         }, {
             label: "Username",
             column_name: "username",
@@ -262,10 +262,10 @@ function userHeaders() {
             label: "Role",
             column_name: "role",
             filter: false,
-            order: false,
+            order: true,
             create: true
         }]
-    )
+    );
 }
 
 function roleHeaders() {
@@ -281,8 +281,20 @@ function roleHeaders() {
             filter: false,
             order: false
         }]
-    )
+    );
 }
 
-export {BATCH_HEADERS, SURVEY_UPLOAD_HISTORY, UPLOAD_HEADERS, AMENDMENT_HEADERS, userHeaders, roleHeaders,
-    DASHBOARD_HEADERS, VARIABLE_DEFINITION_HEADERS, REFERENCE_FILE_IMPORT_HEADERS, VALUE_LABELS_HEADERS, REFERENCE_FILE_HEADERS, BATCH_PROGRESS_TABLE}
+export {
+    BATCH_HEADERS,
+    SURVEY_UPLOAD_HISTORY,
+    UPLOAD_HEADERS,
+    AMENDMENT_HEADERS,
+    userHeaders,
+    roleHeaders,
+    DASHBOARD_HEADERS,
+    VARIABLE_DEFINITION_HEADERS,
+    REFERENCE_FILE_IMPORT_HEADERS,
+    VALUE_LABELS_HEADERS,
+    REFERENCE_FILE_HEADERS,
+    BATCH_PROGRESS_TABLE
+};
