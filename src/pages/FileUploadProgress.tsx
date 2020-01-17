@@ -125,6 +125,13 @@ export class FileUploadProgress extends Component <Props, State> {
     };
 
     getFileUploadProgress = () => {
+        // Send Initial Request to WS to get upload status immediately
+        this.ws.send(JSON.stringify(
+            {
+                "fileName": this.props.fileName
+            }
+        ));
+        // Set interval to get upload status every 3 seconds
         let id = setInterval(_ => {
             this.ws.send(JSON.stringify(
                 {
