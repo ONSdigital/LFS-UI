@@ -21,15 +21,6 @@ describe("File Upload Progress", () => {
         redirectOnComplete: jest.fn()
     };
 
-    const hiddenProps = {
-        importName: "File",
-        fileName: "file12",
-        hidden: true,
-        fileUploading: jest.fn(),
-        setPanel: jest.fn(),
-        redirectOnComplete: jest.fn()
-    };
-
     function wrapper(render: any, props: any) {
         return render(
             <FileUploadProgress {...props}/>
@@ -39,14 +30,14 @@ describe("File Upload Progress", () => {
     it("should return Websocket", async () => {
         const server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
 
-        const {getByTestId, getByLabelText, getByText} = wrapper(render, props);
+        const {getByText} = wrapper(render, props);
 
         /*
         On connection to the server it will return a mock response with the status of a file.
         This would usually be returned after the message is sent from the client (UI)
         but here it is returned immediately on connection for the test
         */
-        server.on("connection", (socket: any) => {
+        server.on("connection", _ => {
             server.send({fileName: "file12", percent: 20, status: 1, errorMessage: ""});
             // socket.close({ wasClean: false, code: 1003, reason: "NOPE" });
         });
