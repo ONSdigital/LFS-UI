@@ -6,13 +6,13 @@ import { default as flushPromises } from "../tests/util/flushPromises"
 import {render, fireEvent, screen, cleanup} from '@testing-library/react'
 
 import { BrowserRouter } from "react-router-dom";
+import { act } from "react-dom/test-utils";
 
 import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import fetch from '../tests/setup/__mocks__/fetch.js';
 
+import fetch from '../tests/setup/__mocks__/fetch.js';
 import { monthNumberToString } from "../utilities/Common_Functions";
-import { act } from "react-dom/test-utils";
 
 global.fetch = fetch;
 
@@ -57,7 +57,7 @@ describe("GB and NI survey file uploads", () => {
         );
     }
 
-    it("renders the page", async () => {
+    it("renders the page correctly", async () => {
         expect(wrapper(render, Props)).toMatchSnapshot()
     })
 
