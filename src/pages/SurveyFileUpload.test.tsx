@@ -22,6 +22,7 @@ describe("GB and NI survey file uploads", () => {
     Enzyme.configure({adapter: new Adapter()});
 
     afterEach(cleanup);
+    beforeEach(cleanup)
 
     const match = {
         path: "/survey-import/:survey/:week/:month/:year",
@@ -122,16 +123,6 @@ describe("GB and NI survey file uploads", () => {
         expect(getByText(/Insert survey row failed/i)).toBeTruthy();
     });
 
-    it("displays file upload history in the table", async () => {
-        const {getByTestId, getByText} = wrapper(render, Props);
-
-        await act(async () => {
-            await flushPromises();
-        });
-
-        expect(getByText(/Insert survey row failed/i)).toBeTruthy();
-    });
-
     it("displays message in table when survey has not been imported before", async () => {
         const {getByTestId, getByText} = wrapper(render, PropsNI);
 
@@ -207,6 +198,7 @@ describe("GB and NI survey file uploads", () => {
         await flushPromises();
 
         expect(window.location.href).toEqual("/manage-batch/monthly/2019/1/GB-1-1-2019");
+        server.close();
     });
 
     it("selects a file and an unknown error is returned, display error", async () => {
