@@ -27,7 +27,7 @@ describe("Selenium - Create New Batch Test", () => {
         }
     });
 
-    it("should Create a New Batch for January 2010 and then redirect to the Manage Batch Page", async () => {
+    it("should Create a New Batch for January (10 years previous from current year) and then redirect to the Manage Batch Page", async () => {
         await browser.get("http://localhost:3000/new-batch");
 
         // get the batch type select field
@@ -40,7 +40,10 @@ describe("Selenium - Create New Batch Test", () => {
         let yearOption = await browser.findElement(By.id("year"));
 
         // selects the 2010 option from the dropdown
-        await yearOption.findElement(By.xpath("option[@value=\"2010\"]")).click();
+        let d = new Date();
+        let tenYearsAgo = d.getFullYear() - 9;
+
+        await yearOption.findElement(By.xpath("option[@value=" + tenYearsAgo +"]")).click();
 
         // get the period select field
         let periodOption = await browser.findElement(By.id("period"));
