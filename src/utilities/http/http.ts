@@ -28,7 +28,7 @@ function getSurveyAudit(survey: string, year: string, period: string): Promise<a
 }
 
 function getImportReportFile(importName: string): Promise<any> {
-    let url = "/" + importName + "/report";
+    let url = "/" + importName + "/report/population";
 
     return new Promise((resolve: any, reject: any) => {
         fetch(url, {
