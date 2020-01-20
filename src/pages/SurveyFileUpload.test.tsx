@@ -13,7 +13,9 @@ import fetch from "../tests/setup/__mocks__/fetch.js";
 
 import {monthNumberToString} from "../utilities/Common_Functions";
 import {act} from "react-dom/test-utils";
+import WS from "jest-websocket-mock";
 
+// @ts-ignore
 global.fetch = fetch;
 
 describe("GB and NI survey file uploads", () => {
@@ -57,6 +59,29 @@ describe("GB and NI survey file uploads", () => {
         );
     }
 
+    /*
+    Function to Mock a file in the File Selection, then press the Submit button
+     */
+    async function selectAndImportFile(getByTestId: any, getByLabelText: any, fileName: string) {
+        const inputEl = getByLabelText(/import/i);
+
+        const file = new File(["(⌐□_□)"], fileName, {
+            type: "sav"
+        });
+
+        Object.defineProperty(inputEl, "files", {
+            value: [file]
+        });
+
+        fireEvent.change(inputEl);
+
+        fireEvent.click(getByTestId("import-button"));
+
+        await act(async () => {
+            await flushPromises();
+        });
+    }
+
     it("renders the page", async () => {
         expect(wrapper(render, Props)).toMatchSnapshot();
     });
@@ -87,35 +112,118 @@ describe("GB and NI survey file uploads", () => {
         expect(breadWrapper.find("ONSBreadcrumbs").getElement().props.List[1].link).toEqual("manage-batch/monthly/" + Props.year + "/" + Props.period.slice(-1));
     });
 
-    it("displays \"no file selected\" panel when the upload doesnt contain a file", async () => {
+    it("displays file upload history in the table", async () => {
         const {getByTestId, getByText} = wrapper(render, Props);
-
-        fireEvent.click(getByTestId("import-button"));
-
-        expect(getByText(/No File Selected/i)).toBeTruthy();
-    });
-
-    it("selects a file and uploads, returning an OK response and displaying a success panel", async () => {
-        const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
-
-        const inputEl = getByLabelText(/import/i);
-
-        const file = new File(["(⌐□_□)"], "chucknorris.sav", {
-            type: "sav"
-        });
-
-        Object.defineProperty(inputEl, "files", {
-            value: [file]
-        });
-
-        fireEvent.change(inputEl);
-
-        fireEvent.click(getByTestId("import-button"));
 
         await act(async () => {
             await flushPromises();
         });
 
-        expect(getByText(/Survey Uploaded, Starting Import/i)).toBeTruthy();
+        expect(getByText(/Insert survey row failed/i)).toBeTruthy();
+    });
+
+    it("displays file upload history in the table", async () => {
+        const {getByTestId, getByText} = wrapper(render, Props);
+
+        await act(async () => {
+            await flushPromises();
+        });
+
+        expect(getByText(/Insert survey row failed/i)).toBeTruthy();
+    });
+
+    it("displays message in table when survey has not been imported before", async () => {
+        const {getByTestId, getByText} = wrapper(render, PropsNI);
+
+        await act(async () => {
+            await flushPromises();
+        });
+
+        expect(getByText(/Survey has not been previously imported/i)).toBeTruthy();
+    });
+
+    it("displays \"no file selected\" panel when the upload doesnt contain a file", async () => {
+        const {getByTestId, getByText} = wrapper(render, Props);
+
+        fireEvent.click(getByTestId("import-button"));
+
+        let panel = await getByTestId(/import=panel/i);
+        expect(panel.textContent).toEqual("No File Selected");
+    });
+
+    it("selects a file and uploads, returning an OK response and displaying a success panel", async () => {
+        const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
+
+        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris.sav");
+
+        let panel = await getByTestId(/import=panel/i);
+        expect(panel.textContent).toContain("Survey Uploaded, Starting Import");
+    });
+
+    it("selects a file and fails to upload, returning an ERROR response and displaying a error panel", async () => {
+        const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
+
+        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris_invalid_file.sav");
+
+        let panel = await getByTestId(/import=panel/i);
+        expect(panel.textContent).toEqual("Error Occurred while Uploading File: Error Occurred");
+    });
+
+    it("selects a file and it can't connect to the server, it should display the error panel", async () => {
+        const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
+
+        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris_server_not_online.sav");
+
+        let panel = await getByTestId(/import=panel/i);
+        expect(panel.textContent).toEqual("Error Occurred while Uploading File: Unable to Connect to Server");
+    });
+
+    test("when an import is successful the page should redirect back to the Manage Batch page with the summary", async () => {
+        delete window.location;
+        // @ts-ignore - added so it doesnt have all other unused parameters
+        window.location = {href: "/survey-import/gb/1/1/2019"};
+
+        const server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
+
+        /*:
+        On connection to the server it will return a mock response with the status of a file.
+        This would usually be returned after the message is sent from the client (UI)
+        but here it is returned immediately on connection for the test
+        */
+        server.on("connection", _ => {
+            server.send({fileName: "file12", percent: 0, status: 1, errorMessage: ""});
+            // socket.close({ wasClean: false, code: 1003, reason: "NOPE" });
+        });
+
+        const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
+
+        await server.connected;
+
+        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris.sav");
+
+        // Send a Import Complete status
+        await server.send({fileName: "file12", percent: 100, status: 2, errorMessage: ""});
+
+        await flushPromises();
+
+        expect(window.location.href).toEqual("/manage-batch/monthly/2019/1/GB-1-1-2019");
+    });
+
+    it("selects a file and an unknown error is returned, display error", async () => {
+        const {getByTestId, getByLabelText, getByText} = wrapper(render, PropsNI);
+
+        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris_unknown_error.sav");
+
+        let panel = await getByTestId(/import=panel/i);
+        expect(panel.textContent).toEqual("File Failed to Upload");
+    });
+
+    it("selects a file and an error is returned, display error with message", async () => {
+        const {getByTestId, getByLabelText, getByText} = wrapper(render, PropsNI);
+
+        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris_weird_error.sav");
+
+        let panel = await getByTestId(/import=panel/i);
+        expect(panel.textContent).toEqual("Error Occurred while Uploading File: Something strange has Occurred here");
     });
 });

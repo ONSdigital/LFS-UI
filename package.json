@@ -56,6 +56,9 @@
       "<rootDir>/node_modules/",
       "<rootDir>/src/stories/",
       "<rootDir>/src/selenium/"
+    ],
+    "watchPathIgnorePatterns": [
+      "<rootDir>/src/selenium/"
     ]
   },
   "eslintConfig": {

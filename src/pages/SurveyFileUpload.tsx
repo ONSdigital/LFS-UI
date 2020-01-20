@@ -153,15 +153,13 @@ export class SurveyFileUpload extends Component <Props, State> {
             });
     };
 
-    returnToManageBatch = (notImported: boolean) => {
+    returnToManageBatch = (imported: boolean) => {
         let redirectURL = "";
-        if (!notImported) {
+        // Checks weather the user has imported a file so it will only redirect when importing a new file
+        if (imported && this.state.importStarted) {
             redirectURL = "/" + this.state.surveyType + "-" + this.state.week + "-" + this.state.month + "-" + this.state.year;
-            if (!this.state.importStarted) {
-                return;
-            }
+            window.location.href = "/manage-batch/monthly/" + this.state.year + "/" + this.state.month + redirectURL;
         }
-        window.location.href = "/manage-batch/monthly/" + this.state.year + "/" + this.state.month + redirectURL;
     };
 
     setPanel = (message: string, status: string, visible: boolean) => {

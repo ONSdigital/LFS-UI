@@ -32,7 +32,7 @@ describe("File Upload Progress", () => {
 
         const {getByText} = wrapper(render, props);
 
-        /*
+        /*:
         On connection to the server it will return a mock response with the status of a file.
         This would usually be returned after the message is sent from the client (UI)
         but here it is returned immediately on connection for the test
