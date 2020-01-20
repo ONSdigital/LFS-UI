@@ -5,7 +5,7 @@ function postImportFile(importFile: any, link: string, fileName: string): Promis
     let formData = new FormData();
     formData.append("lfsFile", importFile[0]);
     formData.append("fileName", fileName);
-
+    
     return requestPromise("POST", url, formData);
 }
 

@@ -12,6 +12,7 @@
   "dependencies": {
     "@ons/design-system": "^14.3.0",
     "@testing-library/react": "^9.4.0",
+    "@testing-library/react-hooks": "^3.2.1",
     "@types/bootstrap": "^4.3.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/lodash": "^4.14.149",
@@ -26,6 +27,7 @@
     "@types/react-table": "^6.8.5",
     "@types/selenium-webdriver": "^4.0.5",
     "@types/uuid": "^3.4.6",
+    "axios": "^0.19.1",
     "dayjs": "^1.8.17",
     "enzyme-async-helpers": "^0.9.1",
     "immutability-helper": "latest",
@@ -39,6 +41,7 @@
     "react-router": "^5.0.3",
     "react-router-dom": "^5.0.3",
     "react-scripts": "^3.3.0",
+    "restful-react": "^9.7.1",
     "selenium-webdriver": "^4.0.0-alpha.5",
     "sinon": "^7.5.0",
     "typescript": "^3.7.3",

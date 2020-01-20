@@ -13,9 +13,9 @@ jest.mock("./auth");
 describe("Login Test", () => {
     
     let mockUser: any = null;
-        let mockSetUser = jest.fn();
-        const cookie = new Cookies;
-        let cookieSpy = sinon.spy(cookie, "set");
+    let mockSetUser = jest.fn();
+    const cookie = new Cookies;
+    let cookieSpy = sinon.spy(cookie, "set");
 
     function wrapper(render: any) {
         return render(
@@ -23,13 +23,13 @@ describe("Login Test", () => {
         );
     }
 
-    test('allows the user to login successfully', async () => {
+    it('allows the user to login successfully', async () => {
        
         wrapper(render)
         
         await act(async () => {
             await flushPromises();
-          });
+        });
         
         // fill out the form
         await act(async () => {

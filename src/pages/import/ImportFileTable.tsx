@@ -5,16 +5,6 @@ import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
 import dateFormatter from "dayjs";
 
-
-interface BatchUploadTableRow {
-    id: number
-    type: string
-    period: string
-    status: string
-    year: number,
-    expanded: boolean
-}
-
 export function ImportFileTable() {
     let imports = [
         {name: "APS Design Weights", "status": "Imported"},
@@ -22,8 +12,8 @@ export function ImportFileTable() {
         {name: "Geographical Classifications", "status": "File Older than One year"},
         {name: "Output Specification", "status": "Not Imported"},
         {name: "Population Estimates", "status": "Not Imported"},
-        {name: "Variable Definitions", "status": "Imported"},
-        {name: "Value Labels", "status": "Imported"}
+        {name: "Value Labels", "status": "Imported"},
+        {name: "Variable Definitions", "status": "Imported"}
     ];
 
     let BatchUploadTableRow = (rowData: any) => {
