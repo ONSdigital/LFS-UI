@@ -145,7 +145,7 @@ describe("GB and NI survey file uploads", () => {
     it("selects a file and uploads, returning an OK response and displaying a success panel", async () => {
         const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
 
-        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris.sav");
+        await selectAndImportFile(getByTestId, getByLabelText, "GB_File.sav");
 
         let panel = await getByTestId(/import=panel/i);
         expect(panel.textContent).toContain("Survey Uploaded, Starting Import");
@@ -154,7 +154,7 @@ describe("GB and NI survey file uploads", () => {
     it("selects a file and fails to upload, returning an ERROR response and displaying a error panel", async () => {
         const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
 
-        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris_invalid_file.sav");
+        await selectAndImportFile(getByTestId, getByLabelText, "GB_File_invalid_file.sav");
 
         let panel = await getByTestId(/import=panel/i);
         expect(panel.textContent).toEqual("Error Occurred while Uploading File: Error Occurred");
@@ -163,7 +163,7 @@ describe("GB and NI survey file uploads", () => {
     it("selects a file and it can't connect to the server, it should display the error panel", async () => {
         const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
 
-        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris_server_not_online.sav");
+        await selectAndImportFile(getByTestId, getByLabelText, "GB_File_server_not_online.sav");
 
         let panel = await getByTestId(/import=panel/i);
         expect(panel.textContent).toEqual("Error Occurred while Uploading File: Unable to Connect to Server");
@@ -190,7 +190,7 @@ describe("GB and NI survey file uploads", () => {
 
         await server.connected;
 
-        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris.sav");
+        await selectAndImportFile(getByTestId, getByLabelText, "GB_File.sav");
 
         // Send a Import Complete status
         await server.send({fileName: "file12", percent: 100, status: 2, errorMessage: ""});
@@ -204,7 +204,7 @@ describe("GB and NI survey file uploads", () => {
     it("selects a file and an unknown error is returned, display error", async () => {
         const {getByTestId, getByLabelText, getByText} = wrapper(render, PropsNI);
 
-        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris_unknown_error.sav");
+        await selectAndImportFile(getByTestId, getByLabelText, "NI_File_unknown_error.sav");
 
         let panel = await getByTestId(/import=panel/i);
         expect(panel.textContent).toEqual("File Failed to Upload");
@@ -213,7 +213,7 @@ describe("GB and NI survey file uploads", () => {
     it("selects a file and an error is returned, display error with message", async () => {
         const {getByTestId, getByLabelText, getByText} = wrapper(render, PropsNI);
 
-        await selectAndImportFile(getByTestId, getByLabelText, "chucknorris_weird_error.sav");
+        await selectAndImportFile(getByTestId, getByLabelText, "NI_File_weird_error.sav");
 
         let panel = await getByTestId(/import=panel/i);
         expect(panel.textContent).toEqual("Error Occurred while Uploading File: Something strange has Occurred here");

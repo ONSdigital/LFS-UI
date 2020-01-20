@@ -97,11 +97,10 @@ export class SurveyFileUpload extends Component <Props, State> {
                 if (r !== undefined) {
                     // Batch does not exist, load not found page
                     this.setState({uploadHistory: r});
+                } else {
+                    this.setState({uploadHistory: []});
                 }
             })
-            .catch(error => {
-                console.log(error);
-            });
     };
 
     uploadFile = () => {
