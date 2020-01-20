@@ -62,8 +62,6 @@ export class FileUploadProgress extends Component <Props, State> {
     componentDidMount(): void {
         this.ws.onopen = (evt => this.handleWSOnOpen(evt));
         this.ws.onmessage = (evt => {
-            console.log(evt)
-
             this.handleWSOnMessage(JSON.parse(evt.data))
         });
         this.ws.onclose = (evt => this.handleWSOnClose(evt));

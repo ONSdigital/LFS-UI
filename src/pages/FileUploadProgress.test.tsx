@@ -27,7 +27,7 @@ describe("File Upload Progress", () => {
         );
     }
 
-    it("should return Websocket", async () => {
+    it("should return update and show the progress from the Websocket messages", async () => {
         const server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
 
         const {getByText} = wrapper(render, props);
@@ -63,5 +63,48 @@ describe("File Upload Progress", () => {
         await flushPromises();
 
         expect(importStatus.textContent).toEqual("Import Complete");
+        server.close();
+    });
+
+    it("should display an error based on a error from the websocket", async () => {
+        const server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
+
+        const {getByText} = wrapper(render, props);
+
+        /*:
+        On connection to the server it will return a mock response with the status of a file.
+        This would usually be returned after the message is sent from the client (UI)
+        but here it is returned immediately on connection for the test
+        */
+        server.on("connection", _ => {
+            server.send({fileName: "file12", percent: 20, status: 1, errorMessage: ""});
+            // socket.close({ wasClean: false, code: 1003, reason: "NOPE" });
+        });
+
+        await server.connected;
+
+        // Check that the mocked server receives the request the the status of the file import
+        await expect(server).toReceiveMessage({
+            "fileName": "file12"
+        });
+
+        await flushPromises();
+
+        let importStatus = getByText(/Importing/i);
+
+        // Confirm import status is shown on screen from the websocket response
+        expect(importStatus.textContent).toEqual("Importing: 20%");
+        console.log();
+
+        // Send a Import Failed status
+        await server.send({fileName: "file12", percent: 100, status: 3, errorMessage: "\"File Was not a good file\""});
+
+        await flushPromises();
+
+        expect(importStatus.textContent).toEqual("Failed");
+
+        // Confirm that Error message is being passed to the Set Panel Function
+        expect(props.setPanel).toBeCalledWith("\"File Was not a good file\"", "error", true);
+        server.close();
     });
 });
