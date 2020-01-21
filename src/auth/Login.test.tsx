@@ -7,8 +7,10 @@ import sinon from "sinon";
 // Project Modules
 import {Cookies} from "react-cookie";
 import {Login} from "./Login";
-// Mocked Auth
-jest.mock("./auth");
+import fetch from "../tests/setup/__mocks__/fetch";
+
+// @ts-ignore
+global.fetch = fetch;
 
 describe("Login Page Test", () => {
     Enzyme.configure({adapter: new Adapter()});
@@ -96,5 +98,21 @@ describe("Login Page Test", () => {
 
     });
 
+    it("Should set a temporary Dev user when in Development  ", async () => {
+        // @ts-ignore - Set Test Env to development
+        process.env.NODE_ENV = "development";
+        let loginPage = wrapper(mount);
 
+        fillInLoginFormAndSubmit(loginPage, "", "");
+
+        // @ts-ignore
+        // Wait for Panel to be shown
+        await waitForState(loginPage, state => state.panel.visible === true);
+
+        // Check that setUser is being passed the temp dev details
+        expect(mockSetUser).toHaveBeenCalledWith({name: "DEV_USER"});
+
+        // Check that the cookie provider passed in is called
+        expect(cookieSpy.called).toBeTruthy();
+    });
 });
