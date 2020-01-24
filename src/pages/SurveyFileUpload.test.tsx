@@ -18,11 +18,20 @@ import WS from "jest-websocket-mock";
 // @ts-ignore
 global.fetch = fetch;
 
+
 describe("GB and NI survey file uploads", () => {
     Enzyme.configure({adapter: new Adapter()});
 
-    afterEach(cleanup);
-    beforeEach(cleanup)
+    let server: WS;
+
+    beforeEach(() => {
+        server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
+    });
+
+    afterEach(() => {
+        cleanup();
+        server.close();
+    });
 
     const match = {
         path: "/survey-import/:survey/:week/:month/:year",
@@ -174,16 +183,13 @@ describe("GB and NI survey file uploads", () => {
         // @ts-ignore - added so it doesnt have all other unused parameters
         window.location = {href: "/survey-import/gb/1/1/2019"};
 
-        const server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
+        server.on("connection", socket => {
+            console.log("Server Connection");
 
-        /*:
-        On connection to the server it will return a mock response with the status of a file.
-        This would usually be returned after the message is sent from the client (UI)
-        but here it is returned immediately on connection for the test
-        */
-        server.on("connection", _ => {
-            server.send({fileName: "file12", percent: 0, status: 1, errorMessage: ""});
-            // socket.close({ wasClean: false, code: 1003, reason: "NOPE" });
+            socket.on('message', function incoming(message) {
+                console.log('Received from client:  %s', message);
+                server.send({fileName: "file12", percent: 100, status: 2, errorMessage: ""});
+            });
         });
 
         const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
@@ -199,6 +205,31 @@ describe("GB and NI survey file uploads", () => {
 
         expect(window.location.href).toEqual("/manage-batch/monthly/2019/1/GB-1-1-2019");
         server.close();
+    });
+
+    test("when you load the page and a import is successful but an new Import is not been started, it should NOT redirect back to the Manage Batch page", async () => {
+        delete window.location;
+        // @ts-ignore - added so it doesnt have all other unused parameters
+        window.location = {href: "/survey-import/gb/1/1/2019"};
+
+        /*:
+        On connection to the server it will return a mock response with the status of a file.
+        This would usually be returned after the message is sent from the client (UI)
+        but here it is returned immediately on connection for the test
+        */
+        server.on("connection", _ => {
+            server.send({fileName: "file12", percent: 100, status: 2, errorMessage: ""});
+            // socket.close({ wasClean: false, code: 1003, reason: "NOPE" });
+        });
+
+        const {getByTestId, getByLabelText, getByText} = wrapper(render, Props);
+
+        await server.connected;
+
+        await flushPromises();
+
+        // Make sure the page has not changed
+        expect(window.location.href).toEqual("/survey-import/gb/1/1/2019");
     });
 
     it("selects a file and an unknown error is returned, display error", async () => {
@@ -217,5 +248,38 @@ describe("GB and NI survey file uploads", () => {
 
         let panel = await getByTestId(/import=panel/i);
         expect(panel.textContent).toEqual("Error Occurred while Uploading File: Something strange has Occurred here");
+    });
+
+    test("that the websocket is called very 3 seconds", async () => {
+        jest.useFakeTimers();
+
+        server.on("connection", socket => {
+            console.log("Server Connection");
+
+            socket.on('message', function incoming(message) {
+                console.log('Received from client:  %s', message);
+                server.send({fileName: "file12", percent: 100, status: 2, errorMessage: ""});
+            });
+        });
+
+        wrapper(render, Props);
+
+        jest.advanceTimersByTime(1000);
+
+        await server.connected;
+
+        // Check the server has received the first request
+        expect(server.messages.length).toEqual(1);
+
+        jest.advanceTimersByTime(2500);
+
+        // Check the server has received the second request from the setTimeout
+        expect(server.messages.length).toEqual(2);
+
+        jest.advanceTimersByTime(6000);
+
+        expect(server.messages.length).toEqual(4);
+
+        jest.useRealTimers();
     });
 });

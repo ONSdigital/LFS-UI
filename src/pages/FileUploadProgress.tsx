@@ -110,9 +110,7 @@ export class FileUploadProgress extends Component <Props, State> {
         if (evt.status === 2 && evt.errorMessage.length === 0) {
             this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", "success", true);
             this.props.fileUploading(false);
-            if (this.props.redirectOnComplete !== undefined) {
-                this.props.redirectOnComplete(true);
-            }
+            this.props.redirectOnComplete !== undefined && this.props.redirectOnComplete(true);
         }
         this.setState({
             uploadStatusData: [{

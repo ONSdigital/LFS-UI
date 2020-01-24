@@ -10,7 +10,16 @@ import flushPromises from "../tests/util/flushPromises";
 describe("File Upload Progress", () => {
     Enzyme.configure({adapter: new Adapter()});
 
-    afterEach(cleanup);
+    let server: WS;
+
+    beforeEach(() => {
+        server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
+    });
+
+    afterEach(() => {
+        cleanup();
+        server.close();
+    });
 
     const props = {
         importName: "File",
@@ -28,8 +37,6 @@ describe("File Upload Progress", () => {
     }
 
     it("should return update and show the progress from the Websocket messages", async () => {
-        const server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
-
         const {getByText} = wrapper(render, props);
 
         /*:
@@ -63,12 +70,9 @@ describe("File Upload Progress", () => {
         await flushPromises();
 
         expect(importStatus.textContent).toEqual("Import Complete");
-        server.close();
     });
 
     it("should display an error based on a error from the websocket", async () => {
-        const server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
-
         const {getByText} = wrapper(render, props);
 
         /*:
@@ -105,6 +109,5 @@ describe("File Upload Progress", () => {
 
         // Confirm that Error message is being passed to the Set Panel Function
         expect(props.setPanel).toBeCalledWith("\"File Was not a good file\"", "error", true);
-        server.close();
     });
 });
