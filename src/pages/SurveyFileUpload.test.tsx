@@ -186,8 +186,8 @@ describe("GB and NI survey file uploads", () => {
         server.on("connection", socket => {
             console.log("Server Connection");
 
-            socket.on('message', function incoming(message) {
-                console.log('Received from client:  %s', message);
+            socket.on("message", function incoming(message) {
+                console.log("Received from client:  %s", message);
                 server.send({fileName: "file12", percent: 100, status: 2, errorMessage: ""});
             });
         });
@@ -256,8 +256,8 @@ describe("GB and NI survey file uploads", () => {
         server.on("connection", socket => {
             console.log("Server Connection");
 
-            socket.on('message', function incoming(message) {
-                console.log('Received from client:  %s', message);
+            socket.on("message", function incoming(message) {
+                console.log("Received from client:  %s", message);
                 server.send({fileName: "file12", percent: 100, status: 2, errorMessage: ""});
             });
         });
