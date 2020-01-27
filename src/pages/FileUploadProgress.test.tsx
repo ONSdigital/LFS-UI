@@ -39,14 +39,13 @@ describe("File Upload Progress", () => {
     it("should return update and show the progress from the Websocket messages", async () => {
         const {getByText} = wrapper(render, props);
 
-        /*:
-        On connection to the server it will return a mock response with the status of a file.
-        This would usually be returned after the message is sent from the client (UI)
-        but here it is returned immediately on connection for the test
-        */
-        server.on("connection", _ => {
-            server.send({fileName: "file12", percent: 20, status: 1, errorMessage: ""});
-            // socket.close({ wasClean: false, code: 1003, reason: "NOPE" });
+        server.on("connection", socket => {
+            console.log("Server Connection");
+
+            socket.on("message", function incoming(message) {
+                console.log("Received from client:  %s", message);
+                server.send({fileName: "file12", percent: 20, status: 1, errorMessage: ""});
+            });
         });
 
         await server.connected;
@@ -75,14 +74,13 @@ describe("File Upload Progress", () => {
     it("should display an error based on a error from the websocket", async () => {
         const {getByText} = wrapper(render, props);
 
-        /*:
-        On connection to the server it will return a mock response with the status of a file.
-        This would usually be returned after the message is sent from the client (UI)
-        but here it is returned immediately on connection for the test
-        */
-        server.on("connection", _ => {
-            server.send({fileName: "file12", percent: 20, status: 1, errorMessage: ""});
-            // socket.close({ wasClean: false, code: 1003, reason: "NOPE" });
+        server.on("connection", socket => {
+            console.log("Server Connection");
+
+            socket.on("message", function incoming(message) {
+                console.log("Received from client:  %s", message);
+                server.send({fileName: "file12", percent: 20, status: 1, errorMessage: ""});
+            });
         });
 
         await server.connected;
