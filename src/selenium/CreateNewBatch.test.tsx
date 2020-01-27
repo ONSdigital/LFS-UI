@@ -7,7 +7,7 @@ Tutorial on selenium find By Xpath, useful for getting items in the HTML, such a
 https://www.guru99.com/xpath-selenium.html
 */
 
-describe("Selenium - Create New Batch Test", () => {
+describe.skip("Selenium - Create New Batch Test", () => {
     let browser: WebDriver;
     // Setup Chrome driver
     chrome.setDefaultService(new chrome.ServiceBuilder(process.env.REACT_APP_CHROME_DRIVER).build());

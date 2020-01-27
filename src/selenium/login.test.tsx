@@ -1,9 +1,9 @@
-import {Builder, By, WebDriver} from 'selenium-webdriver';
-import chrome from 'selenium-webdriver/chrome';
+import {Builder, By, WebDriver} from "selenium-webdriver";
+import chrome from "selenium-webdriver/chrome";
 import {loginUserToUI} from "./WebsiteNavigationFunctions/LoginUserToUI";
 
 
-describe("Selenium - User Login Test", () => {
+describe.skip("Selenium - User Login Test", () => {
     let url = 'http://localhost:3000';
     let browser: WebDriver;
     // Setup Chrome driver
