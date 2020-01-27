@@ -1,24 +1,23 @@
-import React, {Component} from 'react';
+import React from "react";
 
-interface Props{
-  label: string,
-  children: any,
-  status? : string,
-  spacious?: boolean,
-  id?: string,
-  hidden?: boolean
+interface Props {
+    label: string,
+    children: any,
+    status?: string,
+    spacious?: boolean,
+    id?: string,
+    hidden?: boolean,
+    testID?: string
 }
 
-export class ONSPanel extends Component <Props, {}>{
+export const ONSPanel = (props: Props) => {
+    let className = "panel panel--" + (props.status === "success" ? "success" : props.status === "error" ? "error" : "info") + " panel--simple " + (props.spacious ? "panel--spacious" : "");
+    return (
+        <div data-testid={props.testID} id={props.id} className={className} hidden={props.hidden}>
+            <div className="panel__body">
+                {props.children}
+            </div>
+        </div>
+    );
+};
 
-    render() {
-      let className = "panel panel--" + (this.props.status === "success" ? "success" : this.props.status === "error" ? "error": "info") + " panel--simple " + (this.props.spacious ? "panel--spacious" : "");
-      return (
-        <div id={this.props.id} className={className} hidden={this.props.hidden}>
-          <div className="panel__body">
-              {this.props.children}
-          </div>
-        </div> 
-      );
-  }
-}

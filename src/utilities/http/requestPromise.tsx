@@ -1,8 +1,5 @@
 function requestPromiseJson(method: string, url: string, body: any = null): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
-        for (var pair of body.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
         fetch(url, {
             "method": method,
             "body": body

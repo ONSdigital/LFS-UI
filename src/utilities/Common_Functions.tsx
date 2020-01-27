@@ -122,6 +122,17 @@ function getBatchProgressStatusStyle(statusText: string) {
     return status
 }
 
+function getFileImportStatusStyle(statusNo: number) {
+    let status: status = {text: "", colour: 'info', hexCode: '#222'};
+    switch (statusNo){
+        case 0: status = {text: "Not Started", colour: 'info', hexCode: '#888'}; break;
+        case 1: status = {text: "In Progress", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 2: status = {text: "Import Complete", colour: 'success', hexCode: '#12c864'}; break;
+        case 3: status = {text: "Import Failed", colour: 'error', hexCode: '#fd112e'}; break;
+    }
+    return status
+}
+
 
 function getStatusStyle(statusNo: number) {
     let status: status = {text: "", colour: 'info', hexCode: '#222'};
@@ -144,4 +155,4 @@ function isDevEnv() {
     return process.env.NODE_ENV === 'development'
 }
 
-export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle}
+export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle, getFileImportStatusStyle}

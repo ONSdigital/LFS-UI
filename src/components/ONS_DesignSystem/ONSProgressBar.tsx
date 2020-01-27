@@ -1,5 +1,5 @@
-import React from 'react';
-import {getUploadStatusStyle} from "../../utilities/Common_Functions";
+import React from "react";
+import {getFileImportStatusStyle} from "../../utilities/Common_Functions";
 
 interface Props {
     statusCode: number
@@ -21,5 +21,5 @@ export const ONSProgressBar = (props: Props) => (
 
 const Filler = (props: FillerProps) => {
     return <div className="progress-bar-filler"
-                style={{width: `${props.percentage}%`, background: `${getUploadStatusStyle(props.statusCode).hexCode}`}}/>
+                style={{width: `${props.percentage}%`, background: `${getFileImportStatusStyle(props.statusCode).hexCode}`}}/>
 };

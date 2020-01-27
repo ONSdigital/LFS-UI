@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {UPLOAD_HEADERS} from "../utilities/Headers";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
-import {getUploadStatusStyle, isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
+import {getFileImportStatusStyle, isDevEnv, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import {ONSProgressBar} from "../components/ONS_DesignSystem/ONSProgressBar";
 
 interface Props {
@@ -61,7 +61,9 @@ export class FileUploadProgress extends Component <Props, State> {
 
     componentDidMount(): void {
         this.ws.onopen = (evt => this.handleWSOnOpen(evt));
-        this.ws.onmessage = (evt => this.handleWSOnMessage(JSON.parse(evt.data)));
+        this.ws.onmessage = (evt => {
+            this.handleWSOnMessage(JSON.parse(evt.data))
+        });
         this.ws.onclose = (evt => this.handleWSOnClose(evt));
         this.ws.onerror = (evt => this.handleWSOnError(evt));
     }
@@ -108,9 +110,7 @@ export class FileUploadProgress extends Component <Props, State> {
         if (evt.status === 2 && evt.errorMessage.length === 0) {
             this.props.setPanel(toUpperCaseFirstChar(this.props.importName) + " : File Imported Successfully", "success", true);
             this.props.fileUploading(false);
-            if (this.props.redirectOnComplete !== undefined) {
-                this.props.redirectOnComplete(false);
-            }
+            this.props.redirectOnComplete !== undefined && this.props.redirectOnComplete(true);
         }
         this.setState({
             uploadStatusData: [{
@@ -125,6 +125,13 @@ export class FileUploadProgress extends Component <Props, State> {
     };
 
     getFileUploadProgress = () => {
+        // Send Initial Request to WS to get upload status immediately
+        this.ws.send(JSON.stringify(
+            {
+                "fileName": this.props.fileName
+            }
+        ));
+        // Set interval to get upload status every 3 seconds
         let id = setInterval(_ => {
             this.ws.send(JSON.stringify(
                 {
@@ -158,7 +165,7 @@ export class FileUploadProgress extends Component <Props, State> {
                             :
                             <ONSStatus label={row.status}
                                        small={false}
-                                       status={getUploadStatusStyle(this.state.uploadStatusCode).colour}/>
+                                       status={getFileImportStatusStyle(this.state.uploadStatusCode).colour}/>
 
                     }
                 </td>
