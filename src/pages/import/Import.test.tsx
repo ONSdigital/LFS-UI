@@ -13,6 +13,7 @@ import Adapter from "enzyme-adapter-react-16";
 
 import fetch from "../../tests/setup/__mocks__/fetch.js";
 
+// @ts-ignore
 global.fetch = fetch;
 
 const designWeightsMatch = {
