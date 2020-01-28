@@ -2,16 +2,18 @@ import React from "react";
 
 import {Cookies} from "react-cookie";
 import {Login} from "./Login";
-import { act } from "react-dom/test-utils";
+import {act} from "react-dom/test-utils";
 
-import { default as flushPromises } from "../tests/util/flushPromises"
-import {render, fireEvent, screen} from '@testing-library/react'
+import {default as flushPromises} from "../tests/util/flushPromises";
+import {fireEvent, render, screen} from "@testing-library/react";
 import sinon from "sinon";
+import fetch from "../tests/setup/__mocks__/fetch";
 
-jest.mock("./auth");
+// @ts-ignore
+global.fetch = fetch;
 
 describe("Login Test", () => {
-    
+
     let mockUser: any = null;
     let mockSetUser = jest.fn();
     const cookie = new Cookies;
@@ -23,31 +25,31 @@ describe("Login Test", () => {
         );
     }
 
-    it('allows the user to login successfully', async () => {
-       
-        wrapper(render)
-        
+    it("allows the user to login successfully", async () => {
+
+        wrapper(render);
+
         await act(async () => {
             await flushPromises();
         });
-        
+
         // fill out the form
         await act(async () => {
             await fireEvent.change(screen.getByLabelText(/username/i), {
-                target: {value: 'Admin'},
-            })
+                target: {value: "Admin"}
+            });
 
             await fireEvent.change(screen.getByTestId(/login-password-input/i), {
-                target: {value: 'password'},
-            })
-            await fireEvent.click(screen.getByTestId(/submit/i))
+                target: {value: "password"}
+            });
+            await fireEvent.click(screen.getByTestId(/submit/i));
         });
 
         expect(mockSetUser).toHaveBeenCalledWith({name: "Admin"});
 
-        expect(cookieSpy.called).toBeTruthy();    
-    })
-})
+        expect(cookieSpy.called).toBeTruthy();
+    });
+});
 
 // describe("Login Test", () => {
 //     Enzyme.configure({ adapter: new Adapter() });
@@ -68,7 +70,6 @@ describe("Login Test", () => {
 //     }
 
 //     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
-
 
 
 // })
