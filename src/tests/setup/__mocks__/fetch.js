@@ -38,7 +38,11 @@ export default function(url, payload) {
             console.log(url);
             return Promise.resolve({status: 200, json: () => Promise.resolve(undefined)});
         case "/login/Admin":
-            return Promise.resolve({status: 200, json: () => Promise.resolve({status: "OK"})});
+            if (payload.headers.password === "password") {
+                return Promise.resolve({status: 200, json: () => Promise.resolve({status: "OK"})});
+            } else {
+                return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
+            }
         default:
             console.log("default");
             return Promise.reject("URL not Mocked For Test");
