@@ -1,4 +1,4 @@
-import {batch_progress, dashboard_data} from "./mock_data";
+import {batch_progress, dashboard_data, role_data, user_data} from "./mock_data";
 
 export default function(url, payload) {
     console.log(url);
@@ -54,6 +54,10 @@ export default function(url, payload) {
             return Promise.resolve({status: 200, json: () => Promise.resolve(batch_progress)});
         case "/jsons/MOCK_RUNS.json":
             return Promise.resolve({status: 200, json: () => Promise.resolve({"Rows": dashboard_data})});
+        case "/jsons/Roles.json":
+            return Promise.resolve({status: 200, json: () => Promise.resolve({"Rows": role_data})});
+        case "/jsons/Users.json":
+            return Promise.resolve({status: 200, json: () => Promise.resolve({"Rows": user_data})});
         default:
             console.log("default");
             return Promise.reject("URL not Mocked For Test");

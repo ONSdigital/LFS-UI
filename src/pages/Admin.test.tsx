@@ -1,5 +1,5 @@
 import React from "react";
-import {cleanup, render} from "@testing-library/react";
+import {cleanup, fireEvent, render} from "@testing-library/react";
 
 import {BrowserRouter} from "react-router-dom";
 
@@ -38,5 +38,21 @@ describe("Admin - User Management Page", () => {
 
     it("renders the page", async () => {
         expect(wrapper(render)).toMatchSnapshot();
+    });
+
+    it("should open and close the New User Modal ", async () => {
+        const {getByTestId, getByLabelText, getByText, queryAllByTestId} = wrapper(render);
+
+        await fireEvent.click(getByText(/New User/i))
+
+        await fireEvent.click(getByText(/Cancel/i))
+
+        await fireEvent.click(getByText(/New User/i))
+
+        await fireEvent.change(getByLabelText(/Username/i), {
+            target: {value: "Admin"}
+        });
+
+        await fireEvent.click(getByText(/Save/i))
     });
 });
