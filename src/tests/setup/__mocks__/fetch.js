@@ -53,7 +53,7 @@ export default function(url, payload) {
         case "/jsons/MOCK_BATCH_PROGRESS.json":
             return Promise.resolve({status: 200, json: () => Promise.resolve(batch_progress)});
         case "/jsons/MOCK_RUNS.json":
-            return Promise.resolve({status: 200, json: () => Promise.resolve(dashboard_data)});
+            return Promise.resolve({status: 200, json: () => Promise.resolve({"Rows": dashboard_data})});
         default:
             console.log("default");
             return Promise.reject("URL not Mocked For Test");

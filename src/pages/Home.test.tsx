@@ -8,7 +8,6 @@ import {BrowserRouter} from "react-router-dom";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import fetch from "../tests/setup/__mocks__/fetch.js";
-import WS from "jest-websocket-mock";
 import {Home} from "./Home";
 
 
@@ -19,11 +18,10 @@ global.fetch = fetch;
 describe("Home Page", () => {
     Enzyme.configure({adapter: new Adapter()});
 
-    let server: WS;
-
-    // beforeEach(() => {
-    //     server = new WS("ws://127.0.0.1:8000/ws", {jsonProtocol: true});
-    // });
+    beforeEach(() => {
+        // @ts-ignore
+        process.env.NODE_ENV = 'test'
+    });
 
     afterEach(() => {
         cleanup();
@@ -39,29 +37,6 @@ describe("Home Page", () => {
             </BrowserRouter>
         );
     }
-
-    // /*
-    // Function to Mock a file in the File Selection, then press the Submit button
-    //  */
-    // async function selectAndImportFile(getByTestId: any, getByLabelText: any, fileName: string) {
-    //     const inputEl = getByLabelText(/import/i);
-    //
-    //     const file = new File(["(⌐□_□)"], fileName, {
-    //         type: "sav"
-    //     });
-    //
-    //     Object.defineProperty(inputEl, "files", {
-    //         value: [file]
-    //     });
-    //
-    //     fireEvent.change(inputEl);
-    //
-    //     fireEvent.click(getByTestId("import-button"));
-    //
-    //     await act(async () => {
-    //         await flushPromises();
-    //     });
-    // }
 
     it("renders the page", async () => {
         expect(wrapper(render, Props)).toMatchSnapshot();
@@ -129,7 +104,6 @@ describe("Home Page", () => {
         let list = queryAllByTestId(/table-row/i);
         listItemOne = list[0];
         firstRowData = listItemOne.children[2].textContent + " " + listItemOne.children[3].textContent + " " + listItemOne.children[4].textContent;
-        console.log(firstRowData);
         expect(firstRowData).toEqual("Monthly April 2019");
     });
 
@@ -169,9 +143,35 @@ describe("Home Page", () => {
 
         await flushPromises();
 
-        expect(getByText(/No Batches matching this criteria/i)).toBeDefined()
+        expect(getByText(/No Batches matching this criteria/i)).toBeDefined();
+    });
 
-        console.log(process.env.NODE_ENV)
+    test("The Manage Batch button in the expanded row should redirect to the correct Batch.", async () => {
+        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render, Props);
+
+        await flushPromises();
+
+        let buttons = getAllByText(/Manage Batch/i);
+
+        expect(buttons).toHaveLength(5);
+
+        await fireEvent.click(buttons[0]);
+
+        await flushPromises();
+
+        expect(window.location.pathname).toEqual("/manage-batch/monthly/2019/4");
+    });
+
+    test("The Create New Batch button should redirect to the Create New Batch page", async () => {
+        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render, Props);
+
+        await flushPromises();
+
+        let newBatchButton = getByText(/Create New Batch/i);
+
+        await fireEvent.click(newBatchButton);
+
+        expect(window.location.pathname).toEqual("/new-batch");
     });
 
     it("should load test data in development environment", async () => {
@@ -182,8 +182,4 @@ describe("Home Page", () => {
         await flushPromises();
 
     });
-
-
-
-
 });

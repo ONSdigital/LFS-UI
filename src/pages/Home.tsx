@@ -46,8 +46,8 @@ export class Home extends Component <{}, State> {
                 this.filterBatchData();
             })
             .catch(error => {
-                console.log(error);
                 if (process.env.NODE_ENV === "development") {
+                    console.log(error);
                     console.log("Error Connecting to Server, Loading mock data");
                     this.getMockBatchData();
                 }
