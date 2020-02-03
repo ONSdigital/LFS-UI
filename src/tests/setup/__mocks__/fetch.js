@@ -1,3 +1,5 @@
+import {batch_progress, dashboard_data} from "./mock_data";
+
 export default function(url, payload) {
     console.log(url);
     switch (url) {
@@ -43,6 +45,15 @@ export default function(url, payload) {
             } else {
                 return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
             }
+        case "/dashboard":
+            if (process.env.NODE_ENV === "development") {
+                return  Promise.reject({status: 500, json: () => Promise.resolve(dashboard_data)});
+            }
+            return Promise.resolve({status: 200, json: () => Promise.resolve(dashboard_data)});
+        case "/jsons/MOCK_BATCH_PROGRESS.json":
+            return Promise.resolve({status: 200, json: () => Promise.resolve(batch_progress)});
+        case "/jsons/MOCK_RUNS.json":
+            return Promise.resolve({status: 200, json: () => Promise.resolve(dashboard_data)});
         default:
             console.log("default");
             return Promise.reject("URL not Mocked For Test");
