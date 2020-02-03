@@ -18,15 +18,12 @@ describe("Admin - User Management Page", () => {
 
     beforeEach(() => {
         // @ts-ignore
-        process.env.NODE_ENV = 'test'
+        process.env.NODE_ENV = "test";
     });
 
     afterEach(() => {
         cleanup();
     });
-
-    const Props = {};
-
 
     function wrapper(render: any) {
         return render(
@@ -41,18 +38,18 @@ describe("Admin - User Management Page", () => {
     });
 
     it("should open and close the New User Modal ", async () => {
-        const {getByTestId, getByLabelText, getByText, queryAllByTestId} = wrapper(render);
+        const {getByLabelText, getByText} = wrapper(render);
 
-        await fireEvent.click(getByText(/New User/i))
+        await fireEvent.click(getByText(/New User/i));
 
-        await fireEvent.click(getByText(/Cancel/i))
+        await fireEvent.click(getByText(/Cancel/i));
 
-        await fireEvent.click(getByText(/New User/i))
+        await fireEvent.click(getByText(/New User/i));
 
         await fireEvent.change(getByLabelText(/Username/i), {
             target: {value: "Admin"}
         });
 
-        await fireEvent.click(getByText(/Save/i))
+        await fireEvent.click(getByText(/Save/i));
     });
 });
