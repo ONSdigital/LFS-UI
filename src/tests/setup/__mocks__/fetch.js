@@ -1,3 +1,5 @@
+import {valueLabelsData, variableDefinitionData} from "./mock_data";
+
 export default function(url, payload) {
     console.log(url);
     switch (url) {
@@ -43,6 +45,24 @@ export default function(url, payload) {
             } else {
                 return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
             }
+        case "/variable/definitions":
+            if (process.env.NODE_ENV === "noData") {
+                return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve({message: "no data found"})});
+            } else if (process.env.NODE_ENV === "returnError") {
+                return Promise.reject("SyntaxError: Unexpected token P in JSON at position 0");
+            } else {
+                return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve(variableDefinitionData)});
+            }
+        case "/value/labels":
+            console.log(process.env.NODE_ENV)
+            if (process.env.NODE_ENV === "noData") {
+                return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve({message: "no data found"})});
+            } else if (process.env.NODE_ENV === "returnError") {
+                return Promise.reject("SyntaxError: Unexpected token P in JSON at position 0");
+            } else {
+                return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve(valueLabelsData)});
+            }
+
         default:
             console.log("default");
             return Promise.reject("URL not Mocked For Test");

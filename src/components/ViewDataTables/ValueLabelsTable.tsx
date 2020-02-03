@@ -75,7 +75,8 @@ export class ValueLabelsTable extends Component <Props, State> {
                                             inputValue={this.state.search}
                                             primaryButton={false}
                                             buttonLabel={"Clear"}
-                                            onButtonClick={this.viewAll}/>
+                                            onButtonClick={this.viewAll}
+                                            labelID={"valueLabelsSearch"}/>
 
                     <ONSAccordionTable data={this.state.filteredData} Row={ValueLabelTableRow}
                                        expandedRowEnabled={false}
