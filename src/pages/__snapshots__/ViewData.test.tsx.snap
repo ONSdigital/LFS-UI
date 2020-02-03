@@ -1,0 +1,1093 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin - User Management Page renders the page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <br />
+        <div
+          class="tabs"
+        >
+          <label
+            class="label"
+          >
+            Select Table
+          </label>
+          <ul
+            class="tabs__list tabs__list--row"
+            role="tablist"
+          >
+            <li
+              class="tab__list-item tab__list-item--row"
+              id="tabIdItem0"
+            >
+              <a
+                aria-selected="true"
+                class="tab tab--row tab--selected"
+                href="#tabId"
+                role="tab"
+                tabindex="1"
+              >
+                Variable Definitions
+              </a>
+            </li>
+            <li
+              class="tab__list-item tab__list-item--row"
+              id="tabIdItem1"
+            >
+              <a
+                aria-selected="false"
+                class="tab tab--row "
+                href="#tabId"
+                role="tab"
+                tabindex="1"
+              >
+                Value Labels
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="grid--flex "
+        >
+          <p
+            class="field"
+          >
+            <label
+              class="label"
+              for="search-field"
+            >
+              Filter by Variable Name
+            </label>
+            <input
+              class="input input--text input-type__input u-mr-xs u-mb-xs input--w-10"
+              type="text"
+              value=""
+            />
+          </p>
+          <button
+            class="btn btn--small u-flex-align-bottom u-mb-xs btn--secondary "
+            type="submit"
+          >
+            <span
+              class="btn__inner"
+            >
+              Clear
+            </span>
+          </button>
+        </div>
+        <table
+          class="table table--sortable"
+          data-aria-asc="ascending"
+          data-aria-desc="descending"
+          data-aria-sort="Sort by"
+          id="basic-table"
+        >
+          <thead
+            class="table__head"
+          >
+            <tr
+              class="table__row"
+            >
+              <th
+                aria-sort="none"
+                class="table__header "
+                scope="col"
+              />
+              <th
+                aria-sort="none"
+                class="table__header "
+                scope="col"
+              >
+                <button
+                  aria-label="Sort by Variable"
+                  class="table__sort-button"
+                  data-index="0"
+                  type="button"
+                >
+                  Variable
+                </button>
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Description
+              </th>
+              <th
+                aria-sort="none"
+                class="table__header "
+                scope="col"
+              >
+                <button
+                  aria-label="Sort by Valid From"
+                  class="table__sort-button"
+                  data-index="2"
+                  type="button"
+                >
+                  Valid From
+                </button>
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Editable
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Imputation
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                DV
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Type
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Length
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="table__body expandedRowEnabled "
+          >
+            <tr>
+              <td
+                class="table__cell "
+                colspan="9"
+              >
+                <div
+                  class="panel panel--info panel--simple "
+                >
+                  <div
+                    class="panel__body"
+                  >
+                    <p>
+                      No Variable Definitions matching this criteria
+                    </p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          hidden=""
+        >
+          <nav
+            aria-label="Pagination (Page 1 of 0)"
+            class="pagination "
+          >
+            <div
+              class="pagination__position"
+            >
+              Page 
+              1
+               of 
+              0
+            </div>
+            <ul
+              class="pagination__items"
+              style="margin-left: 0px;"
+            >
+              <li
+                class="pagination__item pagination__item--current"
+                style="cursor: pointer;"
+              >
+                <button
+                  aria-label="Go to page 1"
+                  class="pagination__link"
+                  id="link"
+                  style="cursor: pointer; outline: 0; text-decoration: underline;"
+                >
+                  1
+                </button>
+              </li>
+              <li
+                class="pagination__item pageination__item--gap"
+              >
+                …
+              </li>
+              <li
+                class="pagination__item pageination__item--gap"
+              >
+                …
+              </li>
+              <li
+                class="pagination__item "
+                style="cursor: pointer;"
+              >
+                <button
+                  aria-label="Go to page 0"
+                  class="pagination__link"
+                  id="link"
+                  style="cursor: pointer; outline: 0; text-decoration: underline;"
+                >
+                  0
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <br />
+      <div
+        class="tabs"
+      >
+        <label
+          class="label"
+        >
+          Select Table
+        </label>
+        <ul
+          class="tabs__list tabs__list--row"
+          role="tablist"
+        >
+          <li
+            class="tab__list-item tab__list-item--row"
+            id="tabIdItem0"
+          >
+            <a
+              aria-selected="true"
+              class="tab tab--row tab--selected"
+              href="#tabId"
+              role="tab"
+              tabindex="1"
+            >
+              Variable Definitions
+            </a>
+          </li>
+          <li
+            class="tab__list-item tab__list-item--row"
+            id="tabIdItem1"
+          >
+            <a
+              aria-selected="false"
+              class="tab tab--row "
+              href="#tabId"
+              role="tab"
+              tabindex="1"
+            >
+              Value Labels
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="grid--flex "
+      >
+        <p
+          class="field"
+        >
+          <label
+            class="label"
+            for="search-field"
+          >
+            Filter by Variable Name
+          </label>
+          <input
+            class="input input--text input-type__input u-mr-xs u-mb-xs input--w-10"
+            type="text"
+            value=""
+          />
+        </p>
+        <button
+          class="btn btn--small u-flex-align-bottom u-mb-xs btn--secondary "
+          type="submit"
+        >
+          <span
+            class="btn__inner"
+          >
+            Clear
+          </span>
+        </button>
+      </div>
+      <table
+        class="table table--sortable"
+        data-aria-asc="ascending"
+        data-aria-desc="descending"
+        data-aria-sort="Sort by"
+        id="basic-table"
+      >
+        <thead
+          class="table__head"
+        >
+          <tr
+            class="table__row"
+          >
+            <th
+              aria-sort="none"
+              class="table__header "
+              scope="col"
+            />
+            <th
+              aria-sort="none"
+              class="table__header "
+              scope="col"
+            >
+              <button
+                aria-label="Sort by Variable"
+                class="table__sort-button"
+                data-index="0"
+                type="button"
+              >
+                Variable
+              </button>
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Description
+            </th>
+            <th
+              aria-sort="none"
+              class="table__header "
+              scope="col"
+            >
+              <button
+                aria-label="Sort by Valid From"
+                class="table__sort-button"
+                data-index="2"
+                type="button"
+              >
+                Valid From
+              </button>
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Editable
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Imputation
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              DV
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Type
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Length
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="table__body expandedRowEnabled "
+        >
+          <tr>
+            <td
+              class="table__cell "
+              colspan="9"
+            >
+              <div
+                class="panel panel--info panel--simple "
+              >
+                <div
+                  class="panel__body"
+                >
+                  <p>
+                    No Variable Definitions matching this criteria
+                  </p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        hidden=""
+      >
+        <nav
+          aria-label="Pagination (Page 1 of 0)"
+          class="pagination "
+        >
+          <div
+            class="pagination__position"
+          >
+            Page 
+            1
+             of 
+            0
+          </div>
+          <ul
+            class="pagination__items"
+            style="margin-left: 0px;"
+          >
+            <li
+              class="pagination__item pagination__item--current"
+              style="cursor: pointer;"
+            >
+              <button
+                aria-label="Go to page 1"
+                class="pagination__link"
+                id="link"
+                style="cursor: pointer; outline: 0; text-decoration: underline;"
+              >
+                1
+              </button>
+            </li>
+            <li
+              class="pagination__item pageination__item--gap"
+            >
+              …
+            </li>
+            <li
+              class="pagination__item pageination__item--gap"
+            >
+              …
+            </li>
+            <li
+              class="pagination__item "
+              style="cursor: pointer;"
+            >
+              <button
+                aria-label="Go to page 0"
+                class="pagination__link"
+                id="link"
+                style="cursor: pointer; outline: 0; text-decoration: underline;"
+              >
+                0
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`View Data Page renders the page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <br />
+        <div
+          class="tabs"
+        >
+          <label
+            class="label"
+          >
+            Select Table
+          </label>
+          <ul
+            class="tabs__list tabs__list--row"
+            role="tablist"
+          >
+            <li
+              class="tab__list-item tab__list-item--row"
+              id="tabIdItem0"
+            >
+              <a
+                aria-selected="true"
+                class="tab tab--row tab--selected"
+                href="#tabId"
+                role="tab"
+                tabindex="1"
+              >
+                Variable Definitions
+              </a>
+            </li>
+            <li
+              class="tab__list-item tab__list-item--row"
+              id="tabIdItem1"
+            >
+              <a
+                aria-selected="false"
+                class="tab tab--row "
+                href="#tabId"
+                role="tab"
+                tabindex="1"
+              >
+                Value Labels
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="grid--flex "
+        >
+          <p
+            class="field"
+          >
+            <label
+              class="label"
+              for="variableDefinitionSearch"
+            >
+              Filter by Variable Name
+            </label>
+            <input
+              class="input input--text input-type__input u-mr-xs u-mb-xs input--w-10"
+              id="variableDefinitionSearch"
+              type="text"
+              value=""
+            />
+          </p>
+          <button
+            class="btn btn--small u-flex-align-bottom u-mb-xs btn--secondary "
+            type="submit"
+          >
+            <span
+              class="btn__inner"
+            >
+              Clear
+            </span>
+          </button>
+        </div>
+        <table
+          class="table table--sortable"
+          data-aria-asc="ascending"
+          data-aria-desc="descending"
+          data-aria-sort="Sort by"
+          id="basic-table"
+        >
+          <thead
+            class="table__head"
+          >
+            <tr
+              class="table__row"
+            >
+              <th
+                aria-sort="none"
+                class="table__header "
+                scope="col"
+              />
+              <th
+                aria-sort="none"
+                class="table__header "
+                scope="col"
+              >
+                <button
+                  aria-label="Sort by Variable"
+                  class="table__sort-button"
+                  data-index="0"
+                  type="button"
+                >
+                  Variable
+                </button>
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Description
+              </th>
+              <th
+                aria-sort="none"
+                class="table__header "
+                scope="col"
+              >
+                <button
+                  aria-label="Sort by Valid From"
+                  class="table__sort-button"
+                  data-index="2"
+                  type="button"
+                >
+                  Valid From
+                </button>
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Editable
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Imputation
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                DV
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Type
+              </th>
+              <th
+                class="table__header "
+                scope="col"
+              >
+                Length
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="table__body expandedRowEnabled "
+          >
+            <tr>
+              <td
+                class="table__cell "
+                colspan="9"
+              >
+                <div
+                  class="panel panel--info panel--simple "
+                >
+                  <div
+                    class="panel__body"
+                  >
+                    <p>
+                      No Variable Definitions matching this criteria
+                    </p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          hidden=""
+        >
+          <nav
+            aria-label="Pagination (Page 1 of 0)"
+            class="pagination "
+          >
+            <div
+              class="pagination__position"
+            >
+              Page 
+              1
+               of 
+              0
+            </div>
+            <ul
+              class="pagination__items"
+              style="margin-left: 0px;"
+            >
+              <li
+                class="pagination__item pagination__item--current"
+                style="cursor: pointer;"
+              >
+                <button
+                  aria-label="Go to page 1"
+                  class="pagination__link"
+                  id="link"
+                  style="cursor: pointer; outline: 0; text-decoration: underline;"
+                >
+                  1
+                </button>
+              </li>
+              <li
+                class="pagination__item pageination__item--gap"
+              >
+                …
+              </li>
+              <li
+                class="pagination__item pageination__item--gap"
+              >
+                …
+              </li>
+              <li
+                class="pagination__item "
+                style="cursor: pointer;"
+              >
+                <button
+                  aria-label="Go to page 0"
+                  class="pagination__link"
+                  id="link"
+                  style="cursor: pointer; outline: 0; text-decoration: underline;"
+                >
+                  0
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <br />
+      <div
+        class="tabs"
+      >
+        <label
+          class="label"
+        >
+          Select Table
+        </label>
+        <ul
+          class="tabs__list tabs__list--row"
+          role="tablist"
+        >
+          <li
+            class="tab__list-item tab__list-item--row"
+            id="tabIdItem0"
+          >
+            <a
+              aria-selected="true"
+              class="tab tab--row tab--selected"
+              href="#tabId"
+              role="tab"
+              tabindex="1"
+            >
+              Variable Definitions
+            </a>
+          </li>
+          <li
+            class="tab__list-item tab__list-item--row"
+            id="tabIdItem1"
+          >
+            <a
+              aria-selected="false"
+              class="tab tab--row "
+              href="#tabId"
+              role="tab"
+              tabindex="1"
+            >
+              Value Labels
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="grid--flex "
+      >
+        <p
+          class="field"
+        >
+          <label
+            class="label"
+            for="variableDefinitionSearch"
+          >
+            Filter by Variable Name
+          </label>
+          <input
+            class="input input--text input-type__input u-mr-xs u-mb-xs input--w-10"
+            id="variableDefinitionSearch"
+            type="text"
+            value=""
+          />
+        </p>
+        <button
+          class="btn btn--small u-flex-align-bottom u-mb-xs btn--secondary "
+          type="submit"
+        >
+          <span
+            class="btn__inner"
+          >
+            Clear
+          </span>
+        </button>
+      </div>
+      <table
+        class="table table--sortable"
+        data-aria-asc="ascending"
+        data-aria-desc="descending"
+        data-aria-sort="Sort by"
+        id="basic-table"
+      >
+        <thead
+          class="table__head"
+        >
+          <tr
+            class="table__row"
+          >
+            <th
+              aria-sort="none"
+              class="table__header "
+              scope="col"
+            />
+            <th
+              aria-sort="none"
+              class="table__header "
+              scope="col"
+            >
+              <button
+                aria-label="Sort by Variable"
+                class="table__sort-button"
+                data-index="0"
+                type="button"
+              >
+                Variable
+              </button>
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Description
+            </th>
+            <th
+              aria-sort="none"
+              class="table__header "
+              scope="col"
+            >
+              <button
+                aria-label="Sort by Valid From"
+                class="table__sort-button"
+                data-index="2"
+                type="button"
+              >
+                Valid From
+              </button>
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Editable
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Imputation
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              DV
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Type
+            </th>
+            <th
+              class="table__header "
+              scope="col"
+            >
+              Length
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="table__body expandedRowEnabled "
+        >
+          <tr>
+            <td
+              class="table__cell "
+              colspan="9"
+            >
+              <div
+                class="panel panel--info panel--simple "
+              >
+                <div
+                  class="panel__body"
+                >
+                  <p>
+                    No Variable Definitions matching this criteria
+                  </p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        hidden=""
+      >
+        <nav
+          aria-label="Pagination (Page 1 of 0)"
+          class="pagination "
+        >
+          <div
+            class="pagination__position"
+          >
+            Page 
+            1
+             of 
+            0
+          </div>
+          <ul
+            class="pagination__items"
+            style="margin-left: 0px;"
+          >
+            <li
+              class="pagination__item pagination__item--current"
+              style="cursor: pointer;"
+            >
+              <button
+                aria-label="Go to page 1"
+                class="pagination__link"
+                id="link"
+                style="cursor: pointer; outline: 0; text-decoration: underline;"
+              >
+                1
+              </button>
+            </li>
+            <li
+              class="pagination__item pageination__item--gap"
+            >
+              …
+            </li>
+            <li
+              class="pagination__item pageination__item--gap"
+            >
+              …
+            </li>
+            <li
+              class="pagination__item "
+              style="cursor: pointer;"
+            >
+              <button
+                aria-label="Go to page 0"
+                class="pagination__link"
+                id="link"
+                style="cursor: pointer; outline: 0; text-decoration: underline;"
+              >
+                0
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

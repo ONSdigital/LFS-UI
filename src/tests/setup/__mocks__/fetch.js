@@ -54,7 +54,6 @@ export default function(url, payload) {
                 return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve(variableDefinitionData)});
             }
         case "/value/labels":
-            console.log(process.env.NODE_ENV)
             if (process.env.NODE_ENV === "noData") {
                 return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve({message: "no data found"})});
             } else if (process.env.NODE_ENV === "returnError") {
@@ -62,7 +61,6 @@ export default function(url, payload) {
             } else {
                 return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve(valueLabelsData)});
             }
-
         default:
             console.log("default");
             return Promise.reject("URL not Mocked For Test");
