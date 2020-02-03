@@ -30,7 +30,7 @@ describe("Home Page", () => {
     const Props = {};
 
 
-    function wrapper(render: any, props: any) {
+    function wrapper(render: any) {
         return render(
             <BrowserRouter>
                 <Home/>
@@ -39,11 +39,11 @@ describe("Home Page", () => {
     }
 
     it("renders the page", async () => {
-        expect(wrapper(render, Props)).toMatchSnapshot();
+        expect(wrapper(render)).toMatchSnapshot();
     });
 
     it("should display all open batch items in the list", async () => {
-        const {getByTestId, getByLabelText, getByText, queryAllByTestId} = wrapper(render, Props);
+        const {getByTestId, getByLabelText, getByText, queryAllByTestId} = wrapper(render);
 
         await flushPromises();
 
@@ -68,7 +68,7 @@ describe("Home Page", () => {
     });
 
     it("should filter the Batch list by its status", async () => {
-        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render, Props);
+        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render);
 
         await flushPromises();
 
@@ -108,7 +108,7 @@ describe("Home Page", () => {
     });
 
     it("should filter the Batch list by Batch Type", async () => {
-        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render, Props);
+        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render);
 
         await flushPromises();
 
@@ -147,7 +147,7 @@ describe("Home Page", () => {
     });
 
     test("The Manage Batch button in the expanded row should redirect to the correct Batch.", async () => {
-        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render, Props);
+        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render);
 
         await flushPromises();
 
@@ -163,7 +163,7 @@ describe("Home Page", () => {
     });
 
     test("The Create New Batch button should redirect to the Create New Batch page", async () => {
-        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render, Props);
+        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render);
 
         await flushPromises();
 
@@ -177,7 +177,7 @@ describe("Home Page", () => {
     it("should load test data in development environment", async () => {
         // @ts-ignore - Set Test Env to development
         process.env.NODE_ENV = "development";
-        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render, Props);
+        const {getByTestId, getByLabelText, getByText, getAllByText, queryAllByTestId} = wrapper(render);
 
         await flushPromises();
 
