@@ -294,7 +294,7 @@ Object {
                     class="table__cell "
                   >
                     <span
-                      class="status status--dead"
+                      class="status status--info"
                     />
                   </td>
                 </tr>
@@ -308,7 +308,7 @@ Object {
               >
                 <div
                   class="progress-bar-filler"
-                  style="width: 0%; background: rgb(152, 152, 152);"
+                  style="width: 0%; background: rgb(136, 136, 136);"
                 />
               </div>
             </div>
@@ -607,7 +607,7 @@ Object {
                   class="table__cell "
                 >
                   <span
-                    class="status status--dead"
+                    class="status status--info"
                   />
                 </td>
               </tr>
@@ -621,7 +621,7 @@ Object {
             >
               <div
                 class="progress-bar-filler"
-                style="width: 0%; background: rgb(152, 152, 152);"
+                style="width: 0%; background: rgb(136, 136, 136);"
               />
             </div>
           </div>
