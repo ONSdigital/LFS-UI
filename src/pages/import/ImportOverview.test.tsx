@@ -13,7 +13,7 @@ import fetch from "../../tests/setup/__mocks__/fetch";
 global.fetch = fetch;
 
 
-describe("View Data Page", () => {
+describe("Import Overview Page", () => {
     Enzyme.configure({adapter: new Adapter()});
 
     beforeEach(() => {
