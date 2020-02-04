@@ -17,7 +17,7 @@ export class ONSBreadcrumbs extends Component <Props, {}> {
                         </li>
                     ))}
                     
-                    <li id={"breadcrumb-" + String(this.props.List.length + 1) } className="breadcrumb__item u-fs-s breadcrumb__item--current">
+                    <li data-testid="breadcrumb-current" id={"breadcrumb-" + String(this.props.List.length + 1) } className="breadcrumb__item u-fs-s breadcrumb__item--current">
                         {this.props.Current}
                     </li>
                 </ol>
