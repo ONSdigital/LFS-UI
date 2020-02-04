@@ -9,7 +9,7 @@ interface Props {
 export class ONSBreadcrumbs extends Component <Props, {}> {
     render() {
         return(
-            <nav className="breadcrumb" aria-label="Breadcrumb">
+            <nav className="breadcrumb" aria-label="Breadcrumb" data-testid="breadcrumbs">
                 <ol className="breadcrumb__items">
                     {this.props.List.map((item:any, index: number) => (
                         <li key={index} id={"breadcrumb-" + (index + 1)} className="breadcrumb__item u-fs-s">
