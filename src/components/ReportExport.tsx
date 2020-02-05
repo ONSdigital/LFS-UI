@@ -35,6 +35,7 @@ export const ReportExport = (props: Props) => {
                     a.download = toUpperCaseFirstChar(props.importName) + " Summary Report" + props.reportFileType;
                     a.click();
                     setLoading(false);
+                    props.setPanel("Report Exported", "success");
                 });
             })
             .catch(err => {

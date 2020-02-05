@@ -162,7 +162,7 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                     {
                         this.props.importName === "Bulk Amendments" ?
                             <>
-                                <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad}/>
+                                <ONSButton label="Accept" primary={true} small={false} onClick={this.acceptLoad} testid="accept-button"/>
                                 {
                                     this.props.amendmentsResponse.status !== "OK" ? 
                                         <>

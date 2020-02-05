@@ -14,6 +14,7 @@ import Adapter from "enzyme-adapter-react-16";
 import fetch from '../tests/setup/__mocks__/fetch.js';
 import { monthNumberToString } from "../utilities/Common_Functions";
 
+// @ts-ignore 
 global.fetch = fetch;
 
 describe("GB and NI survey file uploads", () => {

@@ -24,6 +24,7 @@ interface State {
     importHidden: boolean
     uploadProgressHidden: boolean
     validFromDateHidden: boolean
+    dateSelected: boolean
     reportExportHidden: boolean
     importSelectHidden: boolean
     quarterPeriodInputHidden: boolean
@@ -71,6 +72,7 @@ export class Import extends Component <Props, State> {
             importHidden: true,
             uploadProgressHidden: true,
             validFromDateHidden: true,
+            dateSelected: false,
             reportExportHidden: true,
             importSelectHidden: false,
             quarterPeriodInputHidden: true,
@@ -134,6 +136,18 @@ export class Import extends Component <Props, State> {
                     uploading: false,
                     panel: {
                         label: 'No File Selected',
+                        visible: true,
+                        status: 'info'
+                    }
+                });
+                return
+            }
+
+            if (this.state.validFromDateHidden === false && this.state.dateSelected === false) {
+                this.setState({
+                    uploading: false,
+                    panel: {
+                        label: 'No Date Selected',
                         visible: true,
                         status: 'info'
                     }
@@ -247,7 +261,7 @@ export class Import extends Component <Props, State> {
     };
 
     handleDateChange = (date: Date) => {
-        this.setState({validFromDate: date});
+        this.setState({validFromDate: date, dateSelected: true});
     };
 
     setFileUploading = (bool: boolean) => {
@@ -470,6 +484,7 @@ export class Import extends Component <Props, State> {
 
 
     bulkAmendmentsModal = () => {
+        console.log(this.state.bulkAmendmentsModalOpen)
         if (this.state.bulkAmendmentsModalOpen)
             return (
                 <BulkAmendmentsModal modalOpen={this.state.bulkAmendmentsModalOpen}

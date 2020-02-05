@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Import page functionality renders the page correctly 1`] = `
+exports[`Import page snapshot rendering renders the APS design weights page correctly 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -49,8 +49,10 @@ Object {
               >
                 <label
                   class="label"
+                  for="year"
                 >
                   Year
+                   
                 </label>
                 <select
                   class="input input--select"
@@ -58,6 +60,7 @@ Object {
                   name="select"
                 >
                   <option
+                    data-testid="option-year"
                     disabled=""
                     selected=""
                     value=""
@@ -121,8 +124,10 @@ Object {
               >
                 <label
                   class="label"
+                  for="quarter"
                 >
                   Quarter
+                   
                 </label>
                 <select
                   class="input input--select"
@@ -130,6 +135,7 @@ Object {
                   name="select"
                 >
                   <option
+                    data-testid="option-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -362,8 +368,10 @@ Object {
             >
               <label
                 class="label"
+                for="year"
               >
                 Year
+                 
               </label>
               <select
                 class="input input--select"
@@ -371,6 +379,7 @@ Object {
                 name="select"
               >
                 <option
+                  data-testid="option-year"
                   disabled=""
                   selected=""
                   value=""
@@ -434,8 +443,10 @@ Object {
             >
               <label
                 class="label"
+                for="quarter"
               >
                 Quarter
+                 
               </label>
               <select
                 class="input input--select"
@@ -443,6 +454,7 @@ Object {
                 name="select"
               >
                 <option
+                  data-testid="option-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -473,6 +485,7150 @@ Object {
             </p>
             <br />
           </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .csv accepted
+                </span>
+              </label>
+              <input
+                accept=".csv"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the APS household variable specification page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-2"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/output"
+              >
+                Output File Specification
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-3"
+            >
+              APS Household Variable Specification
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          APS Household Variable Specification
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .csv accepted
+                  </span>
+                </label>
+                <input
+                  accept=".csv"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-2"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/output"
+            >
+              Output File Specification
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-3"
+          >
+            APS Household Variable Specification
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        APS Household Variable Specification
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .csv accepted
+                </span>
+              </label>
+              <input
+                accept=".csv"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the APS person variable specification page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-2"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/output"
+              >
+                Output File Specification
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-3"
+            >
+              APS Person Variable Specification
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          APS Person Variable Specification
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .csv accepted
+                  </span>
+                </label>
+                <input
+                  accept=".csv"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-2"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/output"
+            >
+              Output File Specification
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-3"
+          >
+            APS Person Variable Specification
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        APS Person Variable Specification
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .csv accepted
+                </span>
+              </label>
+              <input
+                accept=".csv"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the LFS household specification page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-2"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/output"
+              >
+                Output File Specification
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-3"
+            >
+              LFS Household Variable Specification
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          LFS Household Variable Specification
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .csv accepted
+                  </span>
+                </label>
+                <input
+                  accept=".csv"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-2"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/output"
+            >
+              Output File Specification
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-3"
+          >
+            LFS Household Variable Specification
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        LFS Household Variable Specification
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .csv accepted
+                </span>
+              </label>
+              <input
+                accept=".csv"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the LFS person specification page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-2"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/output"
+              >
+                Output File Specification
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-3"
+            >
+              LFS Person Variable Specification
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          LFS Person Variable Specification
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .csv accepted
+                  </span>
+                </label>
+                <input
+                  accept=".csv"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-2"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/output"
+            >
+              Output File Specification
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-3"
+          >
+            LFS Person Variable Specification
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        LFS Person Variable Specification
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .csv accepted
+                </span>
+              </label>
+              <input
+                accept=".csv"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the bulk amendments page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-2"
+            >
+              Bulk Amendments
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          Bulk Amendments
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div
+              hidden=""
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .sav accepted
+                  </span>
+                </label>
+                <input
+                  accept=".sav"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-2"
+          >
+            Bulk Amendments
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        Bulk Amendments
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div
+            hidden=""
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .sav accepted
+                </span>
+              </label>
+              <input
+                accept=".sav"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the eurostat variable specification page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-2"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/output"
+              >
+                Output File Specification
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-3"
+            >
+              Eurostat Variable Specification
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          Eurostat Variable Specification
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .csv accepted
+                  </span>
+                </label>
+                <input
+                  accept=".csv"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-2"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/output"
+            >
+              Output File Specification
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-3"
+          >
+            Eurostat Variable Specification
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        Eurostat Variable Specification
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .csv accepted
+                </span>
+              </label>
+              <input
+                accept=".csv"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the geographical classifications page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-2"
+            >
+              Geographical Calculations
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          Geographical Calculations
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div
+              hidden=""
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only  accepted
+                  </span>
+                </label>
+                <input
+                  accept=""
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-2"
+          >
+            Geographical Calculations
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        Geographical Calculations
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div
+            hidden=""
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only  accepted
+                </span>
+              </label>
+              <input
+                accept=""
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the population estimates page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-2"
+            >
+              Population Estimates
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          Population Estimates
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div
+              hidden=""
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .xlsx accepted
+                  </span>
+                </label>
+                <input
+                  accept=".xlsx"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-2"
+          >
+            Population Estimates
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        Population Estimates
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div
+            hidden=""
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .xlsx accepted
+                </span>
+              </label>
+              <input
+                accept=".xlsx"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the value labels page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-2"
+            >
+              Value Labels
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          Value Labels
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div
+              hidden=""
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="react-datepicker-wrapper"
+            >
+              <div
+                class="react-datepicker__input-container"
+              >
+                <p
+                  class="field"
+                >
+                  <label
+                    class="label"
+                  >
+                    Select Valid From Date
+                  </label>
+                  <input
+                    class="input input--text input-type__input "
+                    data-testid="text-input"
+                    placeholder="Select Date"
+                    type="text"
+                    value=""
+                  />
+                </p>
+              </div>
+            </div>
+            <br />
+            <br />
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .csv accepted
+                  </span>
+                </label>
+                <input
+                  accept=".csv"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-2"
+          >
+            Value Labels
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        Value Labels
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div
+            hidden=""
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="react-datepicker-wrapper"
+          >
+            <div
+              class="react-datepicker__input-container"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                >
+                  Select Valid From Date
+                </label>
+                <input
+                  class="input input--text input-type__input "
+                  data-testid="text-input"
+                  placeholder="Select Date"
+                  type="text"
+                  value=""
+                />
+              </p>
+            </div>
+          </div>
+          <br />
+          <br />
+          <div
+            class="field"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="U1"
+              >
+                Import File
+                <br />
+                <span
+                  class="label__description"
+                >
+                  Only .csv accepted
+                </span>
+              </label>
+              <input
+                accept=".csv"
+                class="input input--text input-type__input input--upload"
+                id="U1"
+                name="Upload 1"
+                style="position: static;"
+                type="file"
+              />
+            </p>
+          </div>
+          <button
+            class="btn field "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="btn field btn--secondary "
+            data-testid="button"
+            type="button"
+          >
+            <span
+              class="btn__inner"
+            >
+              Return to Import Overview
+            </span>
+          </button>
+          <div
+            hidden=""
+          >
+            <br />
+            <button
+              class="btn   btn--excel btn--secondary"
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Download Report
+              </span>
+            </button>
+            <br />
+            <br />
+          </div>
+        </div>
+      </form>
+      <br />
+      <div
+        hidden=""
+      >
+        <h4>
+          Import Progress
+        </h4>
+        <div
+          style="width: 60%;"
+        >
+          <table
+            class="table table--sortable"
+            data-aria-asc="ascending"
+            data-aria-desc="descending"
+            data-aria-sort="Sort by"
+            id="basic-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  File Name 
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Step
+                </th>
+                <th
+                  class="table__header "
+                  scope="col"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body "
+            >
+              <tr
+                class="table__row nonSelectableTableRow"
+                data-testid="table-row"
+                tabindex="0"
+                title="Table Row"
+              >
+                <td
+                  class="table__cell "
+                />
+                <td
+                  class="table__cell "
+                >
+                  Import
+                </td>
+                <td
+                  class="table__cell "
+                >
+                  <span
+                    class="status status--dead"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="field"
+          >
+            <div
+              class="progress-bar"
+            >
+              <div
+                class="progress-bar-filler"
+                style="width: 0%; background: rgb(152, 152, 152);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Import page snapshot rendering renders the variable definitions page correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/import/overview"
+              >
+                Import Overview
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              id="breadcrumb-2"
+            >
+              Variable Definitions
+            </li>
+          </ol>
+        </nav>
+        <h3>
+          Import 
+          Variable Definitions
+        </h3>
+        <br />
+        <form>
+          <div>
+            <div
+              hidden=""
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="year"
+                >
+                  Year
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="year"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-year"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="2020"
+                  >
+                    2020
+                  </option>
+                  <option
+                    value="2019"
+                  >
+                    2019
+                  </option>
+                  <option
+                    value="2018"
+                  >
+                    2018
+                  </option>
+                  <option
+                    value="2017"
+                  >
+                    2017
+                  </option>
+                  <option
+                    value="2016"
+                  >
+                    2016
+                  </option>
+                  <option
+                    value="2015"
+                  >
+                    2015
+                  </option>
+                  <option
+                    value="2014"
+                  >
+                    2014
+                  </option>
+                  <option
+                    value="2013"
+                  >
+                    2013
+                  </option>
+                  <option
+                    value="2012"
+                  >
+                    2012
+                  </option>
+                  <option
+                    value="2011"
+                  >
+                    2011
+                  </option>
+                </select>
+              </p>
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="quarter"
+                >
+                  Quarter
+                   
+                </label>
+                <select
+                  class="input input--select"
+                  id="quarter"
+                  name="select"
+                >
+                  <option
+                    data-testid="option-quarter"
+                    disabled=""
+                    selected=""
+                    value=""
+                  >
+                    Select an option
+                  </option>
+                  <option
+                    value="Q1"
+                  >
+                    Q1
+                  </option>
+                  <option
+                    value="Q2"
+                  >
+                    Q2
+                  </option>
+                  <option
+                    value="Q3"
+                  >
+                    Q3
+                  </option>
+                  <option
+                    value="Q4"
+                  >
+                    Q4
+                  </option>
+                </select>
+              </p>
+              <br />
+            </div>
+            <div
+              class="react-datepicker-wrapper"
+            >
+              <div
+                class="react-datepicker__input-container"
+              >
+                <p
+                  class="field"
+                >
+                  <label
+                    class="label"
+                  >
+                    Select Valid From Date
+                  </label>
+                  <input
+                    class="input input--text input-type__input "
+                    data-testid="text-input"
+                    placeholder="Select Date"
+                    type="text"
+                    value=""
+                  />
+                </p>
+              </div>
+            </div>
+            <br />
+            <br />
+            <div
+              class="field"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                  for="U1"
+                >
+                  Import File
+                  <br />
+                  <span
+                    class="label__description"
+                  >
+                    Only .csv accepted
+                  </span>
+                </label>
+                <input
+                  accept=".csv"
+                  class="input input--text input-type__input input--upload"
+                  id="U1"
+                  name="Upload 1"
+                  style="position: static;"
+                  type="file"
+                />
+              </p>
+            </div>
+            <button
+              class="btn field "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+            <button
+              class="btn field btn--secondary "
+              data-testid="button"
+              type="button"
+            >
+              <span
+                class="btn__inner"
+              >
+                Return to Import Overview
+              </span>
+            </button>
+            <div
+              hidden=""
+            >
+              <br />
+              <button
+                class="btn   btn--excel btn--secondary"
+                data-testid="button"
+                type="button"
+              >
+                <span
+                  class="btn__inner"
+                >
+                  Download Report
+                </span>
+              </button>
+              <br />
+              <br />
+            </div>
+          </div>
+        </form>
+        <br />
+        <div
+          hidden=""
+        >
+          <h4>
+            Import Progress
+          </h4>
+          <div
+            style="width: 60%;"
+          >
+            <table
+              class="table table--sortable"
+              data-aria-asc="ascending"
+              data-aria-desc="descending"
+              data-aria-sort="Sort by"
+              id="basic-table"
+            >
+              <thead
+                class="table__head"
+              >
+                <tr
+                  class="table__row"
+                >
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    File Name 
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Step
+                  </th>
+                  <th
+                    class="table__header "
+                    scope="col"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="table__body "
+              >
+                <tr
+                  class="table__row nonSelectableTableRow"
+                  data-testid="table-row"
+                  tabindex="0"
+                  title="Table Row"
+                >
+                  <td
+                    class="table__cell "
+                  />
+                  <td
+                    class="table__cell "
+                  >
+                    Import
+                  </td>
+                  <td
+                    class="table__cell "
+                  >
+                    <span
+                      class="status status--dead"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              class="field"
+            >
+              <div
+                class="progress-bar"
+              >
+                <div
+                  class="progress-bar-filler"
+                  style="width: 0%; background: rgb(152, 152, 152);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/import/overview"
+            >
+              Import Overview
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            id="breadcrumb-2"
+          >
+            Variable Definitions
+          </li>
+        </ol>
+      </nav>
+      <h3>
+        Import 
+        Variable Definitions
+      </h3>
+      <br />
+      <form>
+        <div>
+          <div
+            hidden=""
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="option-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="2020"
+                >
+                  2020
+                </option>
+                <option
+                  value="2019"
+                >
+                  2019
+                </option>
+                <option
+                  value="2018"
+                >
+                  2018
+                </option>
+                <option
+                  value="2017"
+                >
+                  2017
+                </option>
+                <option
+                  value="2016"
+                >
+                  2016
+                </option>
+                <option
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  value="2011"
+                >
+                  2011
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="quarter"
+              >
+                Quarter
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="quarter"
+                name="select"
+              >
+                <option
+                  data-testid="option-quarter"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  value="Q1"
+                >
+                  Q1
+                </option>
+                <option
+                  value="Q2"
+                >
+                  Q2
+                </option>
+                <option
+                  value="Q3"
+                >
+                  Q3
+                </option>
+                <option
+                  value="Q4"
+                >
+                  Q4
+                </option>
+              </select>
+            </p>
+            <br />
+          </div>
+          <div
+            class="react-datepicker-wrapper"
+          >
+            <div
+              class="react-datepicker__input-container"
+            >
+              <p
+                class="field"
+              >
+                <label
+                  class="label"
+                >
+                  Select Valid From Date
+                </label>
+                <input
+                  class="input input--text input-type__input "
+                  data-testid="text-input"
+                  placeholder="Select Date"
+                  type="text"
+                  value=""
+                />
+              </p>
+            </div>
+          </div>
+          <br />
+          <br />
           <div
             class="field"
           >
