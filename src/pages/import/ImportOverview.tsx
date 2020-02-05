@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import DocumentTitle from "react-document-title";
 import {ImportFileTable} from "./ImportFileTable";
-import { ONSBreadcrumbs } from "../../components/ONS_DesignSystem/ONSBreadcrumbs";
+import {ONSBreadcrumbs} from "../../components/ONS_DesignSystem/ONSBreadcrumbs";
 
 interface Props {
     match: any
@@ -19,7 +19,7 @@ export class ImportOverview extends Component <Props, State> {
         return (
             <DocumentTitle title={"LFS Imports Overview"}>
                 <div className="container">
-                    <ONSBreadcrumbs List={[]} Current="Import Overview"></ONSBreadcrumbs>
+                    <ONSBreadcrumbs List={[]} Current="Import Overview"/>
                     <h3>Import Overview</h3>
                     <ImportFileTable/>
                 </div>

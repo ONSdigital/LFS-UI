@@ -11,6 +11,7 @@ Object {
         <nav
           aria-label="Breadcrumb"
           class="breadcrumb"
+          data-testid="breadcrumbs"
         >
           <ol
             class="breadcrumb__items"
@@ -39,6 +40,7 @@ Object {
             </li>
             <li
               class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              data-testid="breadcrumb-current"
               id="breadcrumb-3"
             >
               Import Survey - Week 1
@@ -316,6 +318,7 @@ Object {
       <nav
         aria-label="Breadcrumb"
         class="breadcrumb"
+        data-testid="breadcrumbs"
       >
         <ol
           class="breadcrumb__items"
@@ -344,6 +347,7 @@ Object {
           </li>
           <li
             class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            data-testid="breadcrumb-current"
             id="breadcrumb-3"
           >
             Import Survey - Week 1
