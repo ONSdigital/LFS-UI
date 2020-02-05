@@ -1,4 +1,4 @@
-import {batch_progress, dashboard_data, role_data, user_data} from "./mock_data";
+import {valueLabelsData, variableDefinitionData, batch_progress, dashboard_data, role_data, user_data} from "./mock_data";
 
 export default function(url, payload) {
     console.log(url);
@@ -44,6 +44,22 @@ export default function(url, payload) {
                 return Promise.resolve({status: 200, json: () => Promise.resolve({status: "OK"})});
             } else {
                 return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
+            }
+        case "/variable/definitions":
+            if (process.env.NODE_ENV === "noData") {
+                return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve({message: "no data found"})});
+            } else if (process.env.NODE_ENV === "returnError") {
+                return Promise.reject("SyntaxError: Unexpected token P in JSON at position 0");
+            } else {
+                return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve(variableDefinitionData)});
+            }
+        case "/value/labels":
+            if (process.env.NODE_ENV === "noData") {
+                return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve({message: "no data found"})});
+            } else if (process.env.NODE_ENV === "returnError") {
+                return Promise.reject("SyntaxError: Unexpected token P in JSON at position 0");
+            } else {
+                return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve(valueLabelsData)});
             }
         case "/dashboard":
             if (process.env.NODE_ENV === "development") {

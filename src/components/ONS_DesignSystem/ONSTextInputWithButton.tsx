@@ -3,7 +3,7 @@ import "./ONSButton.css";
 
 interface Props {
     // Input Props
-    labelID?: string
+    labelID: string
     inputLabel?: string
     handleInputChange: (e: ChangeEvent<HTMLInputElement>, ...args: any[]) => void
     inputValue: string
@@ -22,7 +22,7 @@ export const ONSTextInputWithButton = (props: Props) => {
     return (
         <div className="grid--flex ">
             <p className="field">
-                <label className="label" htmlFor="search-field">{props.inputLabel}</label>
+                <label className="label" htmlFor={props.labelID}>{props.inputLabel}</label>
                 <input type="text" id={props.labelID}
                        className="input input--text input-type__input u-mr-xs u-mb-xs input--w-10"
                        value={props.inputValue}

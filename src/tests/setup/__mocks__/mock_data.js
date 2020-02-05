@@ -1,3 +1,17 @@
+export const variableDefinitionData = [
+    {id: 1, variable: "IOUTCOME", label: {String: "LABELS0", Valid: true}, description: {Valid: false}, type: "double", length: 8, precision: 0, alias: {String: "", Valid: false}, editable: false, imputation: false, dv: false, validFrom: "2019-12-18T15:14:49.306583Z"},
+    {id: 2, variable: "IOUTCOME", label: {String: "LABELS0", Valid: true}, description: {String: "Previous Definition description", Valid: true}, type: "double", length: 8, precision: 0, alias: {String: "", Valid: false}, editable: false, imputation: false, dv: false, validFrom: "2018-12-18T15:14:49.306583Z"},
+    {id: 3, variable: "IOUTCOME", label: {String: "LABELS0", Valid: true}, description: {Valid: false}, type: "double", length: 8, precision: 0, alias: {String: "", Valid: true}, editable: true, imputation: true, dv: true, validFrom: "2017-12-18T15:14:49.306583Z"},
+    {id: 4, variable: "DVHRPNUM", label: {String: "LABELS1", Valid: true}, description: {String: "Mock Data", Valid: true}, type: "double", length: 8, precision: 0, alias: {String: "", Valid: true}, editable: true, imputation: true, dv: true, validFrom: "2019-12-18T15:14:49.306584Z"}
+];
+
+export const valueLabelsData = [
+    {variable: "ILLST17", label_name: "ILLST17", valid_from: "2019-12-10T00:00:00Z", label_value: 1, description: "1 day", last_updated: "2019-12-19T15:54:25.866691Z"},
+    {variable: "ILLST17", label_name: "ILLST17", valid_from: "2019-12-10T00:00:00Z", label_value: 2, description: "2 days", last_updated: "2019-12-19T15:54:25.866691Z"},
+    {variable: "ILLST17", label_name: "ILLST17", valid_from: "2019-12-10T00:00:00Z", label_value: 3, description: "3 days", last_updated: "2019-12-19T15:54:25.866692Z"},
+    {variable: "DVHRPNUM", label_name: "DVHRPNUM", valid_from: "2019-12-10T00:00:00Z", label_value: 4, description: "4 days", last_updated: "2019-12-19T15:54:25.866692Z"}
+];
+
 const dashboard_data = [
     {id: 1, type: "Monthly", period: "1", year: 2019, status: 4},
     {id: 2, type: "Monthly", period: "2", year: 2019, status: 4},
@@ -26,4 +40,4 @@ const user_data = [{"user_id":1,"username":"adam","password":"CcF0mfmKsHe","role
 const role_data = [{"Name": "Admin", "Pages": [0,1,2,3,4,5,6,7,8,9]},
     {"Name": "User", "Pages": [2,3,4,5,6,7,8,9]}];
 
-export {dashboard_data, batch_progress, user_data, role_data};
+export {variableDefinitionData, valueLabelsData, dashboard_data, batch_progress, user_data, role_data};
