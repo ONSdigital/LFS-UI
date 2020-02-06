@@ -1,8 +1,8 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
 import {ONSBreadcrumbs} from "./ONSBreadcrumbs";
-import Adapter from 'enzyme-adapter-react-16';
-import { BrowserRouter } from 'react-router-dom';
+import Adapter from "enzyme-adapter-react-16";
+import {BrowserRouter} from "react-router-dom";
 
 describe("ONS Breadcrumbs Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -26,6 +26,10 @@ describe("ONS Breadcrumbs Test", () => {
             </BrowserRouter>
         )
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 

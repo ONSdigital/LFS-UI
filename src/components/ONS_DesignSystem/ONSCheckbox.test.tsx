@@ -1,8 +1,8 @@
-import React from 'react';
-import Enzyme, {mount, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import {ONSCheckbox} from "./ONSCheckbox";
-import {Builder, By, WebDriver} from 'selenium-webdriver';
+import {WebDriver} from "selenium-webdriver";
 
 describe("ONS Checkbox Test", () => {
     Enzyme.configure({adapter: new Adapter()});
@@ -45,6 +45,10 @@ describe("ONS Checkbox Test", () => {
     //         await browser.quit();
     //     }
     // });
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 

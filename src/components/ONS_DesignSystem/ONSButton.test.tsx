@@ -88,6 +88,10 @@ describe("ONS Button Test", () => {
                        action={props.action}/>);
     }
 
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
+
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
     it("should render with the correct label", () => {

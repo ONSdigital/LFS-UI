@@ -1,9 +1,9 @@
-import React from 'react';
-import Enzyme, {mount, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { ONSDateInput } from './ONSDateInput';
-import DatePicker from 'react-datepicker';
-           
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {ONSDateInput} from "./ONSDateInput";
+import DatePicker from "react-datepicker";
+
 describe("ONS Date Input", () => {
     Enzyme.configure({adapter: new Adapter()});
     
@@ -33,6 +33,10 @@ describe("ONS Date Input", () => {
                           label={dateInputProps.label}
                           onChange={dateInputProps.onChange}/>)
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, dateInputProps)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, dateInputProps).exists()).toEqual(true));
 

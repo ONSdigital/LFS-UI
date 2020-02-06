@@ -1,7 +1,7 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { ONSPasswordInput } from './ONSPasswordInput';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {ONSPasswordInput} from "./ONSPasswordInput";
 
 describe("ONS Password Input Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -30,6 +30,10 @@ describe("ONS Password Input Test", () => {
             </ONSPasswordInput>
         )
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 

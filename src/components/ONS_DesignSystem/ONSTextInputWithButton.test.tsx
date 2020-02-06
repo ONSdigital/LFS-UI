@@ -46,6 +46,10 @@ describe("ONS Text Input With Button Test", () => {
         );
     }
 
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, props)).toMatchSnapshot()
+    });
+
     it("should render correctly", () => expect(wrapper(shallow, props).exists()).toEqual(true));
 
     it("should render with the correct label", () => {

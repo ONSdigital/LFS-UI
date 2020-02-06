@@ -1,8 +1,8 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
 import {ONSPagination} from "./ONSPagination";
-import Adapter from 'enzyme-adapter-react-16';
-import sinon from 'sinon'
+import Adapter from "enzyme-adapter-react-16";
+import sinon from "sinon";
 
 describe("ONS Pagination Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -59,6 +59,10 @@ describe("ONS Pagination Test", () => {
             
         )
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 
