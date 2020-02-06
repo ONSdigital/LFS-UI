@@ -7,13 +7,13 @@ import dateFormatter from "dayjs";
 
 export function ImportFileTable() {
     let imports = [
-        {name: "APS Design Weights", "status": "Imported"},
-        {name: "Bulk Amendments", "status": "Not Imported"},
-        {name: "Geographical Classifications", "status": "File Older than One year"},
-        {name: "Output Specification", "status": "Not Imported"},
-        {name: "Population Estimates", "status": "Not Imported"},
-        {name: "Value Labels", "status": "Imported"},
-        {name: "Variable Definitions", "status": "Imported"}
+        {id: 1, name: "APS Design Weights", "status": "Imported"},
+        {id: 2, name: "Bulk Amendments", "status": "Not Imported"},
+        {id: 3, name: "Geographical Classifications", "status": "File Older than One year"},
+        {id: 4, name: "Output Specification", "status": "Not Imported"},
+        {id: 5, name: "Population Estimates", "status": "Not Imported"},
+        {id: 6, name: "Value Labels", "status": "Imported"},
+        {id: 7, name: "Variable Definitions", "status": "Imported"}
     ];
 
     let BatchUploadTableRow = (rowData: any) => {

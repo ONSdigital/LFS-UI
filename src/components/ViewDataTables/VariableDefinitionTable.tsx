@@ -97,7 +97,8 @@ export class VariableDefinitionTable extends Component <Props, State> {
                                             inputValue={this.state.search}
                                             primaryButton={false}
                                             buttonLabel={"Clear"}
-                                            onButtonClick={this.viewAll}/>
+                                            onButtonClick={this.viewAll}
+                                            labelID={"variableDefinitionSearch"}/>
 
                     <ONSAccordionTable data={this.state.filteredData} Row={VarDefTableRow}
                                        expandedRowEnabled={true}

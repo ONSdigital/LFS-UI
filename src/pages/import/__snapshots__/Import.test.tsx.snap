@@ -11,6 +11,7 @@ Object {
         <nav
           aria-label="Breadcrumb"
           class="breadcrumb"
+          data-testid="breadcrumbs"
         >
           <ol
             class="breadcrumb__items"
@@ -28,6 +29,7 @@ Object {
             </li>
             <li
               class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              data-testid="breadcrumb-current"
               id="breadcrumb-2"
             >
               APS Design Weights
@@ -300,7 +302,7 @@ Object {
                     class="table__cell "
                   >
                     <span
-                      class="status status--dead"
+                      class="status status--info"
                     />
                   </td>
                 </tr>
@@ -314,7 +316,7 @@ Object {
               >
                 <div
                   class="progress-bar-filler"
-                  style="width: 0%; background: rgb(152, 152, 152);"
+                  style="width: 0%; background: rgb(136, 136, 136);"
                 />
               </div>
             </div>
@@ -330,6 +332,7 @@ Object {
       <nav
         aria-label="Breadcrumb"
         class="breadcrumb"
+        data-testid="breadcrumbs"
       >
         <ol
           class="breadcrumb__items"
@@ -347,6 +350,7 @@ Object {
           </li>
           <li
             class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            data-testid="breadcrumb-current"
             id="breadcrumb-2"
           >
             APS Design Weights
@@ -619,7 +623,7 @@ Object {
                   class="table__cell "
                 >
                   <span
-                    class="status status--dead"
+                    class="status status--info"
                   />
                 </td>
               </tr>
@@ -633,7 +637,7 @@ Object {
             >
               <div
                 class="progress-bar-filler"
-                style="width: 0%; background: rgb(152, 152, 152);"
+                style="width: 0%; background: rgb(136, 136, 136);"
               />
             </div>
           </div>

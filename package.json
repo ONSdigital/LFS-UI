@@ -11,11 +11,6 @@
   ],
   "dependencies": {
     "@ons/design-system": "^14.3.0",
-    "@testing-library/jest-dom": "^5.0.2",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/react-hooks": "^3.2.1",
-    "@types/bootstrap": "^4.3.1",
-    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.11.1",
     "@types/react": "^16.9.9",
@@ -26,12 +21,9 @@
     "@types/react-router": "^5.0.3",
     "@types/react-router-dom": "^5.0.3",
     "@types/react-table": "^6.8.5",
-    "@types/selenium-webdriver": "^4.0.5",
-    "@types/testing-library__jest-dom": "^5.0.0",
     "@types/uuid": "^3.4.6",
     "axios": "^0.19.1",
     "dayjs": "^1.8.17",
-    "enzyme-async-helpers": "^0.9.1",
     "immutability-helper": "latest",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
@@ -59,6 +51,18 @@
     "test-coverage": "npm test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
+
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/tests/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/stories/",
+      "<rootDir>/src/selenium/"
+    ],
+    "watchPathIgnorePatterns": [
+      "<rootDir>/src/selenium/"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -75,18 +79,28 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.0.2",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@types/bootstrap": "^4.3.1",
     "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/enzyme-async-helpers": "^0.9.1",
     "@types/jest": "^24.9.1",
+    "@types/selenium-webdriver": "^4.0.5",
     "@types/sinon": "^7.5.0",
+    "@types/testing-library__jest-dom": "^5.0.0",
     "@typescript-eslint/typescript-estree": "^2.9.0",
     "dotenv": "^8.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-async-helpers": "^0.9.1",
     "enzyme-to-json": "^3.4.3",
     "eslint": "^6.8.0",
     "eslint-plugin-jest-dom": "^2.0.0",
     "jest": "^24.9.0",
+    "jest-websocket-mock": "^2.0.1",
+    "mock-socket": "^9.0.3",
     "react-test-renderer": "^16.10.2",
     "serve": "^11.2.0",
     "ts-jest": "^24.1.0"

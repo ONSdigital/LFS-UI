@@ -1,17 +1,17 @@
-import React from "react"
+import React from "react";
 
-import {Import} from "./Import"
+import {Import} from "./Import";
 
-import { default as flushPromises } from "../../tests/util/flushPromises"
-import {render, fireEvent, screen, cleanup} from '@testing-library/react'
+import {default as flushPromises} from "../../tests/util/flushPromises";
+import {cleanup, fireEvent, render} from "@testing-library/react";
 
-import { BrowserRouter } from "react-router-dom"
-import { act } from "react-dom/test-utils";
+import {BrowserRouter} from "react-router-dom";
+import {act} from "react-dom/test-utils";
 
-import Enzyme, { mount } from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import fetch from '../../tests/setup/__mocks__/fetch.js';
+import fetch from "../../tests/setup/__mocks__/fetch.js";
 
 import '@testing-library/jest-dom';
 import { getMonthandYear } from "../../tests/util/getMonthandYear"
@@ -38,7 +38,7 @@ const designWeightsMatch = {
     url: "/import/APS Design Weights",
     isExact: true,
     params: {file: "APS Design Weights"}
-}
+};
 
 const bulkAmendmentsMatch = {
     path: "/import/:file?",
@@ -87,7 +87,7 @@ const APSPersonMatch = {
     url: "/import/APS Person Variable Specification",
     isExact: true,
     params: {file: "APS Person Variable Specification"}
-}
+};
 
 const eurostatMatch = {
     path: "/import/:file?",
@@ -114,15 +114,15 @@ const LFSPersonMatch = {
 function Props(input: any) {
     return {
         match: input
-    }
+    };
 }
 
-function wrapper(render: any, props: any){
-        return render(
-            <BrowserRouter>
-                <Import {...props}/>
-            </BrowserRouter>
-        )
+function wrapper(render: any, props: any) {
+    return render(
+        <BrowserRouter>
+            <Import {...props}/>
+        </BrowserRouter>
+    );
 }
 
 let renderAndImport = (match: any, render: any, fileName?: string) => {
@@ -200,19 +200,19 @@ describe("Import page functionality", () => {
 
     test("breadcrumb points to the correct url", async () => {
         //testing an output file as they have two breadcrumbs
-        let breadWrapper = wrapper(mount, Props(APSPersonMatch))
-        
+        let breadWrapper = wrapper(mount, Props(APSPersonMatch));
+
         //Home breadcrumb links to Home
-        expect(breadWrapper.find("ONSBreadcrumbs").getElement().props.List[0].link).toEqual("import/overview")
+        expect(breadWrapper.find("ONSBreadcrumbs").getElement().props.List[0].link).toEqual("import/overview");
 
         //manage batch breadcrumb links to the correct manage batch page
-        expect(breadWrapper.find("ONSBreadcrumbs").getElement().props.List[1].link).toEqual('import/output')
-    })
+        expect(breadWrapper.find("ONSBreadcrumbs").getElement().props.List[1].link).toEqual("import/output");
+    });
 
-    it('displays "no file selected" panel when the upload doesnt contain a file', async () => {
-        const { getByText }  = wrapper(render, Props(designWeightsMatch))
+    it("displays \"no file selected\" panel when the upload doesnt contain a file", async () => {
+        const {getByText} = wrapper(render, Props(designWeightsMatch));
 
-        fireEvent.click(getByText(/submit/i))
+        fireEvent.click(getByText(/submit/i));
 
         expect(getByText(/No File Selected/i)).toBeTruthy();
     });
@@ -307,9 +307,9 @@ describe("Importing files and handling", () => {
 
         fireEvent.click(screen.getByText(/submit/i))
 
-        await act(async () => {
-            await flushPromises();
-        });
+        fireEvent.change(inputEl);
+
+        fireEvent.click(getByText(/submit/i));
 
         // Bulk amendment file validates and responds with success
         expect(screen.getByText(/validation completed with no errors/i)).toBeTruthy();
@@ -349,3 +349,4 @@ describe("Importing files and handling", () => {
         expect(screen.queryByText(/reject/i)).toBeNull()
     })
 })
+    

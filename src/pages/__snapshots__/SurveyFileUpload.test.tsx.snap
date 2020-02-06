@@ -1,6 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GB and NI survey file uploads renders the page correctly 1`] = `
+
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -11,6 +12,7 @@ Object {
         <nav
           aria-label="Breadcrumb"
           class="breadcrumb"
+          data-testid="breadcrumbs"
         >
           <ol
             class="breadcrumb__items"
@@ -39,6 +41,7 @@ Object {
             </li>
             <li
               class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              data-testid="breadcrumb-current"
               id="breadcrumb-3"
             >
               Import Survey - Week 1
@@ -151,6 +154,7 @@ Object {
         </div>
         <div
           class="panel panel--info panel--simple "
+          data-testid="import=panel"
           hidden=""
         >
           <div
@@ -284,7 +288,7 @@ Object {
                     class="table__cell "
                   >
                     <span
-                      class="status status--dead"
+                      class="status status--info"
                     />
                   </td>
                 </tr>
@@ -298,7 +302,7 @@ Object {
               >
                 <div
                   class="progress-bar-filler"
-                  style="width: 0%; background: rgb(152, 152, 152);"
+                  style="width: 0%; background: rgb(136, 136, 136);"
                 />
               </div>
             </div>
@@ -315,6 +319,7 @@ Object {
       <nav
         aria-label="Breadcrumb"
         class="breadcrumb"
+        data-testid="breadcrumbs"
       >
         <ol
           class="breadcrumb__items"
@@ -343,6 +348,7 @@ Object {
           </li>
           <li
             class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            data-testid="breadcrumb-current"
             id="breadcrumb-3"
           >
             Import Survey - Week 1
@@ -455,6 +461,7 @@ Object {
       </div>
       <div
         class="panel panel--info panel--simple "
+        data-testid="import=panel"
         hidden=""
       >
         <div
@@ -588,7 +595,7 @@ Object {
                   class="table__cell "
                 >
                   <span
-                    class="status status--dead"
+                    class="status status--info"
                   />
                 </td>
               </tr>
@@ -602,7 +609,7 @@ Object {
             >
               <div
                 class="progress-bar-filler"
-                style="width: 0%; background: rgb(152, 152, 152);"
+                style="width: 0%; background: rgb(136, 136, 136);"
               />
             </div>
           </div>

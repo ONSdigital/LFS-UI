@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {GenericNotFound} from "./GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {VariableDefinitionTable} from "../components/ViewDataTables/VariableDefinitionTable";
 import {ValueLabelsTable} from "../components/ViewDataTables/ValueLabelsTable";
@@ -31,15 +30,6 @@ export class ViewData extends Component <{}, State> {
         let table = null;
 
         switch (tableName) {
-            case "Geographical Classifications":
-                table = <GenericNotFound/>;
-                break;
-            case "Design Weights":
-                table = <GenericNotFound/>;
-                break;
-            case "Population Estimates":
-                table = <GenericNotFound/>;
-                break;
             case "Value Labels":
                 table = <ValueLabelsTable/>;
                 break;
