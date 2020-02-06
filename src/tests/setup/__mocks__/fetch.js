@@ -1,5 +1,12 @@
-import {valueLabelsData, variableDefinitionData, batch_progress, dashboard_data, role_data, user_data} from "./mock_data";
-import { getMonthandYear } from "../../util/getMonthandYear"
+import {
+    batch_progress,
+    dashboard_data,
+    role_data,
+    user_data,
+    valueLabelsData,
+    variableDefinitionData
+} from "./mock_data";
+import {getMonthandYear} from "../../util/getMonthandYear";
 
 export default function(url, payload) {
     let variableDefinitionsUrl = '/imports/variable/definitions/' + getMonthandYear("-", 17)
@@ -24,11 +31,10 @@ export default function(url, payload) {
                 return Promise.resolve({status: 200, json: () => Promise.resolve({status: "999"})});
             } else if (NiFileName === "NI_File_weird_error.sav") {
                 return Promise.reject("Something strange has Occurred here");
-            }
-        case "/imports/design/weights": {
+            } break
+        case "/imports/design/weights": 
             console.log(url);
             return Promise.resolve({status: 200, json: {status: "OK"}});
-        }
         case '/imports/population':
           return Promise.resolve({status: 200, json:{status: "OK"}})
         case '/population/report':
@@ -37,9 +43,9 @@ export default function(url, payload) {
           return Promise.resolve({status: 200, json:{status: "OK"}, blob:()=> Promise.resolve({blob: data})})
         case '/imports/survey/amendments/validate':
           let filename = payload.body.get("lfsFile").name
-          if (filename === "Bulk Amendments.csv") 
+          if (filename === "Bulk Amendments.csv")
             return Promise.resolve({status: 200, json:()=> Promise.resolve({status: "OK"})})
-          else if (filename === "Bulk Amendments Reject.csv") 
+          else if (filename === "Bulk Amendments Reject.csv")
             return Promise.resolve({status: 403, json:()=> Promise.resolve({status: "ERROR", errorMessage: "Unmatched items in Bulk Amendments file"})})
           return
         case '/imports/survey/amendments':
@@ -62,6 +68,8 @@ export default function(url, payload) {
             } else {
                 return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
             }
+        case "/login/":
+            return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
         case variableDefinitionsUrl:
             return Promise.resolve({status: 200, json:{status: "OK"}})
         case "/variable/definitions":

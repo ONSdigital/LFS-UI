@@ -5,7 +5,7 @@ function postImportFile(importFile: any, link: string, fileName: string): Promis
     let formData = new FormData();
     formData.append("lfsFile", importFile[0]);
     formData.append("fileName", fileName);
-    
+
     return requestPromise("POST", url, formData);
 }
 
@@ -28,7 +28,7 @@ function getSurveyAudit(survey: string, year: string, period: string): Promise<a
 }
 
 function getImportReportFile(importName: string): Promise<any> {
-    let url = "/" + importName + "/report/population";
+    let url = "/" + importName + "/report";
 
     return new Promise((resolve: any, reject: any) => {
         fetch(url, {

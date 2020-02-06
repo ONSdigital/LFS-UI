@@ -13,6 +13,8 @@ interface Props {
 
 export const ReportExport = (props: Props) => {
     let [loading, setLoading] = useState(false);
+    console.log(props.importName)
+    console.log(props.url)
     const onClick = () => {
         setLoading(true);
         if (props.url) {

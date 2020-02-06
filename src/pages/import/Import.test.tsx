@@ -3,7 +3,7 @@ import React from "react";
 import {Import} from "./Import";
 
 import {default as flushPromises} from "../../tests/util/flushPromises";
-import {cleanup, fireEvent, render} from "@testing-library/react";
+import {cleanup, fireEvent, render, screen} from "@testing-library/react";
 
 import {BrowserRouter} from "react-router-dom";
 import {act} from "react-dom/test-utils";
@@ -13,8 +13,8 @@ import Adapter from "enzyme-adapter-react-16";
 
 import fetch from "../../tests/setup/__mocks__/fetch.js";
 
-import '@testing-library/jest-dom';
-import { getMonthandYear } from "../../tests/util/getMonthandYear"
+import "@testing-library/jest-dom";
+import {getMonthandYear} from "../../tests/util/getMonthandYear";
 
 // @ts-ignore 
 global.fetch = fetch;
@@ -291,8 +291,6 @@ describe("Importing files and handling", () => {
 
         fireEvent.click(screen.getByText(/download report/i))
         
-
-
         await act(async () => {
             await flushPromises();
         });
@@ -307,9 +305,9 @@ describe("Importing files and handling", () => {
 
         fireEvent.click(screen.getByText(/submit/i))
 
-        fireEvent.change(inputEl);
-
-        fireEvent.click(getByText(/submit/i));
+        await act(async () => {
+            await flushPromises();
+        });
 
         // Bulk amendment file validates and responds with success
         expect(screen.getByText(/validation completed with no errors/i)).toBeTruthy();

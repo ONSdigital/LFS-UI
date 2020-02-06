@@ -51,7 +51,6 @@
     "test-coverage": "npm test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
-
   "jest": {
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/tests/",
@@ -79,14 +78,14 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.0.2",
+    "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.0",
     "@testing-library/react-hooks": "^3.2.1",
     "@types/bootstrap": "^4.3.1",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/enzyme-async-helpers": "^0.9.1",
-    "@types/jest": "^24.9.1",
+    "@types/jest": "^24.9.0",
     "@types/selenium-webdriver": "^4.0.5",
     "@types/sinon": "^7.5.0",
     "@types/testing-library__jest-dom": "^5.0.0",
@@ -95,7 +94,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-async-helpers": "^0.9.1",
-    "enzyme-to-json": "^3.4.3",
+    "enzyme-to-json": "^3.4.4",
     "eslint": "^6.8.0",
     "eslint-plugin-jest-dom": "^2.0.0",
     "jest": "^24.9.0",

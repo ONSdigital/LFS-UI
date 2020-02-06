@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GB and NI survey file uploads renders the page correctly 1`] = `
-
+exports[`GB and NI survey file uploads renders the page 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
