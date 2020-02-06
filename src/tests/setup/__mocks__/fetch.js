@@ -6,7 +6,7 @@ import {
     valueLabelsData,
     variableDefinitionData
 } from "./mock_data";
-import { getMonthandYear } from "../../util/getMonthandYear"
+import {getMonthandYear} from "../../util/getMonthandYear";
 
 export default function(url, payload) {
     let variableDefinitionsUrl = '/imports/variable/definitions/' + getMonthandYear("-", 17)
