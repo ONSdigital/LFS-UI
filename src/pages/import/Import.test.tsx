@@ -291,8 +291,6 @@ describe("Importing files and handling", () => {
 
         fireEvent.click(screen.getByText(/download report/i))
         
-
-
         await act(async () => {
             await flushPromises();
         });
@@ -307,9 +305,9 @@ describe("Importing files and handling", () => {
 
         fireEvent.click(screen.getByText(/submit/i))
 
-        fireEvent.change(inputEl);
-
-        fireEvent.click(getByText(/submit/i));
+        await act(async () => {
+            await flushPromises();
+        });
 
         // Bulk amendment file validates and responds with success
         expect(screen.getByText(/validation completed with no errors/i)).toBeTruthy();

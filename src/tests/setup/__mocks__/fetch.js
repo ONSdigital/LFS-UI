@@ -31,11 +31,10 @@ export default function(url, payload) {
                 return Promise.resolve({status: 200, json: () => Promise.resolve({status: "999"})});
             } else if (NiFileName === "NI_File_weird_error.sav") {
                 return Promise.reject("Something strange has Occurred here");
-            }
-        case "/imports/design/weights": {
+            } break
+        case "/imports/design/weights": 
             console.log(url);
             return Promise.resolve({status: 200, json: {status: "OK"}});
-        }
         case '/imports/population':
           return Promise.resolve({status: 200, json:{status: "OK"}})
         case '/population/report':
