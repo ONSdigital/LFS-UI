@@ -6,8 +6,10 @@ import {
     valueLabelsData,
     variableDefinitionData
 } from "./mock_data";
+import { getMonthandYear } from "../../util/getMonthandYear"
 
 export default function(url, payload) {
+    let variableDefinitionsUrl = '/imports/variable/definitions/' + getMonthandYear("-", 17)
     console.log(url);
     switch (url) {
         case "/imports/survey/gb/2019/1":
@@ -34,6 +36,21 @@ export default function(url, payload) {
             console.log(url);
             return Promise.resolve({status: 200, json: {status: "OK"}});
         }
+        case '/imports/population':
+          return Promise.resolve({status: 200, json:{status: "OK"}})
+        case '/population/report':
+          console.log("herererere")
+          var data = new Blob(["res"], {size: 1498187, type: 'application/vnd.ms-excel'});
+          return Promise.resolve({status: 200, json:{status: "OK"}, blob:()=> Promise.resolve({blob: data})})
+        case '/imports/survey/amendments/validate':
+          let filename = payload.body.get("lfsFile").name
+          if (filename === "Bulk Amendments.csv")
+            return Promise.resolve({status: 200, json:()=> Promise.resolve({status: "OK"})})
+          else if (filename === "Bulk Amendments Reject.csv")
+            return Promise.resolve({status: 403, json:()=> Promise.resolve({status: "ERROR", errorMessage: "Unmatched items in Bulk Amendments file"})})
+          return
+        case '/imports/survey/amendments':
+          return Promise.resolve({status: 200, json:()=> Promise.resolve({status: "OK"})})
         case "/audits/week/2019/1":
             console.log(url);
             return Promise.resolve({
@@ -54,6 +71,8 @@ export default function(url, payload) {
             }
         case "/login/":
             return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
+        case variableDefinitionsUrl:
+            return Promise.resolve({status: 200, json:{status: "OK"}})
         case "/variable/definitions":
             if (process.env.NODE_ENV === "noData") {
                 return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve({message: "no data found"})});

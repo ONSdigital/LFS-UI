@@ -40,7 +40,8 @@ export class ONSTextInput extends Component <Props, {}> {
                        className={"input input--text input-type__input "}
                        placeholder={this.props.placeholder}
                        onChange={(e) => this.handleChange(e)}
-                       onClick={(e) => (this.props.onClick !== undefined && this.props.onClick(e))}/>
+                       onClick={(e) => (this.props.onClick !== undefined && this.props.onClick(e))}
+                       data-testid="text-input"/>
             </p>
         );
     }
