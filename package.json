@@ -51,7 +51,6 @@
     "test-coverage": "npm test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
-
   "jest": {
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/tests/",
