@@ -1,4 +1,11 @@
-import {valueLabelsData, variableDefinitionData, batch_progress, dashboard_data, role_data, user_data} from "./mock_data";
+import {
+    batch_progress,
+    dashboard_data,
+    role_data,
+    user_data,
+    valueLabelsData,
+    variableDefinitionData
+} from "./mock_data";
 
 export default function(url, payload) {
     console.log(url);
@@ -45,6 +52,8 @@ export default function(url, payload) {
             } else {
                 return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
             }
+        case "/login/":
+            return Promise.resolve({status: 400, json: () => Promise.resolve({status: "ERROR"})});
         case "/variable/definitions":
             if (process.env.NODE_ENV === "noData") {
                 return Promise.resolve({status: 200, statusText: "OK", json: () => Promise.resolve({message: "no data found"})});
