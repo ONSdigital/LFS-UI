@@ -2,7 +2,6 @@ import React from "react";
 import Enzyme, {mount, shallow} from "enzyme";
 import {ONSStatus} from "./ONSStatus";
 import Adapter from "enzyme-adapter-react-16";
-import { prototype } from "events";
 
 describe("ONS Status Test", () => {
     Enzyme.configure({ adapter: new Adapter() })
