@@ -1,7 +1,7 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
 import {ONSMetadata} from "./ONSMetadata";
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from "enzyme-adapter-react-16";
 
 describe("ONS MetaData Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -29,6 +29,10 @@ describe("ONS MetaData Test", () => {
             
         )
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 

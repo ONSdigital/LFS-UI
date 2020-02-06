@@ -1,6 +1,6 @@
-import React from 'react';
-import Enzyme, {mount, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import {ONSRadioButton} from "./ONSRadioButton";
 
 describe("ONS Radio Button Test", () => {
@@ -23,6 +23,10 @@ describe("ONS Radio Button Test", () => {
                             id={props.id} 
                             onChange={props.onRadioClick}/>)
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, radioProps)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, radioProps).exists()).toEqual(true));
 

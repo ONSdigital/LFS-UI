@@ -146,6 +146,10 @@ describe("ONS Accordion Table Test", () => {
         );
     }
 
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, manyRowPropsNoExpansionPagination)).toMatchSnapshot()
+    });
+
     it("should render correctly", () => expect(wrapper(shallow, singleRowProps).exists()).toEqual(true));
 
     it("should render with the correct headers", () => {

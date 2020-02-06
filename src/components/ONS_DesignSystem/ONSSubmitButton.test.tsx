@@ -1,8 +1,8 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
-import { ONSSubmitButton } from "./ONSSubmitButton";
-import sinon from 'sinon';
-import Adapter from 'enzyme-adapter-react-16';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
+import {ONSSubmitButton} from "./ONSSubmitButton";
+import sinon from "sinon";
+import Adapter from "enzyme-adapter-react-16";
 
 describe("ONS Submit Button Test", () => {
     Enzyme.configure({ adapter: new Adapter() })
@@ -40,6 +40,10 @@ describe("ONS Submit Button Test", () => {
             </ONSSubmitButton>
         )
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, submitProps).exists()).toEqual(true))
 

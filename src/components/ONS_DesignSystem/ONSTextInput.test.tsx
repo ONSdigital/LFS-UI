@@ -1,7 +1,7 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
 import {ONSTextInput} from "./ONSTextInput";
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from "enzyme-adapter-react-16";
 
 describe("ONS Text Input Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -43,6 +43,10 @@ describe("ONS Text Input Test", () => {
             
         )
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 

@@ -1,7 +1,7 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
 import {ONSProgressBar} from "./ONSProgressBar";
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from "enzyme-adapter-react-16";
 import {getUploadStatusStyle} from "../../utilities/Common_Functions";
 
 describe("ONS Progress Bar Test", () => {
@@ -21,6 +21,10 @@ describe("ONS Progress Bar Test", () => {
             
         )
     }
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, Props)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, Props).exists()).toEqual(true));
 

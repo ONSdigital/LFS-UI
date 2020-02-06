@@ -1,7 +1,7 @@
-import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
 import {ONSPanel} from "./ONSPanel";
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from "enzyme-adapter-react-16";
 
 describe("ONS Panel Test", () => {
     Enzyme.configure({ adapter: new Adapter() });
@@ -34,6 +34,10 @@ describe("ONS Panel Test", () => {
                         id={props.id}
                         hidden = {props.hidden}
                         >{props.children}</ONSPanel>)}
+
+    it("matches Snapshot", () => {
+        expect(wrapper(shallow, panelProps)).toMatchSnapshot()
+    });
 
     it("should render correctly", () => expect(wrapper(shallow, panelProps).exists()).toEqual(true));
 
