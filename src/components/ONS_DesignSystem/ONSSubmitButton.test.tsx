@@ -42,7 +42,7 @@ describe("ONS Submit Button Test", () => {
     }
 
     it("matches Snapshot", () => {
-        expect(wrapper(shallow, Props)).toMatchSnapshot()
+        expect(wrapper(shallow, submitProps)).toMatchSnapshot()
     });
 
     it("should render correctly", () => expect(wrapper(shallow, submitProps).exists()).toEqual(true))

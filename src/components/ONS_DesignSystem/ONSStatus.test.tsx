@@ -20,15 +20,12 @@ describe("ONS Status Test", () => {
 
     function wrapper(render: any, props: any) {
         return render(
-            <ONSStatus  label={props.label}
-                        small={props.small}
-                        status={props.status}>
-            </ONSStatus>
+            <ONSStatus label={props.label} small={props.small} status={props.status}/>
         )
     }
 
     it("matches Snapshot", () => {
-        expect(wrapper(shallow, Props)).toMatchSnapshot()
+        expect(wrapper(shallow, statusProps)).toMatchSnapshot()
     });
     
     it("should render correctly", () => expect(wrapper(shallow, statusProps).exists()).toEqual(true));
