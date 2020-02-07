@@ -15,9 +15,11 @@ import fetch from "../../tests/setup/__mocks__/fetch.js";
 
 import "@testing-library/jest-dom";
 import {getMonthandYear} from "../../tests/util/getMonthandYear";
+import MockDate from "mockdate";
 
 // @ts-ignore 
 global.fetch = fetch;
+MockDate.set('1955-06-18');
 // @ts-ignore 
 global.URL.createObjectURL = jest.fn();
 

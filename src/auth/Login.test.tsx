@@ -8,9 +8,11 @@ import sinon from "sinon";
 import {Cookies} from "react-cookie";
 import {Login} from "./Login";
 import fetch from "../tests/setup/__mocks__/fetch";
+import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
+MockDate.set('1955-06-18');
 
 describe("Login Page Test", () => {
     Enzyme.configure({adapter: new Adapter()});

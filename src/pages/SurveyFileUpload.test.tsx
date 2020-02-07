@@ -14,9 +14,11 @@ import fetch from "../tests/setup/__mocks__/fetch.js";
 import {monthNumberToString} from "../utilities/Common_Functions";
 import {act} from "react-dom/test-utils";
 import WS from "jest-websocket-mock";
+import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
+MockDate.set('1955-06-18');
 
 
 describe("GB and NI survey file uploads", () => {

@@ -8,9 +8,11 @@ import Adapter from "enzyme-adapter-react-16";
 import flushPromises from "../../tests/util/flushPromises";
 import fetch from "../../tests/setup/__mocks__/fetch";
 import {ImportOutputSpec} from "./ImportOutputSpec";
+import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
+MockDate.set('1955-06-18');
 
 
 describe("Import Output Specification Page", () => {

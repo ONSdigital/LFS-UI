@@ -7,10 +7,11 @@ import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import fetch from "../tests/setup/__mocks__/fetch.js";
 import {Admin} from "./Admin";
-
+import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
+MockDate.set('1955-06-18');
 
 
 describe("Admin - User Management Page", () => {
