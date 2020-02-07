@@ -11,7 +11,7 @@ import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
-MockDate.set('1955-06-18');
+MockDate.set('1955-07-18');
 
 
 describe("Admin - User Management Page", () => {

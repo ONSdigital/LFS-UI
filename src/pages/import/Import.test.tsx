@@ -19,7 +19,7 @@ import MockDate from "mockdate";
 
 // @ts-ignore 
 global.fetch = fetch;
-MockDate.set('1955-06-18');
+MockDate.set('1955-07-18');
 // @ts-ignore 
 global.URL.createObjectURL = jest.fn();
 
