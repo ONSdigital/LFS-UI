@@ -9,10 +9,11 @@ import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import fetch from "../tests/setup/__mocks__/fetch.js";
 import {Home} from "./Home";
-
+import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
+MockDate.set('2015-01-21');
 
 
 describe("Home Page", () => {

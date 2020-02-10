@@ -8,10 +8,11 @@ import Adapter from "enzyme-adapter-react-16";
 import {ImportOverview} from "./ImportOverview";
 import flushPromises from "../../tests/util/flushPromises";
 import fetch from "../../tests/setup/__mocks__/fetch";
+import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
-
+MockDate.set('2015-01-21');
 
 describe("Import Overview Page", () => {
     Enzyme.configure({adapter: new Adapter()});

@@ -8,9 +8,11 @@ import {default as flushPromises} from "../tests/util/flushPromises";
 import {fireEvent, render, screen} from "@testing-library/react";
 import sinon from "sinon";
 import fetch from "../tests/setup/__mocks__/fetch";
+import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
+MockDate.set('2015-01-21');
 
 describe("Login Test", () => {
 

@@ -1,3 +1,7 @@
+import MockDate from "mockdate";
+
+MockDate.set('2015-01-21');
+
 export function getMonthandYear(divide: string, day?: number) {
     var date = new Date();
     const month = date.getMonth() + 1;

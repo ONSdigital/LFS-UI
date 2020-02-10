@@ -8,10 +8,11 @@ import Adapter from "enzyme-adapter-react-16";
 import fetch from "../tests/setup/__mocks__/fetch.js";
 import {ViewData} from "./ViewData";
 import flushPromises from "../tests/util/flushPromises";
-
+import MockDate from "mockdate";
 
 // @ts-ignore
 global.fetch = fetch;
+MockDate.set('2015-01-21');
 
 
 describe("View Data Page", () => {
