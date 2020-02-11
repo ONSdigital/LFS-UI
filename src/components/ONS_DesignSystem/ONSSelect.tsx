@@ -40,11 +40,11 @@ export class ONSSelect extends Component <Props, State>{
             <label className="label" htmlFor={this.props.id}>{this.props.label} </label>
           }
           <select id={this.props.id} name="select" defaultValue="" className="input input--select" onChange={(e) => this.handleChange(e)}>
-            <option value="" disabled data-testid={"option-" + this.props.id}>
+            <option value="" disabled data-testid={"select-" + this.props.id}>
               Select an option
             </option>
             {this.props.options.map((option, index) =>
-              <option value={option.value} key={index} id={option.id}>
+              <option value={option.value} key={index} id={option.id} data-testid={"option-" + this.props.id + "-" + option.value}>
                 {option.label} 
               </option> 
             )}

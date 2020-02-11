@@ -168,7 +168,7 @@ export class Import extends Component <Props, State> {
                     (isDevEnv && console.log(response));
 
                     if (this.state.outputSpec) {
-                        response.clone().json().then((json: any) => {
+                        response.json().then((json: any) => {
                             (isDevEnv && console.log(json));
                             if (json.status === "OK") {
                                 this.setPanel(json.message + ". Records inserted: " + json.recordsInserted, "success");
@@ -287,6 +287,7 @@ export class Import extends Component <Props, State> {
     };
 
     fileType = (file: string) => {
+        console.log(file)
         switch (file) {
             case "Geographical Classifications":
                 this.setState({
@@ -327,9 +328,9 @@ export class Import extends Component <Props, State> {
                     }
                 });
                 break;
-            case "Output Specification":
-                this.setState({outputSpec: true});
-                break;
+            // case "Output Specification":
+            //     this.setState({outputSpec: true});
+            //     break;
             case "APS Design Weights":
                 this.setState({
                     fileType: ".csv",
@@ -484,7 +485,6 @@ export class Import extends Component <Props, State> {
 
 
     bulkAmendmentsModal = () => {
-        console.log(this.state.bulkAmendmentsModalOpen)
         if (this.state.bulkAmendmentsModalOpen)
             return (
                 <BulkAmendmentsModal modalOpen={this.state.bulkAmendmentsModalOpen}

@@ -10,7 +10,7 @@ import {getMonthandYear} from "../../util/getMonthandYear";
 
 export default function(url, payload) {
     let variableDefinitionsUrl = '/imports/variable/definitions/' + getMonthandYear("-", 17)
-    console.log(url);
+    // console.log(url);
     switch (url) {
         case "/imports/survey/gb/2019/1":
             let GbFileName = payload.body.get("lfsFile").name;
@@ -47,9 +47,11 @@ export default function(url, payload) {
             return Promise.resolve({status: 200, json:()=> Promise.resolve({status: "OK"})})
           else if (filename === "Bulk Amendments Reject.csv")
             return Promise.resolve({status: 403, json:()=> Promise.resolve({status: "ERROR", errorMessage: "Unmatched items in Bulk Amendments file"})})
-          return
+            break
         case '/imports/survey/amendments':
           return Promise.resolve({status: 200, json:()=> Promise.resolve({status: "OK"})})
+        case '/imports/specification/aps/household/2015/1':
+            return Promise.resolve({status: 200, json:()=> Promise.resolve({status: "OK", recordsInserted: "14,000,000", message: "File Uploaded Successfully"})})
         case "/audits/week/2019/1":
             console.log(url);
             return Promise.resolve({

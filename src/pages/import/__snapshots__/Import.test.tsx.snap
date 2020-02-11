@@ -62,7 +62,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -70,51 +70,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -137,7 +147,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -145,21 +155,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -383,7 +397,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -391,51 +405,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -458,7 +482,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -466,21 +490,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -770,7 +798,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -778,51 +806,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -845,7 +883,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -853,21 +891,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -1100,7 +1142,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -1108,51 +1150,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -1175,7 +1227,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -1183,21 +1235,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -1487,7 +1543,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -1495,51 +1551,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -1562,7 +1628,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -1570,21 +1636,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -1817,7 +1887,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -1825,51 +1895,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -1892,7 +1972,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -1900,21 +1980,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -2204,7 +2288,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -2212,51 +2296,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -2279,7 +2373,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -2287,21 +2381,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -2534,7 +2632,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -2542,51 +2640,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -2609,7 +2717,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -2617,21 +2725,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -2921,7 +3033,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -2929,51 +3041,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -2996,7 +3118,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -3004,21 +3126,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -3251,7 +3377,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -3259,51 +3385,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -3326,7 +3462,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -3334,21 +3470,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -3629,7 +3769,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -3637,51 +3777,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -3704,7 +3854,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -3712,21 +3862,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -3950,7 +4104,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -3958,51 +4112,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -4025,7 +4189,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -4033,21 +4197,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -4337,7 +4505,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -4345,51 +4513,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -4412,7 +4590,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -4420,21 +4598,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -4667,7 +4849,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -4675,51 +4857,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -4742,7 +4934,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -4750,21 +4942,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -5015,13 +5211,13 @@ Object {
               data-testid="breadcrumb-current"
               id="breadcrumb-2"
             >
-              Geographical Calculations
+              Geographical Classifications
             </li>
           </ol>
         </nav>
         <h3>
           Import 
-          Geographical Calculations
+          Geographical Classifications
         </h3>
         <br />
         <form>
@@ -5045,7 +5241,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -5053,51 +5249,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -5120,7 +5326,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -5128,21 +5334,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -5166,11 +5376,11 @@ Object {
                   <span
                     class="label__description"
                   >
-                    Only  accepted
+                    Only .csv accepted
                   </span>
                 </label>
                 <input
-                  accept=""
+                  accept=".csv"
                   class="input input--text input-type__input input--upload"
                   id="U1"
                   name="Upload 1"
@@ -5336,13 +5546,13 @@ Object {
             data-testid="breadcrumb-current"
             id="breadcrumb-2"
           >
-            Geographical Calculations
+            Geographical Classifications
           </li>
         </ol>
       </nav>
       <h3>
         Import 
-        Geographical Calculations
+        Geographical Classifications
       </h3>
       <br />
       <form>
@@ -5366,7 +5576,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -5374,51 +5584,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -5441,7 +5661,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -5449,21 +5669,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -5487,11 +5711,11 @@ Object {
                 <span
                   class="label__description"
                 >
-                  Only  accepted
+                  Only .csv accepted
                 </span>
               </label>
               <input
-                accept=""
+                accept=".csv"
                 class="input input--text input-type__input input--upload"
                 id="U1"
                 name="Upload 1"
@@ -5744,7 +5968,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -5752,51 +5976,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -5819,7 +6053,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -5827,21 +6061,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -6065,7 +6303,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -6073,51 +6311,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -6140,7 +6388,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -6148,21 +6396,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -6443,7 +6695,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -6451,51 +6703,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -6518,7 +6780,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -6526,21 +6788,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -6790,7 +7056,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -6798,51 +7064,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -6865,7 +7141,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -6873,21 +7149,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4
@@ -7194,7 +7474,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-year"
+                    data-testid="select-year"
                     disabled=""
                     selected=""
                     value=""
@@ -7202,51 +7482,61 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-year-2015"
                     value="2015"
                   >
                     2015
                   </option>
                   <option
+                    data-testid="option-year-2014"
                     value="2014"
                   >
                     2014
                   </option>
                   <option
+                    data-testid="option-year-2013"
                     value="2013"
                   >
                     2013
                   </option>
                   <option
+                    data-testid="option-year-2012"
                     value="2012"
                   >
                     2012
                   </option>
                   <option
+                    data-testid="option-year-2011"
                     value="2011"
                   >
                     2011
                   </option>
                   <option
+                    data-testid="option-year-2010"
                     value="2010"
                   >
                     2010
                   </option>
                   <option
+                    data-testid="option-year-2009"
                     value="2009"
                   >
                     2009
                   </option>
                   <option
+                    data-testid="option-year-2008"
                     value="2008"
                   >
                     2008
                   </option>
                   <option
+                    data-testid="option-year-2007"
                     value="2007"
                   >
                     2007
                   </option>
                   <option
+                    data-testid="option-year-2006"
                     value="2006"
                   >
                     2006
@@ -7269,7 +7559,7 @@ Object {
                   name="select"
                 >
                   <option
-                    data-testid="option-quarter"
+                    data-testid="select-quarter"
                     disabled=""
                     selected=""
                     value=""
@@ -7277,21 +7567,25 @@ Object {
                     Select an option
                   </option>
                   <option
+                    data-testid="option-quarter-Q1"
                     value="Q1"
                   >
                     Q1
                   </option>
                   <option
+                    data-testid="option-quarter-Q2"
                     value="Q2"
                   >
                     Q2
                   </option>
                   <option
+                    data-testid="option-quarter-Q3"
                     value="Q3"
                   >
                     Q3
                   </option>
                   <option
+                    data-testid="option-quarter-Q4"
                     value="Q4"
                   >
                     Q4
@@ -7541,7 +7835,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-year"
+                  data-testid="select-year"
                   disabled=""
                   selected=""
                   value=""
@@ -7549,51 +7843,61 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-year-2015"
                   value="2015"
                 >
                   2015
                 </option>
                 <option
+                  data-testid="option-year-2014"
                   value="2014"
                 >
                   2014
                 </option>
                 <option
+                  data-testid="option-year-2013"
                   value="2013"
                 >
                   2013
                 </option>
                 <option
+                  data-testid="option-year-2012"
                   value="2012"
                 >
                   2012
                 </option>
                 <option
+                  data-testid="option-year-2011"
                   value="2011"
                 >
                   2011
                 </option>
                 <option
+                  data-testid="option-year-2010"
                   value="2010"
                 >
                   2010
                 </option>
                 <option
+                  data-testid="option-year-2009"
                   value="2009"
                 >
                   2009
                 </option>
                 <option
+                  data-testid="option-year-2008"
                   value="2008"
                 >
                   2008
                 </option>
                 <option
+                  data-testid="option-year-2007"
                   value="2007"
                 >
                   2007
                 </option>
                 <option
+                  data-testid="option-year-2006"
                   value="2006"
                 >
                   2006
@@ -7616,7 +7920,7 @@ Object {
                 name="select"
               >
                 <option
-                  data-testid="option-quarter"
+                  data-testid="select-quarter"
                   disabled=""
                   selected=""
                   value=""
@@ -7624,21 +7928,25 @@ Object {
                   Select an option
                 </option>
                 <option
+                  data-testid="option-quarter-Q1"
                   value="Q1"
                 >
                   Q1
                 </option>
                 <option
+                  data-testid="option-quarter-Q2"
                   value="Q2"
                 >
                   Q2
                 </option>
                 <option
+                  data-testid="option-quarter-Q3"
                   value="Q3"
                 >
                   Q3
                 </option>
                 <option
+                  data-testid="option-quarter-Q4"
                   value="Q4"
                 >
                   Q4

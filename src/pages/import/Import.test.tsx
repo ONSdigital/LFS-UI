@@ -3,7 +3,7 @@ import React from "react";
 import {Import} from "./Import";
 
 import {default as flushPromises} from "../../tests/util/flushPromises";
-import {cleanup, fireEvent, render, screen} from "@testing-library/react";
+import {cleanup, fireEvent, render, screen, waitForElement} from "@testing-library/react";
 
 import {BrowserRouter} from "react-router-dom";
 import {act} from "react-dom/test-utils";
@@ -53,9 +53,9 @@ const bulkAmendmentsMatch = {
 
 const geogClassMatch = {
     path: "/import/:file?",
-    url: "/import/Geographical Calculations",
+    url: "/import/Geographical Classifications",
     isExact: true,
-    params: {file: "Geographical Calculations"}
+    params: {file: "Geographical Classifications"}
 };
 
 const populationEstimatesMatch = {
@@ -247,23 +247,39 @@ describe("Import page functionality", () => {
     });
 
     // TODO
-    // test('the dropdowns on the output spec imports function correctly', async () => {
-    //     renderAndImport(APSHouseholdMatch, render)
+    test('the dropdowns on the output spec imports function correctly', async () => {
+        renderAndImport(APSHouseholdMatch, render)
 
-    //     fireEvent.click(screen.getByText(/submit/i))
+        fireEvent.click(screen.getByText(/submit/i))
 
-    //     // File submitted with no year
-    //     expect(screen.getAllByText(/please select a year/i))
-    //     // console.log(screen.getByLabelText(/year/i))
-    //     console.log(screen.getByTestId(/option-year/i))
+        // File submitted with no year or period
+        expect(screen.getByText(/this page has errors/i))
+        expect(screen.getByText(/please select a year/i))
+        expect(screen.getByText(/please select a quarter/i))
 
-    //     fireEvent.click(screen.getByTestId(/option-year/i))
-    //     // console.log(screen.getByLabelText(/year/i))
-    //     console.log(screen.getByTestId(/option-year/i))
-    //     fireEvent.click(screen.getByText("2020"))
-    //             expect(screen.getByLabelText(/yearrrr/i)).toHaveAttribute("value", "2020")
+        // Selecting from drop downs
+        await fireEvent.change(screen.getByLabelText(/year/i), {
+            target: {value: "2015"}
+        }); 
 
-    // })
+        await fireEvent.change(screen.getByLabelText(/quarter/i), {
+            target: {value: "Q1"}
+        }); 
+    
+        fireEvent.click(screen.getByText(/submit/i))
+
+        // Expect error panel to be gone completely
+        expect(screen.queryByText(/this page has errors/i)).toBeFalsy()
+
+        fireEvent.click(screen.getByText(/submit/i))
+
+        await act(async () => {
+            await flushPromises();
+        });
+        
+        expect(screen.getByText(/File Uploaded Successfully/i))
+
+    })
 });
 
 describe("Importing files and handling", () => {
