@@ -123,14 +123,6 @@ export class Import extends Component <Props, State> {
                 uploading: true
             });
 
-            if (!this.state.built) {
-                this.setPanel(this.state.importName + ": Import Not Implemented Yet", "error");
-                this.setState({
-                    uploading: false
-                });
-                return;
-            }
-
             if (this.state.uploadFile.length === 0) {
                 this.setState({
                     uploading: false,

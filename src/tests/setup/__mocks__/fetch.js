@@ -10,44 +10,56 @@ import {getMonthandYear} from "../../util/getMonthandYear";
 
 export default function(url, payload) {
     let variableDefinitionsUrl = '/imports/variable/definitions/' + getMonthandYear("-", 17)
+    var data = new Blob(["res"], {size: 1498187, type: 'application/vnd.ms-excel'});
+    let fileName
+    if (payload) if (payload.body) {fileName = payload.body.get("lfsFile").name}
     // console.log(url);
+    // console.log(fileName)
     switch (url) {
         case "/imports/survey/gb/2019/1":
-            let GbFileName = payload.body.get("lfsFile").name;
-            if (GbFileName === "GB_File_invalid_file.sav") {
+            if (fileName === "GB_File_invalid_file.sav") {
                 return Promise.resolve({
                     status: 200,
                     json: () => Promise.resolve({status: "ERROR", errorMessage: "Error Occurred"})
                 });
-            } else if (GbFileName === "GB_File_server_not_online.sav") {
+            } else if (fileName === "GB_File_server_not_online.sav") {
                 // Mock server not being online
                 return Promise.reject("SyntaxError: Unexpected token P in JSON at position 0");
             } else {
                 return Promise.resolve({status: 200, json: () => Promise.resolve({status: "OK"})});
             }
         case "/imports/survey/ni/2019/5":
-            let NiFileName = payload.body.get("lfsFile").name;
-            if (NiFileName === "NI_File_unknown_error.sav") {
+            if (fileName === "NI_File_unknown_error.sav") {
                 return Promise.resolve({status: 200, json: () => Promise.resolve({status: "999"})});
-            } else if (NiFileName === "NI_File_weird_error.sav") {
+            } else if (fileName === "NI_File_weird_error.sav") {
                 return Promise.reject("Something strange has Occurred here");
             } break
         case "/imports/design/weights": 
             console.log(url);
-            return Promise.resolve({status: 200, json: {status: "OK"}});
+            if (fileName === "Big Boom.csv") {
+                return "its all broken"
+            }
+            else return Promise.resolve({status: 200, json: {status: "OK"}});
         case '/imports/population':
           return Promise.resolve({status: 200, json:{status: "OK"}})
         case '/population/report':
-          console.log("herererere")
-          var data = new Blob(["res"], {size: 1498187, type: 'application/vnd.ms-excel'});
-          return Promise.resolve({status: 200, json:{status: "OK"}, blob:()=> Promise.resolve({blob: data})})
+            console.log("Population Report")
+            return Promise.resolve({status: 200, json:{status: "OK"}, blob:()=> Promise.resolve({blob: data})})
         case '/imports/survey/amendments/validate':
-          let filename = payload.body.get("lfsFile").name
-          if (filename === "Bulk Amendments.csv")
+          if (fileName === "Bulk Amendments.csv")
             return Promise.resolve({status: 200, json:()=> Promise.resolve({status: "OK"})})
-          else if (filename === "Bulk Amendments Reject.csv")
-            return Promise.resolve({status: 403, json:()=> Promise.resolve({status: "ERROR", errorMessage: "Unmatched items in Bulk Amendments file"})})
+          else if (fileName === "Bulk Amendments Reject.csv")
+            return Promise.resolve({status: 403, json:() => Promise.resolve({
+                status: "ERROR", 
+                errorMessage: "Unmatched items in Bulk Amendments file", 
+                AmendmentItems: [
+                    {caseNo: 1, variable: "1", found: "Yes", refDate: "20202020"},
+                ]
+            })
+        })
             break
+        case '/survey/amendments/validate/report':
+            return Promise.resolve({status: 200, json:{status: "OK"}, blob:()=> Promise.resolve({blob: data})})
         case '/imports/survey/amendments':
           return Promise.resolve({status: 200, json:()=> Promise.resolve({status: "OK"})})
         case '/imports/specification/aps/household/2015/1':

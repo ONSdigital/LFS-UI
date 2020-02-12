@@ -3,7 +3,7 @@ import React from "react";
 import {Import} from "./Import";
 
 import {default as flushPromises} from "../../tests/util/flushPromises";
-import {cleanup, fireEvent, render, screen, waitForElement} from "@testing-library/react";
+import {cleanup, fireEvent, render, screen} from "@testing-library/react";
 
 import {BrowserRouter} from "react-router-dom";
 import {act} from "react-dom/test-utils";
@@ -114,6 +114,12 @@ const LFSPersonMatch = {
     params: {file: "LFS Person Variable Specification"}
 };
 
+const dodgyDesignWeightsMatch = {
+    path: "/import/:file?",
+    url: "/import/Big Blow Up",
+    isExact: true,
+    params: {file: "APS Design Weights"}
+}
 
 function Props(input: any) {
     return {
@@ -246,7 +252,6 @@ describe("Import page functionality", () => {
         expect(screen.getByText(/Variable Definitions: File Uploaded Successfully/i));
     });
 
-    // TODO
     test('the dropdowns on the output spec imports function correctly', async () => {
         renderAndImport(APSHouseholdMatch, render)
 
@@ -349,7 +354,7 @@ describe("Importing files and handling", () => {
 
     });
 
-    it("selects a bulk ammendments file and validates, returning an unmatched response, displaying a modal, it is then rejected", async () => {
+    it("selects a bulk ammendments file and validates, returning an unmatched response in a modal, report is exported, it is then rejected", async () => {
         renderAndImport(bulkAmendmentsMatch, render, "Bulk Amendments Reject");
 
         fireEvent.click(screen.getByText(/submit/i));
@@ -361,6 +366,12 @@ describe("Importing files and handling", () => {
         // Bulk amendment file validates and responds with success
         expect(screen.getAllByText(/Unmatched items in Bulk Amendments file/i)).toBeTruthy();
 
+        fireEvent.click(screen.getByText(/Export/i));
+    
+        await act(async () => {
+            await flushPromises();
+        });
+
         fireEvent.click(screen.getByText(/reject/i));
 
         // Modal is closed when reject button is clicked
@@ -368,17 +379,28 @@ describe("Importing files and handling", () => {
     });
 });
 
+describe("Error handling - ", () => {
+    // Cases with bad responses 
+
+    test("straight error", async () =>  {
+        renderAndImport(dodgyDesignWeightsMatch, render, "Big Boom")
+
+        fireEvent.click(screen.getByText(/submit/i))
+
+        await act(async () => {
+            await flushPromises();
+        });
+
+        // Modal is closed when reject button is clicked
+        expect(screen.getByText(/Error Occurred when uploading files/i)).toBeTruthy();
+
+    })
+})
+
 // TODO:
-// Bulk ammendments modal export report
-// Bulk ammendments modal with row
-// Bulk ammendments modal panel
-// Does "not implemented yet" have to go ?
 // Output spec status error
 // Bulk ammendments 400 and 403 response
 // 400, 403 and design weights 200 response
-// Error uploading files
 // Errorgone
 // SetFileUploading
 
-
-    
