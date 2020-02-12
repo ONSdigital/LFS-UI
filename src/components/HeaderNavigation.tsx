@@ -3,6 +3,7 @@ import {Link, useLocation} from "react-router-dom";
 
 interface Props {
     loggedIn: boolean
+    isTimeout: boolean
 }
 
 interface LinkRow {
@@ -69,6 +70,7 @@ export function HeaderNavigation(props: Props) {
                                     </Fragment>
                                 )
                                 :
+                                !props.isTimeout &&
                                 <Fragment key={0}>
                                     <li className={"header-nav__item header-nav__item--active"}>
                                         <a href={"/"}
