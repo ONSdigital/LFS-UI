@@ -115,6 +115,8 @@ export default function(url, payload) {
             return Promise.resolve({status: 200, json: () => Promise.resolve({"Rows": role_data})});
         case "/jsons/Users.json":
             return Promise.resolve({status: 200, json: () => Promise.resolve({"Rows": user_data})});
+        case "batches/yearly/2015/":
+            return
         default:
             console.log("default");
             return Promise.reject("URL not Mocked For Test");

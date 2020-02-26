@@ -1,0 +1,424 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New batch creation -  renders the page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          class="breadcrumb"
+          data-testid="breadcrumbs"
+        >
+          <ol
+            class="breadcrumb__items"
+          >
+            <li
+              class="breadcrumb__item u-fs-s"
+              id="breadcrumb-1"
+            >
+              <a
+                class="breadcrumb__link"
+                href="/"
+              >
+                Home
+              </a>
+            </li>
+            <li
+              class="breadcrumb__item u-fs-s breadcrumb__item--current"
+              data-testid="breadcrumb-current"
+              id="breadcrumb-2"
+            >
+              Create New Batch
+            </li>
+          </ol>
+        </nav>
+        <form
+          data-testid="New-Batch-Form"
+        >
+          <div
+            style="max-width: 351px;"
+          >
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="batch"
+              >
+                Batch Type
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="batch"
+                name="select"
+              >
+                <option
+                  data-testid="select-batch"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  data-testid="option-batch-monthly"
+                  value="monthly"
+                >
+                  Monthly
+                </option>
+                <option
+                  data-testid="option-batch-quarterly"
+                  value="quarterly"
+                >
+                  Quarterly
+                </option>
+                <option
+                  data-testid="option-batch-yearly"
+                  value="yearly"
+                >
+                  Yearly
+                </option>
+              </select>
+            </p>
+            <p
+              class="field"
+            >
+              <label
+                class="label"
+                for="year"
+              >
+                Year
+                 
+              </label>
+              <select
+                class="input input--select"
+                id="year"
+                name="select"
+              >
+                <option
+                  data-testid="select-year"
+                  disabled=""
+                  selected=""
+                  value=""
+                >
+                  Select an option
+                </option>
+                <option
+                  data-testid="option-year-2015"
+                  value="2015"
+                >
+                  2015
+                </option>
+                <option
+                  data-testid="option-year-2014"
+                  value="2014"
+                >
+                  2014
+                </option>
+                <option
+                  data-testid="option-year-2013"
+                  value="2013"
+                >
+                  2013
+                </option>
+                <option
+                  data-testid="option-year-2012"
+                  value="2012"
+                >
+                  2012
+                </option>
+                <option
+                  data-testid="option-year-2011"
+                  value="2011"
+                >
+                  2011
+                </option>
+                <option
+                  data-testid="option-year-2010"
+                  value="2010"
+                >
+                  2010
+                </option>
+                <option
+                  data-testid="option-year-2009"
+                  value="2009"
+                >
+                  2009
+                </option>
+                <option
+                  data-testid="option-year-2008"
+                  value="2008"
+                >
+                  2008
+                </option>
+                <option
+                  data-testid="option-year-2007"
+                  value="2007"
+                >
+                  2007
+                </option>
+                <option
+                  data-testid="option-year-2006"
+                  value="2006"
+                >
+                  2006
+                </option>
+              </select>
+            </p>
+            <button
+              class="field btn "
+              data-testid="submit-button"
+              id="newBatchSubmit"
+              type="submit"
+            >
+              <span
+                class="btn__inner"
+              >
+                Submit
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container"
+    >
+      <nav
+        aria-label="Breadcrumb"
+        class="breadcrumb"
+        data-testid="breadcrumbs"
+      >
+        <ol
+          class="breadcrumb__items"
+        >
+          <li
+            class="breadcrumb__item u-fs-s"
+            id="breadcrumb-1"
+          >
+            <a
+              class="breadcrumb__link"
+              href="/"
+            >
+              Home
+            </a>
+          </li>
+          <li
+            class="breadcrumb__item u-fs-s breadcrumb__item--current"
+            data-testid="breadcrumb-current"
+            id="breadcrumb-2"
+          >
+            Create New Batch
+          </li>
+        </ol>
+      </nav>
+      <form
+        data-testid="New-Batch-Form"
+      >
+        <div
+          style="max-width: 351px;"
+        >
+          <p
+            class="field"
+          >
+            <label
+              class="label"
+              for="batch"
+            >
+              Batch Type
+               
+            </label>
+            <select
+              class="input input--select"
+              id="batch"
+              name="select"
+            >
+              <option
+                data-testid="select-batch"
+                disabled=""
+                selected=""
+                value=""
+              >
+                Select an option
+              </option>
+              <option
+                data-testid="option-batch-monthly"
+                value="monthly"
+              >
+                Monthly
+              </option>
+              <option
+                data-testid="option-batch-quarterly"
+                value="quarterly"
+              >
+                Quarterly
+              </option>
+              <option
+                data-testid="option-batch-yearly"
+                value="yearly"
+              >
+                Yearly
+              </option>
+            </select>
+          </p>
+          <p
+            class="field"
+          >
+            <label
+              class="label"
+              for="year"
+            >
+              Year
+               
+            </label>
+            <select
+              class="input input--select"
+              id="year"
+              name="select"
+            >
+              <option
+                data-testid="select-year"
+                disabled=""
+                selected=""
+                value=""
+              >
+                Select an option
+              </option>
+              <option
+                data-testid="option-year-2015"
+                value="2015"
+              >
+                2015
+              </option>
+              <option
+                data-testid="option-year-2014"
+                value="2014"
+              >
+                2014
+              </option>
+              <option
+                data-testid="option-year-2013"
+                value="2013"
+              >
+                2013
+              </option>
+              <option
+                data-testid="option-year-2012"
+                value="2012"
+              >
+                2012
+              </option>
+              <option
+                data-testid="option-year-2011"
+                value="2011"
+              >
+                2011
+              </option>
+              <option
+                data-testid="option-year-2010"
+                value="2010"
+              >
+                2010
+              </option>
+              <option
+                data-testid="option-year-2009"
+                value="2009"
+              >
+                2009
+              </option>
+              <option
+                data-testid="option-year-2008"
+                value="2008"
+              >
+                2008
+              </option>
+              <option
+                data-testid="option-year-2007"
+                value="2007"
+              >
+                2007
+              </option>
+              <option
+                data-testid="option-year-2006"
+                value="2006"
+              >
+                2006
+              </option>
+            </select>
+          </p>
+          <button
+            class="field btn "
+            data-testid="submit-button"
+            id="newBatchSubmit"
+            type="submit"
+          >
+            <span
+              class="btn__inner"
+            >
+              Submit
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

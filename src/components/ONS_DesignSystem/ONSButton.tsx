@@ -25,7 +25,7 @@ export const ONSButton = (props: Props) => {
     };
 
     let test_id = () => {
-        if(props.testid){
+        if (props.testid) {
             return props.testid + "-button"
         }
         return "button"
@@ -46,7 +46,7 @@ export const ONSButton = (props: Props) => {
 
     return (
         <button id={props.id} style={spacing()} type="button" disabled={props.loading || props.disabled}
-                className={className} onClick={props.onClick} data-testid={test_id()}>
+            className={className} onClick={props.onClick} data-testid={test_id()}>
             <span className="btn__inner">{props.label}</span>
         </button>
     );
