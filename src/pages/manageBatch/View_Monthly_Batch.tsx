@@ -6,7 +6,7 @@ import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../../components/SurveyAuditModal";
 import {MonthlyBatchUploadTable} from "./MonthlyBatchUploadTable";
-import {getBatchData} from "../../utilities/http";
+import {getBatchData, runMonthlyProcess} from "../../utilities/http";
 import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 import {AccordionDropDown} from "../../components/AccordionDropDown";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
@@ -30,6 +30,8 @@ interface State {
     surveyAuditStatus: number
     pathName: string
     breadcrumbList: any[]
+    cancel: boolean
+    runLoading:boolean
 }
 
 interface MetaDataListItem {
@@ -77,7 +79,9 @@ export class View_Monthly_Batch extends Component <Props, State> {
             surveyAuditStatus: 0,
             importAudit: null,
             pathName: "/manage-batch/monthly/" + props.match.params.year + "/" + props.match.params.period,
-            breadcrumbList: [{name: "Home", link: ""}]
+            breadcrumbList: [{name: "Home", link: ""}],
+            cancel: false,
+            runLoading: false,
         };
     }
 
@@ -175,6 +179,29 @@ export class View_Monthly_Batch extends Component <Props, State> {
         );
     };
 
+    handleMonthlyProcess = () => {
+        this.setState({cancel:true, runLoading: true})
+        runMonthlyProcess(this.state.year, this.state.period)
+            .then(r => {
+                (isDevEnv() && console.log(r));
+
+                if (r.status === 200) {
+                    this.setState({cancel:false, runLoading:false})
+                    
+                } 
+                    // redirect to Manage batch Page
+                    
+                
+            })
+            .catch(error => (isDevEnv() && console.log(error)));
+            return 
+    }
+
+    handleInterimProcess = () => {
+        this.setState({cancel:true})
+        return 
+    }
+
     render() {
         // TODO: Temporary way to check if imports are complete, should eventually be able to get this from batch status
         let importComplete = true;
@@ -233,11 +260,20 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                            small={false}
                                            primary={true}
                                            marginRight={10}
-                                           disabled={!importComplete}/>
+                                           disabled={this.state.runLoading}
+                                           loading={this.state.runLoading}
+                                           onClick={this.handleMonthlyProcess}/>
                                 <ONSButton label="Run Interim Weighting"
                                            small={false}
                                            primary={false}
-                                           disabled={!importComplete}/>
+                                           marginRight={10}
+                                           disabled={!importComplete}
+                                           onClick={this.handleInterimProcess}/>
+                                <ONSButton label="Cancel"
+                                           small={false}
+                                           primary={false}
+                                           marginRight={10}
+                                           disabled={!this.state.cancel}/>
                                 <br/>
                                 <br/>
                             </>
