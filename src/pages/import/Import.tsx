@@ -28,6 +28,7 @@ interface State {
     reportExportHidden: boolean
     importSelectHidden: boolean
     quarterPeriodInputHidden: boolean
+    yearInputHidden: boolean
     fileType: string
     uploadLink: string
     //check to see if functionality is built and whether to send the request
@@ -76,6 +77,7 @@ export class Import extends Component <Props, State> {
             reportExportHidden: true,
             importSelectHidden: false,
             quarterPeriodInputHidden: true,
+            yearInputHidden: true,
             fileType: "",
             uploadLink: "",
             built: false,
@@ -116,7 +118,9 @@ export class Import extends Component <Props, State> {
     }
 
     upload = () => {
-        if (!this.state.outputSpec || (this.state.period !== "" && this.state.year !== "")) {
+        console.log(this.state.fileName)
+        console.log(this.state.year)
+        if (((!this.state.outputSpec && this.state.fileName !== "address")|| (this.state.period !== "" && this.state.year !== ""))) {
             console.log("Uploading File");
             this.hidePanel();
             this.setState({
@@ -162,11 +166,13 @@ export class Import extends Component <Props, State> {
             if (this.state.outputSpec) {
                 uploadLink = uploadLink + "/" + this.state.year + "/" + this.state.period.slice(1);
             }
+            if (uploadLink === "address") {
+                uploadLink = uploadLink + "/" + this.state.year
+            }
 
             postImportFile(this.state.uploadFile, uploadLink, this.state.fileName)
                 .then(response => {
                     (isDevEnv && console.log(response));
-
                     if (this.state.outputSpec) {
                         response.clone().json().then((json: any) => {
                             (isDevEnv && console.log(json));
@@ -231,7 +237,10 @@ export class Import extends Component <Props, State> {
                     });
                 });
 
-        } else if (!this.state.errorGone) this.setState({inputError: true});
+        } else if (!this.state.errorGone) {
+            console.log("error here")
+            this.setState({inputError: true});
+        }
         else this.setState({inputError: false});
     };
 
@@ -295,6 +304,8 @@ export class Import extends Component <Props, State> {
                     fileName: "address",
                     uploadLink: "address",
                     validFromDateHidden: true,
+                    yearInputHidden: false,
+                    period: "1",
                     importReport: {
                         hasImportReport: false,
                         reportFileType: ""
@@ -394,6 +405,7 @@ export class Import extends Component <Props, State> {
                         reportFileType: ""
                     },
                     quarterPeriodInputHidden: false,
+                    yearInputHidden: false,
                     outputSpec: true
                 });
                 break;
@@ -409,6 +421,7 @@ export class Import extends Component <Props, State> {
                         reportFileType: ""
                     },
                     quarterPeriodInputHidden: false,
+                    yearInputHidden: false,
                     outputSpec: true
                 });
                 break;
@@ -424,6 +437,7 @@ export class Import extends Component <Props, State> {
                         reportFileType: ""
                     },
                     quarterPeriodInputHidden: false,
+                    yearInputHidden: false,
                     outputSpec: true
                 });
                 break;
@@ -439,6 +453,7 @@ export class Import extends Component <Props, State> {
                         reportFileType: ""
                     },
                     quarterPeriodInputHidden: false,
+                    yearInputHidden: false,
                     outputSpec: true
                 });
                 break;
@@ -454,6 +469,7 @@ export class Import extends Component <Props, State> {
                         reportFileType: ""
                     },
                     quarterPeriodInputHidden: false,
+                    yearInputHidden: false,
                     outputSpec: true
                 });
                 break;
@@ -554,9 +570,12 @@ export class Import extends Component <Props, State> {
 
 
                         <div hidden={this.state.importHidden}>
-                            <div hidden={this.state.quarterPeriodInputHidden}>
+                            <div hidden={this.state.yearInputHidden}>
                                 <ONSSelect id="year" label="Year" value="year" options={years()}
                                            onChange={this.handleYearChange}/>
+                                <br/>
+                            </div>
+                            <div hidden={this.state.quarterPeriodInputHidden}>
                                 <ONSSelect id="quarter" label="Quarter" value="quarter" options={quarters}
                                            onChange={this.handlePeriodChange}/>
                                 <br/>
