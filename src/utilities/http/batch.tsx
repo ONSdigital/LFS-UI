@@ -14,6 +14,14 @@ function runMonthlyProcess(year: string, period: string): Promise<any> {
     return requestPromise("GET", url);
 }
 
+function cancelMonthlyProcess(): Promise<any> {
+    let url = "http://localhost:8081/cancel"
+    
+    return requestPromise("GET", url);
+}
+
+
+
 function getBatchData(batchType: string, year: string, period: string): Promise<any> {
     let url = "/batches/display/" + batchType + "/" + year + (batchType !== 'annually' ? "/" + period : "");
 
@@ -26,4 +34,4 @@ function getAllBatches(): Promise<any> {
     return requestPromiseJson("GET", url);
 }
 
-export {createNewBatch, getBatchData, getAllBatches, runMonthlyProcess}
+export {createNewBatch, getBatchData, getAllBatches, runMonthlyProcess, cancelMonthlyProcess}

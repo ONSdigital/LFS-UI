@@ -6,7 +6,7 @@ import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {SurveyAuditModal} from "../../components/SurveyAuditModal";
 import {MonthlyBatchUploadTable} from "./MonthlyBatchUploadTable";
-import {getBatchData, runMonthlyProcess} from "../../utilities/http";
+import {getBatchData, runMonthlyProcess, cancelMonthlyProcess} from "../../utilities/http";
 import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 import {AccordionDropDown} from "../../components/AccordionDropDown";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
@@ -32,6 +32,7 @@ interface State {
     breadcrumbList: any[]
     cancel: boolean
     runLoading:boolean
+    tablesHidden: boolean
 }
 
 interface MetaDataListItem {
@@ -82,6 +83,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
             breadcrumbList: [{name: "Home", link: ""}],
             cancel: false,
             runLoading: false,
+            tablesHidden: false,
         };
     }
 
@@ -180,15 +182,33 @@ export class View_Monthly_Batch extends Component <Props, State> {
     };
 
     handleMonthlyProcess = () => {
-        this.setState({cancel:true, runLoading: true})
+        this.setState({cancel:true, runLoading: true, tablesHidden: true})
         runMonthlyProcess(this.state.year, this.state.period)
             .then(r => {
                 (isDevEnv() && console.log(r));
 
                 if (r.status === 200) {
-                    this.setState({cancel:false, runLoading:false})
+                    this.setState({cancel:false, runLoading:false, tablesHidden:false})
                     
                 } 
+                    // redirect to Manage batch Page
+                    
+                
+            })
+            .catch(error => (isDevEnv() && console.log(error)));
+            return 
+    }
+
+    cancelMonthlyProcess = () => {
+        this.setState({})
+        cancelMonthlyProcess()
+            .then(r => {
+                (isDevEnv() && console.log(r));
+
+                // if (r.status === 200) {
+                    this.setState({cancel:false, runLoading:false})
+                    
+                // } 
                     // redirect to Manage batch Page
                     
                 
@@ -227,7 +247,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                                 Current={"Manage Batch " + monthNumberToString(+this.state.period) + " " + this.state.year}/>
                                 <h3> Manage Monthly Batch</h3>
                                 <ONSMetadata List={this.state.metadata}/>
-                                <div style={{width: "35rem"}}>
+                                <div style={{width: "35rem"}} hidden={this.state.tablesHidden}>
                                     {
                                         importComplete ?
                                             <AccordionDropDown caption={"Survey Files"}
@@ -263,17 +283,19 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                            disabled={this.state.runLoading}
                                            loading={this.state.runLoading}
                                            onClick={this.handleMonthlyProcess}/>
-                                <ONSButton label="Run Interim Weighting"
+                                {/* <ONSButton label="Run Interim Weighting"
                                            small={false}
                                            primary={false}
                                            marginRight={10}
                                            disabled={!importComplete}
-                                           onClick={this.handleInterimProcess}/>
+                                           onClick={this.handleInterimProcess}/> */}
                                 <ONSButton label="Cancel"
                                            small={false}
                                            primary={false}
                                            marginRight={10}
-                                           disabled={!this.state.cancel}/>
+                                        //    disabled={!this.state.cancel}
+                                           disabled={this.state.cancel}
+                                           onClick={this.cancelMonthlyProcess}/>
                                 <br/>
                                 <br/>
                             </>

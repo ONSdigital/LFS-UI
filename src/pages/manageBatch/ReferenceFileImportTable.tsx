@@ -14,7 +14,7 @@ export function ReferenceFileImportTable() {
         {name: "Geographical Classifications", "status": "File Older than One year"},
         {name: "Variable Definitions", "status": "Imported"},
         {name: "Value Labels", "status": "Imported"},
-        {name: "Output Specification", "status": "Not Imported"},
+        // {name: "Output Specification", "status": "Not Imported"},
         {name: "Population Estimates", "status": "Not Imported"}
     ];
 
