@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
-import {Header} from './Header';
-import {Footer} from './Footer';
+import React, {Component} from "react";
+import {Header} from "./Header";
+import {Footer} from "./Footer";
 import {HeaderNavigation} from "./HeaderNavigation";
 
 interface Props {
     loggedIn: boolean
+    isTimeout: boolean
 }
 
 export class Layout extends Component <Props, {}> {
@@ -15,7 +16,7 @@ export class Layout extends Component <Props, {}> {
         <div style={{height: "100%"}}>
           <div style={{minHeight: "100%"}}>
             <Header title="Labour Force Survey" loggedIn={this.props.loggedIn}>
-                <HeaderNavigation loggedIn={this.props.loggedIn}/>
+                <HeaderNavigation loggedIn={this.props.loggedIn} isTimeout={this.props.isTimeout}/>
             </Header>
             {this.props.children}
           </div>

@@ -17,7 +17,9 @@ import {ViewData} from "./pages/ViewData";
 import {View_Quarterly_Batch} from "./pages/manageBatch/View_Quarterly_Batch";
 import {ImportOverview} from "./pages/import/ImportOverview";
 import {ImportOutputSpec} from "./pages/import/ImportOutputSpec";
+import IdleTimer from "react-idle-timer";
 import "@ons/design-system/css/main.css";
+import {Timeout} from "./auth/Timeout";
 
 interface Props {
     cookies: Cookies
@@ -25,6 +27,8 @@ interface Props {
 
 interface State {
     user?: User | null
+    timeout: number
+    isTimeout: boolean
 }
 
 interface User {
@@ -42,7 +46,7 @@ class App extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
-        this.state = {user: null};
+        this.state = {user: null, timeout: 900000, isTimeout: false};
         this.setUser.bind(this);
     }
 
@@ -57,14 +61,22 @@ class App extends React.Component<Props, State> {
         }
     };
 
-    setUser = (user: User) => {
+    setUser = (user: User | null) => {
         this.setState({user: user});
+    };
+
+    setIsTimeout = (isTimeout: boolean) => {
+        this.setState({isTimeout: isTimeout});
     };
 
     PrivateRoute = ({component: Component, page_id, ...rest}: PRProps) => {
         if (!this.state.user) {
-            return (<Route {...rest} render={(props) => (
-                <Login setUser={this.setUser} user={this.state.user} cookies={this.props.cookies}/>)}/>)
+            if (this.state.isTimeout) {
+                return <Timeout setIsTimeout={this.setIsTimeout}/>
+            } else {
+                return (<Route {...rest} render={(props) => (
+                    <Login setUser={this.setUser} user={this.state.user} cookies={this.props.cookies}/>)}/>)
+            }
         } else {
             if (page_id === 0) { // Page ID 0 : logout page
                 return (
@@ -82,28 +94,50 @@ class App extends React.Component<Props, State> {
         }
     };
 
+    onIdle = () => {
+        if (this.state.user !== null) {
+            console.log('User is idle, signing out');
+
+            this.props.cookies.remove('username');
+            this.setUser(null);
+            this.setIsTimeout(true);
+        }
+    };
+
     render() {
         return (
           <BrowserRouter> 
               <DocumentTitle title="Labour Force Survey">
-                  <Layout loggedIn={!!(this.state.user !== null || "")}>
-                      <Switch>
-                          <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
-                          <this.PrivateRoute exact path='/new-batch' component={New_Batch} page_id={3}/>
-                          <this.PrivateRoute exact path='/manage-batch/monthly/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
-                          <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>
-                          <this.PrivateRoute exact path='/survey-import/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
-                          <this.PrivateRoute exact path='/view-data' component={ViewData} page_id={10}/>
-                          <this.PrivateRoute exact path='/import/overview' component={ImportOverview} page_id={7}/>
-                          <this.PrivateRoute exact path='/import/Output' component={ImportOutputSpec} page_id={17}/>
-                          <this.PrivateRoute exact path='/import/:file?' component={Import} page_id={7}/>
-                          <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
-                          <this.PrivateRoute exact path='/admin' component={Admin} page_id={9}/>
-                          <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
-                          <Route exact path='/login' component={Login}/>
-                          <Route component={GenericNotFound}/>
-                      </Switch>
-                  </Layout>
+                  <>
+                      <IdleTimer
+                          // ref={ref => { this.idleTimer = ref }}
+                          element={document}
+                          // onActive={this.onActive}
+                          onIdle={this.onIdle}
+                          // onAction={this.onAction}
+                          debounce={250}
+                          timeout={this.state.timeout}/>
+                      <Layout loggedIn={!!(this.state.user !== null || "")} isTimeout={this.state.isTimeout}>
+                          <Switch>
+                              <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
+                              <this.PrivateRoute exact path='/new-batch' component={New_Batch} page_id={3}/>
+                              <this.PrivateRoute exact path='/manage-batch/monthly/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
+                              <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>
+                              <this.PrivateRoute exact path='/survey-import/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
+                              <this.PrivateRoute exact path='/view-data' component={ViewData} page_id={10}/>
+                              <this.PrivateRoute exact path='/import/overview' component={ImportOverview} page_id={7}/>
+                              <this.PrivateRoute exact path='/import/Output' component={ImportOutputSpec} page_id={17}/>
+                              <this.PrivateRoute exact path='/import/:file?' component={Import} page_id={7}/>
+                              <this.PrivateRoute exact path='/Address' component={FileUploadProgress} page_id={8}/>
+                              <this.PrivateRoute exact path='/admin' component={Admin} page_id={9}/>
+                              <this.PrivateRoute exact path='/logout' component={Logout} page_id={0}/>
+                              <Route exact path='/timeout' component={Timeout}/>
+                              <Route exact path='/login' component={Login}/>
+                              <Route component={GenericNotFound}/>
+                          </Switch>
+                      </Layout>
+                  </>
+
               </DocumentTitle>
           </BrowserRouter>
         );
