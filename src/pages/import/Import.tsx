@@ -320,9 +320,9 @@ export class Import extends Component <Props, State> {
                     }
                 });
                 break;
-            // case "Output Specification":
-            //     this.setState({outputSpec: true});
-            //     break;
+            case "Output Specification":
+                this.setState({outputSpec: true});
+                break;
             case "APS Design Weights":
                 this.setState({
                     fileType: ".csv",
