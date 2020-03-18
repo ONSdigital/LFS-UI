@@ -127,14 +127,6 @@ export class Import extends Component <Props, State> {
                 uploading: true
             });
 
-            if (!this.state.built) {
-                this.setPanel(this.state.importName + ": Import Not Implemented Yet", "error");
-                this.setState({
-                    uploading: false
-                });
-                return;
-            }
-
             if (this.state.uploadFile.length === 0) {
                 this.setState({
                     uploading: false,
@@ -174,7 +166,7 @@ export class Import extends Component <Props, State> {
                 .then(response => {
                     (isDevEnv && console.log(response));
                     if (this.state.outputSpec) {
-                        response.clone().json().then((json: any) => {
+                        response.json().then((json: any) => {
                             (isDevEnv && console.log(json));
                             if (json.status === "OK") {
                                 this.setPanel(json.message + ". Records inserted: " + json.recordsInserted, "success");
@@ -296,6 +288,7 @@ export class Import extends Component <Props, State> {
     };
 
     fileType = (file: string) => {
+        console.log(file)
         switch (file) {
             case "Geographical Classifications":
                 this.setState({
@@ -500,7 +493,6 @@ export class Import extends Component <Props, State> {
 
 
     bulkAmendmentsModal = () => {
-        console.log(this.state.bulkAmendmentsModalOpen)
         if (this.state.bulkAmendmentsModalOpen)
             return (
                 <BulkAmendmentsModal modalOpen={this.state.bulkAmendmentsModalOpen}

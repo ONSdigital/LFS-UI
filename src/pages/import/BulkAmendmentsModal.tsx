@@ -95,16 +95,6 @@ export class BulkAmendmentsModal extends Component <Props, State> {
         this.props.closeBulkAmendmentsModal(true);
     };
  
-    setPanel = (message: string, status: string, visible: boolean = true) => {
-        this.setState({
-            panel: {
-                label: message,
-                visible: visible,
-                status: status
-            }
-        });
-    };
-
     exportReport = () => {
         let data = this.props.amendmentsResponse.AmendmentItems;
         let worksheet = XLSX.utils.json_to_sheet(data);

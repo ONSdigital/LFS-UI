@@ -111,7 +111,6 @@ export class New_Batch extends Component <{}, State> {
                 })
                 .catch(error => (isDevEnv() && console.log(error)));
         }
-
         if (this.state.batchType === "yearly") this.setState({period: ""});
         if (!this.state.errorGone) this.setState({inputError: true});
         else this.setState({inputError: false});
@@ -221,7 +220,7 @@ export class New_Batch extends Component <{}, State> {
                         <br/>
                     </div>
                     }
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} data-testid="New-Batch-Form">
                         <div style={{maxWidth: "351px"}}>
                             <ONSSelect id="batch" label="Batch Type" value="batch" options={batches}
                                        onChange={this.handleBatchTypeChange}/>

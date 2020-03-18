@@ -53,9 +53,9 @@ const bulkAmendmentsMatch = {
 
 const geogClassMatch = {
     path: "/import/:file?",
-    url: "/import/Geographical Calculations",
+    url: "/import/Geographical Classifications",
     isExact: true,
-    params: {file: "Geographical Calculations"}
+    params: {file: "Geographical Classifications"}
 };
 
 const populationEstimatesMatch = {
@@ -114,6 +114,12 @@ const LFSPersonMatch = {
     params: {file: "LFS Person Variable Specification"}
 };
 
+const dodgyDesignWeightsMatch = {
+    path: "/import/:file?",
+    url: "/import/Big Blow Up",
+    isExact: true,
+    params: {file: "APS Design Weights"}
+}
 
 function Props(input: any) {
     return {
@@ -246,24 +252,39 @@ describe("Import page functionality", () => {
         expect(screen.getByText(/Variable Definitions: File Uploaded Successfully/i));
     });
 
-    // TODO
-    // test('the dropdowns on the output spec imports function correctly', async () => {
-    //     renderAndImport(APSHouseholdMatch, render)
+    test('the dropdowns on the output spec imports function correctly', async () => {
+        renderAndImport(APSHouseholdMatch, render)
 
-    //     fireEvent.click(screen.getByText(/submit/i))
+        fireEvent.click(screen.getByText(/submit/i))
 
-    //     // File submitted with no year
-    //     expect(screen.getAllByText(/please select a year/i))
-    //     // console.log(screen.getByLabelText(/year/i))
-    //     console.log(screen.getByTestId(/option-year/i))
+        // File submitted with no year or period
+        expect(screen.getByText(/this page has errors/i))
+        expect(screen.getByText(/please select a year/i))
+        expect(screen.getByText(/please select a quarter/i))
 
-    //     fireEvent.click(screen.getByTestId(/option-year/i))
-    //     // console.log(screen.getByLabelText(/year/i))
-    //     console.log(screen.getByTestId(/option-year/i))
-    //     fireEvent.click(screen.getByText("2020"))
-    //             expect(screen.getByLabelText(/yearrrr/i)).toHaveAttribute("value", "2020")
+        // Selecting from drop downs
+        await fireEvent.change(screen.getByLabelText(/year/i), {
+            target: {value: "2015"}
+        }); 
 
-    // })
+        await fireEvent.change(screen.getByLabelText(/quarter/i), {
+            target: {value: "Q1"}
+        }); 
+    
+        fireEvent.click(screen.getByText(/submit/i))
+
+        // Expect error panel to be gone completely
+        expect(screen.queryByText(/this page has errors/i)).toBeFalsy()
+
+        fireEvent.click(screen.getByText(/submit/i))
+
+        await act(async () => {
+            await flushPromises();
+        });
+        
+        expect(screen.getByText(/File Uploaded Successfully/i))
+
+    })
 });
 
 describe("Importing files and handling", () => {
@@ -333,7 +354,7 @@ describe("Importing files and handling", () => {
 
     });
 
-    it("selects a bulk ammendments file and validates, returning an unmatched response, displaying a modal, it is then rejected", async () => {
+    it("selects a bulk ammendments file and validates, returning an unmatched response in a modal, report is exported, it is then rejected", async () => {
         renderAndImport(bulkAmendmentsMatch, render, "Bulk Amendments Reject");
 
         fireEvent.click(screen.getByText(/submit/i));
@@ -345,10 +366,41 @@ describe("Importing files and handling", () => {
         // Bulk amendment file validates and responds with success
         expect(screen.getAllByText(/Unmatched items in Bulk Amendments file/i)).toBeTruthy();
 
+        fireEvent.click(screen.getByText(/Export/i));
+    
+        await act(async () => {
+            await flushPromises();
+        });
+
         fireEvent.click(screen.getByText(/reject/i));
 
         // Modal is closed when reject button is clicked
         expect(screen.queryByText(/reject/i)).toBeNull();
     });
 });
-    
+
+describe("Error handling - ", () => {
+    // Cases with bad responses 
+
+    test("straight error", async () =>  {
+        renderAndImport(dodgyDesignWeightsMatch, render, "Big Boom")
+
+        fireEvent.click(screen.getByText(/submit/i))
+
+        await act(async () => {
+            await flushPromises();
+        });
+
+        // Modal is closed when reject button is clicked
+        expect(screen.getByText(/Error Occurred when uploading files/i)).toBeTruthy();
+
+    })
+})
+
+// TODO:
+// Output spec status error
+// Bulk ammendments 400 and 403 response
+// 400, 403 and design weights 200 response
+// Errorgone
+// SetFileUploading
+
