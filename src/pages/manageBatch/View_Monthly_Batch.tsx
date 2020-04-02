@@ -107,7 +107,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
             })
             .catch(error => {
                 (isDevEnv() && console.log(error));
-                this.setState({batchFound: false});
+                // this.setState({batchFound: false});
             });
     };
 
