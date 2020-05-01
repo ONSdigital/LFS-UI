@@ -14,14 +14,17 @@ interface Props {
     disabled?: boolean
     action?: boolean
     testid?: string
+    hidden?: boolean
 }
 
 export const ONSButton = (props: Props) => {
 
-    let spacing = () => {
-        return {
-            marginRight: String(props.marginRight) + "px"
-        };
+    let styling = () => {
+        if(props.hidden === true) {
+           return {display: "none"}
+        }else if(props.marginRight){
+            return {marginRight: + String(props.marginRight) + "px"}
+        }; 
     };
 
     let test_id = () => {
@@ -45,7 +48,7 @@ export const ONSButton = (props: Props) => {
     }
 
     return (
-        <button id={props.id} style={spacing()} type="button" disabled={props.loading || props.disabled}
+        <button id={props.id} style={styling()} type="button" disabled={props.loading || props.disabled}
                 className={className} onClick={props.onClick} data-testid={test_id()}>
             <span className="btn__inner">{props.label}</span>
         </button>

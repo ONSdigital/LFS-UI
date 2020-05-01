@@ -293,9 +293,9 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                            small={false}
                                            primary={false}
                                            marginRight={10}
-                                        //    disabled={!this.state.cancel}
-                                           disabled={this.state.cancel}
-                                           onClick={this.cancelMonthlyProcess}/>
+                                           disabled={!this.state.cancel}
+                                           onClick={this.cancelMonthlyProcess}
+                                           hidden={!this.state.cancel}/>
                                 <br/>
                                 <br/>
                             </>
