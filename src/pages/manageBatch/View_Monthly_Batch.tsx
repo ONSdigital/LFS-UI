@@ -178,6 +178,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
     render() {
         // TODO: Temporary way to check if imports are complete, should eventually be able to get this from batch status
         let importComplete = true;
+        console.log(this.props.match)
         if (this.state.batchFound) {
             if (this.state.batchData !== null) {
                 this.state.batchData.forEach(row => {

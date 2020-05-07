@@ -20,6 +20,7 @@ import {ImportOutputSpec} from "./pages/import/ImportOutputSpec";
 import IdleTimer from "react-idle-timer";
 import "@ons/design-system/css/main.css";
 import {Timeout} from "./auth/Timeout";
+import { ViewBatchProgress } from "./pages/ViewBatchProgress";
 
 interface Props {
     cookies: Cookies
@@ -121,6 +122,7 @@ class App extends React.Component<Props, State> {
                           <Switch>
                               <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
                               <this.PrivateRoute exact path='/new-batch' component={New_Batch} page_id={3}/>
+                              <this.PrivateRoute exact path='/view-batch/:year/:type/:period' component={ViewBatchProgress} page_id={11}/>
                               <this.PrivateRoute exact path='/manage-batch/monthly/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
                               <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>
                               <this.PrivateRoute exact path='/survey-import/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>

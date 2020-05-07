@@ -22,7 +22,7 @@ interface DashboardTableRow {
     period: string
     status: string
     year: number,
-    expanded: boolean
+    // expanded: boolean
 }
 
 export class HomeBatchTable extends Component <Props, State> {
@@ -43,9 +43,11 @@ export class HomeBatchTable extends Component <Props, State> {
 
     render() {
         return (
-            <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} expandedRowEnabled={true}
-                               expandedRow={DashboardExpandedRow} noDataMessage={this.noDataMessage}
-                               Headers={DASHBOARD_HEADERS}/>
+            <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} expandedRowEnabled={false}
+                            //    expandedRow={DashboardExpandedRow} 
+                               noDataMessage={this.noDataMessage}
+                               Headers={DASHBOARD_HEADERS}
+                               pagination={true} paginationSize={2}/>
         );
     }
 }
@@ -71,24 +73,28 @@ const DashboardTableRow = (rowData: any) => {
                 {row.year}
             </td>
             <td className="table__cell ">
-
                 <ONSStatus label={getStatusStyle(+row.status).text} small={false}
                            status={getStatusStyle(+row.status).colour}/>
+            </td>
+            <td className="table__cell ">
+                <Link to={"/view-batch/" + row.year + "/" + row.type.toLowerCase() + "/" + row.period}>
+                    Batch Progress
+                </Link>
             </td>
         </>
     );
 };
 
-const DashboardExpandedRow = (rowData: any) => {
-    let row: DashboardTableRow = rowData.row;
-    return (
-        <>
+// const DashboardExpandedRow = (rowData: any) => {
+//     let row: DashboardTableRow = rowData.row;
+//     return (
+//         <>
 
-            <BatchProgressTable/>
-            <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period}>
-                <ONSButton label={"Manage Batch"} primary={true} small={false} field={true}/>
-            </Link>
-        </>
-    );
-};
+//             <BatchProgressTable/>
+//             <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period}>
+//                 <ONSButton label={"Manage Batch"} primary={true} small={false} field={true}/>
+//             </Link>
+//         </>
+//     );
+// };
 

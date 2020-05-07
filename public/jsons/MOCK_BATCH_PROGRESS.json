@@ -11,15 +11,10 @@
       "status": "In Progress"
     },
     {
-      "id": 2,
-      "step": "Run Monthly Weighting",
-      "status": "Failed"
-    },
-    {
-      "id": 3,
+      "id": 4,
       "step": "Run Monthly ____",
-      "status": "Not Run"
+      "status": "Failed"
     }
   ],
-  "Count": 4
+  "Count": 3
 }

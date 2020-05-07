@@ -5,7 +5,7 @@ import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
 import {getBatchProgressStatusStyle} from '../utilities/Common_Functions';
 
 interface Props {
-
+    width?: number
 }
 
 interface State {
@@ -41,8 +41,6 @@ export class BatchProgressTable extends Component <Props, State> {
             })
     };
 
-
-
     BatchProgressRow = (rowData: any) => {
         let row = rowData.row;
         return (
@@ -61,8 +59,8 @@ export class BatchProgressTable extends Component <Props, State> {
     render() {
         return (
             <>
-                <h4>Batch Progress</h4>
-                <div style={{width: "60%"}}>
+                <h2>Batch Progress</h2>
+                <div>
                     <ONSAccordionTable Headers={BATCH_PROGRESS_TABLE}
                                        data={this.state.data}
                                        Row={this.BatchProgressRow}

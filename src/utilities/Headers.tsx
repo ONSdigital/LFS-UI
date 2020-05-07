@@ -134,6 +134,11 @@ const DASHBOARD_HEADERS =
         column_name: "status",
         filter: false,
         order: true
+    }, {
+        label: "",
+        column_name: "link",
+        filter: false,
+        order: false
     }
     ];
 
