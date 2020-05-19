@@ -142,7 +142,7 @@ export class Home extends Component <{}, State> {
         //     "conf": {"DB_USER": "lfs", "DB_PASSWORD": "lfs", "DB_URI": "jdbc:postgresql://localhost:5432/lfs"}
     
         // }
-        fetch('http://localhost:8998/batches')
+        fetch('/sessions')
         .then(function(response) {
             // Convert to JSON
             console.log(response.json());
