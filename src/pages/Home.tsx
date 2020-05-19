@@ -120,12 +120,63 @@ export class Home extends Component <{}, State> {
         this.filterBatchData();
     };
 
+    talkToLivy = async () => {
+        // const express = require('express');
+        // var cors = require('cors');
+        // var app = express();
+        // app.use(cors());
+
+        // app.get('http://localhost:8998/batches', function (req: any, res: any, next: any) {
+        //     console.log(res.json({msg: 'This is CORS-enabled for all origins!'}))
+            
+        // })
+
+
+        // const json = {
+        //     "className" :  "uk.gov.ons.lfs.LFSMonthly",
+        //     "file"  : "/Users/andrewurquhart/Documents/Repositories/GitHub/lfs-monthly/target/scala-2.11/lfs-monthly-assembly-1.0.jar",
+        //     "executorMemory": "20g",
+        //     "args": [2000],
+        //     "proxyUser": "andyyyyyyyyy",
+        //     "queue": "default",
+        //     "conf": {"DB_USER": "lfs", "DB_PASSWORD": "lfs", "DB_URI": "jdbc:postgresql://localhost:5432/lfs"}
+    
+        // }
+        fetch('http://localhost:8998/batches')
+        .then(function(response) {
+            // Convert to JSON
+            console.log(response.json());
+        })
+        // .then(function(j) {
+        //     // Yay, `j` is a JavaScript object
+        //     console.log(JSON.stringify(j));
+        // }).catch(function(error) {
+        //     console.log('Request failed', error)
+        // });
+        // fetch('http://localhost:8998/batches'
+        //     ,{
+        //         mode: 'cors',
+        //         method:'get',
+        //         // headers: {'Content-Type': 'application/json'},
+        //         // body: JSON.stringify({
+        //         //     json
+        //         // })
+        //     })
+        //     // .then(() => alert('Thank you for subscribing!'))
+        //     .then(function(response) {
+        //         console.log(response); 
+        //       }).catch(function(error) {  
+        //         console.log('Request failed', error)  
+        //       });;
+    }
+
     filterOptionStyle = {marginRight: ".5rem", minWidth: "15rem"};
 
     render() {
         return (
             <DocumentTitle title={"Labour Force Survey Dashboard"}>
                 <div className="container">
+                    <ONSButton label="livy" primary={true} onClick={this.talkToLivy}></ONSButton>
                     <br/>
                     <fieldset className="fieldset">
                         <Link to={"/new-batch"} style={{right: 0, float: "right"}}>

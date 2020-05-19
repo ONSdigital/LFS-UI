@@ -59,7 +59,6 @@ export class ViewBatchProgress extends Component <Props, State> {
                 <br></br>
                 <h1>Batch ID: {[this.state.type, this.state.year, this.state.period]}</h1>
                 {console.log(getBatchData(this.state.type, this.state.year, this.state.period))}
-                {console.log(getAllBatches())}
                 {/* <h1>Batch ID: {getBatchData(this.state.type, this.state.year, this.state.period)}</h1> */}
                 <br></br>
                 <ONSAccordionTable Headers={DASHBOARD_HEADERS} data={table} 
