@@ -12,6 +12,8 @@ import {AccordionDropDown} from "../../components/AccordionDropDown";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {ONSMetadata} from "../../components/ONS_DesignSystem/ONSMetadata";
 import {ONSBreadcrumbs} from "../../components/ONS_DesignSystem/ONSBreadcrumbs";
+import worker_script from "../../workerfile";
+import { start } from "repl";
 
 interface State {
     UploadsData: Data | null
@@ -97,6 +99,8 @@ export class View_Monthly_Batch extends Component <Props, State> {
             this.openSummaryModalFromRedirect(summaryRedirect);
         }
         this.updateMetaDataList();
+        this.getLivyStatus();
+        this.getLivyBatchID();
     }
 
     batchData = () => {
@@ -187,21 +191,14 @@ export class View_Monthly_Batch extends Component <Props, State> {
         // but for postgres of course. This means the jar file needs to be available to spark in hdfs or wherever
 
 
-
-
-        // var myWorker = new Worker(worker_script);
-        // myWorker.onmessage = (m) => {
-        //     // here put what you want to happen when its done
-        //     console.log("msg from worker: ", m.data);
-        // };
-        // myWorker.postMessage('im from main');
+        
         this.setState({running: true})
         let newDate = new Date()
         let date = newDate.getTime()
         let job = "Livy Job " + date
         console.log(job)
         var that = this
-        fetch('/livy/batches', {
+        await fetch('/livy/batches', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -221,17 +218,21 @@ export class View_Monthly_Batch extends Component <Props, State> {
         .then(function(data) {
             that.setState({livyBatchID: data.id})
             console.log("Livy Batch " + data.id + " Created")
-            return
         })
-        // fetch('/livy/batches')
-        // .then(function(response) {
-        //     // Convert to JSON
-        //     console.log(response.json());
-        // })  
+
+        var myWorker = new Worker(worker_script);
+        myWorker.onmessage = (m) => {
+            // here put what you want to happen when its done
+            const status = m.data
+            if(status) console.log("Batch " + this.state.livyBatchID + " " + m.data);
+            this.setState({running: false})
+        };
+        myWorker.postMessage(this.state.livyBatchID);
+        
     }
 
     cancelLivy = () => {
-        this.setState({running: false})
+        var that = this
         let livyBatchID = this.state.livyBatchID
         let url = '/livy/batches/' + livyBatchID
         fetch(url, {
@@ -241,10 +242,36 @@ export class View_Monthly_Batch extends Component <Props, State> {
             return response.json(); 
         })
         .then(function(data) {
-            if(data.msg === "deleted") console.log("Livy Batch " + livyBatchID + " Cancelled")
-            else console.log("Livy Batch " + livyBatchID + "NOT Cancelled")
+            if(data.msg === "deleted") {
+                console.log("Livy Batch " + livyBatchID + " Cancelled")
+                that.setState({running: false})
+
+            }
+            else console.log("Livy Batch " + livyBatchID + " NOT Cancelled")
         })
-        
+    }
+
+    getLivyBatchID = () => {
+        var that = this
+        fetch('/livy/batches')
+            .then(function(response) {return response.json()})
+            .then(function(data) {
+                const sessions = (data.sessions)
+                const session =  sessions[sessions.length - 1]
+                that.setState({livyBatchID: session.id})
+            })
+    }
+
+    getLivyStatus = () => {
+        var that = this
+        fetch('/livy/batches')
+            .then(function(response) {return response.json()})
+            .then(function(data) {
+                const sessions = (data.sessions)
+                const session =  sessions[sessions.length - 1]
+                const state = session.state
+                if(state)if(state==="running")that.setState({running: true})
+            })
 
     }
 
@@ -319,7 +346,7 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                            primary={false}
                                            disabled={!importComplete}/> */}
                                 <ONSButton label="Run Monthly Processing (Livy)" primary={true} onClick={this.talkToLivy} loading={this.isItRunning()} disabled={this.isItRunning()}></ONSButton>
-                                <ONSButton label="Cancel" primary={true} onClick={this.cancelLivy}></ONSButton>
+                                <ONSButton label="Cancel" primary={true} disabled={!this.isItRunning()} onClick={this.cancelLivy}></ONSButton>
                                 <br/>
                                 <br/>
                             </>
