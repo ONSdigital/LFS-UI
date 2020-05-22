@@ -30,6 +30,8 @@ interface State {
     surveyAuditStatus: number
     pathName: string
     breadcrumbList: any[]
+    running: Boolean
+    livyBatchID: String | null
 }
 
 interface MetaDataListItem {
@@ -77,7 +79,9 @@ export class View_Monthly_Batch extends Component <Props, State> {
             surveyAuditStatus: 0,
             importAudit: null,
             pathName: "/manage-batch/monthly/" + props.match.params.year + "/" + props.match.params.period,
-            breadcrumbList: [{name: "Home", link: ""}]
+            breadcrumbList: [{name: "Home", link: ""}],
+            running: false,
+            livyBatchID: null
         };
     }
 
@@ -175,6 +179,72 @@ export class View_Monthly_Batch extends Component <Props, State> {
         );
     };
 
+    talkToLivy = async () => {
+        // var myWorker = new Worker(worker_script);
+        // myWorker.onmessage = (m) => {
+        //     // here put what you want to happen when its done
+        //     console.log("msg from worker: ", m.data);
+        // };
+        // myWorker.postMessage('im from main');
+        this.setState({running: true})
+        let newDate = new Date()
+        let date = newDate.getTime()
+        let job = "Livy Job " + date
+        console.log(job)
+        var that = this
+        fetch('/livy/batches', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                'name': job,
+                'file': '/Users/andrewurquhart/Documents/Repositories/GitHub/lfs-monthly/target/scala-2.11/lfs-monthly-assembly-1.0.jar',
+                'className': 'uk.gov.ons.lfs.LFSMonthly'
+            })
+        })
+        .then(function(response){ 
+            const x = response.json()
+            console.log(x)
+            return x; 
+        })
+        .then(function(data) {
+            that.setState({livyBatchID: data.id})
+            console.log("Livy Batch " + data.id + " Created")
+            return
+        })
+        // fetch('/livy/batches')
+        // .then(function(response) {
+        //     // Convert to JSON
+        //     console.log(response.json());
+        // })  
+    }
+
+    cancelLivy = () => {
+        this.setState({running: false})
+        let livyBatchID = this.state.livyBatchID
+        let url = '/livy/batches/' + livyBatchID
+        fetch(url, {
+            method: 'Delete'
+        })
+        .then(function(response){ 
+            return response.json(); 
+        })
+        .then(function(data) {
+            if(data.msg === "deleted") console.log("Livy Batch " + livyBatchID + " Cancelled")
+            else console.log("Livy Batch " + livyBatchID + "NOT Cancelled")
+        })
+        
+
+    }
+
+    isItRunning = () => {
+        if(this.state.running) return true
+        else return false
+    }
+
+
     render() {
         // TODO: Temporary way to check if imports are complete, should eventually be able to get this from batch status
         let importComplete = true;
@@ -229,15 +299,18 @@ export class View_Monthly_Batch extends Component <Props, State> {
                                     {this.summaryModal()}
                                     <ReferenceFileImportTable/>
                                 </div>
-                                <ONSButton label="Run Monthly Process"
+                                {/* making these buttons useable for livy purposes */}
+                                {/* <ONSButton label="Run Monthly Process"
                                            small={false}
                                            primary={true}
                                            marginRight={10}
                                            disabled={!importComplete}/>
-                                <ONSButton label="Run Interim Weighting"
+                                <ONSButton label="Cancelled"
                                            small={false}
                                            primary={false}
-                                           disabled={!importComplete}/>
+                                           disabled={!importComplete}/> */}
+                                <ONSButton label="Run Monthly Processing (Livy)" primary={true} onClick={this.talkToLivy} loading={this.isItRunning()} disabled={this.isItRunning()}></ONSButton>
+                                <ONSButton label="Cancel" primary={true} onClick={this.cancelLivy}></ONSButton>
                                 <br/>
                                 <br/>
                             </>
