@@ -6,6 +6,7 @@ import {getAllBatches} from "../utilities/http";
 import DocumentTitle from "react-document-title";
 import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {Link} from "react-router-dom";
+import worker_script from '../workerfile';
 
 const MONTHLY_BATCH = "Monthly";
 const QUARTERLY_BATCH = "Quarterly";
@@ -18,7 +19,9 @@ interface State {
     liveStatus: boolean,
     monthlyBatchFilter: boolean,
     quarterlyBatchFilter: boolean,
-    annuallyBatchFilter: boolean
+    annuallyBatchFilter: boolean,
+    livyBatchID: string| null,
+    running: Boolean
 }
 
 export class Home extends Component <{}, State> {
@@ -33,7 +36,9 @@ export class Home extends Component <{}, State> {
             liveStatus: true,
             monthlyBatchFilter: true,
             quarterlyBatchFilter: true,
-            annuallyBatchFilter: true
+            annuallyBatchFilter: true,
+            livyBatchID: null,
+            running: false
         };
         this.getBatchData();
     }
@@ -121,12 +126,68 @@ export class Home extends Component <{}, State> {
     };
 
     talkToLivy = async () => {
-
-        fetch('/livy/batches')
-        .then(function(response) {
-            // Convert to JSON
-            console.log(response.json());
+        // var myWorker = new Worker(worker_script);
+        // myWorker.onmessage = (m) => {
+        //     // here put what you want to happen when its done
+        //     console.log("msg from worker: ", m.data);
+        // };
+        // myWorker.postMessage('im from main');
+        this.setState({running: true})
+        let newDate = new Date()
+        let date = newDate.getTime()
+        let job = "Livy Job " + date
+        console.log(job)
+        var that = this
+        fetch('/livy/batches', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                'name': job,
+                'file': '/Users/andrewurquhart/Documents/Repositories/GitHub/lfs-monthly/target/scala-2.11/lfs-monthly-assembly-1.0.jar',
+                'className': 'uk.gov.ons.lfs.LFSMonthly'
+            })
         })
+        .then(function(response){ 
+            const x = response.json()
+            console.log(x)
+            return x; 
+        })
+        .then(function(data) {
+            that.setState({livyBatchID: data.id})
+            console.log("Livy Batch " + data.id + " Created")
+            return
+        })
+        // fetch('/livy/batches')
+        // .then(function(response) {
+        //     // Convert to JSON
+        //     console.log(response.json());
+        // })  
+    }
+
+    cancelLivy = () => {
+        this.setState({running: false})
+        let livyBatchID = this.state.livyBatchID
+        let url = 'livy/batches/' + livyBatchID
+        fetch(url, {
+            method: 'Delete'
+        })
+        .then(function(response){ 
+            return response.json(); 
+        })
+        .then(function(data) {
+            if(data.msg === "deleted") console.log("Livy Batch " + livyBatchID + " Cancelled")
+            else console.log("Livy Batch " + livyBatchID + "NOT Cancelled")
+        })
+        
+
+    }
+
+    isItRunning = () => {
+        if(this.state.running) return true
+        else return false
     }
 
     filterOptionStyle = {marginRight: ".5rem", minWidth: "15rem"};
@@ -135,7 +196,8 @@ export class Home extends Component <{}, State> {
         return (
             <DocumentTitle title={"Labour Force Survey Dashboard"}>
                 <div className="container">
-                    <ONSButton label="livy" primary={true} onClick={this.talkToLivy}></ONSButton>
+                    <ONSButton label="livy" primary={true} onClick={this.talkToLivy} loading={this.isItRunning()} disabled={this.isItRunning()}></ONSButton>
+                    <ONSButton label="cancel" primary={true} onClick={this.cancelLivy}></ONSButton>
                     <br/>
                     <fieldset className="fieldset">
                         <Link to={"/new-batch"} style={{right: 0, float: "right"}}>
