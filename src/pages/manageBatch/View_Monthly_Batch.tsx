@@ -180,6 +180,15 @@ export class View_Monthly_Batch extends Component <Props, State> {
     };
 
     talkToLivy = async () => {
+        // something paul said
+        // looks like we either add it to the spark classpath - not an option in production or we add it to the execution classpath by passing the following arguments:
+        // spark.driver.extraClassPath = <path>/mysql-connector-java-5.1.36.jar
+        // spark.executor.extraClassPath = <path>/mysql-connector-java-5.1.36.jar
+        // but for postgres of course. This means the jar file needs to be available to spark in hdfs or wherever
+
+
+
+
         // var myWorker = new Worker(worker_script);
         // myWorker.onmessage = (m) => {
         //     // here put what you want to happen when its done
