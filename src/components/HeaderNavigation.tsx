@@ -17,7 +17,7 @@ interface LinkRow {
 let headerLinks = [
     {
         link: "/",
-        label: "Home"
+        label: "Processing"
     },
     {
         link: "/view-data",
