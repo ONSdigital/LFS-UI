@@ -1,0 +1,12 @@
+
+
+FROM node:10 as react-build
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --silent
+
+COPY . .
+
+EXPOSE 3000
+CMD [ "npm", "start" ]
