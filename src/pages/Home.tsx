@@ -5,6 +5,7 @@ import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
 import DocumentTitle from "react-document-title";
 import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
+import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 import {Link} from "react-router-dom";
 import { ONSSearch } from "../components/ONS_DesignSystem/ONSSearch";
 
@@ -22,6 +23,7 @@ interface State {
     annuallyBatchFilter: boolean
     periodFilter: string | null
     clickedPeriodFilter: string | null
+    mocked: boolean
 }
 
 export class Home extends Component <{}, State> {
@@ -38,7 +40,8 @@ export class Home extends Component <{}, State> {
             quarterlyBatchFilter: true,
             annuallyBatchFilter: true,
             periodFilter: null,
-            clickedPeriodFilter: null
+            clickedPeriodFilter: null,
+            mocked: false
         };
         this.getBatchData();
     }
@@ -47,7 +50,7 @@ export class Home extends Component <{}, State> {
         getAllBatches()
             .then(r => {
                 console.log(r);
-                this.setState({batchData: r});
+                this.setState({batchData: r, mocked: false});
                 this.filterBatchData();
             })
             .catch(error => {
@@ -63,7 +66,7 @@ export class Home extends Component <{}, State> {
         fetch("/jsons/MOCK_RUNS.json")
             .then(response => response.json())
             .then(response => {
-                this.setState({batchData: response.Rows});
+                this.setState({batchData: response.Rows, mocked: true});
                 this.filterBatchData();
             });
     };
@@ -209,6 +212,9 @@ export class Home extends Component <{}, State> {
                                 onChange={this.handlePeriodFilterChange}></ONSSearch>
                     </fieldset>
                     <br/>
+                    {(this.state.mocked) && 
+                        <ONSPanel label="This Data Has Been Mocked" ><p>This data has been mocked, Links may not work correctly</p></ONSPanel>
+                    }
                     <HomeBatchTable data={this.state.filteredBatchData}/>
                 </div>
             </DocumentTitle>

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {ONSAccordionTable} from "./ONS_DesignSystem/ONSAccordionTable";
-import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
+import {getStatusStyle} from "../utilities/Common_Functions";
 import {ONSStatus} from "./ONS_DesignSystem/ONSStatus";
 import {DASHBOARD_HEADERS} from "../utilities/Headers";
 import {Link} from "react-router-dom";
@@ -52,13 +52,14 @@ export class HomeBatchTable extends Component <Props, State> {
 
 const DashboardTableRow = (rowData: any) => {
     let row: DashboardTableRow = rowData.row;
+    let url: string = "/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
     return (
         <>
             <td className="table__cell ">
                 {row.type}
             </td>
             <td className="table__cell ">
-                {row.fullPeriod}
+                {row.fullPeriod.substring(0, 3) + row.fullPeriod.substring(row.fullPeriod.length - 5)}
             </td>
             <td className="table__cell ">
                 <ONSStatus label={getStatusStyle(+row.status).text} small={false}
@@ -70,15 +71,17 @@ const DashboardTableRow = (rowData: any) => {
             </td>
             <td className="table__cell ">
                 {/* Progress Page does not exist yet also*/}
-                <Link to={"/"}>
-                    Progress
-                </Link>
+                {progress(row.status)}
             </td>
             <td className="table__cell ">
-                <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period}>
+                <Link to={url}>
                     Manage
                 </Link>
             </td>
         </>
     );
 };
+
+function progress (status: string) {
+    if(Number(status) === 1) return <Link to={"/"}>Progress</Link>
+}

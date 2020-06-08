@@ -7,7 +7,7 @@ function createNewBatch(batchType: string, year: string, period: string, descrip
 
     formData.append("description", description);
     if(period[0] !== "Q") {
-        let fullPeriod = monthNumberToString(parseInt(period)).substring(0,3) + " " + year
+        let fullPeriod = monthNumberToString(parseInt(period)) + " " + year
         formData.append("fullPeriod", fullPeriod);
     }
     let url = "/batches/" + batchType + "/" + year + (batchType !== 'annually' ? "/" + period : "");
