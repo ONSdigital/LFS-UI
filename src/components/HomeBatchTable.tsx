@@ -44,6 +44,7 @@ export class HomeBatchTable extends Component <Props, State> {
             <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} 
                                expandedRowEnabled={false}
                                noDataMessage={this.noDataMessage}
+                               pagination={true} paginationSize={5}
                                Headers={DASHBOARD_HEADERS}/>
         );
     }
