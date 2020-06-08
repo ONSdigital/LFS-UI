@@ -5,7 +5,9 @@ import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
 import DocumentTitle from "react-document-title";
 import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
+import {ONSPanel} from "../components/ONS_DesignSystem/ONSPanel";
 import {Link} from "react-router-dom";
+import { ONSSearch } from "../components/ONS_DesignSystem/ONSSearch";
 
 const MONTHLY_BATCH = "Monthly";
 const QUARTERLY_BATCH = "Quarterly";
@@ -13,12 +15,15 @@ const ANNUALLY_BATCH = "Annually";
 
 interface State {
     batchData: [] | null,
-    filteredBatchData: [] | null,
+    filteredBatchData: any[],
     batchType: string,
     liveStatus: boolean,
     monthlyBatchFilter: boolean,
     quarterlyBatchFilter: boolean,
     annuallyBatchFilter: boolean
+    periodFilter: string | null
+    clickedPeriodFilter: string | null
+    mocked: boolean
 }
 
 export class Home extends Component <{}, State> {
@@ -33,7 +38,10 @@ export class Home extends Component <{}, State> {
             liveStatus: true,
             monthlyBatchFilter: true,
             quarterlyBatchFilter: true,
-            annuallyBatchFilter: true
+            annuallyBatchFilter: true,
+            periodFilter: null,
+            clickedPeriodFilter: null,
+            mocked: false
         };
         this.getBatchData();
     }
@@ -42,7 +50,7 @@ export class Home extends Component <{}, State> {
         getAllBatches()
             .then(r => {
                 console.log(r);
-                this.setState({batchData: r});
+                this.setState({batchData: r, mocked: false});
                 this.filterBatchData();
             })
             .catch(error => {
@@ -58,7 +66,7 @@ export class Home extends Component <{}, State> {
         fetch("/jsons/MOCK_RUNS.json")
             .then(response => response.json())
             .then(response => {
-                this.setState({batchData: response.Rows});
+                this.setState({batchData: response.Rows, mocked: true});
                 this.filterBatchData();
             });
     };
@@ -96,6 +104,37 @@ export class Home extends Component <{}, State> {
         }
     };
 
+    filterListByPeriod = (row: any) => {
+        // console.log(this.state.periodFilter)
+        let fullPeriod: string = row.fullPeriod.toLowerCase()
+        let periodFilter = ""
+        if(this.state.periodFilter) {
+            periodFilter = this.state.periodFilter.toLowerCase()
+            return fullPeriod.includes(periodFilter)
+        }
+        else return fullPeriod
+        
+        
+    }
+
+    filterByPeriod = () => {        
+        if(this.state.batchData) {
+            const elements = this.state.batchData      
+            let filteredElements = elements.filter(this.filterListByPeriod)
+            this.setState({filteredBatchData: filteredElements})
+        }            
+
+    }
+
+    handlePeriodFilterClick = async (e: any) => {
+        this.setState({clickedPeriodFilter: this.state.periodFilter})
+        this.filterByPeriod()
+    }
+
+    handlePeriodFilterChange = async (e: any) => {
+        this.setState({periodFilter: e.target.value})
+    }
+
     handleBatchTypeRadioChange = async (e: ChangeEvent<HTMLInputElement>) => {
         let liveStatusFilter = false;
         if (e.target.value === "live") {
@@ -129,42 +168,53 @@ export class Home extends Component <{}, State> {
                     <br/>
                     <fieldset className="fieldset">
                         <Link to={"/new-batch"} style={{right: 0, float: "right"}}>
-                            <ONSButton label={"Create New Batch"} primary={true} field={true} action={true}/>
+                            <ONSButton label={"Create New Processing"} primary={true} field={true} action={true}/>
                         </Link>
-                        <h4 className="fieldset__legend">Filter Batches</h4>
-                        <p className="checkboxes__label">Batch Status</p>
+                        {/* <br/> */}
+                        <br/>
+                        <br/>
+                        <p className="checkboxes__label">Processing Status</p>
                         <span className="radios__items">
-                        <ONSRadioButton label={"Live"}
-                                        onChange={this.handleBatchTypeRadioChange}
-                                        id={"live"}
-                                        checked={this.state.liveStatus}
-                                        style={this.filterOptionStyle}/>
-                        <ONSRadioButton label={"Completed"}
-                                        onChange={this.handleBatchTypeRadioChange}
-                                        id={"completed"}
-                                        checked={!this.state.liveStatus}
-                                        style={this.filterOptionStyle}/>
-                            <br/>
-                    </span>
-                        <p className="checkboxes__label">Batch Type</p>
+                            <ONSRadioButton label={"Live"}
+                                            onChange={this.handleBatchTypeRadioChange}
+                                            id={"live"}
+                                            checked={this.state.liveStatus}
+                                            style={this.filterOptionStyle}/>
+                            <ONSRadioButton label={"Completed"}
+                                            onChange={this.handleBatchTypeRadioChange}
+                                            id={"completed"}
+                                            checked={!this.state.liveStatus}
+                                            style={this.filterOptionStyle}/>
+                        </span>
+                        <br/>
+                        <p className="checkboxes__label">Processing Type</p>
                         <span className="checkboxes__items">
-                        <ONSCheckbox onChange={this.handleMonthlyBatchFilterChange}
-                                     id={MONTHLY_BATCH}
-                                     label={MONTHLY_BATCH}
-                                     checked={this.state.monthlyBatchFilter}
-                                     style={this.filterOptionStyle}/>
-                        <ONSCheckbox onChange={this.handleQuarterlyBatchFilterChange}
-                                     id={QUARTERLY_BATCH}
-                                     label={QUARTERLY_BATCH}
-                                     checked={this.state.quarterlyBatchFilter}
-                                     style={this.filterOptionStyle}/>
-                        <ONSCheckbox onChange={this.handleAnnuallyBatchFilterChange}
-                                     id={ANNUALLY_BATCH}
-                                     label={ANNUALLY_BATCH}
-                                     checked={this.state.annuallyBatchFilter}
-                                     style={this.filterOptionStyle}/>
-                    </span>
+                            <ONSCheckbox onChange={this.handleMonthlyBatchFilterChange}
+                                        id={MONTHLY_BATCH}
+                                        label={MONTHLY_BATCH}
+                                        checked={this.state.monthlyBatchFilter}
+                                        style={this.filterOptionStyle}/>
+                            <ONSCheckbox onChange={this.handleQuarterlyBatchFilterChange}
+                                        id={QUARTERLY_BATCH}
+                                        label={QUARTERLY_BATCH}
+                                        checked={this.state.quarterlyBatchFilter}
+                                        style={this.filterOptionStyle}/>
+                            {/* <ONSCheckbox onChange={this.handleAnnuallyBatchFilterChange}
+                                        id={ANNUALLY_BATCH}
+                                        label={ANNUALLY_BATCH}
+                                        checked={this.state.annuallyBatchFilter}
+                                        style={this.filterOptionStyle}/> */}
+                        </span>
+                        <br/>
+                        <ONSSearch label="Filter results by period" 
+                                buttonLabel="Filter" 
+                                onClick={this.handlePeriodFilterClick}
+                                onChange={this.handlePeriodFilterChange}></ONSSearch>
                     </fieldset>
+                    <br/>
+                    {(this.state.mocked) && 
+                        <ONSPanel label="This Data Has Been Mocked" ><p>This data has been mocked, Links may not work correctly</p></ONSPanel>
+                    }
                     <HomeBatchTable data={this.state.filteredBatchData}/>
                 </div>
             </DocumentTitle>

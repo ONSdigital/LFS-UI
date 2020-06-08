@@ -1,15 +1,13 @@
 import React, {Component} from "react";
 import {ONSAccordionTable} from "./ONS_DesignSystem/ONSAccordionTable";
-import {getStatusStyle, monthNumberToString} from "../utilities/Common_Functions";
+import {getStatusStyle} from "../utilities/Common_Functions";
 import {ONSStatus} from "./ONS_DesignSystem/ONSStatus";
-import {ONSButton} from "./ONS_DesignSystem/ONSButton";
 import {DASHBOARD_HEADERS} from "../utilities/Headers";
-import {BatchProgressTable} from "./BatchProgressTable";
 import {Link} from "react-router-dom";
 
 interface Props {
     Headers?: string[],
-    data: [] | null
+    data: any[] | null
 }
 
 interface State {
@@ -17,12 +15,12 @@ interface State {
 }
 
 interface DashboardTableRow {
-    id: number
     type: string
-    period: string
+    fullPeriod: string
     status: string
-    year: number,
-    expanded: boolean
+    user: number
+    year: number
+    period: number
 }
 
 export class HomeBatchTable extends Component <Props, State> {
@@ -43,8 +41,10 @@ export class HomeBatchTable extends Component <Props, State> {
 
     render() {
         return (
-            <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} expandedRowEnabled={true}
-                               expandedRow={DashboardExpandedRow} noDataMessage={this.noDataMessage}
+            <ONSAccordionTable data={this.state.data} Row={DashboardTableRow} 
+                               expandedRowEnabled={false}
+                               noDataMessage={this.noDataMessage}
+                               pagination={true} paginationSize={5}
                                Headers={DASHBOARD_HEADERS}/>
         );
     }
@@ -52,43 +52,36 @@ export class HomeBatchTable extends Component <Props, State> {
 
 const DashboardTableRow = (rowData: any) => {
     let row: DashboardTableRow = rowData.row;
+    let url: string = "/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
     return (
         <>
-            <td className="table__cell ">
-                {row.id}
-            </td>
             <td className="table__cell ">
                 {row.type}
             </td>
             <td className="table__cell ">
-                {row.type === "Monthly" ?
-                    monthNumberToString(+row.period)
-                    :
-                    row.period
-                }
+                {row.fullPeriod.substring(0, 3) + row.fullPeriod.substring(row.fullPeriod.length - 5)}
             </td>
             <td className="table__cell ">
-                {row.year}
-            </td>
-            <td className="table__cell ">
-
                 <ONSStatus label={getStatusStyle(+row.status).text} small={false}
                            status={getStatusStyle(+row.status).colour}/>
             </td>
+            <td className="table__cell ">
+                {/* Users don't exist currently */}
+                username
+            </td>
+            <td className="table__cell ">
+                {/* Progress Page does not exist yet also*/}
+                {progress(row.status)}
+            </td>
+            <td className="table__cell ">
+                <Link to={url}>
+                    Manage
+                </Link>
+            </td>
         </>
     );
 };
 
-const DashboardExpandedRow = (rowData: any) => {
-    let row: DashboardTableRow = rowData.row;
-    return (
-        <>
-
-            <BatchProgressTable/>
-            <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period}>
-                <ONSButton label={"Manage Batch"} primary={true} small={false} field={true}/>
-            </Link>
-        </>
-    );
-};
-
+function progress (status: string) {
+    if(Number(status) === 1) return <Link to={"/"}>Progress</Link>
+}

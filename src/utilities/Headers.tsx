@@ -110,23 +110,13 @@ const AMENDMENT_HEADERS =
 
 const DASHBOARD_HEADERS =
     [{
-        label: "BatchID",
+        label: "Processing Type",
         column_name: "id",
-        filter: false,
-        order: false
-    }, {
-        label: "Batch Type",
-        column_name: "type",
-        filter: false,
-        order: false
-    }, {
-        label: "Period",
-        column_name: "period",
         filter: false,
         order: true
     }, {
-        label: "Year",
-        column_name: "year",
+        label: "Period",
+        column_name: "period",
         filter: false,
         order: true
     }, {
@@ -134,6 +124,21 @@ const DASHBOARD_HEADERS =
         column_name: "status",
         filter: false,
         order: true
+    }, {
+        label: "User",
+        column_name: "user",
+        filter: false,
+        order: true
+    }, {
+        label: "",
+        column_name: "progress",
+        filter: false,
+        order: false
+    }, {
+        label: "",
+        column_name: "manage",
+        filter: false,
+        order: false
     }
     ];
 
