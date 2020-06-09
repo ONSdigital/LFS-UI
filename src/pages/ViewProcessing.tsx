@@ -69,9 +69,6 @@ export class ViewProcessing extends Component <Props, State> {
                 <h1>
                     Processing: <mark>{fullPeriod}</mark>
                 </h1>
-                {console.log(getBatchData(this.state.type, this.state.year, this.state.period))}
-                {console.log(this.props.match)}
-                {/* <h1>Processing ID: {getBatchData(this.state.type, this.state.year, this.state.period)}</h1> */}
                 <br></br>
                 <ONSAccordionTable Headers={PROCESSING_HEADERS} data={table} 
                                 expandedRowEnabled={false} Row={DashboardTableRow} 

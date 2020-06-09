@@ -147,22 +147,22 @@ const PROCESSING_HEADERS =
         label: "Processing Type",
         column_name: "id",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Period",
         column_name: "period",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "Status",
         column_name: "status",
         filter: false,
-        order: true
+        order: false
     }, {
         label: "User",
         column_name: "user",
         filter: false,
-        order: true
+        order: false
     }];
 
 const PROCESSING_PROGRESS_TABLE =
