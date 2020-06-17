@@ -129,7 +129,8 @@ const DASHBOARD_HEADERS =
         column_name: "user",
         filter: false,
         order: true
-    }, {
+    }
+    , {
         label: "",
         column_name: "progress",
         filter: false,
@@ -139,10 +140,32 @@ const DASHBOARD_HEADERS =
         column_name: "manage",
         filter: false,
         order: false
-    }
-    ];
+    }];
 
-const BATCH_PROGRESS_TABLE =
+const PROCESSING_HEADERS =
+    [{
+        label: "Processing Type",
+        column_name: "id",
+        filter: false,
+        order: false
+    }, {
+        label: "Period",
+        column_name: "period",
+        filter: false,
+        order: false
+    }, {
+        label: "Status",
+        column_name: "status",
+        filter: false,
+        order: false
+    }, {
+        label: "User",
+        column_name: "user",
+        filter: false,
+        order: false
+    }];
+
+const PROCESSING_PROGRESS_TABLE =
     [{
         label: "Step",
         column_name: "Step",
@@ -301,5 +324,6 @@ export {
     REFERENCE_FILE_IMPORT_HEADERS,
     VALUE_LABELS_HEADERS,
     REFERENCE_FILE_HEADERS,
-    BATCH_PROGRESS_TABLE
+    PROCESSING_PROGRESS_TABLE,
+    PROCESSING_HEADERS
 };

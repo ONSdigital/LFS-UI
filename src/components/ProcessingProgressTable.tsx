@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
-import {BATCH_PROGRESS_TABLE} from "../utilities/Headers"
-import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
+import {ONSAccordionTable} from "./ONS_DesignSystem/ONSAccordionTable";
+import {PROCESSING_PROGRESS_TABLE} from "../utilities/Headers"
+import {ONSStatus} from "./ONS_DesignSystem/ONSStatus";
 import {getBatchProgressStatusStyle} from '../utilities/Common_Functions';
 
 interface Props {
-
+    width?: number
 }
 
 interface State {
@@ -14,7 +14,7 @@ interface State {
 }
 
 
-export class BatchProgressTable extends Component <Props, State> {
+export class ProcessingProgressTable extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -43,7 +43,7 @@ export class BatchProgressTable extends Component <Props, State> {
 
 
 
-    BatchProgressRow = (rowData: any) => {
+    ProcessingProgressRow = (rowData: any) => {
         let row = rowData.row;
         return (
             <>
@@ -61,11 +61,11 @@ export class BatchProgressTable extends Component <Props, State> {
     render() {
         return (
             <>
-                <h4>Batch Progress</h4>
-                <div style={{width: "60%"}}>
-                    <ONSAccordionTable Headers={BATCH_PROGRESS_TABLE}
+                <h2>Processing Progress</h2>
+                <div>
+                    <ONSAccordionTable Headers={PROCESSING_PROGRESS_TABLE}
                                        data={this.state.data}
-                                       Row={this.BatchProgressRow}
+                                       Row={this.ProcessingProgressRow}
                                        expandedRowEnabled={false}
                                        noDataMessage={"No Data"}/>
                 </div>

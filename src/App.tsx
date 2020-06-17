@@ -20,6 +20,7 @@ import {ImportOutputSpec} from "./pages/import/ImportOutputSpec";
 import IdleTimer from "react-idle-timer";
 import "@ons/design-system/css/main.css";
 import {Timeout} from "./auth/Timeout";
+import { ViewProcessing } from "./pages/ViewProcessing";
 
 interface Props {
     cookies: Cookies
@@ -123,6 +124,7 @@ class App extends React.Component<Props, State> {
                               <this.PrivateRoute exact path='/new-batch' component={New_Batch} page_id={3}/>
                               <this.PrivateRoute exact path='/manage-batch/monthly/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
                               <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>
+                              <this.PrivateRoute exact path='/processing/:type/:year/:period' component={ViewProcessing} page_id={11}/>
                               <this.PrivateRoute exact path='/survey-import/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
                               <this.PrivateRoute exact path='/view-data' component={ViewData} page_id={10}/>
                               <this.PrivateRoute exact path='/import/overview' component={ImportOverview} page_id={7}/>
