@@ -29,6 +29,7 @@ function monthNumberToString(MonthNum: number): string {
     return Month
 }
 
+
 function months() {
 
     let i;
@@ -101,21 +102,11 @@ function getUploadStatusStyle(statusNo: number) {
     let status: status = {text: "", colour: 'info', hexCode: '#222'};
     switch (statusNo){
         case 0: status = {text: "Not Started", colour: 'dead', hexCode: '#989898'}; break;
-        case 1: status = {text: "Importing", colour: 'info', hexCode: '#5e7dd8'}; break;
-        case 2: status = {text: "Undecided", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 1: status = {text: "File Uploaded", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 2: status = {text: "File Reloaded", colour: 'info', hexCode: '#5e7dd8'}; break;
         case 3: status = {text: "Upload Failed", colour: 'error', hexCode: '#fd112e'}; break;
         case 4: status = {text: "Upload Accepted", colour: 'success', hexCode: '#12c864'}; break;
         case 5: status = {text: "Upload Rejected", colour: 'error', hexCode: '#fd112e'}; break;
-    }
-    return status
-}
-
-function getReferenceStatusStyle(statusNo: number) {
-    let status: status = {text: "", colour: 'info', hexCode: '#222'};
-    switch (statusNo){
-        case 0: status = {text: "Not Started", colour: 'dead', hexCode: '#989898'}; break;
-        case 1: status = {text: "Importing", colour: 'info', hexCode: '#5e7dd8'}; break;
-        case 2: status = {text: "Upload Failed", colour: 'error', hexCode: '#fd112e'}; break;
     }
     return status
 }
@@ -159,25 +150,9 @@ function toUpperCaseFirstChar(string: string){
     return string.charAt(0).toUpperCase() + string.slice(1, string.length)
 }
 
+
 function isDevEnv() {
     return process.env.NODE_ENV === 'development'
 }
 
-function fullPeriodPlease (currentPeriod: string, currentYear: string) {
-    if(currentPeriod !== "Q"){
-        currentPeriod = monthNumberToString(Number(currentPeriod)).substring(0, 3)
-    }
-    return `${currentPeriod} ${currentYear}`
-}
-
-function currentDateAsString(): string {
-    let dateTime = new Date();
-    let date = dateTime.getDate();
-    let month: any = dateTime.getMonth();
-    let year = dateTime.getFullYear();
-    if(month < 10) month = "0" + month
-
-    return `${String(date)}/${String(month)}/${String(year)}`
-}
-
-export{ getReferenceStatusStyle, currentDateAsString, fullPeriodPlease, weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle, getFileImportStatusStyle}
+export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle, getFileImportStatusStyle}

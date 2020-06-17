@@ -7,71 +7,14 @@ import {Link} from "react-router-dom";
 
 interface Props {
     batchData: [] | null
+    openModal: Function
     batchType: string
     year: string
     period: string
+    caption: boolean
 }
 
-export function MonthlyProcessingUploadTable(props: Props) {
-    // I've added mock upload data so we can see all the statuses :)
-    let mockUploadData: any[] = [
-        {
-            "id": 2,
-            "month": 2,
-            "status": 0,
-            "type": "GB",
-            "week": 5,
-            "year": 2013
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 1,
-            "type": "GB",
-            "week": 6,
-            "year": 2013,
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 2,
-            "type": "GB",
-            "week": 7,
-            "year": 2013,
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 3,
-            "type": "GB",
-            "week": 8,
-            "year": 2013,
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 4,
-            "type": "GB",
-            "week": 9,
-            "year": 2013,
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 5,
-            "type": "NI",
-            "week": 0,
-            "year": 2013,
-        }
-    ]
-    
-    function statusLink(status: number) {
-        switch(status) {
-            case 0: return "Import"
-            case 1: return "View Processing"
-            default: return "Re-import"
-          } 
-    }
+export function MonthlyBatchUploadTable(props: Props) {
 
     let BatchUploadTableRow = (rowData: any) => {
         let row = rowData.row;
@@ -95,7 +38,7 @@ export function MonthlyProcessingUploadTable(props: Props) {
                     <Link
                         className={"breadcrumb__linkbreadcrumb__link"}
                         to={"/survey-import/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year}>
-                        {statusLink(row.status)}
+                        Import
                     </Link>
                 </td>
                 {
@@ -103,8 +46,7 @@ export function MonthlyProcessingUploadTable(props: Props) {
                         <td className="table__cell "/>
                         :
                         <td className="table__cell ">
-                            {/* This link goes nowhere atm */}
-                            <Link to="">Summary</Link>
+                            <a onClick={(() => props.openModal(row))}>Summary</a>
                         </td>
                 }
             </>
@@ -117,6 +59,7 @@ export function MonthlyProcessingUploadTable(props: Props) {
                            Row={BatchUploadTableRow}
                            expandedRowEnabled={false}
                            noDataMessage={"No Data"}
+                           caption={props.caption ? "Survey Files" : undefined}
         />
     );
 }

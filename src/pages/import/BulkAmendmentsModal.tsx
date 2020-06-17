@@ -124,7 +124,7 @@ export class BulkAmendmentsModal extends Component <Props, State> {
                     {
                         this.state.panel.visible &&
                         <>
-                            <ONSPanel status={this.state.panel.status}>
+                            <ONSPanel status={this.state.panel.status} label={this.state.panel.label}>
                                 <p>{this.state.panel.label}</p>
                             </ONSPanel>
                             <br/>
