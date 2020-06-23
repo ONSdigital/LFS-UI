@@ -132,10 +132,10 @@ function getReferenceStatusStyle(statusNo: number) {
 function getBatchProgressStatusStyle(statusText: string) {
     let status: status = {text: "", colour: 'dead', hexCode: '#888'};
     switch (statusText){
-        case "Completed": status = {text: "Completed", colour: 'success', hexCode: '#12c864'}; break;
-        case "In Progress": status = {text: "In Progress", colour: 'info', hexCode: '#5e7dd8'}; break;
-        case "Failed": status = {text: "Failed", colour: 'error', hexCode: '#fd112e'}; break;
         case "Not Run": status = {text: "Not Run", colour: 'dead', hexCode: '#888'}; break;
+        case "Running": status = {text: "Running", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case "Failed": status = {text: "Failed", colour: 'error', hexCode: '#fd112e'}; break;
+        case "Completed": status = {text: "Completed", colour: 'success', hexCode: '#12c864'}; break;
     }
     return status
 }

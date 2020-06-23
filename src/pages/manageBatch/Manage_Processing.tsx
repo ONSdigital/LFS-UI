@@ -9,6 +9,8 @@ import {getBatchData, getReferenceData} from "../../utilities/http";
 import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 import {Link} from "react-router-dom";
 import { ONSSelect } from "../../components/ONS_DesignSystem/ONSSelect";
+import { RunningStepsTable } from "../../components/RunningStepsTable";
+
 import { ProcessingStepsTable } from "../../components/ProcessingStepsTable";
 import "./Manage_Processing.css";
 
@@ -280,7 +282,7 @@ export class Manage_Processing extends Component <Props, State> {
                                 </div>
                                 <br/>
                                 <h3 className="lil-gap">Steps</h3>
-                                <ProcessingStepsTable/>
+                                { this.state.running ? <RunningStepsTable/> : <ProcessingStepsTable/> }
                                 <ONSButton label="Run Processing Steps"
                                            small={false}
                                            primary={true}
