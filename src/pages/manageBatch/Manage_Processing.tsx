@@ -1,19 +1,22 @@
-import React, {Component} from "react";
+import React, {Component, ChangeEvent} from "react";
 import {ONSPanel} from "../../components/ONS_DesignSystem/ONSPanel";
 import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
-import {isDevEnv, monthNumberToString, toUpperCaseFirstChar, fullPeriodPlease, currentDateAsString} from "../../utilities/Common_Functions";
+import {isDevEnv, monthNumberToString, toUpperCaseFirstChar, fullPeriodPlease, processingSteps} from "../../utilities/Common_Functions";
 import {GenericNotFound} from "../GenericNotFound";
 import DocumentTitle from "react-document-title";
 import {MonthlyProcessingUploadTable} from "./MonthlyProcessingUploadTable";
 import {getBatchData, getReferenceData} from "../../utilities/http";
 import {ReferenceFileImportTable} from "./ReferenceFileImportTable";
 import {Link} from "react-router-dom";
+import { ONSSelect } from "../../components/ONS_DesignSystem/ONSSelect";
+import { ProcessingStepsTable } from "../../components/ProcessingStepsTable";
+import "./Manage_Processing.css";
 
 interface State {
     processingType: string
     year: string
     period: string
-    batchData: [] | null
+    batchData: any[] | null
     referenceData: [] | null
     batchFound: boolean,
     referenceFound: boolean
@@ -28,24 +31,9 @@ interface State {
     breadcrumbList: any[]
     uploadsAccepted: boolean
     referenceRejected: string[] | null
-}
-
-interface MetaDataListItem {
-    R: any
-    L: any
-}
-
-interface Data {
-    Rows: Row
-    Count: number
-}
-
-interface Row {
-    [key: number]: Cell
-}
-
-interface Cell {
-    [key: string]: object
+    startStep: number
+    endStep: number
+    running: boolean
 }
 
 interface Props {
@@ -77,7 +65,10 @@ export class Manage_Processing extends Component <Props, State> {
             pathName: "/manage-batch/" + props.match.params.type + "/" + props.match.params.year + "/" + props.match.params.period,
             breadcrumbList: [{name: "Home", link: ""}],
             uploadsAccepted: false,
-            referenceRejected: null
+            referenceRejected: null,
+            startStep: 1,
+            endStep:5,
+            running: false
         };
     }
 
@@ -87,7 +78,7 @@ export class Manage_Processing extends Component <Props, State> {
     }
 
     referenceData () {
-        // this function doesnt yet exist will make dw (will always error and hit the catch to be mocked)
+        // this function doesnt yet exist will neeed to contact lfs-imports for the file (will always error and hit the catch to be mocked)
         getReferenceData()
             .then(r => r.json())
             .then(r => {
@@ -141,7 +132,7 @@ export class Manage_Processing extends Component <Props, State> {
         let year = Number(fullDate.substring(6,10))
         return new Date(year + 1, month, date)
     }
-
+    
     batchData = () => {
         getBatchData(this.state.processingType, this.state.year, this.state.period)
             .then(r => {
@@ -149,12 +140,17 @@ export class Manage_Processing extends Component <Props, State> {
                     // Batch does not exist, load not found page
                     this.setState({batchFound: false});
                 }
+                // 
+                // set processingUploadsData to mocksuccessfuldata when reviewing to see the accepted files state
+                // 
+                const processingUploadsData = mockSuccessfulData
                 var uploadsAccepted = true
-                r.forEach((element: any) => {
+                processingUploadsData.forEach((element: any) => {
                     // currently this status is a not set and will be the upload accepted status
-                    if(element.status !== 3) uploadsAccepted = false
+                    if(element.status !== 4) uploadsAccepted = false
                 });
-                this.setState({batchData: r, uploadsAccepted: uploadsAccepted});
+                // Here set batchdata to mockSuccessfulData to see accepted upload mocks
+                this.setState({batchData: processingUploadsData, uploadsAccepted: uploadsAccepted});
             })
             .catch(error => {
                 (isDevEnv() && console.log(error));
@@ -170,11 +166,31 @@ export class Manage_Processing extends Component <Props, State> {
 
         return x
     }
- 
+
+    handleStartStepChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        this.setState({startStep: Number(e.target.value)});
+    };
+
+    handleEndStepChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        this.setState({endStep: Number(e.target.value)});
+    };
+
+    runProcessing = () => {
+        // Run Processing here, send request to lfs-monthly or livy or however it's working these days...
+        this.setState({running: true})
+    }
+
+    onCancel = () => {
+        this.setState({running: false})
+    }
+
     render() {
-        // TODO: Temporary way to check if imports are complete, should eventually be able to get this from batch status
+        // TODO: Temporary way to check if imports are complete, should eventually be able to get this from processing status
         let importComplete = true;
         let fullPeriod = fullPeriodPlease(this.state.period, this.state.year)
+
+        // Disabling the run button
+        if(this.state.running) importComplete = false
         if (this.state.batchFound) {
             if (this.state.batchData !== null) {
                 this.state.batchData.forEach(row => {
@@ -204,17 +220,23 @@ export class Manage_Processing extends Component <Props, State> {
                                 {
                                     !this.state.uploadsAccepted && 
                                         <ONSPanel>
-                                            <p>Every survey file must be uploaded with status "Upload Accepted" to run processing.</p>
+                                            <p>Every survey file must be uploaded with status "Upload Accepted" to run processing</p>
+                                        </ONSPanel>
+                                }
+                                {
+                                    this.state.running && 
+                                        <ONSPanel>
+                                            <p>You may navigate to other pages in the system and the processing of these steps will run in the background</p>
                                         </ONSPanel>
                                 }
                                 <br/>
-                                <h1>Survey Files:</h1>
+                                <h1>Survey Files</h1>
                                 <MonthlyProcessingUploadTable batchData={this.state.batchData}
                                                             batchType={this.state.processingType}
                                                             year={this.state.year}
                                                             period={this.state.period}/>
                                     {/* {this.summaryModal()} */}
-                                <h1>Reference Files:</h1>
+                                <h1>Reference Files</h1>
                                 {
                                     !this.state.referenceFound &&
                                         <ONSPanel status="info">Reference data has been mocked :)</ONSPanel>
@@ -227,11 +249,49 @@ export class Manage_Processing extends Component <Props, State> {
                                 }
                                 
                                 <ReferenceFileImportTable data={this.state.referenceData}/>
+                                <br/>
+                                <h3 className="lil-gap">Manage Step Runs</h3>
+                                <p>Manage which steps are run by selecting the start and finishing steps.</p>
+                                <div className="div--select">
+                                    <ONSSelect 
+                                        label="Start Step" 
+                                        options={processingSteps} 
+                                        value="Start" 
+                                        horizontal={true} 
+                                        defaultValue={"1"} 
+                                        small={true} 
+                                        onChange={this.handleStartStepChange}
+                                        disabled={!importComplete}>
+                                    </ONSSelect>
+                                    {/* put this in the style sheet for this one... */}
+                                    <div className="div-outer">
+                                        <b className="div-inner">To</b>
+                                    </div>
+                                    <ONSSelect
+                                        label="End Step" 
+                                        options={processingSteps} 
+                                        value="End" 
+                                        horizontal={true} 
+                                        defaultValue={"5"} 
+                                        small={true}
+                                        onChange={this.handleEndStepChange}
+                                        disabled={!importComplete}>
+                                    </ONSSelect>
+                                </div>
+                                <br/>
+                                <h3 className="lil-gap">Steps</h3>
+                                <ProcessingStepsTable/>
                                 <ONSButton label="Run Processing Steps"
                                            small={false}
                                            primary={true}
                                            marginRight={10}
-                                           disabled={!importComplete}/>
+                                           disabled={!importComplete}
+                                           onClick={this.runProcessing}
+                                           loading={this.state.running}/>
+                                <ONSButton label="Cancel" 
+                                            primary={false}
+                                            hidden={!this.state.running}
+                                            onClick={this.onCancel}/>
                                 <br/>
                                 <br/>
                             </>
@@ -243,3 +303,55 @@ export class Manage_Processing extends Component <Props, State> {
         );
     }
 }
+
+const mockSuccessfulData = [
+    {
+        "id": 2,
+        "month": 2,
+        "status": 4,
+        "type": "GB",
+        "week": 5,
+        "year": 2013
+    },
+    {
+        "id": 2,
+        "month": 2,
+        "status": 4,
+        "type": "GB",
+        "week": 6,
+        "year": 2013,
+    },
+    {
+        "id": 2,
+        "month": 2,
+        "status": 4,
+        "type": "GB",
+        "week": 7,
+        "year": 2013,
+    },
+    {
+        "id": 2,
+        "month": 2,
+        "status": 4,
+        "type": "GB",
+        "week": 8,
+        "year": 2013,
+    },
+    {
+        "id": 2,
+        "month": 2,
+        "status": 4,
+        "type": "GB",
+        "week": 9,
+        "year": 2013,
+    },
+    {
+        "id": 2,
+        "month": 2,
+        "status": 4,
+        "type": "NI",
+        "week": 0,
+        "year": 2013,
+    }
+]
+

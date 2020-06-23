@@ -6,65 +6,13 @@ import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
 
 interface Props {
-    batchData: [] | null
+    batchData: any[] | null
     batchType: string
     year: string
     period: string
 }
 
 export function MonthlyProcessingUploadTable(props: Props) {
-    // I've added mock upload data so we can see all the statuses :)
-    let mockUploadData: any[] = [
-        {
-            "id": 2,
-            "month": 2,
-            "status": 0,
-            "type": "GB",
-            "week": 5,
-            "year": 2013
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 1,
-            "type": "GB",
-            "week": 6,
-            "year": 2013,
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 2,
-            "type": "GB",
-            "week": 7,
-            "year": 2013,
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 3,
-            "type": "GB",
-            "week": 8,
-            "year": 2013,
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 4,
-            "type": "GB",
-            "week": 9,
-            "year": 2013,
-        },
-        {
-            "id": 2,
-            "month": 2,
-            "status": 5,
-            "type": "NI",
-            "week": 0,
-            "year": 2013,
-        }
-    ]
-    
     function statusLink(status: number) {
         switch(status) {
             case 0: return "Import"

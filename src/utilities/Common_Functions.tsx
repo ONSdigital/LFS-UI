@@ -91,6 +91,14 @@ const batches = [{"label":"Monthly", "value":"monthly"},
 
 const qList = ["January", "February", "April", "May", "July", "August", "October", "November"]
 
+const processingSteps = [
+    {"label":"1", "value":"1"},
+    {"label":"2", "value":"2"},
+    {"label":"3", "value":"3"},
+    {"label":"4", "value":"4"},
+    {"label":"5", "value":"5"}
+]
+
 interface status {
     text: string,
     colour: string
@@ -116,6 +124,7 @@ function getReferenceStatusStyle(statusNo: number) {
         case 0: status = {text: "Not Started", colour: 'dead', hexCode: '#989898'}; break;
         case 1: status = {text: "Importing", colour: 'info', hexCode: '#5e7dd8'}; break;
         case 2: status = {text: "Upload Failed", colour: 'error', hexCode: '#fd112e'}; break;
+        case 3: status = {text: "Imported", colour: 'info', hexCode: '#5e7dd8'}; break;
     }
     return status
 }
@@ -180,4 +189,25 @@ function currentDateAsString(): string {
     return `${String(date)}/${String(month)}/${String(year)}`
 }
 
-export{ getReferenceStatusStyle, currentDateAsString, fullPeriodPlease, weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle, getFileImportStatusStyle}
+export{ 
+    processingSteps, 
+    currentDateAsString, 
+    fullPeriodPlease, 
+    weeks, 
+    months, 
+    quarters, 
+    years, 
+    batches, 
+    getMonth, 
+    getYear, 
+    qList, 
+    monthNames, 
+    monthNumberToString, 
+    getStatusStyle, 
+    toUpperCaseFirstChar, 
+    getUploadStatusStyle, 
+    isDevEnv, 
+    getBatchProgressStatusStyle, 
+    getFileImportStatusStyle,
+    getReferenceStatusStyle, 
+}

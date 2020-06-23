@@ -317,6 +317,19 @@ function roleHeaders() {
     );
 }
 
+const PROCESSING_STEP_HEADERS = 
+        [{
+            label: "Steps",
+            column_name: "Steps",
+            filter: false,
+            order: false
+        }, {
+            label: "Step name",
+            column_name: "Step names",
+            filter: false,
+            order: false
+        }]
+
 export {
     BATCH_HEADERS,
     SURVEY_UPLOAD_HISTORY,
@@ -330,5 +343,6 @@ export {
     VALUE_LABELS_HEADERS,
     REFERENCE_FILE_HEADERS,
     PROCESSING_PROGRESS_TABLE,
-    PROCESSING_HEADERS
+    PROCESSING_HEADERS,
+    PROCESSING_STEP_HEADERS,
 };
