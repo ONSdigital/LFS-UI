@@ -4,8 +4,9 @@ import {ONSButton} from "../components/ONS_DesignSystem/ONSButton";
 import {Link} from "react-router-dom";
 import {ONSAccordionTable} from "../components/ONS_DesignSystem/ONSAccordionTable";
 import {PROCESSING_HEADERS} from "../utilities/Headers";
-import {getStatusStyle, monthNumberToString, fullPeriodPlease} from "../utilities/Common_Functions";
+import {getStatusStyle, monthNumberToString, toUpperCaseFirstChar} from "../utilities/Common_Functions";
 import {ONSStatus} from "../components/ONS_DesignSystem/ONSStatus";
+import {getBatchData, getAllBatches} from "../utilities/http";
 
 interface Props {
     match: any
@@ -44,9 +45,18 @@ export class ViewProcessing extends Component <Props, State> {
             data: []};
     }
 
+    fullPeriodPlease () {
+        var currentPeriod = this.state.period
+        var currentYear = this.state.year
+        if(currentPeriod !== "Q"){
+            currentPeriod = monthNumberToString(Number(this.state.period)).substring(0, 3)
+        }
+        return `${currentPeriod} ${currentYear}`
+    }
+
     render() {
-        let fullPeriod = fullPeriodPlease(this.state.period, this.state.year)
-        let table: any[] = [{id: 1, year: this.state.year, period: this.state.period, fullPeriod: fullPeriod, type: this.state.type, status:0}]
+        let fullPeriod = this.fullPeriodPlease()
+        let table: any[] = [{id: 1, year: this.state.year, period: this.state.period, fullPeriod: this.fullPeriodPlease(), type: this.state.type, status:0}]
         let row: DashboardTableRow = table[0]
         let noDataMessage = "No processing matching this criteria";
 
@@ -67,7 +77,7 @@ export class ViewProcessing extends Component <Props, State> {
 
                 <ProcessingProgressTable/>
                 <br></br>
-                <Link to={"/manage-processing/" + row.type.toLowerCase() + "/" + row.year + "/" + this.state.period}>
+                <Link to={"/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + this.state.period}>
                     <ONSButton label={"Manage Processing"} primary={true} small={false} field={true}/>
                 </Link>
             </div>

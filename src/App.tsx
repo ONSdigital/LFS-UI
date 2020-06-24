@@ -7,13 +7,14 @@ import {Admin} from "./pages/Admin";
 import Logout from "./auth/Logout";
 import {Import} from "./pages/import/Import";
 import {New_Batch} from "./pages/New_Batch";
-import {Manage_Processing} from "./pages/manageBatch/Manage_Processing";
+import {View_Monthly_Batch} from "./pages/manageBatch/View_Monthly_Batch";
 import {GenericNotFound} from "./pages/GenericNotFound";
 import {Cookies, withCookies} from "react-cookie";
 import {SurveyFileUpload} from "./pages/SurveyFileUpload";
 import {FileUploadProgress} from "./pages/FileUploadProgress";
 import DocumentTitle from "react-document-title";
 import {ViewData} from "./pages/ViewData";
+import {View_Quarterly_Batch} from "./pages/manageBatch/View_Quarterly_Batch";
 import {ImportOverview} from "./pages/import/ImportOverview";
 import {ImportOutputSpec} from "./pages/import/ImportOutputSpec";
 import IdleTimer from "react-idle-timer";
@@ -121,7 +122,8 @@ class App extends React.Component<Props, State> {
                           <Switch>
                               <this.PrivateRoute exact path='/' component={Home} page_id={1}/>
                               <this.PrivateRoute exact path='/new-batch' component={New_Batch} page_id={3}/>
-                              <this.PrivateRoute exact path='/manage-processing/:type/:year/:period/:summary?' component={Manage_Processing} page_id={4}/>
+                              <this.PrivateRoute exact path='/manage-batch/monthly/:year/:period/:summary?' component={View_Monthly_Batch} page_id={4}/>
+                              <this.PrivateRoute exact path='/manage-batch/quarterly/:year/:period/:summary?' component={View_Quarterly_Batch} page_id={4}/>
                               <this.PrivateRoute exact path='/processing/:type/:year/:period' component={ViewProcessing} page_id={11}/>
                               <this.PrivateRoute exact path='/survey-import/:survey/:week/:month/:year' component={SurveyFileUpload} page_id={5}/>
                               <this.PrivateRoute exact path='/view-data' component={ViewData} page_id={10}/>

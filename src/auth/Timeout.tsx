@@ -23,7 +23,7 @@ export class Timeout extends Component <Props, {}> {
                         <div className="grid__col col-8@m">
                             <main id="main-content" className="page__main ">
                                 <h1>Your session has timed out due to inactivity</h1>
-                                    <ONSPanel>
+                                    <ONSPanel label={"To protect your information we have timed you out."}>
                                         <p>To protect your information we have timed you out.</p>
                                     </ONSPanel>
                                 <br/>

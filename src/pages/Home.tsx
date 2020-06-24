@@ -1,5 +1,5 @@
 ﻿import React, {ChangeEvent, Component} from "react";
-import {HomeProcessingTable} from "../components/HomeProcessingTable";
+import {HomeBatchTable} from "../components/HomeBatchTable";
 import {ONSRadioButton} from "../components/ONS_DesignSystem/ONSRadioButton";
 import {ONSCheckbox} from "../components/ONS_DesignSystem/ONSCheckbox";
 import {getAllBatches} from "../utilities/http";
@@ -213,9 +213,9 @@ export class Home extends Component <{}, State> {
                     </fieldset>
                     <br/>
                     {(this.state.mocked) && 
-                        <ONSPanel><p>This data has been mocked, Links may not work correctly</p></ONSPanel>
+                        <ONSPanel label="This Data Has Been Mocked" ><p>This data has been mocked, Links may not work correctly</p></ONSPanel>
                     }
-                    <HomeProcessingTable data={this.state.filteredBatchData}/>
+                    <HomeBatchTable data={this.state.filteredBatchData}/>
                 </div>
             </DocumentTitle>
         );

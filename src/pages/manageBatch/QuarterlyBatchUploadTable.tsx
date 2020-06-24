@@ -1,25 +1,20 @@
-import React from "react";
+import React from 'react';
 import {BATCH_HEADERS} from "../../utilities/Headers";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
-import {getUploadStatusStyle, monthNumberToString} from "../../utilities/Common_Functions";
+import {getStatusStyle, monthNumberToString} from "../../utilities/Common_Functions";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
 import {Link} from "react-router-dom";
+import {ONSButton} from "../../components/ONS_DesignSystem/ONSButton";
 
 interface Props {
-    batchData: any[] | null
+    batchData: [] | null
+    openModal: Function
     batchType: string
     year: string
     period: string
 }
 
-export function MonthlyProcessingUploadTable(props: Props) {
-    function statusLink(status: number) {
-        switch(status) {
-            case 0: return "Import"
-            case 1: return "View Processing"
-            default: return "Re-import"
-          } 
-    }
+export function QuarterlyBatchUploadTable(props: Props) {
 
     let BatchUploadTableRow = (rowData: any) => {
         let row = rowData.row;
@@ -36,14 +31,13 @@ export function MonthlyProcessingUploadTable(props: Props) {
                     }
                 </td>
                 <td className="table__cell ">
-                    <ONSStatus label={getUploadStatusStyle(+row.status).text} small={false}
-                               status={getUploadStatusStyle(+row.status).colour}/>
+                    <ONSStatus label={getStatusStyle(+row.status).text} small={false}
+                               status={getStatusStyle(+row.status).colour}/>
                 </td>
                 <td className="table__cell ">
                     <Link
-                        className={"breadcrumb__linkbreadcrumb__link"}
                         to={"/survey-import/" + row.type.toLowerCase() + "/" + row.week + "/" + row.month + "/" + row.year}>
-                        {statusLink(row.status)}
+                        <ONSButton label={"Import"} primary={false} small={true}/>
                     </Link>
                 </td>
                 {
@@ -51,12 +45,12 @@ export function MonthlyProcessingUploadTable(props: Props) {
                         <td className="table__cell "/>
                         :
                         <td className="table__cell ">
-                            {/* This link goes nowhere atm */}
-                            <Link to="">Summary</Link>
+                            <ONSButton label={"Summary"} primary={true} small={true}
+                                       onClick={(() => props.openModal(row))}/>
                         </td>
                 }
             </>
-        );
+        )
     };
 
     return (
@@ -64,7 +58,6 @@ export function MonthlyProcessingUploadTable(props: Props) {
                            data={props.batchData}
                            Row={BatchUploadTableRow}
                            expandedRowEnabled={false}
-                           noDataMessage={"No Data"}
-        />
-    );
+                           noDataMessage={"No Data"}/>
+    )
 }

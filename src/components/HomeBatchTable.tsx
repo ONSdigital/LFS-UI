@@ -23,7 +23,7 @@ interface DashboardTableRow {
     period: number
 }
 
-export class HomeProcessingTable extends Component <Props, State> {
+export class HomeBatchTable extends Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -52,7 +52,7 @@ export class HomeProcessingTable extends Component <Props, State> {
 
 const DashboardTableRow = (rowData: any) => {
     let row: DashboardTableRow = rowData.row;
-    let manageUrl: string = "/manage-processing/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
+    let manageUrl: string = "/manage-batch/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
     let progressUrl: string = "/processing/" + row.type.toLowerCase() + "/" + row.year + "/" + row.period
     return (
         <>
@@ -73,6 +73,7 @@ const DashboardTableRow = (rowData: any) => {
             <td className="table__cell ">
                 {/* Progress Page does not exist yet also*/}
                 {progress(row.status, progressUrl)}
+                
             </td>
             <td className="table__cell ">
                 <Link to={manageUrl}>
@@ -83,6 +84,6 @@ const DashboardTableRow = (rowData: any) => {
     );
 };
 
-function progress (status: string, progressUrl: string) {
-    if(Number(status) === 1) return <Link to={progressUrl}>Progress</Link>
+function progress (status: string, url: string) {
+    if(Number(status) === 1) return <Link to={url}>Progress</Link>
 }

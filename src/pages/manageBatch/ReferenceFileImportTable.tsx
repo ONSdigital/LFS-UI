@@ -2,16 +2,22 @@ import React from "react";
 import {REFERENCE_FILE_HEADERS} from "../../utilities/Headers";
 import {ONSAccordionTable} from "../../components/ONS_DesignSystem/ONSAccordionTable";
 import {ONSStatus} from "../../components/ONS_DesignSystem/ONSStatus";
-import { Link } from "react-router-dom";
-import { getReferenceStatusStyle } from "../../utilities/Common_Functions";
+import dateFormatter from "dayjs";
 
 interface Props {
-    data: [] | null
+
 }
 
-export function ReferenceFileImportTable(props: Props) {
+export function ReferenceFileImportTable() {
+    let imports = [
+        {name: "APS Design Weights", "status": "Imported"},
+        {name: "Geographical Classifications", "status": "File Older than One year"},
+        {name: "Variable Definitions", "status": "Imported"},
+        {name: "Value Labels", "status": "Imported"},
+        {name: "Output Specification", "status": "Not Imported"},
+        {name: "Population Estimates", "status": "Not Imported"}
+    ];
 
-    let imports = props.data
 
     let BatchUploadTableRow = (rowData: any) => {
         let row = rowData.row;
@@ -21,14 +27,10 @@ export function ReferenceFileImportTable(props: Props) {
                     {row.name}
                 </td>
                 <td className="table__cell ">
-                    {row.date}
+                    {dateFormatter(new Date()).format("DD/MM/YYYY")}
                 </td>
                 <td className="table__cell ">
-                    <ONSStatus label={getReferenceStatusStyle(+row.status).text} small={false}
-                               status={getReferenceStatusStyle(+row.status).colour}/>
-                </td>
-                <td className="table__cell ">
-                    <Link to="/">Re-import</Link>
+                    <ONSStatus label={row.status} small={false} status={"info"}/>
                 </td>
             </>
         );
