@@ -27,4 +27,10 @@ function getAllBatches(): Promise<any> {
     return requestPromiseJson("GET",url);
 }
 
-export {createNewBatch, getBatchData, getAllBatches}
+function getReferenceData(): Promise<any> {
+    let url = "/references"
+
+    return requestPromiseJson("GET",url);
+}
+
+export {createNewBatch, getBatchData, getAllBatches, getReferenceData}

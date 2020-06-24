@@ -10,9 +10,7 @@ interface Props {
 
 interface State {
     data: []
-
 }
-
 
 export class ProcessingProgressTable extends Component <Props, State> {
 
@@ -28,7 +26,6 @@ export class ProcessingProgressTable extends Component <Props, State> {
         this.getBatchProgressData()
     }
 
-
     getBatchProgressData = () => {
         this.getMockBatchProgressData()
     };
@@ -40,8 +37,6 @@ export class ProcessingProgressTable extends Component <Props, State> {
                 this.setState({data: response.Rows});
             })
     };
-
-
 
     ProcessingProgressRow = (rowData: any) => {
         let row = rowData.row;

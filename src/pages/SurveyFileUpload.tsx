@@ -222,7 +222,7 @@ export class SurveyFileUpload extends Component <Props, State> {
                                            expandedRowEnabled={false}
                                            noDataMessage={"Survey has not been previously imported"}/>
                     </div>
-                    <ONSPanel testID="import=panel" status={this.state.panel.status} label={this.state.panel.label}
+                    <ONSPanel testID="import=panel" status={this.state.panel.status}
                               hidden={!this.state.panel.visible}>
                         <p>{this.state.panel.label}</p>
                     </ONSPanel>

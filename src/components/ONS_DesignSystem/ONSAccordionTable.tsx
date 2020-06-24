@@ -215,8 +215,7 @@ export class ONSAccordionTable extends Component <Props, State> {
                                     <td colSpan={this.props.Headers.length + (this.props.expandedRowEnabled ? 1 : 0)}
                                         className="table__cell ">
                                         <ONSPanel
-                                            status={(this.props.noDataMessage.toLowerCase().includes("error") ? "error" : "info")}
-                                            label={"No Batches Matching the Criteria"}>
+                                            status={(this.props.noDataMessage.toLowerCase().includes("error") ? "error" : "info")}>
                                             <p>{this.props.noDataMessage}</p>
                                         </ONSPanel>
                                     </td>
@@ -236,7 +235,7 @@ export class ONSAccordionTable extends Component <Props, State> {
                 {
                     this.props.scrollable ?
                         <>
-                            <ONSPanel label={" "}>
+                            <ONSPanel>
                                 {"Scrollable table. There are " + this.props.Headers.length + " columns in this table. Some of the table may be off screen. Scroll or drag horizontally to bring into view. "}
                             </ONSPanel>
                             <div className="table-scrollable table-scrollable--on">

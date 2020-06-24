@@ -106,7 +106,7 @@ export class New_Batch extends Component <{}, State> {
                             }
                         });
                         // redirect to Manage batch Page
-                        window.location.href = "/manage-batch/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period + "/new";
+                        window.location.href = "/manage-processing/" + this.state.batchType + "/" + this.state.year + "/" + this.state.period + "/new";
                     }
                 })
                 .catch(error => (isDevEnv() && console.log(error)));
@@ -167,7 +167,7 @@ export class New_Batch extends Component <{}, State> {
                     {
                         this.state.panel.visible &&
                         <>
-                            <ONSPanel label={this.state.panel.label} hidden={!this.state.panel.visible}
+                            <ONSPanel hidden={!this.state.panel.visible}
                                       status={this.state.panel.status}>
                                 {
                                     this.state.panel.label.includes("already exists") ?
