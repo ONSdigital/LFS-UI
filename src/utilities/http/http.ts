@@ -1,10 +1,12 @@
 import {requestPromise, requestPromiseJson} from "./requestPromise";
+import { currentDateAsString } from "../Common_Functions"
 
 function postImportFile(importFile: any, link: string, fileName: string): Promise<any> {
     let url = "/imports/" + link;
     let formData = new FormData();
     formData.append("lfsFile", importFile[0]);
     formData.append("fileName", fileName);
+    formData.append("uploadDate", currentDateAsString())
 
     return requestPromise("POST", url, formData);
 }

@@ -29,7 +29,6 @@ function monthNumberToString(MonthNum: number): string {
     return Month
 }
 
-
 function months() {
 
     let i;
@@ -92,6 +91,14 @@ const batches = [{"label":"Monthly", "value":"monthly"},
 
 const qList = ["January", "February", "April", "May", "July", "August", "October", "November"]
 
+const processingSteps = [
+    {"label":"1", "value":"1"},
+    {"label":"2", "value":"2"},
+    {"label":"3", "value":"3"},
+    {"label":"4", "value":"4"},
+    {"label":"5", "value":"5"}
+]
+
 interface status {
     text: string,
     colour: string
@@ -102,8 +109,8 @@ function getUploadStatusStyle(statusNo: number) {
     let status: status = {text: "", colour: 'info', hexCode: '#222'};
     switch (statusNo){
         case 0: status = {text: "Not Started", colour: 'dead', hexCode: '#989898'}; break;
-        case 1: status = {text: "File Uploaded", colour: 'info', hexCode: '#5e7dd8'}; break;
-        case 2: status = {text: "File Reloaded", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 1: status = {text: "Importing", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 2: status = {text: "Undecided", colour: 'info', hexCode: '#5e7dd8'}; break;
         case 3: status = {text: "Upload Failed", colour: 'error', hexCode: '#fd112e'}; break;
         case 4: status = {text: "Upload Accepted", colour: 'success', hexCode: '#12c864'}; break;
         case 5: status = {text: "Upload Rejected", colour: 'error', hexCode: '#fd112e'}; break;
@@ -111,13 +118,24 @@ function getUploadStatusStyle(statusNo: number) {
     return status
 }
 
+function getReferenceStatusStyle(statusNo: number) {
+    let status: status = {text: "", colour: 'info', hexCode: '#222'};
+    switch (statusNo){
+        case 0: status = {text: "Not Started", colour: 'dead', hexCode: '#989898'}; break;
+        case 1: status = {text: "Importing", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case 2: status = {text: "Upload Failed", colour: 'error', hexCode: '#fd112e'}; break;
+        case 3: status = {text: "Imported", colour: 'info', hexCode: '#5e7dd8'}; break;
+    }
+    return status
+}
+
 function getBatchProgressStatusStyle(statusText: string) {
     let status: status = {text: "", colour: 'dead', hexCode: '#888'};
     switch (statusText){
-        case "Completed": status = {text: "Completed", colour: 'success', hexCode: '#12c864'}; break;
-        case "In Progress": status = {text: "In Progress", colour: 'info', hexCode: '#5e7dd8'}; break;
-        case "Failed": status = {text: "Failed", colour: 'error', hexCode: '#fd112e'}; break;
         case "Not Run": status = {text: "Not Run", colour: 'dead', hexCode: '#888'}; break;
+        case "Running": status = {text: "Running", colour: 'info', hexCode: '#5e7dd8'}; break;
+        case "Failed": status = {text: "Failed", colour: 'error', hexCode: '#fd112e'}; break;
+        case "Completed": status = {text: "Completed", colour: 'success', hexCode: '#12c864'}; break;
     }
     return status
 }
@@ -150,9 +168,46 @@ function toUpperCaseFirstChar(string: string){
     return string.charAt(0).toUpperCase() + string.slice(1, string.length)
 }
 
-
 function isDevEnv() {
     return process.env.NODE_ENV === 'development'
 }
 
-export{ weeks, months, quarters, years, batches, getMonth, getYear, qList, monthNames, monthNumberToString, getStatusStyle, toUpperCaseFirstChar, getUploadStatusStyle, isDevEnv, getBatchProgressStatusStyle, getFileImportStatusStyle}
+function fullPeriodPlease (currentPeriod: string, currentYear: string) {
+    if(currentPeriod !== "Q"){
+        currentPeriod = monthNumberToString(Number(currentPeriod)).substring(0, 3)
+    }
+    return `${currentPeriod} ${currentYear}`
+}
+
+function currentDateAsString(): string {
+    let dateTime = new Date();
+    let date = dateTime.getDate();
+    let month: any = dateTime.getMonth();
+    let year = dateTime.getFullYear();
+    if(month < 10) month = "0" + month
+
+    return `${String(date)}/${String(month)}/${String(year)}`
+}
+
+export{ 
+    processingSteps, 
+    currentDateAsString, 
+    fullPeriodPlease, 
+    weeks, 
+    months, 
+    quarters, 
+    years, 
+    batches, 
+    getMonth, 
+    getYear, 
+    qList, 
+    monthNames, 
+    monthNumberToString, 
+    getStatusStyle, 
+    toUpperCaseFirstChar, 
+    getUploadStatusStyle, 
+    isDevEnv, 
+    getBatchProgressStatusStyle, 
+    getFileImportStatusStyle,
+    getReferenceStatusStyle, 
+}

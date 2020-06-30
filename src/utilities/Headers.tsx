@@ -1,6 +1,6 @@
 const BATCH_HEADERS =
     [{
-        label: "Source",
+        label: "Processing ID",
         column_name: "type",
         filter: false,
         order: false
@@ -40,6 +40,11 @@ const REFERENCE_FILE_HEADERS =
     }, {
         label: "Status",
         column_name: "status",
+        filter: false,
+        order: false
+    }, {
+        label: "",
+        column_name: "re-import",
         filter: false,
         order: false
     }];
@@ -312,6 +317,52 @@ function roleHeaders() {
     );
 }
 
+const PROCESSING_STEP_HEADERS = 
+        [{
+            label: "Steps",
+            column_name: "Steps",
+            filter: false,
+            order: false
+        }, {
+            label: "Step name",
+            column_name: "Step names",
+            filter: false,
+            order: false
+        }]
+
+const RUNNING_STEP_HEADERS = 
+        [{
+            label: "Steps",
+            column_name: "Steps",
+            filter: false,
+            order: false
+        }, {
+            label: "Step name",
+            column_name: "Step names",
+            filter: false,
+            order: false
+        }, {
+            label: "Status",
+            column_name: "Status",
+            filter: false,
+            order: false
+        }, {
+            label: "Start Time",
+            column_name: "Start Time",
+            filter: false,
+            order: false
+        }, {
+            label: "End Time",
+            column_name: "End Time",
+            filter: false,
+            order: false
+        }, {
+            label: "",
+            column_name: "",
+            filter: false,
+            order: false
+        }]
+
 export {
     BATCH_HEADERS,
     SURVEY_UPLOAD_HISTORY,
@@ -325,5 +376,7 @@ export {
     VALUE_LABELS_HEADERS,
     REFERENCE_FILE_HEADERS,
     PROCESSING_PROGRESS_TABLE,
-    PROCESSING_HEADERS
+    PROCESSING_HEADERS,
+    PROCESSING_STEP_HEADERS,
+    RUNNING_STEP_HEADERS,
 };

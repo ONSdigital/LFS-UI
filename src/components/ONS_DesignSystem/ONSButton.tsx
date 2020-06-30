@@ -14,11 +14,13 @@ interface Props {
     disabled?: boolean
     action?: boolean
     testid?: string
+    hidden?: boolean
 }
 
 export const ONSButton = (props: Props) => {
 
     let spacing = () => {
+        if(props.hidden) return {display: "none"}
         return {
             marginRight: String(props.marginRight) + "px"
         };
